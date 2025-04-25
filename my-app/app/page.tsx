@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import _topbar from '../components/partials/_topbar'
 const Home = () => {
   return (
-    <div>
-      <_topbar/>
+    <div className='w-full h-[100vh] bg-white'>
+      
     </div>
   );
 };
