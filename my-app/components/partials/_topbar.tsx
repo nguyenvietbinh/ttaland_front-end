@@ -1,3 +1,4 @@
+'use client'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,14 +8,14 @@ import { faFacebook, faInstagram, faLinkedin, faSquarePinterest, faTwitter } fro
 const _topbar = () => {
   return (
     <div>
-      <section id="top-bar" className="py-6 bg-gray-200 text-center">
-              <div className="flex flex-wrap mx-[2vw] text-gray-700">
+      <section id="top-bar" className="py-5 bg-gray-200 text-center">
+              <div className="flex flex-wrap mx-[4vw] text-gray-700">
                   <div className="w-full items-center flex md:justify-start justify-center md:w-1/3 mb-2 md:mb-0">
                     <FontAwesomeIcon icon={faPhone} className=""></FontAwesomeIcon> 
                     <p className='whitespace-nowrap'>+91 1234567890</p>
                   </div>
                   <div className="w-full flex items-center justify-center md:w-1/3 mb-2 md:mb-0">
-                    <FontAwesomeIcon icon={faEnvelopeOpen} className="fas fa-envelope-open mr-2"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faEnvelopeOpen} className="fas fa-envelope-open mr-1"></FontAwesomeIcon>
                     <p className='whitespace-nowrap'>contact@realestate.com</p>
                   </div>
                   <div className="w-full md:w-1/3">

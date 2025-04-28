@@ -1,30 +1,51 @@
 'use client'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 
+
 const _navbar = () => {
   return (
-      <nav className="w-full inline-block text-white bg-blue-950">
-        <div className="flex h-full mx-[2vw]">
-          <a className="h-fit mr-[1vw] items-center w-auto my-auto" href="/">
-            <img className="h-[10vh] w-auto py-4" src="/img/logo.png" alt="" />
-          </a>
-          <a className='h-fit mx-[1vw] items-center w-auto my-auto' href="/about">ABOUT</a>
-          <a className="mx-[1vw] whitespace-nowrap h-fit items-center w-auto my-auto" href="">FEATURED LISTINGS</a>
-          <a className='flex ml-auto mr-[1vw] h-fit items-center w-auto my-auto' href="">
-            <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
-            <p>REGISTER</p>
-          </a>
-          <a className='flex ml-[1vw] h-fit items-center w-auto my-auto' href="">
-            <FontAwesomeIcon icon={faSignIn}></FontAwesomeIcon>
-            <p>LOGIN</p>
+    <div tabIndex={0} className="text-white bg-blue-950 sticky top-0 z-50 collapse md:collapse-open md:flex rounded-none">
+      <div className="flex justify-between">
+        <div className="pl-[4vw] py-4">
+          <a className="" href="/">
+            <img src="/img/logo.png" alt="" className="h-[8vh] w-auto md:w-[10vh]"/>
           </a>
         </div>
-      </nav>
+        <div className="items-center my-auto mr-[4vw] md:hidden rotate-0">
+          <img src="/img/bars.png" className="h-[3vh] w-auto" alt="" />
+        </div>
+      </div>
+      <div className="collapse-content pl-[4vw] md:p-0 md:pt-4 md:my-auto md:mr-[4vw] md:w-full">
+        <ul className='md:flex space-y-4 md:space-y-0 md:space-x-[1.5vw]'>
+          <li className='md:mx-[1.5vw]'>
+            <a href="/">HOME</a>
+          </li>
+          <li>
+            <a href="/about">ABOUT</a>
+          </li>
+          <li>
+            <a href="">FEATURED LISTINGS</a>
+          </li>
+          <li className='md:ml-auto'>
+            <a href="">
+              <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
+              <span className='ml-1'>REGISTER</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <FontAwesomeIcon icon={faSignIn}></FontAwesomeIcon>
+              <span className='ml-1'>LOGIN</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   )
 }
+
 
 
 export default _navbar
