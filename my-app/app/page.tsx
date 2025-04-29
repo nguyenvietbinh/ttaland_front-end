@@ -1,12 +1,12 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
-import _topbar from '../components/partials/_topbar'
+import _search_bar from "@/components/search_bar";
+import _bla from "@/components/bla";
 const Home = () => {
   return (
-    <div className='w-full h-[100vh] bg-white'>
-      
+    <div>
+      <_search_bar/>
     </div>
   );
 };
