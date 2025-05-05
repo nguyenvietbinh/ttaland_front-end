@@ -8,9 +8,9 @@ const _navbar = () => {
   return (
     <div tabIndex={0} className="text-white bg-blue-950 sticky top-0 z-50 collapse md:collapse-open md:flex rounded-none">
       <div className="flex justify-between">
-        <div className="pl-[4vw] py-4">
+        <div className="pl-[3vw]">
           <a className="" href="/">
-            <img src="/img/logo.png" alt="" className="h-[8vh] w-auto md:w-[10vh]"/>
+            <img src="/img/logo.png" alt="" className="h-[10vh] w-auto md:w-[12vh]"/>
           </a>
         </div>
         <div className="items-center my-auto mr-[4vw] md:hidden rotate-0">
@@ -26,7 +26,7 @@ const _navbar = () => {
             <a href="/about">ABOUT</a>
           </li>
           <li>
-            <a href="">FEATURED LISTINGS</a>
+            <a href="/listing">FEATURED LISTINGS</a>
           </li>
           <li className='md:ml-auto'>
             <a href="">

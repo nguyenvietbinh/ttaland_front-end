@@ -55,25 +55,9 @@ const _search_bar = () => {
     const form = new FormData(a)
     console.log(form.get('state'))
   }
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:8000/api/');
-      console.log(response)
-      const result = await response.json();
-      console.log(result.message)
-      setData(result.message);
-    };
-    try {
-      fetchData();
-      console.log(data)
-    } catch (e) {
-      console.log(e)
-    }
-  }, []);
+  
   return (
-    <div className="w-full h-auto bg-[url(/img/showcase.jpg)] bg-center bg-no-repeat flex text-white">
+    <div className="w-full h-auto bg-[url(/img/showcase.png)] bg-center bg-no-repeat flex text-white">
       <div className="w-full h-auto p-10 bg-gray-700 md:mx-[16vw] mx-[8vw] my-[15vh] text-center opacity-95">
         <p className="md:text-5xl text-2xl m-0 md:m-[5vh]">Property Searching Just Got So Easy</p>
         <p className="text-2xl hidden md:block mx-10">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum tempore! Consectetur, id commodi!</p>
