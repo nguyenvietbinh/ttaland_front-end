@@ -4,6 +4,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpen, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faLinkedin, faSquarePinterest, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Link from 'next/link';
 
 const _topbar = () => {
   return (
@@ -20,21 +21,21 @@ const _topbar = () => {
                   </div>
                   <div className="w-full md:w-1/3">
                       <div className="flex justify-center md:justify-end space-x-4">
-                          <a href="#" className="text-gray-700 hover:text-blue-400">
+                          <Link href="#" className="text-gray-700 hover:text-blue-400">
                               <FontAwesomeIcon icon={faTwitter} className="fab fa-twitter"></FontAwesomeIcon>
-                          </a>
-                          <a href="#" className="text-gray-700 hover:text-blue-600">
+                          </Link>
+                          <Link href="#" className="text-gray-700 hover:text-blue-600">
                               <FontAwesomeIcon icon={faFacebook} className="fab fa-facebook"></FontAwesomeIcon>
-                          </a>
-                          <a href="#" className="text-gray-700 hover:text-blue-700">
+                          </Link>
+                          <Link href="#" className="text-gray-700 hover:text-blue-700">
                               <FontAwesomeIcon icon={faLinkedin} className="fab fa-linkedin"></FontAwesomeIcon>
-                          </a>
-                          <a href="#" className="text-gray-700 hover:text-pink-600">
+                          </Link>
+                          <Link href="#" className="text-gray-700 hover:text-pink-600">
                               <FontAwesomeIcon icon={faInstagram} className="fab fa-instagram"></FontAwesomeIcon>
-                          </a>
-                          <a href="#" className="text-gray-700 hover:text-red-600">
+                          </Link>
+                          <Link href="#" className="text-gray-700 hover:text-red-600">
                               <FontAwesomeIcon icon={faSquarePinterest} className="fab fa-pinterest"></FontAwesomeIcon>
-                          </a>
+                          </Link>
                       </div>
                   </div>
               </div>

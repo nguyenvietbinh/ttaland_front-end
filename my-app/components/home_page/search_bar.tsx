@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useState } from "react"
-
 
 const _search_bar = () => {
   const state_choices = {
@@ -49,12 +47,6 @@ const _search_bar = () => {
     '9':9,
     '10':10
   }
-  const handleChange = (event: any) => {
-    const a: any = document.querySelector('.form_a')
-    console.log(typeof a)
-    const form = new FormData(a)
-    console.log(form.get('state'))
-  }
   
   return (
     <div className="w-full h-auto bg-[url(/img/showcase.png)] bg-center bg-no-repeat flex text-white">
@@ -86,7 +78,7 @@ const _search_bar = () => {
               ))}
             </select>
           </form>
-          <button className="btn w-full my-[5vh]" onClick={handleChange}>Submit form</button>
+          <button className="btn w-full my-[5vh]">Submit form</button>
         </div>
       </div>
     </div>
