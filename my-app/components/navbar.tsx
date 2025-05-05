@@ -12,11 +12,11 @@ const _navbar = () => {
       <div className="flex justify-between">
         <div className="pl-[3vw]">
           <Link className="" href="/">
-            <Image src="/img/logo.png" alt="" className="h-[10vh] w-auto md:w-[12vh]"/>
+            <img src="/img/logo.png" alt="" className="h-[10vh] w-auto md:w-[12vh]"/>
           </Link>
         </div>
         <div className="items-center my-auto mr-[4vw] md:hidden rotate-0">
-          <Image src="/img/bars.png" className="h-[3vh] w-auto" alt="" />
+          <img src="/img/bars.png" className="h-[3vh] w-auto" alt="" />
         </div>
       </div>
       <div className="collapse-content pl-[4vw] md:p-0 md:pt-4 md:my-auto md:mr-[4vw] md:w-full">

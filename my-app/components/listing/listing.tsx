@@ -19,7 +19,7 @@ const list = () => {
               <div className='m-4 py-1 px-3 inline-block bg-gray-700 text-white rounded-sm opacity-90'>1000$</div>
             </div>
             <div className='first_layout'>
-            <Image src="/img/showcase.png" alt="" className="w-full"/>
+            <img src="/img/showcase.png" alt="" className="w-full"/>
               <div className="w-full h-auto border-t-[1px] border-gray-500 border-solid px-2">
                 <p className="text-2xl my-2">Property Name</p>
                 <span>
