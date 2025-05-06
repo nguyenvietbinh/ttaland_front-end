@@ -49,7 +49,7 @@ const _search_bar = () => {
   }
   
   return (
-    <div className="w-full h-auto bg-[url(/img/showcase.png)] bg-center bg-no-repeat flex text-white">
+    <div className="w-full h-auto bg-[url(/img/showcase.png)] bg-center bg-no-repeat flex text-white font-myfont">
       <div className="w-full h-auto p-10 bg-gray-700 md:mx-[16vw] mx-[8vw] my-[15vh] text-center opacity-95">
         <p className="md:text-5xl text-2xl m-0 md:m-[5vh]">Property Searching Just Got So Easy</p>
         <p className="text-2xl hidden md:block mx-10">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum tempore! Consectetur, id commodi!</p>

@@ -1,4 +1,4 @@
-
+import { myCustomFont } from '@/lib/fonts';
 import '../lib/globals.css';
 import '../lib/fontawesome'
 import _navbar from '@/components/navbar';
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={myCustomFont.className}>
         <_navbar/>
         {children}
       </body>

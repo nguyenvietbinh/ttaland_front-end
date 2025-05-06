@@ -1,2 +1,9 @@
 @import "tailwindcss";
-@plugin "daisyui"
+@plugin "daisyui";
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('/MyFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
