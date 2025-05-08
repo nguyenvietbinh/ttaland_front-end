@@ -10,7 +10,7 @@ for (let i = 0; i < items.length; i ++) {
 console.log(JSON.stringify(height))
 const list = () => {
   return (
-    <div className="w-full bg-gray-300 text-gray-950 pt-8">
+    <div className="w-full text-gray-950 pt-8">
       <div className='text-4xl text-center my-8 text-gray-800'>Lastest Listing</div>
       <div className="h-auto mx-[4vw] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-[4vw]">
         {items.map((item) => (
