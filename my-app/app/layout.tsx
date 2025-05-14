@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${myCustomFont.className} relative`}>
-        <div className='h-screen w-screen bg-[url(/img/showcase.png)] bg-cover bg-center bg-no-repeat fixed'></div>
-        <div className='absolute top-0'>
-          <_navbar/>
+        <div className='h-full w-full bg-[url(/img/showcase.png)] bg-cover bg-center bg-no-repeat fixed brightness-70'></div>
+        <div className='absolute w-full top-0'>
+          <_navbar/> 
           {children}
         </div>
       </body>

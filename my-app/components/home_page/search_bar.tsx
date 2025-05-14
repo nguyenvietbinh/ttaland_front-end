@@ -47,7 +47,7 @@ const new_search_bar = () => {
     '10':10
   }
   return (
-    <div className="w-screen xl:w-[1280px] 2xl:w-[1536px] mx-auto h-auto my-20 text-white">
+    <div className="w-full xl:w-[1280px] 2xl:w-[1536px] mx-auto h-auto mt-20 text-white">
       <div className="w-[90%] p-10 bg-gray-700 mx-auto text-center">
       <p className="md:text-5xl text-2xl m-0 md:m-15">Property Searching Just Got So Easy</p>
         <p className="text-2xl hidden md:block mx-10">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum tempore! Consectetur, id commodi!</p>

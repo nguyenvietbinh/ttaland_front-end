@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const navbar = () => {
   return (
-    <div className="text-white bg-blue-950 sticky top-0 z-50 w-screen h-auto opacity-95">
+    <div className="text-white bg-blue-950 sticky top-0 z-50 w-full h-auto opacity-95">
         {/* laptop part */}
 
         <div className='xl:flex gap-6 justify-start xl:w-[1280px] 2xl:w-[1536px] mx-auto text-gray-300 text-xl hidden'>

@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <div>
       <_search_bar/>
+      <_listing/>
     </div>
   );
 };
