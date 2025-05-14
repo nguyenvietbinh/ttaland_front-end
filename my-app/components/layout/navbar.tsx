@@ -5,13 +5,12 @@ import Link from 'next/link';
 
 
 
-const _navbar = () => {
+const navbar = () => {
   return (
-    <div className="text-white bg-blue-950 sticky top-0 z-50 min-w-screen h-auto opacity-95">
-      <div className='container min-w-screen xl:min-w-0 xl:w-[1280px] 2xl:w-[1536px] mx-auto'>
+    <div className="text-white bg-blue-950 sticky top-0 z-50 w-screen h-auto opacity-95">
         {/* laptop part */}
 
-        <div className='xl:flex gap-6 justify-start text-gray-300 text-xl hidden'>
+        <div className='xl:flex gap-6 justify-start xl:w-[1280px] 2xl:w-[1536px] mx-auto text-gray-300 text-xl hidden'>
           <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
           <div className='flex'>
             <Link href="/" className='my-auto group hover:text-white'>
@@ -101,7 +100,7 @@ const _navbar = () => {
 
         <div className="flex justify-between xl:hidden">
           <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
-          <div className="dropdown dropdown-end my-auto xl:hidden">
+          <div className="dropdown dropdown-end my-auto">
             <div tabIndex={0} className="">
               <img src="/img/bars.png" alt="" className='bars h-8 my-auto mx-4'/>
             </div>
@@ -173,7 +172,6 @@ const _navbar = () => {
             </div>
           </div>
         </div>
-        </div>
       </div>
     </div>
   )
@@ -181,4 +179,4 @@ const _navbar = () => {
 
 
 
-export default _navbar
+export default navbar

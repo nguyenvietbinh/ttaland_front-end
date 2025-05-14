@@ -1,8 +1,7 @@
 'use client'
 
-
-const _search_bar = () => {
-  const state_choices = {
+const new_search_bar = () => {
+    const state_choices = {
     'AP': 'Andra Pradesh',
     'HYD' : 'Hyderabad' ,
     'AS':'Assam',
@@ -47,38 +46,37 @@ const _search_bar = () => {
     '9':9,
     '10':10
   }
-  
   return (
-    <div className="w-full h-auto  flex text-white font-myfont">
-      <div className="w-full h-auto p-10 bg-gray-700 md:mx-[16vw] mx-[8vw] my-[15vh] text-center opacity-95">
-        <p className="md:text-5xl text-2xl m-0 md:m-[5vh]">Property Searching Just Got So Easy</p>
+    <div className="w-screen xl:w-[1280px] 2xl:w-[1536px] mx-auto h-auto my-20 text-white">
+      <div className="w-[90%] p-10 bg-gray-700 mx-auto text-center">
+      <p className="md:text-5xl text-2xl m-0 md:m-15">Property Searching Just Got So Easy</p>
         <p className="text-2xl hidden md:block mx-10">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum tempore! Consectetur, id commodi!</p>
         <div className="h-auto w-full mx-auto mt-10">
-          <form className="form_a grid grid-cols-1 md:grid-cols-3 gap-[1vw]" action="">
-            <input className="w-full h-[4vh] bg-white text-black rounded-sm mt-2 p-3" type="text" name="keyword" placeholder="Keyword (Pool, Garage, etc)"/>
-            <input className="w-full h-[4vh] bg-white text-black rounded-sm mt-2 p-3" type="text" name="city" placeholder="City"/>
-            <select className="w-full h-[4vh] bg-white text-black rounded-sm mt-2" name="state" id="">
+          <form className="form_a grid grid-cols-1 md:grid-cols-3 gap-2" action="">
+            <input className="w-full h-10 bg-white text-black rounded-sm mt-2 p-3" type="text" name="keyword" placeholder="Keyword (Pool, Garage, etc)"/>
+            <input className="w-full h-10 bg-white text-black rounded-sm mt-2 p-3" type="text" name="city" placeholder="City"/>
+            <select className="w-full h-10 bg-white text-black rounded-sm mt-2" name="state" id="">
               <option key={'all'}>State (All)</option>
               {Object.entries(state_choices).map(([key, value]) => (
                 <option key={key} value={key}>{value}</option>
               ))}
             </select>
           </form>
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-[1vw] mt-[1vw]" action="">
-            <select className="w-full h-[4vh] bg-white text-black rounded-sm mt-2" name="bedroom" id="">
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" action="">
+            <select className="w-full h-10 bg-white text-black rounded-sm mt-2" name="bedroom" id="">
               <option key={'all'}>Bedrooms (All)</option>
               {Object.entries(bedroom_choices).map(([key, value]) => (
                 <option key={key} value={key}>{value}</option>
               ))}
             </select>
-            <select className="w-full h-[4vh] bg-white text-black rounded-sm mt-2" name="prize" id="">
+            <select className="w-full h-10 bg-white text-black rounded-sm mt-2" name="prize" id="">
               <option key={'all'}>Max Price (Any)</option>
               {Object.entries(price_choices).map(([key, value]) => (
                 <option key={key} value={key}>{value}</option>
               ))}
             </select>
           </form>
-          <button className="btn w-full my-[5vh]">Submit form</button>
+          <button className="btn w-full my-12">Submit form</button>
         </div>
       </div>
     </div>
@@ -86,4 +84,5 @@ const _search_bar = () => {
 }
 
 
-export default _search_bar
+
+export default new_search_bar
