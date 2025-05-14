@@ -3,11 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBath, faBed, faCar, faClock, faMapMarker, faThLarge, faUser } from "@fortawesome/free-solid-svg-icons"
 
 const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-const height = []
-for (let i = 0; i < items.length; i ++) {
-  height.push(`h-[${i+1}vh]`)
-}
-console.log(JSON.stringify(height))
+
 const list = () => {
   return (
     <div className="w-full text-gray-950 pt-8">
