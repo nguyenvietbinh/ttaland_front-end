@@ -14,7 +14,7 @@ const listing = () => {
       <div className='text-4xl md:text-5xl text-center text-white my-8'>Sản Phẩm Nổi Bật</div>
       <div className="h-auto mx-4 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
                 {items.map((item) => (
-                  <div key={item} className="inline-block bg-gray-400 text-center">
+                  <div key={item} className="inline-block bg-gray-600 text-center">
                     <div className='absolute'>
                       <div className='m-4 py-1 px-3 inline-block bg-gray-700 text-white rounded-sm opacity-90'>1000$</div>
                     </div>
