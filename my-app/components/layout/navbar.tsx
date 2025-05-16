@@ -2,11 +2,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 
-const navbar = () => {
+const Navbar = () => {
   const path_name = usePathname()
   return (
     <div className="text-white bg-blue-950 sticky top-0 z-50 w-full h-auto">
@@ -195,4 +194,4 @@ const navbar = () => {
 
 
 
-export default navbar
+export default Navbar
