@@ -2,21 +2,32 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBath, faBed, faCar, faClock, faMapMarker, faThLarge, faUser } from "@fortawesome/free-solid-svg-icons"
+import _sub_avbar from '@/components/listing/sub_navbar'
+import { usePathname } from 'next/navigation';
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
 
-
-const listing = () => {
-
+const Listing = () => {
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  let title = ''
+  const path_name = usePathname()
+  const list_path = path_name.split('/')
+  if (list_path[1] === 'san_pham_ban') {
+    title = 'Sản Phẩm Bán'
+  } else if (list_path[1] === 'san_pham_cho_thue') {
+    title = 'Sản Phẩm Cho Thuê'
+  } else if (list_path[1] === 'du_an') {
+    title = 'Dự Án'
+  }
   return (
     <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto mt-30 text-white">
-      <div className='text-4xl md:text-5xl text-center text-white my-8'>Sản Phẩm Nổi Bật</div>
+    <div className='text-4xl md:text-5xl text-center text-white my-8'>{title} Nổi Bật</div>
+    <_sub_avbar/>
       <div className="h-auto mx-4 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
                 {items.map((item) => (
                   <div key={item} className="inline-block bg-gray-600 text-center">
-                    <div className='absolute'>
-                      <div className='m-4 py-1 px-3 inline-block bg-gray-700 text-white rounded-sm opacity-90'>1000$</div>
+                    <div className='absolute'>  
+                      <div className='m-4 py-1 px-3 inline-block bg-gray-700 text-white rounded-sm opacity-90'>800.000.000 VND</div>
                     </div>
                     <div className=''>
                     <img src="/img/showcase.png" alt="" className=""/>
@@ -35,7 +46,7 @@ const listing = () => {
                           <FontAwesomeIcon icon={faCar}></FontAwesomeIcon> Garage: 2
                         </div>
                         <div>
-                          <FontAwesomeIcon icon={faBed}></FontAwesomeIcon> Bedrooms: 4
+                          <FontAwesomeIcon icon={faBed}></FontAwesomeIcon> Bedrooms: {item}
                         </div>
                         <div>
                           <FontAwesomeIcon icon={faBath}></FontAwesomeIcon> Bathroom: 2
@@ -50,7 +61,7 @@ const listing = () => {
                         </div>
                       </div>
                       <div className='w-full h-auto border-t-[1px] border-gray-500 border-solid text-left py-8 px-2'>
-                        <div className='btn bg-blue-950 w-full'>More Infor</div>
+                        <div className='btn bg-blue-950 text-white w-full'>More Infor</div>
                       </div>
                     </div>
                   </div>
@@ -62,4 +73,4 @@ const listing = () => {
 }
 
 
-export default listing
+export default Listing

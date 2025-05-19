@@ -7,7 +7,7 @@ const about = () => {
   return (
     <div>
       <_navbar/>
-      gioi_thieu
+      <div>gioi_thieu</div>
     </div>
   )
 }
