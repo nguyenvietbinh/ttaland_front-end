@@ -14,7 +14,7 @@ const SubNavbar = () => {
         <Link className={list_path[2] === 'biet_thu' ? "w-full text-center border-solid border-gray-400 border-t-2 border-x-2 py-2 bg-black/30 rounded-t-sm" : "w-full text-gray-200 text-center py-2 border-solid border-gray-400 border-b-2"} href={`/${list_path[1]}/biet_thu`}>Biệt Thự</Link>
         <Link className={list_path[2] === 'can_ho' ? "w-full text-center border-solid border-gray-400 border-t-2 border-x-2 py-2 bg-black/30 rounded-t-sm" : "w-full text-gray-200 text-center py-2 border-solid border-gray-400 border-b-2"} href={`/${list_path[1]}/can_ho`}>Căn Hộ</Link>
       </div>
-      <div className="h-4 w-full bg-black/30"></div>
+      <div className="h-4 hidden md:block mx-4 xl:mx-0 bg-black/30"></div>
     </div>
     
   )

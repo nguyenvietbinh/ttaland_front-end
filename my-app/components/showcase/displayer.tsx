@@ -43,9 +43,9 @@ const EnhancedMediaGallery: React.FC<MediaGalleryProps> = ({ mediaItems }) => {
   const currentMedia = mediaItems[currentIndex];
 
   return (
-    <div className="card bg-base-100 shadow-xl max-w-4xl mx-auto">
-      <div className="card-body">
-        <h2 className="card-title text-2xl font-bold mb-4">Nguyen Viet Binh</h2>
+    <div className="card bg-gray-800 shadow-xl max-w-4xl mx-auto">
+      <div className="card-body px-0">
+        <h2 className="card-title text-2xl font-bold mx-4 mb-4">Nguyen Viet Binh</h2>
         
         <div 
           ref={mediaContainerRef}
@@ -53,7 +53,7 @@ const EnhancedMediaGallery: React.FC<MediaGalleryProps> = ({ mediaItems }) => {
         >
           {/* Hiển thị ảnh hoặc video */}
           {currentMedia.type === 'image' ? (
-            <figure className="relative aspect-video rounded-lg overflow-hidden">
+            <figure className="relative bg-gray-900 aspect-video rounded-lg overflow-hidden">
               <img 
                 src={currentMedia.url} 
                 alt={currentMedia.alt || 'Gallery image'} 
@@ -61,7 +61,7 @@ const EnhancedMediaGallery: React.FC<MediaGalleryProps> = ({ mediaItems }) => {
               />
             </figure>
           ) : (
-            <div className="relative aspect-video">
+            <div className="relative aspect-video bg-gray-900">
               <video
                 ref={videoRef}
                 className="w-full h-full object-contain rounded-lg"
@@ -104,7 +104,7 @@ const EnhancedMediaGallery: React.FC<MediaGalleryProps> = ({ mediaItems }) => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-primary' : 'bg-gray-300'
+                index === currentIndex ? 'bg-gray-100' : 'bg-gray-500'
               }`}
               aria-label={`Go to media ${index + 1}`}
             />

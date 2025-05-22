@@ -24,7 +24,7 @@ const Listing = () => {
     <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto mt-10 text-white">
     <div className='text-4xl md:text-5xl text-center text-white my-8'>{title} Nổi Bật</div>
     <_sub_avbar/>
-      <div className={category.includes(list_path[2]) ? "h-auto mx-4 bg-black/30 px-2 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8" : "hidden"}>
+      <div className={category.includes(list_path[2]) ? "h-auto mx-4 md:bg-black/30 bg-none px-2 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8" : "hidden"}>
                 {items.map((item) => (
                   <div key={item} className=" bg-gray-600 rounded-sm text-center">
                     <div className='absolute'>  
