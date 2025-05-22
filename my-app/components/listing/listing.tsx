@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBath, faBed, faCar, faClock, faMapMarker, faThLarge, faUser } from "@fortawesome/free-solid-svg-icons"
 import _sub_avbar from '@/components/listing/sub_navbar'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 
 
@@ -11,6 +12,7 @@ const Listing = () => {
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
   let title = ''
   const path_name = usePathname()
+  console.log(path_name)
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho']
   const list_path: string[] = path_name.split('/')
   if (list_path[1] === 'san_pham_ban') {
@@ -62,12 +64,11 @@ const Listing = () => {
                         </div>
                       </div>
                       <div className='w-full h-auto border-t-[1px] border-gray-500 border-solid text-left py-8 px-2'>
-                        <div className='btn bg-blue-950 text-white w-full'>More Infor</div>
+                        <Link href={`${path_name}/show/displayer`}><div className='btn bg-blue-950 text-white w-full'>More Infor</div></Link>
                       </div>
                     </div>
                   </div>
                 ))}
-
       </div>
     </div>
   )

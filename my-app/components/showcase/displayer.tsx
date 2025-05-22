@@ -1,4 +1,3 @@
-// components/EnhancedMediaGallery.tsx
 'use client'
 import { useState, useRef } from 'react';
 import { 
@@ -51,7 +50,7 @@ const EnhancedMediaGallery: React.FC<MediaGalleryProps> = ({ mediaItems }) => {
           ref={mediaContainerRef}
           className="relative group"
         >
-          {/* Hiển thị ảnh hoặc video */}
+          {/* display img or vid */}
           {currentMedia.type === 'image' ? (
             <figure className="relative bg-gray-900 aspect-video rounded-lg overflow-hidden">
               <img 

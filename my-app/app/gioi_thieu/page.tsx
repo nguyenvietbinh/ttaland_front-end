@@ -1,7 +1,6 @@
 
 'use client'
 import _navbar from "@/components/layout/navbar"
-
 const about = () => {
 
   return (

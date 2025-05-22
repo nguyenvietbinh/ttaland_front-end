@@ -2,9 +2,10 @@
 
 'use client'
 import { NextPage } from 'next';
+import Navbar from '@/components/layout/navbar';
 import Displayer from '@/components/showcase/displayer';
 import { usePathname } from "next/navigation"
-
+import Footer from '@/components/layout/footer';
 
 const HomePage: NextPage = () => {
   const path_name = usePathname().split('/')
@@ -34,10 +35,14 @@ const HomePage: NextPage = () => {
   ];
 
   return (
-    <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto mt-10 text-white">
-      <div className={path_name[4] === 'displayer' ? 'block' : 'hidden'}>
-        <Displayer mediaItems={mediaItems}/>
+    <div>
+      <Navbar/>
+      <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto mt-10 text-white">
+        <div className={path_name[4] === 'displayer' ? 'block' : 'hidden'}>
+          <Displayer mediaItems={mediaItems}/>
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 };
