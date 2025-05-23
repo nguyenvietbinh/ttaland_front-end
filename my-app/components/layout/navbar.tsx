@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 const Navbar = () => {
   const path_name = usePathname()
   return (
-    <div className="text-white bg-blue-950 sticky top-0 z-50 w-full h-auto">
+    <div className="text-white bg-blue-950 sticky top-0 z-50 w-full opacity-90 h-auto">
         {/* laptop part */}
 
         <div className='xl:flex gap-6 justify-start xl:w-[1280px] 2xl:w-[1536px] mx-auto text-gray-300 text-xl hidden'>
@@ -91,7 +91,7 @@ const Navbar = () => {
             <div className={path_name === '/tuyen_dung' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
           </Link>
           <div className='p-4 ml-auto flex justify-between'>
-            <div className='flex gap-2 my-auto'><Link href='/login' className='my-auto group hover:text-white'>Log in <div className='h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'></div></Link>/<Link href='/login' className='my-auto group hover:text-white'>Sign up <div className='h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'></div></Link></div>
+            <div className='flex gap-2 my-auto'><Link href='/login' className='my-auto group hover:text-white'>Đăng Nhập<div className='h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'></div></Link></div>
             <FontAwesomeIcon icon={faSignIn} className='my-auto pl-2'></FontAwesomeIcon>
           </div>
         </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
               <p className={path_name === '/tuyen_dung' ? 'pt-1 pr-1' : 'pt-1 pr-1 hidden'}>*</p>
             </div>
             <div className='p-4 flex justify-between'>
-              <div className='flex'><Link href='/login' className='text-2xl'>Log in</Link>/<Link href='/login' className='text-2xl'>Sign up</Link></div>
+              <div className='flex'><Link href='/login' className='text-2xl'>Đăng Nhập</Link></div>
               <FontAwesomeIcon icon={faSignIn} className='my-auto'></FontAwesomeIcon>
             </div>
           </div>
