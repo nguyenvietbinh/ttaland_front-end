@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 const Navbar = () => {
   const path_name = usePathname()
   return (
+    // <div className="text-white bg-[#0c7ba5] sticky top-0 z-50 w-full opacity-90 h-auto">
+    // <div className="text-white bg-[#09394f] sticky top-0 z-50 w-full opacity-90 h-auto">
     <div className="text-white bg-blue-950 sticky top-0 z-50 w-full opacity-90 h-auto">
         {/* laptop part */}
 
