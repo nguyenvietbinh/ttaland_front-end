@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     // <div className="text-white bg-[#0c7ba5] sticky top-0 z-50 w-full opacity-90 h-auto">
     // <div className="text-white bg-[#09394f] sticky top-0 z-50 w-full opacity-90 h-auto">
-    <div className="text-white bg-blue-950 sticky top-0 z-50 w-full opacity-90 h-auto">
+    <div className="text-white bg-blue-950 sticky top-0 z-50 w-full h-auto">
         {/* laptop part */}
 
         <div className='xl:flex gap-6 justify-start xl:w-[1280px] 2xl:w-[1536px] mx-auto text-gray-300 text-xl hidden'>
@@ -91,6 +91,10 @@ const Navbar = () => {
           <Link href='/tuyen_dung' className={path_name === '/tuyen_dung' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
             Tuyển Dụng
             <div className={path_name === '/tuyen_dung' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
+          </Link>
+          <Link href='/sale' className={path_name === '/sale' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
+            Đăng Sản Phẩm
+            <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
           </Link>
           <div className='p-4 ml-auto flex justify-between'>
             <div className='flex gap-2 my-auto'><Link href='/login' className='my-auto group hover:text-white'>Đăng Nhập<div className='h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'></div></Link></div>
@@ -182,6 +186,10 @@ const Navbar = () => {
             <div className={path_name === '/tuyen_dung' ? 'p-4 flex justify-between text-white text-2xl' : 'p-4 flex justify-between text-2xl'}>
               <Link href="/tuyen_dung">Tuyển Dụng</Link>
               <p className={path_name === '/tuyen_dung' ? 'pt-1 pr-1' : 'pt-1 pr-1 hidden'}>*</p>
+            </div>
+            <div className={path_name === '/sale' ? 'p-4 flex justify-between text-white text-2xl' : 'p-4 flex justify-between text-2xl'}>
+              <Link href="/sale">Đăng Sản Phẩm</Link>
+              <p className={path_name === '/sale' ? 'pt-1 pr-1' : 'pt-1 pr-1 hidden'}>*</p>
             </div>
             <div className='p-4 flex justify-between'>
               <div className='flex'><Link href='/login' className='text-2xl'>Đăng Nhập</Link></div>
