@@ -6,7 +6,7 @@ const about = () => {
   return (
     <div>
       <_navbar/>
-      <div>gioi_thieu</div>
+      <div>tin_tuc</div>
     </div>
   )
 }

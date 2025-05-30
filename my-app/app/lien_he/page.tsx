@@ -6,7 +6,7 @@ const about = () => {
   return (
     <div>
     <_navbar/>
-    tuyen_dung
+    lien_he
     </div>
   )
 }
