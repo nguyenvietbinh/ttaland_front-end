@@ -10,12 +10,10 @@ const LG_navbar = () => {
     <div>
       <div className='lg:flex xl:hidden gap-6 justify-start w-[1024px] mx-auto text-gray-300 text-xl hidden'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
-        <div className='flex'>
-          <Link href="/" className={path_name === '/' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
-            Trang Chủ
-            <div className={path_name === '/' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
-          </Link>
-        </div>
+        <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
+          Tin Tức
+          <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
+        </Link>
         <div className="dropdown dropdown-hover flex group/main"> 
           <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
             <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
@@ -79,10 +77,7 @@ const LG_navbar = () => {
             </Link></li>
           </ul>
         </div>
-        <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
-          Tin Tức
-          <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
-        </Link>
+
 
         <div className="dropdown ml-auto flex dropdown-hover group/main"> 
             <div tabIndex={0} className="flex">

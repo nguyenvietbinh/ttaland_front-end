@@ -1,6 +1,6 @@
 'use client'
 import _listing from "@/components/listing/listing"
-import _navbar from '@/components/layout/navbar';
+import _navbar from '@/components/nav_bar/navbar';
 import Footer from "@/components/layout/footer";
 const listing = () => {
   return (

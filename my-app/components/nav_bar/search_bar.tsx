@@ -1,7 +1,8 @@
 'use client'
 
 
-export default function HoverCollapse() {
+const Search_bar = () => {
+
   return (
     <div>
       <div className='xl:flex mx-4 bg-gray-500 p-1 h-7 rounded-full hidden inset-shadow-md cursor-pointer items-center' onClick={() => (document.getElementById('my_modal_2') as HTMLDialogElement)?.showModal()}><span className='mx-4 text-sm text-white'>Ctrl K</span><img src="/img/search.png" alt="" className='h-full'/></div>
@@ -18,5 +19,8 @@ export default function HoverCollapse() {
           </form>
         </dialog>
     </div>
-  );
+  )
 }
+
+
+export default Search_bar

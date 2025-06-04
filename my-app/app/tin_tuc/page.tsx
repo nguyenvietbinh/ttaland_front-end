@@ -1,6 +1,6 @@
 
 'use client'
-import _navbar from "@/components/layout/navbar"
+import _navbar from "@/components/nav_bar/navbar"
 const about = () => {
 
   return (

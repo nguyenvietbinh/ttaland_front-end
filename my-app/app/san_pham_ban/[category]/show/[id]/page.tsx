@@ -2,7 +2,7 @@
 
 'use client'
 import { NextPage } from 'next';
-import Navbar from '@/components/layout/navbar';
+import Navbar from '@/components/nav_bar/navbar';
 import Displayer from '@/components/showcase/displayer';
 import { usePathname } from "next/navigation"
 import Footer from '@/components/layout/footer';

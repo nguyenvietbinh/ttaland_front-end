@@ -1,7 +1,7 @@
 
 'use client'
 import Submit_form from '@/components/sale/submit_form';
-import Navbar from '@/components/layout/navbar';
+import Navbar from '@/components/nav_bar/navbar';
 import Footer from '@/components/layout/footer';
 const FormSale = () => {
 
