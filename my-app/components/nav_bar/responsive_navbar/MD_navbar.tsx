@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Search_bar from '../search_bar';
 
 
 const MD_navbar = () => {
   const path_name = usePathname()
   return (
     <div>
-      <div className='md:flex hidden lg:hidden gap-6 justify-start w-[768px] mx-auto text-gray-300 text-xl '>
+      <div className='flex gap-4 justify-start w-[768px] mx-auto text-gray-300 text-xl '>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
         <div className="dropdown dropdown-hover flex group/main"> 
@@ -75,29 +76,30 @@ const MD_navbar = () => {
           </ul>
         </div>
 
-
-        <div className="dropdown ml-auto flex dropdown-hover group/main"> 
-            <div tabIndex={0} className="flex">
-              <img src="/img/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
-            </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 p-4 text-center">
-            <li className='py-2.5'><Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Tin Tức
-              <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-            <li className='py-2.5'><Link href='/lien_he' className={path_name === '/lien_he' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Liên Hệ
-              <div className={path_name === '/lien_he' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-            <li className='py-2.5'><Link href='/sale' className={path_name === '/sale' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Sản Phẩm
-              <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-            <li className='py-2.5'><Link href='/login' className={path_name === '/login' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Nhập
-              <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-          </ul>
+        <div className='flex ml-auto'>
+          <Search_bar modal_name='md_navbar'/>
+          <div className="dropdown flex dropdown-hover group/main"> 
+              <div tabIndex={0} className="flex">
+                <img src="/img/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
+              </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 p-4 text-center">
+              <li className='py-2.5'><Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Tin Tức
+                <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
+              </Link></li>
+              <li className='py-2.5'><Link href='/lien_he' className={path_name === '/lien_he' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Liên Hệ
+                <div className={path_name === '/lien_he' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
+              </Link></li>
+              <li className='py-2.5'><Link href='/sale' className={path_name === '/sale' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Sản Phẩm
+                <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
+              </Link></li>
+              <li className='py-2.5'><Link href='/login' className={path_name === '/login' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Nhập
+                <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
+              </Link></li>
+            </ul>
+          </div>
         </div>
-
       </div>
     </div>
   )

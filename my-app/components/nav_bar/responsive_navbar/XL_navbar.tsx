@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link';
+import Search_bar from '../search_bar';
 import { usePathname } from 'next/navigation';
 
 
@@ -8,7 +9,7 @@ const XL_navbar = () => {
   const path_name = usePathname()
   return (
     <div>
-      <div className='xl:flex 2xl:hidden gap-5 justify-start w-[1280px] mx-auto text-gray-300 text-xl hidden whitespace-nowrap'>
+      <div className='flex gap-5 justify-start w-[1280px] mx-auto text-gray-300 text-xl whitespace-nowrap'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
                 <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
           Tin Tức
@@ -85,8 +86,11 @@ const XL_navbar = () => {
           Đăng Sản Phẩm
           <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
-          <div className="dropdown ml-auto flex dropdown-hover group/main"> 
-            <div tabIndex={0} className="flex">
+        <div className='ml-auto flex'>
+          <Search_bar modal_name='XL_navbar'/>
+
+          <div className="dropdown flex dropdown-hover group/main"> 
+            <div tabIndex={0} className="flex my-auto">
               <img src="/img/user.png" alt="" className='bars h-10 my-auto mx-4'/>
             </div>
           <ul
@@ -100,6 +104,8 @@ const XL_navbar = () => {
             </Link></li>
           </ul>
         </div>
+        </div>
+
       </div>
     </div>
   )

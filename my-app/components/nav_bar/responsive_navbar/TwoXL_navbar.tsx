@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link';
+import Search_bar from '../search_bar';
+import User_dropdown from '../user_dropdown';
 import { usePathname } from 'next/navigation';
 
 
@@ -8,9 +10,9 @@ const TwoXL_navbar = () => {
   const path_name = usePathname()
   return (
     <div>
-      <div className='2xl:flex gap-6 justify-start w-[1536px] mx-auto text-gray-300 text-xl hidden'>
+      <div className='flex gap-6 justify-start w-[1536px] mx-auto text-gray-300 text-xl'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
-                <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
+        <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
           Tin Tức
           <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
@@ -86,20 +88,9 @@ const TwoXL_navbar = () => {
           Đăng Sản Phẩm
           <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
-          <div className="dropdown ml-auto flex dropdown-hover group/main"> 
-            <div tabIndex={0} className="flex">
-              <img src="/img/user.png" alt="" className='bars h-10 my-auto mx-4'/>
-            </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 p-4 text-center">
-            <li className='py-2.5'><Link href='/login' className={path_name === '/login' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Nhập
-              <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-            <li className='py-2.5'><Link href='/dang_ki' className={path_name === '/dang_ki' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Kí 
-              <div className={path_name === '/dang_ki' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-            </Link></li>
-          </ul>
+        <div className='ml-auto flex'>
+          <Search_bar modal_name='twoXL_navbar'/>
+          <User_dropdown/>
         </div>
       </div>
     </div>
