@@ -7,7 +7,7 @@ type search_bar_props = {
 }
 
 const Search_bar = ({ modal_name = '' }: search_bar_props) => {
-  
+  const keywords = [1, 2, 3, 4, 5, 6, 7]
   // Lắng nghe tổ hợp phím Ctrl + K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -40,11 +40,21 @@ const Search_bar = ({ modal_name = '' }: search_bar_props) => {
       />
       
       <dialog id={modal_name} className="modal">
-        <div className="modal-box w-11/12 max-w-5xl">
-          <label className="input w-full focus-within:outline-none text-xl">
+        <div className="modal-box w-11/12 bg-gray-900 max-w-5xl">
+          <label className="input w-full focus-within:outline-none bg-gray-800 text-xl">
             <img src="/img/search.png" className='h-6' alt="" />
             <input type="search" required placeholder='Search' className=''/>
           </label>
+          <div className='w-full mt-2 border-solid border-gray-400 rounded-xl p-1'>
+            <ul className="space-y-2">
+              {keywords.map((key_word) => (
+                <div key={key_word} className='flex justify-between cursor-pointer shadow-2xs shadow-gray-800 hover:bg-gray-700 items-center py-1 px-2 rounded-sm'>
+                  <li className=''>key word {key_word}</li>
+                  <img src="/img/x.png" className='h-4' alt="" />
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
