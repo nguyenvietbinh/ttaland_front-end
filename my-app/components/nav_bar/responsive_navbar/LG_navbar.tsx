@@ -3,12 +3,19 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Search_bar from '../search_bar';
-
+import { useEffect, useState } from 'react';
 
 const LG_navbar = () => {
   const path_name = usePathname()
+  const [width, setWidth] = useState<number>(0);
+  useEffect(() => {
+    setWidth(window.innerWidth)
+    window.addEventListener('resize', () => {setWidth(window.innerWidth)});
+    return () => window.removeEventListener('resize', () => {setWidth(window.innerWidth)});
+  }, []);
   return (
     <div>
+      {((width > 1024) && (width < 1280)) ? (
       <div className='flex gap-6 justify-start w-[1024px] mx-auto text-gray-300 text-xl'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
         <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
@@ -101,6 +108,10 @@ const LG_navbar = () => {
         </div>
 
       </div>
+      ) : (
+        <div></div>
+      )}
+
     </div>
   )
 }

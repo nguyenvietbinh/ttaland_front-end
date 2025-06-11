@@ -3,12 +3,19 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Search_bar from '../search_bar';
-
+import { useEffect, useState } from 'react';
 
 const MD_navbar = () => {
   const path_name = usePathname()
+  const [width, setWidth] = useState<number>(0);
+  useEffect(() => {
+    setWidth(window.innerWidth)
+    window.addEventListener('resize', () => {setWidth(window.innerWidth)});
+    return () => window.removeEventListener('resize', () => {setWidth(window.innerWidth)});
+  }, []);
   return (
     <div>
+      {((width > 768) && (width < 1024)) ? (
       <div className='flex gap-4 justify-start w-[768px] mx-auto text-gray-300 text-xl '>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
@@ -101,6 +108,10 @@ const MD_navbar = () => {
           </div>
         </div>
       </div>
+      ) : (
+        <div></div>
+      )}
+
     </div>
   )
 }

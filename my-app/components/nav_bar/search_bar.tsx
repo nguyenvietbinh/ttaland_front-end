@@ -9,11 +9,8 @@ type search_bar_props = {
 const Search_bar = ({ modal_name = '' }: search_bar_props) => {
   const keywords = []
   const getRandomAlphabetCharacter = (): string => {
-    // Generate a random number between 0 and 25
     const randomNum = Math.floor(Math.random() * 26);
-    // Convert to ASCII code for lowercase letters (97-122)
     const charCode = randomNum + 97;
-    // Convert ASCII code to character
     return String.fromCharCode(charCode);
   };
   const getRandomKeyword = (): string => {
@@ -24,7 +21,6 @@ const Search_bar = ({ modal_name = '' }: search_bar_props) => {
     }
     return ans
   }
-  const randomNum = Math.floor(Math.random() * 26);
   for (let i = 0; i < 30; i ++) {
     keywords.push(getRandomKeyword())
   }
