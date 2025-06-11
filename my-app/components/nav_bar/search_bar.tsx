@@ -7,8 +7,30 @@ type search_bar_props = {
 }
 
 const Search_bar = ({ modal_name = '' }: search_bar_props) => {
-  const keywords = [1, 2, 3, 4, 5, 6, 7]
-  // Lắng nghe tổ hợp phím Ctrl + K
+  const keywords = []
+  const getRandomAlphabetCharacter = (): string => {
+    // Generate a random number between 0 and 25
+    const randomNum = Math.floor(Math.random() * 26);
+    // Convert to ASCII code for lowercase letters (97-122)
+    const charCode = randomNum + 97;
+    // Convert ASCII code to character
+    return String.fromCharCode(charCode);
+  };
+  const getRandomKeyword = (): string => {
+    const randomNum = Math.floor(Math.random() * 26);
+    let ans = ''
+    for (let i = 0; i < randomNum; i ++) {
+      ans += getRandomAlphabetCharacter()
+    }
+    return ans
+  }
+  const randomNum = Math.floor(Math.random() * 26);
+  for (let i = 0; i < 30; i ++) {
+    keywords.push(getRandomKeyword())
+  }
+
+
+  // listen to ctrl+k
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key.toLowerCase() === 'k') {
@@ -24,37 +46,23 @@ const Search_bar = ({ modal_name = '' }: search_bar_props) => {
 
   return (
     <div className="flex">
-      <div
-        className='xl:flex mx-4 bg-gray-500 p-1 h-7 rounded-full hidden my-auto inset-shadow-md cursor-pointer items-center'
-        onClick={() => (document.getElementById(modal_name) as HTMLDialogElement)?.showModal()}
-      >
-        <span className='mx-4 text-sm text-white'>Ctrl K</span>
-        <img src="/img/search.png" alt="" className='h-full'/>
-      </div>
-      
+      <div className="h-8 my-auto mx-4 flex cursor-pointer items-center tooltip tooltip-bottom" data-tip="Tìm Kiếm">
       <img
-        src="/img/search.png"
+        src="/img/filter.png"
         alt=""
-        className="h-8 my-auto mx-4 flex xl:hidden cursor-pointer"
+        className='w-full h-full'
         onClick={() => (document.getElementById(modal_name) as HTMLDialogElement)?.showModal()}
       />
+      </div>
+
       
       <dialog id={modal_name} className="modal">
         <div className="modal-box w-11/12 bg-gray-900 max-w-5xl">
           <label className="input w-full focus-within:outline-none bg-gray-800 text-xl">
             <img src="/img/search.png" className='h-6' alt="" />
-            <input type="search" required placeholder='Search' className=''/>
+            <input type="search" required placeholder='Tỉnh, Thành Phố/Quận Huyện' className=''/>
           </label>
-          <div className='w-full mt-2 border-solid border-gray-400 rounded-xl p-1'>
-            <ul className="space-y-2">
-              {keywords.map((key_word) => (
-                <div key={key_word} className='flex justify-between cursor-pointer shadow-2xs shadow-gray-800 hover:bg-gray-700 items-center py-1 px-2 rounded-sm'>
-                  <li className=''>key word {key_word}</li>
-                  <img src="/img/x.png" className='h-4' alt="" />
-                </div>
-              ))}
-            </ul>
-          </div>
+
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

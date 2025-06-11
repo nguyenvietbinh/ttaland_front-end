@@ -9,11 +9,9 @@ import SM_navbar from './responsive_navbar/SM_navbar';
 
 export default function NavBar() {
   const [NavbarComponent, setNavbarComponent] = useState(() => SM_navbar);
-
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      
       if (width < 768) {
         setNavbarComponent(() => SM_navbar);
       } else if (width < 1024) {
