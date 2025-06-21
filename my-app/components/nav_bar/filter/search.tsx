@@ -39,14 +39,43 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
 
     // Lọc keyword gợi ý dựa trên input
     if (value.length > 0) {
-      const filtered = keywords.filter(keyword =>
-        keyword.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filtered);
+      setSuggestions(handleSuggestion(value, keywords))
     } else {
       setSuggestions(keywords);
     }
   };
+
+  const handleSuggestion = (value: string, suggestions: string[]): string[] => {
+    value = removeTones(value.toLowerCase())
+    const keywords = [...suggestions]
+    for (let i = 0; i < keywords.length; i ++) {
+      keywords[i] = removeTones(keywords[i].toLowerCase())
+    }
+    return sortSuggestion(value, keywords)
+  }
+
+  const removeTones = (str: string): string => {
+    str = str.replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, "a");
+    str = str.replace(/[èéẹẻẽêềếệểễ]/g, "e");
+    str = str.replace(/[ìíịỉĩ]/g, "i");
+    str = str.replace(/[òóọỏõôồốộổỗơờớợởỡ]/g, "o");
+    str = str.replace(/[ùúụủũưừứựửữ]/g, "u");
+    str = str.replace(/[ỳýỵỷỹ]/g, "y");
+    str = str.replace(/đ/g, "d");
+    return str
+  }
+
+  const sortSuggestion = (value: string, suggestion: string[]): string[] => {
+    const sortedSuggestion = []
+    for (let i = 0; i < suggestion.length; i ++) {
+      if (value === suggestion[i].substring(0, value.length)) {
+        sortedSuggestion.push(keywords[i])
+      }
+    }
+    console.log(sortedSuggestion)
+    return sortedSuggestion
+  }
+
 
   const handleFocus = () => {
     setShowSuggestions(true);
@@ -101,11 +130,7 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
         >
           <ul className="menu menu-compact w-full">
             {suggestions.map((suggestion, index) => (
-              <li 
-                key={suggestion}
-                className={`${index === activeSuggestionIndex ? 'bg-base-200' : ''}`}
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
+              <li key={suggestion} className={`${index === activeSuggestionIndex ? 'bg-base-200' : ''}`} onClick={() => handleSuggestionClick(suggestion)}>
                 <a className="py-2 px-4 hover:bg-base-200">
                   {suggestion}
                 </a>
