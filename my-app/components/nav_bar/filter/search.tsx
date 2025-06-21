@@ -1,0 +1,121 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react';
+
+type Search_props = {
+  keywords: string[]
+}
+
+const Search: React.FC<Search_props> = ({ keywords }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Đóng dropdown khi click ra ngoài
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputRef.current && 
+        !inputRef.current.contains(event.target as Node) &&
+        suggestionsRef.current && 
+        !suggestionsRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    // Lọc keyword gợi ý dựa trên input
+    if (value.length > 0) {
+      const filtered = keywords.filter(keyword =>
+        keyword.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filtered);
+    } else {
+      setSuggestions(keywords);
+    }
+  };
+
+  const handleFocus = () => {
+    setShowSuggestions(true);
+    setSuggestions(keywords);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setInputValue(suggestion);
+    setShowSuggestions(false);
+    inputRef.current?.focus();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveSuggestionIndex(prev => 
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveSuggestionIndex(prev => 
+        prev > 0 ? prev - 1 : 0
+      );
+    } else if (e.key === 'Enter' && activeSuggestionIndex >= 0) {
+      e.preventDefault();
+      handleSuggestionClick(suggestions[activeSuggestionIndex]);
+    }
+  };
+
+  return (
+    <div className="relative w-full max-w-md mx-auto mt-10">
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Nhập từ khóa</span>
+        </label>
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Type here..."
+          className="input focus:outline-0 w-full"
+          value={inputValue}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+
+      {showSuggestions && suggestions.length > 0 && (
+        <div 
+          ref={suggestionsRef}
+          className="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow-lg max-h-60 overflow-auto"
+        >
+          <ul className="menu menu-compact w-full">
+            {suggestions.map((suggestion, index) => (
+              <li 
+                key={suggestion}
+                className={`${index === activeSuggestionIndex ? 'bg-base-200' : ''}`}
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                <a className="py-2 px-4 hover:bg-base-200">
+                  {suggestion}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Search;

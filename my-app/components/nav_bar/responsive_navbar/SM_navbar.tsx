@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Search_bar from '../search_bar';
+import Search_bar from '../filter';
 import { useEffect, useState } from 'react';
 
 const SM_navbar = () => {

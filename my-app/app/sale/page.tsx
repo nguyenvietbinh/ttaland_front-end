@@ -14,19 +14,19 @@ const FormSale = () => {
         <div className="space-y-4">
           {/* san_pham_ban */}
           <div className="tabs tabs-border">
-            <input type="radio" value='tab_1' name="my_tabs_2" className="tab tab_1" aria-label="Sản Phẩm Bán" defaultChecked/>
+            <input type="radio" value='sale_tab_1' name="my_tabs_2" className="tab tab_1" aria-label="Sản Phẩm Bán" defaultChecked/>
             <div className="tab-content border-base-300 bg-gray-950 rounded-md p-10">
               <Submit_form tab='san_pham_ban'/>
             </div>
 
             {/* san_pham_cho_thue */}
-            <input type="radio" value='tab_2' name="my_tabs_2" className="tab tab_2" aria-label="Sản Phẩm Cho Thuê" />
+            <input type="radio" value='sale_tab_2' name="my_tabs_2" className="tab tab_2" aria-label="Sản Phẩm Cho Thuê" />
             <div className="tab-content border-base-300 bg-gray-950 rounded-md p-10">
               <Submit_form tab='san_pham_cho_thue'/>
             </div>
 
             {/* du_an */}
-            <input type="radio" value='tab_3' name="my_tabs_2" className="tab tab_3" aria-label="Dự Án" />
+            <input type="radio" value='sale_tab_3' name="my_tabs_2" className="tab tab_3" aria-label="Dự Án" />
             <div className="tab-content border-base-300 bg-gray-950 rounded-md p-10">
               <Submit_form tab='du_an'/>
             </div>

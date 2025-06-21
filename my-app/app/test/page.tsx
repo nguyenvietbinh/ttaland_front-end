@@ -1,6 +1,6 @@
 'use client'
 
-import Search_bar from "@/components/nav_bar/search_bar";
+import Search_bar from "@/components/nav_bar/filter";
 
 
 export default function HoverCollapse() {

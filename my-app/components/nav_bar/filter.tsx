@@ -1,12 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
+import Filter_form from './filter/filter_form'
 
-type search_bar_props = {
+
+type filter_props = {
   modal_name: string
 }
 
-const Search_bar = ({ modal_name = '' }: search_bar_props) => {
+const Filter = ({ modal_name = '' }: filter_props) => {
   const keywords = []
   const getRandomAlphabetCharacter = (): string => {
     const randomNum = Math.floor(Math.random() * 26);
@@ -53,11 +55,8 @@ const Search_bar = ({ modal_name = '' }: search_bar_props) => {
 
       
       <dialog id={modal_name} className="modal">
-        <div className="modal-box w-11/12 bg-gray-900 max-w-5xl">
-          <label className="input w-full focus-within:outline-none bg-gray-800 text-xl">
-            <img src="/img/search.png" className='h-6' alt="" />
-            <input type="search" required placeholder='Tỉnh, Thành Phố/Quận Huyện' className=''/>
-          </label>
+        <div className="modal-box bg-gray-800 w-auto max-w-[100%] h-[80%]">
+          <Filter_form/>
 
         </div>
         <form method="dialog" className="modal-backdrop">
@@ -68,4 +67,4 @@ const Search_bar = ({ modal_name = '' }: search_bar_props) => {
   )
 }
 
-export default Search_bar
+export default Filter

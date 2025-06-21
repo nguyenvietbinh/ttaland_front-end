@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react"
-import { Input } from "../input"
+import { Input } from "../element/input"
 interface Submit_form_props {
   tab: string
 }

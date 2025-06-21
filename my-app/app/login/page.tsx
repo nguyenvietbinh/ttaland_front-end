@@ -1,6 +1,6 @@
 'use client'
 import { FormEvent } from "react";
-import BackButton from "@/components/back_button";
+import BackButton from "@/components/element/back_button";
 
 interface LoginFormData {
   email: string;
