@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link';
-import Search_bar from '../filter';
+import Search_bar from '../filter/filter';
 import User_dropdown from '../user_dropdown';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';

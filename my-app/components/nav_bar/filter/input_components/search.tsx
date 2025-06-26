@@ -3,11 +3,14 @@
 import { useState, useRef, useEffect } from 'react';
 
 type Search_props = {
-  keywords: string[]
+  keywords: string[],
+  placeholder: string,
+  setData?: (data: string) => void,
+  disable: boolean,
 }
 
-const Search: React.FC<Search_props> = ({ keywords }) => {
-  const [inputValue, setInputValue] = useState('');
+const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disable }) => {
+  const [inputValue, setInputValue] = useState<string>('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
@@ -33,10 +36,11 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
     };
   }, []);
 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
-
+    setData?.(value)
     // Lọc keyword gợi ý dựa trên input
     if (value.length > 0) {
       setSuggestions(handleSuggestion(value, keywords))
@@ -72,7 +76,11 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
         sortedSuggestion.push(keywords[i])
       }
     }
-    console.log(sortedSuggestion)
+    for (let i = 0; i < suggestion.length; i ++) {
+      if ((value !== suggestion[i].substring(0, value.length)) && (suggestion[i].includes(value))) {
+        sortedSuggestion.push(keywords[i])
+      } 
+    }
     return sortedSuggestion
   }
 
@@ -84,8 +92,8 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
 
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion);
+    setData?.(suggestion)
     setShowSuggestions(false);
-    inputRef.current?.focus();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -106,27 +114,27 @@ const Search: React.FC<Search_props> = ({ keywords }) => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto mt-10">
+    <div className="relative w-full text-white">
       <div className="form-control">
         <label className="label">
-          <span className="label-text">Nhập từ khóa</span>
         </label>
         <input
           ref={inputRef}
           type="text"
-          placeholder="Type here..."
+          placeholder={placeholder}
           className="input focus:outline-0 w-full"
           value={inputValue}
           onChange={handleInputChange}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
+          disabled={disable}
         />
       </div>
 
       {showSuggestions && suggestions.length > 0 && (
         <div 
           ref={suggestionsRef}
-          className="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow-lg max-h-60 overflow-auto"
+          className="absolute z-10 mt-2 w-full bg-gray-900 border border-base-300 rounded-box shadow-lg max-h-60 overflow-auto"
         >
           <ul className="menu menu-compact w-full">
             {suggestions.map((suggestion, index) => (

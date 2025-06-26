@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Search_bar from '../filter';
+import Search_bar from '../filter/filter';
 import { useEffect, useState } from 'react';
 
 const LG_navbar = () => {
