@@ -25,7 +25,7 @@ const XL_navbar = () => {
           </Link>
           <div className="dropdown dropdown-hover flex group/main"> 
             <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
-              <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+              <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
             </div>
             <ul
               tabIndex={0}
@@ -46,7 +46,7 @@ const XL_navbar = () => {
           </div>
           <div className="dropdown flex dropdown-hover group/main"> 
             <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
-              <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+              <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
             </div>
             <ul
               tabIndex={0}
@@ -67,7 +67,7 @@ const XL_navbar = () => {
           </div>
           <div className="dropdown flex dropdown-hover group/main"> 
             <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
-              <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+              <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
             </div>
             <ul
               tabIndex={0}

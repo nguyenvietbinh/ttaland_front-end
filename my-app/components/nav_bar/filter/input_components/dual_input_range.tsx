@@ -9,11 +9,7 @@ interface DualRangeSliderProps {
   step?: number;
 }
 
-function roundToNearestThousand(number: number) {
-    // Chia số cho 1000 và làm tròn đến 1 chữ số thập phân
-    const rounded = Math.round(number / 100 * 10) / 10; // Làm tròn đến 1 chữ số thập phân
-    return rounded.toFixed(1); // Đảm bảo luôn có 1 chữ số thập phân
-}
+
 
 const DualRangeSlider = ({
   min,
@@ -29,13 +25,33 @@ const DualRangeSlider = ({
   const getPercent = (value: number) =>
     Math.round(((value - min) / (max - min)) * 100);
 
+  const roundToNearestThousand = (number: number) => {
+    // Chia số cho 1000 và làm tròn đến 1 chữ số thập phân
+    const rounded = Math.round(number / 100 * 10) / 100; // Làm tròn đến 1 chữ số thập phân
+    return rounded.toFixed(1); // Đảm bảo luôn có 1 chữ số thập phân
+  }
+
+  const setUnit = (type: string, value: number): string[] => {
+    if (type === 'price') {
+      if (value < 1000) {
+        return [`${value}`, 'Triệu']
+      } else {
+        return [roundToNearestThousand(value), 'Tỷ']
+      }
+    } else if (type === 'sqr') {
+      return [`${value}`, 'm²']
+    }
+    return ['', '']
+  }
+
+
   // Set width of the range to decrease from the left side
   useEffect(() => {
     if (range.current) {
       let minPercent: number = getPercent(minVal);
       let maxPercent: number = getPercent(maxVal);
-      minPercent = minPercent >= 50 ? minPercent - 2 : minPercent;
-      maxPercent = maxPercent <= 50 ? maxPercent + 2 : maxPercent;
+      minPercent -= (minPercent * 0.02)
+      maxPercent += ((100 - maxPercent) * 0.02)
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
@@ -45,15 +61,15 @@ const DualRangeSlider = ({
     <div className="container px-2">
       <div className="flex flex-col w-full">
         <div className="flex justify-between mb-2">
-          <span className="text-sm font-medium">
-            Từ: {(type === 'price' && minVal >= 1000) ? `${roundToNearestThousand(minVal)} Tỷ` : `${minVal} Triệu`}
+          <span className="text-sm font-medium flex items-center gap-1">
+            Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
           </span>
-          <span className="text-sm font-medium">
-            Đến: {(type === 'price' && maxVal >= 1000) ? `${roundToNearestThousand(maxVal)} Tỷ` : `${maxVal} Triệu`}
+          <span className="text-sm font-medium flex items-center gap-1">
+            Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
           </span>
         </div>
         
-        <div className="relative h-8">
+        <div className="relative h-4">
           {/* Background track */}
           <div className="absolute h-4 w-full rounded-full bg-gray-300"></div>
           

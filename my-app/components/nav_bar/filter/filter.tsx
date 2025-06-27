@@ -46,7 +46,7 @@ const Filter = ({ modal_name = '' }: filter_props) => {
     <div className="flex">
       <div className="h-8 my-auto mx-4 flex cursor-pointer items-center">
       <img
-        src="/img/filter.png"
+        src="/img/icons/filter.png"
         alt=""
         className='w-full h-full'
         onClick={() => (document.getElementById(modal_name) as HTMLDialogElement)?.showModal()}

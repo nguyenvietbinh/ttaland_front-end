@@ -17,14 +17,14 @@ const LG_navbar = () => {
     <div>
       {((width > 1024) && (width < 1280)) ? (
       <div className='flex gap-6 justify-start w-[1024px] mx-auto text-gray-300 text-xl'>
-        <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
+        <Link href="/"><img src="/img/icons/logo.png" alt="" className='h-24'/></Link>
         <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
           Tin Tức
           <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
         <div className="dropdown dropdown-hover flex group/main"> 
           <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -45,7 +45,7 @@ const LG_navbar = () => {
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
           <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -66,7 +66,7 @@ const LG_navbar = () => {
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
           <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -89,7 +89,7 @@ const LG_navbar = () => {
           <Search_bar modal_name='lg_navbar'/>
           <div className="dropdown flex dropdown-hover group/main"> 
               <div tabIndex={0} className="flex">
-                <img src="/img/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
+                <img src="/img/icons/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
               </div>
             <ul
               tabIndex={0}

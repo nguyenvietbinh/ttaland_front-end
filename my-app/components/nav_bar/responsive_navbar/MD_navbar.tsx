@@ -21,7 +21,7 @@ const MD_navbar = () => {
 
         <div className="dropdown dropdown-hover flex group/main"> 
           <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -42,7 +42,7 @@ const MD_navbar = () => {
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
           <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -63,7 +63,7 @@ const MD_navbar = () => {
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
           <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
-            <img src="/img/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
+            <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
             tabIndex={0}
@@ -87,7 +87,7 @@ const MD_navbar = () => {
           <Search_bar modal_name='md_navbar'/>
           <div className="dropdown flex dropdown-hover group/main"> 
               <div tabIndex={0} className="flex">
-                <img src="/img/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
+                <img src="/img/icons/bars.png" alt="" className='bars h-7 my-auto mx-4'/>
               </div>
             <ul
               tabIndex={0}
