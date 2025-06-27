@@ -7,9 +7,6 @@ interface DualRangeSliderProps {
   max: number;
   type: string;
   step?: number;
-  onChange: (values: { min: number; max: number }) => void;
-  initialMin?: number;
-  initialMax?: number;
 }
 
 function roundToNearestThousand(number: number) {
@@ -23,12 +20,9 @@ const DualRangeSlider = ({
   max,
   type,
   step = 1,
-  onChange,
-  initialMin,
-  initialMax,
 }: DualRangeSliderProps) => {
-  const [minVal, setMinVal] = useState(initialMin || min);
-  const [maxVal, setMaxVal] = useState(initialMax || max);
+  const [minVal, setMinVal] = useState(min);
+  const [maxVal, setMaxVal] = useState(max);
   const range = useRef<HTMLDivElement>(null);
 
   // Convert to percentage
@@ -38,18 +32,14 @@ const DualRangeSlider = ({
   // Set width of the range to decrease from the left side
   useEffect(() => {
     if (range.current) {
-      const minPercent = getPercent(minVal);
-      const maxPercent = getPercent(maxVal);
-
+      let minPercent: number = getPercent(minVal);
+      let maxPercent: number = getPercent(maxVal);
+      minPercent = minPercent >= 50 ? minPercent - 2 : minPercent;
+      maxPercent = maxPercent <= 50 ? maxPercent + 2 : maxPercent;
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [minVal, maxVal]);
-
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
 
   return (
     <div className="container px-2">

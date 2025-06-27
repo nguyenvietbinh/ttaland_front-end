@@ -63,9 +63,7 @@ const San_pham_ban_filter_form = () => {
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>3. Giá</p>
-        <DualRangeSlider min={0} max={6000} step={10} onChange={() => {
-          console.log('blabl')
-        }} type='price'/>
+        <DualRangeSlider min={0} max={6000} step={10} type='price'/>
       </div>
     </div>
   )
