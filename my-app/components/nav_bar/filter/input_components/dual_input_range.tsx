@@ -20,6 +20,11 @@ const DualRangeSlider = ({
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const range = useRef<HTMLDivElement>(null);
+  const [isMinDown, setIsMinDown] = useState(false)
+  const [isMinUp, setIsMinUp] = useState(false)
+  const [isMaxDown, setIsMaxDown] = useState(false)
+  const [isMaxUp, setIsMaxUp] = useState(false)
+
 
   // Convert to percentage
   const getPercent = (value: number) =>
@@ -28,7 +33,7 @@ const DualRangeSlider = ({
   const roundToNearestThousand = (number: number) => {
     // Chia số cho 1000 và làm tròn đến 1 chữ số thập phân
     const rounded = Math.round(number / 100 * 10) / 100; // Làm tròn đến 1 chữ số thập phân
-    return rounded.toFixed(1); // Đảm bảo luôn có 1 chữ số thập phân
+    return rounded.toFixed(2); // Đảm bảo luôn có 1 chữ số thập phân
   }
 
   const setUnit = (type: string, value: number): string[] => {
@@ -57,26 +62,112 @@ const DualRangeSlider = ({
     }
   }, [minVal, maxVal]);
 
+useEffect(() => {
+  const speed = 200; // Tốc độ ban đầu (ms)
+  const acceleration = 0.95; // Hệ số tăng tốc
+  const minSpeed = 10; // Tốc độ tối thiểu
+  let timeoutId: number | null = null;
+
+  const changeValue = (currentSpeed: number) => {
+    if (isMinDown) {
+      setMinVal(preVal => {
+        if (preVal > min) {
+          return preVal - step
+        }
+        return preVal
+      });
+      const newSpeed = Math.max(minSpeed, currentSpeed * acceleration);
+      timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
+    } else if (isMinUp) {
+      setMinVal(preVal => {
+        if (preVal < maxVal) {
+          return preVal + step
+        }
+        return preVal
+      });
+      const newSpeed = Math.max(minSpeed, currentSpeed * acceleration);
+      timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
+    } else if (isMaxDown) {
+      setMaxVal(preVal => {
+        if (preVal > minVal) {
+          return preVal - step
+        }
+        return preVal
+      })
+      const newSpeed = Math.max(minSpeed, currentSpeed * acceleration);
+      timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
+    } else if (isMaxUp) {
+      setMaxVal(preVal => {
+        if (preVal < max) {
+          return preVal + step
+        }
+        return preVal
+      })
+      const newSpeed = Math.max(minSpeed, currentSpeed * acceleration);
+      timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
+    } else {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    }
+  };
+
+  timeoutId = window.setTimeout(() => changeValue(speed), speed);
+
+  return () => {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+  };
+}, [isMinDown, isMinUp, isMaxDown, isMaxUp]);
+
+  useEffect(() => {
+    const handle_window_mouseup = () => {
+      setIsMinUp(false)
+      setIsMinDown(false)
+      setIsMaxUp(false)
+      setIsMaxDown(false)
+    }
+
+    window.addEventListener('mouseup', handle_window_mouseup)
+
+    return() => {
+      window.removeEventListener('mouseup', handle_window_mouseup)
+    }
+  })
+
   return (
     <div className="container px-2">
       <div className="flex flex-col w-full">
-        <div className="flex justify-between mb-2">
-          <span className="text-sm font-medium flex items-center gap-1">
-            Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
-          </span>
-          <span className="text-sm font-medium flex items-center gap-1">
-            Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
-          </span>
+        <div className="flex justify-center gap-4 mb-2">
+          <div className='flex gap-2'>
+            <div className='flex gap-1 items-center'>
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-180 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto cursor-pointer select-none drag-none' onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
+            </div>
+            <span className="text-sm font-medium flex items-center gap-1">
+              Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
+            </span>
+          </div>
+          <div className='flex gap-2'>
+            <span className="text-sm font-medium flex items-center gap-1">
+              Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
+            </span>
+            <div className='flex gap-1 items-center'>
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-180 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxDown(true)} onMouseUp={() => setIsMaxDown(false)} onMouseLeave={() => setIsMaxDown} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxUp(true)} onMouseUp={() => setIsMaxUp(false)} onMouseLeave={() => setIsMaxUp} alt="" />
+            </div>
+          </div>
         </div>
         
         <div className="relative h-4">
           {/* Background track */}
-          <div className="absolute h-4 w-full rounded-full bg-gray-300"></div>
+          <div className="absolute h-4 w-full rounded-full bg-gray-400"></div>
           
           {/* Colored range track */}
           <div
             ref={range}
-            className="absolute h-4 rounded-full bg-gray-600"
+            className="absolute h-4 rounded-full bg-gray-900"
           ></div>
           
           {/* Min thumb */}
