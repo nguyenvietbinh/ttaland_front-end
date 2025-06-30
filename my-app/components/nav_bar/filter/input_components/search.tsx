@@ -36,6 +36,11 @@ const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disabl
     };
   }, []);
 
+  useEffect(() => {
+    if (disable) {
+      setInputValue('')
+    }
+  }, [disable])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

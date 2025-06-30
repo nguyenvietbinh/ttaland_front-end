@@ -45,8 +45,10 @@ const DualRangeSlider = ({
       }
     } else if (type === 'sqr') {
       return [`${value}`, 'm²']
+    } else if (type === 'room') {
+      return [`${value}`, 'Phòng']
     }
-    return ['', '']
+    return [`${value}`, '']
   }
 
 
@@ -65,7 +67,7 @@ const DualRangeSlider = ({
 useEffect(() => {
   const speed = 200; // Tốc độ ban đầu (ms)
   const acceleration = 0.95; // Hệ số tăng tốc
-  const minSpeed = 10; // Tốc độ tối thiểu
+  const minSpeed = 5; // Tốc độ tối thiểu
   let timeoutId: number | null = null;
 
   const changeValue = (currentSpeed: number) => {
@@ -80,7 +82,7 @@ useEffect(() => {
       timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
     } else if (isMinUp) {
       setMinVal(preVal => {
-        if (preVal < maxVal) {
+        if (preVal < maxVal - step) {
           return preVal + step
         }
         return preVal
@@ -89,7 +91,7 @@ useEffect(() => {
       timeoutId = window.setTimeout(() => changeValue(newSpeed), newSpeed);
     } else if (isMaxDown) {
       setMaxVal(preVal => {
-        if (preVal > minVal) {
+        if (preVal > minVal + step) {
           return preVal - step
         }
         return preVal
@@ -142,8 +144,8 @@ useEffect(() => {
         <div className="flex justify-center gap-4 mb-2">
           <div className='flex gap-2'>
             <div className='flex gap-1 items-center'>
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-180 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
-              <img src="/img/icons/up.png" className='h-4 w-auto cursor-pointer select-none drag-none' onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
             </div>
             <span className="text-sm font-medium flex items-center gap-1">
               Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
@@ -154,20 +156,20 @@ useEffect(() => {
               Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
             </span>
             <div className='flex gap-1 items-center'>
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-180 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxDown(true)} onMouseUp={() => setIsMaxDown(false)} onMouseLeave={() => setIsMaxDown} alt="" />
-              <img src="/img/icons/up.png" className='h-4 w-auto cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxUp(true)} onMouseUp={() => setIsMaxUp(false)} onMouseLeave={() => setIsMaxUp} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxDown(true)} onMouseUp={() => setIsMaxDown(false)} onMouseLeave={() => setIsMaxDown} alt="" />
+              <img src="/img/icons/up.png" className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxUp(true)} onMouseUp={() => setIsMaxUp(false)} onMouseLeave={() => setIsMaxUp} alt="" />
             </div>
           </div>
         </div>
         
-        <div className="relative h-4">
+        <div className="relative h-1">
           {/* Background track */}
-          <div className="absolute h-4 w-full rounded-full bg-gray-400"></div>
+          <div className="absolute h-1 w-full rounded-full bg-gray-900"></div>
           
           {/* Colored range track */}
           <div
             ref={range}
-            className="absolute h-4 rounded-full bg-gray-900"
+            className="absolute h-1 rounded-full bg-gray-300"
           ></div>
           
           {/* Min thumb */}
@@ -181,7 +183,7 @@ useEffect(() => {
               const value = Math.min(Number(e.target.value), maxVal - step);
               setMinVal(value);
             }}
-            className={`absolute w-full pointer-events-none appearance-none h-4 bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-gray-600 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10`}
+            className={`absolute w-full pointer-events-none appearance-none h-1 bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-300 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-gray-300 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10`}
             style={{ zIndex: minVal > max - 100 ? 5 : 3 }}
           />
           
@@ -196,7 +198,7 @@ useEffect(() => {
               const value = Math.max(Number(e.target.value), minVal + step);
               setMaxVal(value);
             }}
-            className={`absolute w-full pointer-events-none appearance-none h-4 bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-gray-600 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10`}
+            className={`absolute w-full pointer-events-none appearance-none h-1 bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-300 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-gray-300 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10`}
             style={{ zIndex: 4 }}
           />
         </div>

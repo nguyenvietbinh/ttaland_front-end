@@ -13,7 +13,7 @@ import Search from '../input_components/search'
 import DualRangeSlider from '../input_components/dual_input_range'
 
 
-const San_pham_ban_filter_form = () => {
+const San_pham_cho_thue_filter_form = () => {
   const [tinh_thanh_pho_input_value, set_tinh_thanh_pho_input_value] = useState<string>('')
   const [disable_dvhc_cap_huyen_input, set_disable_dvhc_cap_huyen_input] = useState<boolean>(true)
   function removeVietnameseTones(str: string): string {
@@ -82,4 +82,4 @@ const San_pham_ban_filter_form = () => {
 }
 
 
-export default San_pham_ban_filter_form
+export default San_pham_cho_thue_filter_form
