@@ -55,7 +55,7 @@ const Filter = ({ modal_name = '' }: filter_props) => {
 
       
       <dialog id={modal_name} className="modal">
-        <div className="modal-box bg-gray-950 p-4 max-w-2xl max-h-5xl h-[70%]">
+        <div className="modal-box absolute top-[15%] bg-gray-950 p-4 pb-8 max-w-2xl max-h-5xl h-auto">
           <Filter_form/>
         </div>
         <form method="dialog" className="modal-backdrop">

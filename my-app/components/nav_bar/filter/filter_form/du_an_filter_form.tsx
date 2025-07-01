@@ -35,7 +35,6 @@ const Du_an_filter_form = () => {
   }
   useEffect(() => {
     if ((data.don_vi_hanh_chinh_cap_tinh.includes(tinh_thanh_pho_input_value)) && (tinh_thanh_pho_input_value !== data.don_vi_hanh_chinh_cap_tinh[0])) {
-      console.log()
       set_disable_dvhc_cap_huyen_input(false)
     } else {
       set_disable_dvhc_cap_huyen_input(true)
@@ -47,13 +46,13 @@ const Du_an_filter_form = () => {
       <div>
         <p className='text-sm my-1 ml-1'>1. Địa Chỉ</p>
         <div className="flex space-x-2">
-          <Search keywords={data.don_vi_hanh_chinh_cap_tinh} placeholder="Tỉnh / Thành Phố" setData={set_tinh_thanh_pho_input_value} disable={false}/>
-          <Search keywords={data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] ? data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] : []} placeholder="Quận / Huyện" disable={disable_dvhc_cap_huyen_input}/>
+          <Search seach_name=' du_an_loc' keywords={data.don_vi_hanh_chinh_cap_tinh} placeholder="Tỉnh / Thành Phố" setData={set_tinh_thanh_pho_input_value} disable={false}/>
+          <Search seach_name=' du_an_loc' keywords={data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] ? data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] : []} placeholder="Quận / Huyện" disable={disable_dvhc_cap_huyen_input}/>
         </div>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>2. Loại Tài Sản</p>
-        <select defaultValue="Tất Cả" className="select focus:outline-0 w-full">
+        <select defaultValue="Tất Cả" className="select focus:outline-0 w-full du_an_property_type">
           <option>Tất Cả</option>
           <option>Nhà Phố</option>
           <option>Biệt Thự</option>
@@ -63,19 +62,11 @@ const Du_an_filter_form = () => {
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>3. Giá</p>
-        <DualRangeSlider min={0} max={60000} step={10} type='price'/>
+        <DualRangeSlider dual_input_range_name='du_an_price' min={0} max={100} step={10} type='du_an_price'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>4. Diện Tích</p>
-        <DualRangeSlider min={0} max={500} step={10} type='sqr'/>
-      </div>
-      <div>
-        <p className='text-sm my-1 ml-1'>5. Phòng Ngủ</p>
-        <DualRangeSlider min={1} max={5} step={1} type='room'/>
-      </div>
-      <div>
-        <p className='text-sm my-1 ml-1'>5. Phòng Tắm</p>
-        <DualRangeSlider min={1} max={5} step={1} type='room'/>
+        <DualRangeSlider dual_input_range_name='du_an_sqr' min={0} max={500} step={10} type='sqr'/>
       </div>
     </div>
   )

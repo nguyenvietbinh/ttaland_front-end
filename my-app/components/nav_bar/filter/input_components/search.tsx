@@ -7,9 +7,10 @@ type Search_props = {
   placeholder: string,
   setData?: (data: string) => void,
   disable: boolean,
+  seach_name: string,
 }
 
-const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disable }) => {
+const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disable, seach_name }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -127,7 +128,7 @@ const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disabl
           ref={inputRef}
           type="text"
           placeholder={placeholder}
-          className="input focus:outline-0 w-full"
+          className={"input focus:outline-0 w-full" + " " + seach_name}
           value={inputValue}
           onChange={handleInputChange}
           onFocus={handleFocus}

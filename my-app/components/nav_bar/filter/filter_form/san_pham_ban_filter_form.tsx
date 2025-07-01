@@ -47,13 +47,13 @@ const San_pham_ban_filter_form = () => {
       <div>
         <p className='text-sm my-1 ml-1'>1. Địa Chỉ</p>
         <div className="flex space-x-2">
-          <Search keywords={data.don_vi_hanh_chinh_cap_tinh} placeholder="Tỉnh / Thành Phố" setData={set_tinh_thanh_pho_input_value} disable={false}/>
-          <Search keywords={data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] ? data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] : []} placeholder="Quận / Huyện" disable={disable_dvhc_cap_huyen_input}/>
+          <Search seach_name='san_pham_ban_loc' keywords={data.don_vi_hanh_chinh_cap_tinh} placeholder="Tỉnh / Thành Phố" setData={set_tinh_thanh_pho_input_value} disable={false}/>
+          <Search seach_name='san_pham_ban_loc' keywords={data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] ? data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] : []} placeholder="Quận / Huyện" disable={disable_dvhc_cap_huyen_input}/>
         </div>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>2. Loại Tài Sản</p>
-        <select defaultValue="Tất Cả" className="select focus:outline-0 w-full">
+        <select defaultValue="Tất Cả" className="select focus:outline-0 w-full san_pham_ban_property_type">
           <option>Tất Cả</option>
           <option>Nhà Phố</option>
           <option>Biệt Thự</option>
@@ -63,19 +63,19 @@ const San_pham_ban_filter_form = () => {
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>3. Giá</p>
-        <DualRangeSlider min={0} max={60000} step={10} type='price'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_price' min={0} max={60000} step={10} type='san_pham_ban_price'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>4. Diện Tích</p>
-        <DualRangeSlider min={0} max={500} step={10} type='sqr'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_sqr' min={0} max={500} step={10} type='sqr'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>5. Phòng Ngủ</p>
-        <DualRangeSlider min={1} max={5} step={1} type='room'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_bed_room' min={1} max={5} step={1} type='room'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>5. Phòng Tắm</p>
-        <DualRangeSlider min={1} max={5} step={1} type='room'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_bath_room' min={1} max={5} step={1} type='room'/>
       </div>
     </div>
   )

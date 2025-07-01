@@ -7,6 +7,7 @@ interface DualRangeSliderProps {
   max: number;
   type: string;
   step?: number;
+  dual_input_range_name: string;
 }
 
 
@@ -16,6 +17,7 @@ const DualRangeSlider = ({
   max,
   type,
   step = 1,
+  dual_input_range_name,
 }: DualRangeSliderProps) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
@@ -37,12 +39,20 @@ const DualRangeSlider = ({
   }
 
   const setUnit = (type: string, value: number): string[] => {
-    if (type === 'price') {
+    if (type === 'san_pham_ban_price') {
       if (value < 1000) {
         return [`${value}`, 'Triệu']
       } else {
         return [roundToNearestThousand(value), 'Tỷ']
       }
+    } else if (type === 'san_pham_cho_thue_price') {
+      if (value < 1000) {
+        return [`${value}`, 'Triệu/Tháng']
+      } else {
+        return [roundToNearestThousand(value), 'Tỷ/Tháng']
+      }
+    } else if (type === 'du_an_price') {
+      return [`${value}`, 'Triệu/m²']
     } else if (type === 'sqr') {
       return [`${value}`, 'm²']
     } else if (type === 'room') {
@@ -144,20 +154,20 @@ useEffect(() => {
         <div className="flex justify-center gap-4 mb-2">
           <div className='flex gap-2'>
             <div className='flex gap-1 items-center'>
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none' onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
+              <img src={(isMinDown) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none hover:h-5' style={(isMinDown) ? { height: '20px' } : {}} onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
+              <img src={(isMinUp) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none hover:h-5' style={(isMinUp) ? { height: '20px' } : {}} onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
             </div>
-            <span className="text-sm font-medium flex items-center gap-1">
+            <span className={"text-sm font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
               Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
             </span>
           </div>
           <div className='flex gap-2'>
-            <span className="text-sm font-medium flex items-center gap-1">
+            <span className={"text-sm font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
               Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
             </span>
             <div className='flex gap-1 items-center'>
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxDown(true)} onMouseUp={() => setIsMaxDown(false)} onMouseLeave={() => setIsMaxDown} alt="" />
-              <img src="/img/icons/up.png" className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none' onMouseDown={() => setIsMaxUp(true)} onMouseUp={() => setIsMaxUp(false)} onMouseLeave={() => setIsMaxUp} alt="" />
+              <img src={(isMaxDown) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none hover:h-5' style={(isMaxDown) ? { height: '20px' } : {}} onMouseDown={() => setIsMaxDown(true)} onMouseUp={() => setIsMaxDown(false)} onMouseLeave={() => setIsMaxDown} alt="" />
+              <img src={(isMaxUp) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none hover:h-5' style={(isMaxUp) ? { height: '20px' } : {}} onMouseDown={() => setIsMaxUp(true)} onMouseUp={() => setIsMaxUp(false)} onMouseLeave={() => setIsMaxUp} alt="" />
             </div>
           </div>
         </div>
