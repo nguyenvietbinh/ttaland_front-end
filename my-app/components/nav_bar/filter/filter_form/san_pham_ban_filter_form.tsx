@@ -54,11 +54,11 @@ const San_pham_ban_filter_form = () => {
       <div>
         <p className='text-sm my-1 ml-1'>2. Loại Tài Sản</p>
         <select defaultValue="Tất Cả" className="select focus:outline-0 w-full san_pham_ban_property_type">
-          <option>Tất Cả</option>
-          <option>Nhà Phố</option>
-          <option>Biệt Thự</option>
-          <option>Đất Nền</option>
-          <option>Căn Hộ</option>
+          <option value='tat_ca'>Tất Cả</option>
+          <option value='nha_pho'>Nhà Phố</option>
+          <option value='biet_thu'>Biệt Thự</option>
+          <option value='dat_nen'>Đất Nền</option>
+          <option value='can_ho'>Căn Hộ</option>
         </select>
       </div>
       <div>
