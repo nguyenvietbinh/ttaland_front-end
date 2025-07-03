@@ -7,7 +7,7 @@ type LocationData = {
 
 
 import { useEffect, useState } from 'react'
-import dataJson from '../location.json'
+import dataJson from '@/public/data/location.json'
 const data = dataJson as LocationData;
 import Search from '../input_components/search'
 import DualRangeSlider from '../input_components/dual_input_range'
@@ -63,11 +63,11 @@ const San_pham_ban_filter_form = () => {
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>3. Giá</p>
-        <DualRangeSlider dual_input_range_name='san_pham_ban_price' min={0} max={60000} step={10} type='san_pham_ban_price'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_price' min={0} max={60000} step={500} type='san_pham_ban_price'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>4. Diện Tích</p>
-        <DualRangeSlider dual_input_range_name='san_pham_ban_sqr' min={0} max={500} step={10} type='sqr'/>
+        <DualRangeSlider dual_input_range_name='san_pham_ban_sqr' min={0} max={500} step={50} type='sqr'/>
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>5. Phòng Ngủ</p>
