@@ -1,10 +1,24 @@
-"use client";
+'use client';
 
-import { MapContainer, GeoJSON, TileLayer } from 'react-leaflet';
+import dynamic from 'next/dynamic';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { GeoJsonObject } from 'geojson';
 import { useEffect, useState, useRef } from 'react';
+
+// Dynamic import các component từ react-leaflet
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const GeoJSON = dynamic(
+  () => import('react-leaflet').then((mod) => mod.GeoJSON),
+  { ssr: false }
+);
 
 type FeatureProperties = {
   name: string;
@@ -14,10 +28,12 @@ type Feature = GeoJSON.Feature<GeoJSON.Geometry, FeatureProperties>;
 
 export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
-  const [selectedFeature, setSelectedFeature] = useState<string[]>([])
+  const [selectedFeature, setSelectedFeature] = useState<string[]>([]);
+  const [isClient, setIsClient] = useState(false);
   const selectedFeatureRef = useRef<string[]>([]);
 
   useEffect(() => {
+    setIsClient(true);
     selectedFeatureRef.current = selectedFeature;
   }, [selectedFeature]);
 
@@ -39,7 +55,11 @@ export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
           }
         },
         click: (e) => {
-          setSelectedFeature(preVal => (preVal.includes(feature.properties.name) ? [...preVal].filter(item => item !== feature.properties.name) : [...preVal, feature.properties.name]))
+          setSelectedFeature(preVal => 
+            preVal.includes(feature.properties.name) 
+              ? [...preVal].filter(item => item !== feature.properties.name) 
+              : [...preVal, feature.properties.name]
+          );
           const layer = e.target;
           layer.bringToFront();
         }
@@ -53,7 +73,7 @@ export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
     color: '#666',
     dashArray: '',
     fillOpacity: 0.7,
-  }
+  };
 
   const secondaryStyle = {
     fillColor: '#3b82f6',
@@ -61,23 +81,21 @@ export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
     color: 'white',
     dashArray: '2',
     fillOpacity: 0.4,
-  }
-
-  const style = (feature?: GeoJSON.Feature<GeoJSON.Geometry, FeatureProperties>) => {
-    if (hoveredFeature === feature?.properties?.name) {
-      return primaryStyle
-    } else {
-      if (feature?.properties?.name) {
-        if (selectedFeature.includes(feature?.properties?.name)) {
-          return primaryStyle
-        } else {
-          return secondaryStyle
-        }
-      }
-    }
-    return secondaryStyle
   };
-  
+
+  const style = (feature?: Feature) => {
+    if (!feature?.properties?.name) return secondaryStyle;
+    
+    if (hoveredFeature === feature.properties.name) {
+      return primaryStyle;
+    }
+    
+    return selectedFeature.includes(feature.properties.name) 
+      ? primaryStyle 
+      : secondaryStyle;
+  };
+
+  if (!isClient) return null;
 
   return (
     <div className="h-[600px] w-full">
