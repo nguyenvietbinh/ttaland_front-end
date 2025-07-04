@@ -9,24 +9,6 @@ type filter_props = {
 }
 
 const Filter = ({ modal_name = '' }: filter_props) => {
-  const keywords = []
-  const getRandomAlphabetCharacter = (): string => {
-    const randomNum = Math.floor(Math.random() * 26);
-    const charCode = randomNum + 97;
-    return String.fromCharCode(charCode);
-  };
-  const getRandomKeyword = (): string => {
-    const randomNum = Math.floor(Math.random() * 26);
-    let ans = ''
-    for (let i = 0; i < randomNum; i ++) {
-      ans += getRandomAlphabetCharacter()
-    }
-    return ans
-  }
-  for (let i = 0; i < 30; i ++) {
-    keywords.push(getRandomKeyword())
-  }
-
 
   // listen to ctrl+k
   useEffect(() => {
@@ -55,7 +37,7 @@ const Filter = ({ modal_name = '' }: filter_props) => {
 
       
       <dialog id={modal_name} className="modal">
-        <div className="modal-box absolute top-[15%] bg-gray-950 p-4 pb-8 max-w-2xl max-h-5xl h-auto">
+        <div className="modal-box absolute top-[12%] bg-gray-950 p-4 pb-8 max-w-2xl max-h-5xl h-auto">
           <Filter_form/>
         </div>
         <form method="dialog" className="modal-backdrop">
