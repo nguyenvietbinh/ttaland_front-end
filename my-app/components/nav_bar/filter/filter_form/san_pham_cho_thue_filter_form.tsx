@@ -1,54 +1,86 @@
 'use client'
 
-type LocationData = {
-  don_vi_hanh_chinh_cap_tinh: string[],
-  don_vi_hanh_chinh_cap_huyen: Record<string, string[]>
+import HCMap from '@/components/element/HCMCmap';
+interface CustomFeature {
+  type: "Feature";
+  properties: {
+    gid: number;
+    name: string;
+  };
+  geometry: {
+    type: string;
+    geometries: {
+      type: string;
+      coordinates: number[][][][];
+    }[];
+  };
 }
 
+interface CustomGeoJSON {
+  type: "FeatureCollection";
+  features: CustomFeature[];
+}
 
-import { useEffect, useState } from 'react'
-import dataJson from '@/public/data/location.json'
-const data = dataJson as LocationData;
-import Search from '../input_components/search'
+import rawData from '@/public/data/hcm.json';
+const hcmGeoJson = rawData as CustomGeoJSON;
+
+
+
 import DualRangeSlider from '../input_components/dual_input_range'
-
+import { useState } from 'react';
 
 const San_pham_cho_thue_filter_form = () => {
-  const [tinh_thanh_pho_input_value, set_tinh_thanh_pho_input_value] = useState<string>('')
-  const [disable_dvhc_cap_huyen_input, set_disable_dvhc_cap_huyen_input] = useState<boolean>(true)
-  function removeVietnameseTones(str: string): string {
-    str = str.replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, "a");
-    str = str.replace(/[èéẹẻẽêềếệểễ]/g, "e");
-    str = str.replace(/[ìíịỉĩ]/g, "i");
-    str = str.replace(/[òóọỏõôồốộổỗơờớợởỡ]/g, "o");
-    str = str.replace(/[ùúụủũưừứựửữ]/g, "u");
-    str = str.replace(/[ỳýỵỷỹ]/g, "y");
-    str = str.replace(/đ/g, "d");
-    str = str.replace(/[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]/g, "A");
-    str = str.replace(/[ÈÉẸẺẼÊỀẾỆỂỄ]/g, "E");
-    str = str.replace(/[ÌÍỊỈĨ]/g, "I");
-    str = str.replace(/[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]/g, "O");
-    str = str.replace(/[ÙÚỤỦŨƯỪỨỰỬỮ]/g, "U");
-    str = str.replace(/[ỲÝỴỶỸ]/g, "Y");
-    str = str.replace(/Đ/g, "D");
-    return str;
-  }
-  useEffect(() => {
-    if ((data.don_vi_hanh_chinh_cap_tinh.includes(tinh_thanh_pho_input_value)) && (tinh_thanh_pho_input_value !== data.don_vi_hanh_chinh_cap_tinh[0])) {
-      console.log()
-      set_disable_dvhc_cap_huyen_input(false)
-    } else {
-      set_disable_dvhc_cap_huyen_input(true)
-    }
-  }, [tinh_thanh_pho_input_value])
+  const [locations, setLocation] = useState<string[]>([])
+  const [reset, setreset] = useState<boolean>(false)
 
   return (
     <div className='space-y-4 flex-col'>
       <div>
-        <p className='text-sm my-1 ml-1'>1. Địa Chỉ</p>
-        <div className="flex space-x-2">
-          <Search seach_name=' san_pham_cho_thue_loc' keywords={data.don_vi_hanh_chinh_cap_tinh} placeholder="Tỉnh / Thành Phố" setData={set_tinh_thanh_pho_input_value} disable={false}/>
-          <Search seach_name=' san_pham_cho_thue_loc' keywords={data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] ? data.don_vi_hanh_chinh_cap_huyen[removeVietnameseTones(tinh_thanh_pho_input_value)] : []} placeholder="Quận / Huyện" disable={disable_dvhc_cap_huyen_input}/>
+        <p className='text-sm my-1 ml-1'>1. Vị Trí</p>
+        <div className="flex px-2 justify-between  items-center">
+          <div className='max-h-36 overflow-auto pr-4'>
+            {locations.map((item, index) => (
+              <p key={index} className='text-md text-nowrap'>{ item },</p>
+            ))}
+          </div>
+          <div className='flex btn gap-2 border-[1px] rounded-sm border-gray-600 bg-black hover:border-white p-2 cursor-pointer items-center' onClick={() => (document.getElementById('san_pham_cho_thue_map') as HTMLDialogElement)?.showModal()}>
+            <img src="/img/icons/map.png" alt="" className='h-6'/>
+            <p className='text-sm text-nowrap'>Bản đồ</p>
+            <dialog id={'san_pham_cho_thue_map'} className="modal">
+              <div className="modal-box absolute top-[12%] bg-black p-4 pb-8 max-w-2xl max-h-5xl h-auto">
+                <div className="modal-action flex justify-start items-center mt-0 mb-2 px-2">
+                  <form method="dialog">
+                    <button className='cursor-pointer'>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                        />
+                      </svg>
+                    </button>
+                  </form>
+                </div>                
+                <HCMap onSendData={setLocation} reset={reset} geoJsonData={hcmGeoJson}/>
+                <div className="modal-action gap-0 justify-between mt-4">
+                  <button className='btn bg-gray-800 w-[16%]' onClick={() => setreset(preVal => !preVal)}>Đặt Lại</button>
+                  <form method="dialog" className='w-[84%] px-2'>
+                    <button className="btn w-full bg-red-600" onClick={() => console.log(locations)}>Xác nhận</button>
+                  </form>
+                </div>
+              </div>
+              <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+              </form>
+            </dialog>
+          </div>
         </div>
       </div>
       <div>

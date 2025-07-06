@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import { GeoJsonObject } from 'geojson';
 import { useEffect, useState, useRef } from 'react';
 
@@ -26,15 +25,25 @@ type FeatureProperties = {
 
 type Feature = GeoJSON.Feature<GeoJSON.Geometry, FeatureProperties>;
 
-export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
+type HCMCmapProps = {
+  onSendData: (data: string[]) => void;
+  reset: boolean
+};
+
+export default function HCMap({ geoJsonData, onSendData, reset }: { geoJsonData: GeoJsonObject } & HCMCmapProps) {
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
   const [selectedFeature, setSelectedFeature] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
   const selectedFeatureRef = useRef<string[]>([]);
+  
+  useEffect(() => {
+    setSelectedFeature([])
+  }, [reset])
 
   useEffect(() => {
     setIsClient(true);
     selectedFeatureRef.current = selectedFeature;
+    onSendData(selectedFeatureRef.current)
   }, [selectedFeature]);
 
   const onEachFeature = (feature: Feature, layer: L.Layer) => {
@@ -90,7 +99,7 @@ export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
       return primaryStyle;
     }
     
-    return selectedFeature.includes(feature.properties.name) 
+    return selectedFeatureRef.current.includes(feature.properties.name) 
       ? primaryStyle 
       : secondaryStyle;
   };
@@ -107,6 +116,7 @@ export default function HCMap({ geoJsonData }: { geoJsonData: GeoJsonObject }) {
         touchZoom={false}  
         className='h-full w-full rounded-lg'
       >
+        
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

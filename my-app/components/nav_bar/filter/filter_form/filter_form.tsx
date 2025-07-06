@@ -4,9 +4,11 @@ import Du_an_filter_form from './du_an_filter_form'
 import San_pham_ban_filter_form from './san_pham_ban_filter_form'
 import San_pham_cho_thue_filter_form from './san_pham_cho_thue_filter_form'
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const Filter_form = () => {
   const router = useRouter()
+  const [activeTab, setActiveTab] = useState('tab1');
 
   const collect_filter_data = () => {
     interface Filter_data {
@@ -52,19 +54,31 @@ const Filter_form = () => {
     <div className="">
       <div className="">
         <div className="tabs tabs-border">
-          <input type="radio" value='san_pham_ban' name="filter_tab" className="tab tab_1" aria-label="Sản Phẩm Bán" defaultChecked/>
+          <input type="radio" value='san_pham_ban' name="filter_tab" className="tab tab_1" aria-label="Sản Phẩm Bán" defaultChecked onClick={() => {setActiveTab('tab1')}}/>
           <div className="tab-content border-gray-700 bg-black rounded-md p-4 pb-8">
-            <San_pham_ban_filter_form/>
+            {activeTab === 'tab1' ? (
+              <San_pham_ban_filter_form/>
+            ) : (
+              <div></div>
+            )}
           </div>
 
-          <input type="radio" value='san_pham_cho_thue' name="filter_tab" className="tab tab_2" aria-label="Sản Phẩm Cho Thuê" />
-          <div className="tab-content border-gray-700 bg-black rounded-md p-4 pb-8">
-            <San_pham_cho_thue_filter_form/>
+          <input type="radio" value='san_pham_cho_thue' name="filter_tab" className="tab tab_2" aria-label="Sản Phẩm Cho Thuê" onClick={() => {setActiveTab('tab2')}}/>
+          <div className="tab-content border-gray-700 bg-black rounded-md p-4 pb-8"> 
+            {activeTab === 'tab2' ? (
+              <San_pham_cho_thue_filter_form/>
+            ) : (
+              <div></div>
+            )}
           </div>
 
-          <input type="radio" value='du_an' name="filter_tab" className="tab tab_3" aria-label="Dự Án" />
+          <input type="radio" value='du_an' name="filter_tab" className="tab tab_3" aria-label="Dự Án" onClick={() => {setActiveTab('tab3')}}/>
           <div className="tab-content border-gray-700 bg-black rounded-md p-4 pb-8">
-            <Du_an_filter_form/>
+            {activeTab === 'tab3' ? (
+              <Du_an_filter_form/>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>
