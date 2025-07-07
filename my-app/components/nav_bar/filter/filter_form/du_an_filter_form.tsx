@@ -21,6 +21,10 @@ interface CustomGeoJSON {
   features: CustomFeature[];
 }
 
+interface du_an_filter_form_props {
+  sendLocations: (Locations: string[]) => void
+}
+
 // Sử dụng type assertion khi import
 import rawData from '@/public/data/hcm.json';
 const hcmGeoJson = rawData as CustomGeoJSON;
@@ -30,7 +34,7 @@ const hcmGeoJson = rawData as CustomGeoJSON;
 import DualRangeSlider from '../input_components/dual_input_range'
 import { useState } from 'react';
 
-const Du_an_filter_form = ({}) => {
+const Du_an_filter_form = ({ sendLocations }: du_an_filter_form_props) => {
   const [locations, setLocation] = useState<string[]>([])
   const [reset, setreset] = useState<boolean>(false)
 
@@ -73,7 +77,7 @@ const Du_an_filter_form = ({}) => {
                 <div className="modal-action gap-0 justify-between mt-4">
                   <button className='btn bg-gray-800 w-[16%]' onClick={() => setreset(preVal => !preVal)}>Đặt Lại</button>
                   <form method="dialog" className='w-[84%] px-2'>
-                    <button className="btn w-full bg-red-600">Xác nhận</button>
+                    <button className="btn w-full bg-red-600" onClick={() => {sendLocations(locations)}}>Xác nhận</button>
                   </form>
                 </div>
               </div>

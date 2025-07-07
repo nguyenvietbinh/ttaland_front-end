@@ -21,6 +21,10 @@ interface CustomGeoJSON {
   features: CustomFeature[];
 }
 
+interface san_pham_cho_thue_props {
+  sendLocaions: (loactions: string[]) => void
+}
+
 import rawData from '@/public/data/hcm.json';
 const hcmGeoJson = rawData as CustomGeoJSON;
 
@@ -29,7 +33,7 @@ const hcmGeoJson = rawData as CustomGeoJSON;
 import DualRangeSlider from '../input_components/dual_input_range'
 import { useState } from 'react';
 
-const San_pham_cho_thue_filter_form = () => {
+const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props) => {
   const [locations, setLocation] = useState<string[]>([])
   const [reset, setreset] = useState<boolean>(false)
 
@@ -72,7 +76,7 @@ const San_pham_cho_thue_filter_form = () => {
                 <div className="modal-action gap-0 justify-between mt-4">
                   <button className='btn bg-gray-800 w-[16%]' onClick={() => setreset(preVal => !preVal)}>Đặt Lại</button>
                   <form method="dialog" className='w-[84%] px-2'>
-                    <button className="btn w-full bg-red-600" onClick={() => console.log(locations)}>Xác nhận</button>
+                    <button className="btn w-full bg-red-600" onClick={() => {sendLocaions(locations)}}>Xác nhận</button>
                   </form>
                 </div>
               </div>
