@@ -10,25 +10,24 @@ import Link from 'next/link';
 
 const Listing = () => {
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-  let title = ''
   const searchParams = useSearchParams();
   const path_name = usePathname()
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho', 'tat_ca']
   const list_path: string[] = path_name.split('/')
-  if (list_path[1] === 'san_pham_ban') {
-    title = 'Sản phẩm bán'
-  } else if (list_path[1] === 'san_pham_cho_thue') {
-    title = 'Sản phẩm cho thuê'
-  } else if (list_path[1] === 'du_an') {
-    title = 'Dự án'
+  let locations = searchParams.get('locations')?.split(',') || ['Thành phố Hồ Chí Minh']
+  if (locations[0] === '') {
+    locations = ['Thành phố Hồ Chí Minh']
   }
-  const locations = searchParams.get('locations')?.split(',');
-  console.log(locations)
-
   return (
     <div>
-      <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto text-white">
-        <div className='text-2xl text-white my-2'>{title}/{list_path[2]}</div>
+      <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto text-white p-2">
+        <div className='text-3xl text-white mt-8 flex text-nowrap '>
+          <p className='hidden md:flex'>Bất động sản tại:&ensp;</p>
+          <div className='flex overflow-auto'>{locations?.map((loc, index) => (
+              <p key={index} className='cursor-pointer'>{loc}{(index === locations.length - 1) ? '' : ','}&ensp;</p>
+          ))}</div>
+        </div>
+
         <_sub_avbar/>
         <div className={category.includes(list_path[2]) ? "h-auto mx-4 bg-none px-2 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8" : "hidden"}>
           {items.map((item) => (
@@ -61,7 +60,7 @@ const Listing = () => {
                 </div>
                 <div className='w-full h-auto border-t-[1px] border-gray-500 border-solid text-left py-4 px-2'>
                   <div>
-                    <FontAwesomeIcon icon={faUser}></FontAwesomeIcon> Nguyen Viet Binh
+                    <FontAwesomeIcon icon={faUser}></FontAwesomeIcon> Nguyen Van A
                   </div>
                   <div>
                     <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> 1 year

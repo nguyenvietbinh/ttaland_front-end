@@ -62,7 +62,7 @@ const Filter_form = () => {
       price_max: filter_data.price_max,
       sqr_min: filter_data.sqr_min,
       sqr_max: filter_data.sqr_max,
-      locations: filter_data.locations.join(','), // hoặc serialize dạng khác nếu bạn xử lý bên phía router
+      locations: filter_data.locations.join(','),
     };
 
     if (filter_data.bed_room_min) queryParams.bed_room_min = filter_data.bed_room_min;
