@@ -29,12 +29,10 @@ const Listing = () => {
         </div>
 
         <_sub_avbar/>
-        <div className={category.includes(list_path[2]) ? "h-auto mx-4 bg-none px-2 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8" : "hidden"}>
+        <div className={category.includes(list_path[2]) ? "max-h-[100vh] overflow-auto mx-4 bg-none px-2 xl:mx-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8" : "hidden"}>
           {items.map((item) => (
             <div key={item} className=" bg-gray-600 rounded-sm text-center">
-              <div className='absolute'>  
-                <div className='m-4 py-1 px-3 inline-block bg-gray-700 text-white rounded-sm opacity-90'>800.000.000 VND</div>
-              </div>
+
               <div className=''>
               <img src='/img/showcase.png' alt="" className="min-w-full"/>
                 <div className="w-full h-auto border-t-[1px] border-gray-500 border-solid px-2">

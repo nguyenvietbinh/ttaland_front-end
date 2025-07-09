@@ -28,7 +28,7 @@ const Filter_form = () => {
 
     const filter_data: Filter_data = {
       type: "san_pham_ban",
-      locations: ['ca nuoc', ''],
+      locations: [''],
       property_type: 'Tất Cả',
       price_min: 'Từ: 0 Triệu',
       price_max: 'Đến: 60.00 Tỷ',

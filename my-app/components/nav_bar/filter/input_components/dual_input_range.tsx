@@ -35,7 +35,7 @@ const DualRangeSlider = ({
   const roundToNearestThousand = (number: number) => {
     // Chia số cho 1000 và làm tròn đến 1 chữ số thập phân
     const rounded = Math.round(number / 100 * 10) / 100; // Làm tròn đến 1 chữ số thập phân
-    return rounded.toFixed(2); // Đảm bảo luôn có 1 chữ số thập phân
+    return rounded.toFixed(0); // Đảm bảo luôn có 1 chữ số thập phân
   }
 
   const setUnit = (type: string, value: number): string[] => {
