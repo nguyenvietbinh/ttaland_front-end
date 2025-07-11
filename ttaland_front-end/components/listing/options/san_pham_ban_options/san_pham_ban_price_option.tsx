@@ -75,14 +75,14 @@ const San_pham_ban_price_option = () => {
 
   return (
     <div>
-      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] border-gray-400 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
+      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] backdrop-blur-3xl bg-white/10 border-gray-400 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
         <p className=" overflow-auto text-nowrap">{ priceTagName }</p>
         <div className="flex items-center">
-          <img src="/img/icons/arrow.png" alt="" className="h-2"/>
+          <img src="/img/icons/arrow.png" alt="" className={`h-2 ${(showPriceOption) ? 'rotate-180' : 'rotate-0'} transition-all duration-200`}/>
         </div>
       </div>
       {showPriceOption && (
-        <div ref={optionContainerRef} className="absolute text-nowrap mt-2 z-49 backdrop-blur-md bg-black/60  text-white inline-block p-4 rounded-box max-h-80 overflow-auto shadow-lg">
+        <div ref={optionContainerRef} className="absolute text-nowrap mt-2 z-49 backdrop-blur-md bg-black/60 text-white inline-block p-4 rounded-box max-h-80 overflow-auto shadow-lg">
         <div className="gap-2 flex-col space-y-2">
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
             <span>Tất Cả</span>

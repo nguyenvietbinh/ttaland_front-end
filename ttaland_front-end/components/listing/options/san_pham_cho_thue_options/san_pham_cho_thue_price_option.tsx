@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from "react"
 
-const Du_an_price_option = () => {
+const San_pham_cho_thue_price_option = () => {
   const router = useRouter()
   const path_name = usePathname()
   const list_path = path_name.split('/')
@@ -63,7 +63,7 @@ const Du_an_price_option = () => {
     if (spanElement) {
       const spanContent = spanElement.textContent;
       if (spanContent === 'Tất Cả' || spanContent === null) {
-        moveTo('Từ: 0 Triệu/m²', 'Đến: 100 Triệu/m²')
+        moveTo('Từ: 0 Triệu/Tháng', 'Đến: 1 Tỷ/Tháng')
       } else {
         moveTo(spanContent.split(' - ')[0], spanContent.split(' - ')[1])
       }
@@ -75,10 +75,10 @@ const Du_an_price_option = () => {
 
   return (
     <div>
-      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] border-gray-400 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
+      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] border-gray-400 backdrop-blur-3xl bg-white/10 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
         <p className=" overflow-auto text-nowrap">{ priceTagName }</p>
         <div className="flex items-center">
-          <img src="/img/icons/arrow.png" alt="" className="h-2"/>
+          <img src="/img/icons/arrow.png" alt="" className={`h-2 ${(showPriceOption) ? 'rotate-180' : 'rotate-0'} transition-all duration-200`}/>
         </div>
       </div>
       {showPriceOption && (
@@ -88,55 +88,67 @@ const Du_an_price_option = () => {
             <span>Tất Cả</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 0 Triệu/m² - Đến: 1 Triệu/m²</span>
+            <span>Từ: 0 Triệu/Tháng - Đến: 1 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 1 Triệu/m² - Đến: 2 Triệu/m²</span>
+            <span>Từ: 1 Triệu/Tháng - Đến: 2 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 2 Triệu/m² - Đến: 3 Triệu/m²</span>
+            <span>Từ: 2 Triệu/Tháng - Đến: 3 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 3 Triệu/m² - Đến: 5 Triệu/m²</span>
+            <span>Từ: 3 Triệu/Tháng - Đến: 5 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 5 Triệu/m² - Đến: 7 Triệu/m²</span>
+            <span>Từ: 5 Triệu/Tháng - Đến: 7 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 7 Triệu/m² - Đến: 10 Triệu/m²</span>
+            <span>Từ: 7 Triệu/Tháng - Đến: 10 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 10 Triệu/m² - Đến: 15 Triệu/m²</span>
+            <span>Từ: 10 Triệu/Tháng - Đến: 15 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 15 Triệu/m² - Đến: 20 Triệu/m²</span>
+            <span>Từ: 15 Triệu/Tháng - Đến: 20 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 20 Triệu/m² - Đến: 25 Triệu/m²</span>
+            <span>Từ: 20 Triệu/Tháng - Đến: 25 Triệu/Tháng</span>
           </div>          
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 25 Triệu/m² - Đến: 30 Triệu/m²</span>
+            <span>Từ: 25 Triệu/Tháng - Đến: 30 Triệu/Tháng</span>
           </div>          
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 30 Triệu/m² - Đến: 40 Triệu/m²</span>
+            <span>Từ: 30 Triệu/Tháng - Đến: 40 Triệu/Tháng</span>
           </div>          
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 40 Triệu/m² - Đến: 50 Triệu/m²</span>
+            <span>Từ: 40 Triệu/Tháng - Đến: 50 Triệu/Tháng</span>
           </div>          
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 50 Triệu/m² - Đến: 60 Triệu/m²</span>
+            <span>Từ: 50 Triệu/Tháng - Đến: 100 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 60 Triệu/m² - Đến: 70 Triệu/m²</span>
+            <span>Từ: 100 Triệu/Tháng - Đến: 200 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 70 Triệu/m² - Đến: 80 Triệu/m²</span>
+            <span>Từ: 200 Triệu/Tháng - Đến: 300 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 80 Triệu/m² - Đến: 90 Triệu/m²</span>
+            <span>Từ: 300 Triệu/Tháng - Đến: 400 Triệu/Tháng</span>
           </div>
           <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
-            <span>Từ: 90 Triệu/m² - Đến: 100 Triệu/m²</span>
+            <span>Từ: 400 Triệu/Tháng - Đến: 500 Triệu/Tháng</span>
+          </div>
+          <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
+            <span>Từ: 500 Triệu/Tháng - Đến: 600 Triệu/Tháng</span>
+          </div>
+          <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
+            <span>Từ: 600 Triệu/Tháng - Đến: 700 Triệu/Tháng</span>
+          </div>
+          <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
+            <span>Từ: 700 Triệu/Tháng - Đến: 800 Triệu/Tháng</span>
+          </div>
+          <div onClick={handleOptionsClick} className="flex gap-8 justify-between cursor-pointer hover:bg-white/10 py-2 px-4 rounded-md">
+            <span>Từ: 900 Triệu/Tháng - Đến: 1 Tỷ/Tháng</span>
           </div>
         </div>
         </div>
@@ -145,4 +157,4 @@ const Du_an_price_option = () => {
   )
 }
 
-export default Du_an_price_option
+export default San_pham_cho_thue_price_option
