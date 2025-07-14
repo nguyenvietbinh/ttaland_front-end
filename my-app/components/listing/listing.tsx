@@ -15,7 +15,7 @@ const Listing = () => {
   const path_name = usePathname()
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho', 'tat_ca']
   const list_path: string[] = path_name.split('/')
-  if (list_path[1] === 'san_pham_ban') {
+  if (list_path[1] === 'san_pham_bProjectDetailan') {
     title = 'Sản phẩm bán'
   } else if (list_path[1] === 'san_pham_cho_thue') {
     title = 'Sản phẩm cho thuê'
@@ -68,7 +68,7 @@ const Listing = () => {
                   </div>
                 </div>
                 <div className='w-full h-auto border-t-[1px] border-gray-500 border-solid text-left py-8 px-2'>
-                  <Link href={`${path_name}/show/displayer`}><div className='btn bg-blue-950 text-white w-full'>More Infor</div></Link>
+                  <Link href={`${path_name}/show/${item}`}><div className='btn bg-blue-950 text-white w-full hover:bg-blue-900 cursor-pointer'>More Info</div></Link>
                 </div>
               </div>
             </div>
