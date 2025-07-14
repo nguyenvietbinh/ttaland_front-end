@@ -1,4 +1,5 @@
 
+import ProgressBar from '@/components/layout/loading';
 import { myCustomFont } from '@/lib/fonts';
 import '../lib/globals.css';
 import '../lib/fontawesome'
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${myCustomFont.className} relative`}>
         <div className='h-full w-full bg-[url(/img/background.jpg)] bg-cover bg-center bg-no-repeat fixed brightness-50'></div>
+        <ProgressBar/>
         <div className='absolute w-full top-0'>
           {children}
         </div>
