@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 
 
-const Property = () => {
+const San_pham_cho_thue_property = () => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -59,4 +59,4 @@ const Property = () => {
   )
 }
 
-export default Property
+export default San_pham_cho_thue_property
