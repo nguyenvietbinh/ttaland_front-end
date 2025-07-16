@@ -55,22 +55,45 @@ const San_pham_ban_property = () => {
         {/* info */}
         <div className="">
           <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
-          <div className="grid grid-cols-3 mt-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
-            <div className="flex items-center gap-1"><p className="">Diện tích:</p><p> 100 m²</p></div>
-            <div className="flex items-center gap-1"><img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/><p className="">Garage:</p><p className="">1</p></div>
-            <div className="flex items-center gap-1"><img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/><p className="">Giá:</p><p className="">1 Tỷ</p></div>
-            <div className="flex items-center gap-1"><img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng ngủ:</p><p className="">4</p></div>
-            <div className="flex items-center gap-1"><img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng tắm:</p><p className="">3</p></div>
-            <div className="flex items-center gap-1 overflow-auto"><img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/><p className="">Phường 2, Thủ Đức</p></div>
+          <div className="grid grid-cols-3 gap-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Diện tích:</p>
+              <p className="overflow-auto no-scrollbar"> 100 m²</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Garage:</p>
+              <p className="overflow-auto no-scrollbar">1</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Giá:</p>
+              <p className="overflow-auto no-scrollbar">6 Triệu/ Tháng</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Phòng ngủ:</p>
+              <p className="overflow-auto no-scrollbar">4</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Phòng tắm:</p>
+              <p className="overflow-auto no-scrollbar">3</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
+              <p className="overflow-auto no-scrollbar">Phường 2, Thủ Đức</p>
+            </div>
           </div>
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
           <div className="btn w-[90%]">Thông tin thêm</div>
-          <div className="w-[10%]"><img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/></div>
+          <div className="w-[10%] cursor-pointer tooltip " data-tip="Thêm vào giỏ hàng">
+            <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
+          </div>
         </div>
-        
-        
       </div>
     </div>
   )

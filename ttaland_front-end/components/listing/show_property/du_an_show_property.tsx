@@ -45,16 +45,56 @@ const Du_an_property = () => {
           </div>
         </div>
       </div>
-        <div className="text-black p-4 cursor-pointer flex-col space-y-2">
-          <p className="font-bold text-center">Cho thuê Biệt Thự Q2, căn góc 2 mặt tiền đường Ven Sông Sài Gòn, View trực diện Landmark 81 và Q. 1</p>
-          <div className="flex justify-end gap-2 text-lg">
-            <p className="">Giá: 10 tỷ</p>
-            <p>-</p>
-            <p className="">Diện Tích: 100 m²</p>
-            <p>-</p>
-            <p>Vị Trí: blablablal</p>
+
+
+
+
+
+      <div className="px-2 pt-4 text-black">
+
+        {/* info */}
+        <div className="">
+          <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <div className="grid grid-cols-3 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Quy Mô:</p>
+              <p className="overflow-auto no-scrollbar">3.75 ha</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/clock.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Bàn giao:</p>
+              <p className="overflow-auto no-scrollbar">Quý 4/2025</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/rule.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Pháp lý:</p>
+              <p className="overflow-auto no-scrollbar">Sổ hồng riêng</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/houses.png" alt="" className="h-6 hidden md:block"/>
+              <p className=""> Số lượng:</p>
+              <p className="overflow-auto no-scrollbar">199 Căn</p>
+            </div>
+            <div className="flex items-center gap-1 ">
+              <img src="/img/icons/house.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Loại hình:</p>
+              <p className="overflow-auto no-scrollbar">Nhà phố, Shophouse</p>
+            </div>
+            <div className="flex items-center gap-1 tooltip cursor-pointer tooltip-bottom" data-tip="Xem bản đồ">
+              <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
+              <p className="overflow-auto no-scrollbar">Đường Hoàng Phan Thái, Mỹ Yên, Bến Lức, Long An</p>
+            </div>
           </div>
         </div>
+
+        <div className="flex justify-between w-full mt-8 mb-4 items-center">
+          <div className="btn w-[90%]">Thông tin thêm</div>
+          <div className="w-[10%] cursor-pointer tooltip " data-tip="Thêm vào giỏ hàng">
+            <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
