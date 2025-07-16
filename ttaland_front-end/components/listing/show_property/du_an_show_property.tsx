@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
-
+import NProgress from 'nprogress'
 interface Du_an_propertyProps {
   projectId?: string;
   index?: number;
@@ -30,6 +30,7 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
   }, [])
 
   const handleNavigateToDetail = () => {
+    NProgress.start()
     const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
     const currentPath = pathname
     const detailPath = `${currentPath}/show/${currentProjectId}`
