@@ -75,7 +75,7 @@ const Du_an_price_option = () => {
 
   return (
     <div>
-      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] border-gray-400 backdrop-blur-3xl bg-white/10 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
+      <div ref={priceRef} onClick={() => {setShowPriceOption(preVal => !preVal)}} className="border-[1px] border-gray-400 backdrop-blur-3xl bg-black/10 p-1 px-4 flex gap-2 cursor-pointer hover:border-white rounded-sm">
         <p className=" overflow-auto text-nowrap">{ priceTagName }</p>
         <div className="flex items-center">
           <img src="/img/icons/arrow.png" alt="" className={`h-2 ${(showPriceOption) ? 'rotate-180' : 'rotate-0'} transition-all duration-200`}/>
