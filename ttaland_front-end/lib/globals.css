@@ -25,3 +25,14 @@
   -webkit-user-drag: none;
   user-drag: none;
 }
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ẩn scrollbar cho IE, Edge và Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE và Edge */
+  scrollbar-width: none;  /* Firefox */
+}
