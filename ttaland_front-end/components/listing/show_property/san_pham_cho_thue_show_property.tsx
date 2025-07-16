@@ -50,7 +50,7 @@ const San_pham_ban_property = () => {
 
 
 
-      <div className="px-2 pt-4 text-black rounded-lg overflow-hidden shadow-md">
+      <div className="px-2 pt-4 text-black">
 
         {/* info */}
         <div className="">
