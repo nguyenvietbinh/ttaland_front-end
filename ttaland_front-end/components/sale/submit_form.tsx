@@ -6,7 +6,7 @@ interface Submit_form_props {
 }
 
 const Submit_form = ({tab = ''}: Submit_form_props) => {
-  const [userName, setUserName] = useState('Nguyen Viet Binh')
+  const [userName, setUserName] = useState('Nguyen Van A')
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
     
