@@ -1,10 +1,16 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { useRouter, usePathname } from 'next/navigation'
 
+interface Du_an_propertyProps {
+  projectId?: string;
+  index?: number;
+}
 
-
-const Du_an_property = () => {
+const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -22,6 +28,13 @@ const Du_an_property = () => {
     }
     setListOfImg(Array.from(uniqueNumbers))
   }, [])
+
+  const handleNavigateToDetail = () => {
+    const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
+    const currentPath = pathname
+    const detailPath = `${currentPath}/show/${currentProjectId}`
+    router.push(detailPath)
+  }
 
 
 
@@ -66,7 +79,12 @@ const Du_an_property = () => {
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <div className="btn w-[90%]">Thông tin thêm</div>
+          <button 
+            onClick={handleNavigateToDetail}
+            className="btn w-[90%] cursor-pointer hover:bg-opacity-80 transition-all duration-200"
+          >
+            Thông tin thêm
+          </button>
           <div className="w-[10%]"><img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/></div>
         </div>
         
