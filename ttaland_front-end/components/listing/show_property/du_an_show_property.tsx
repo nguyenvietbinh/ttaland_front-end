@@ -53,37 +53,24 @@ const Du_an_property = () => {
       <div className="px-2 pt-4 text-black rounded-lg overflow-hidden shadow-md">
 
         {/* info */}
-        <div className=" cursor-pointer">
-          <h1 className="font-bold text-xl">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
-          <div className="flex flex-wrap mt-2 gap-2 mb-3">
-              <span className="bg-blue-200 text-red-600 px-2 py-0.5 rounded text-lg font-bold">13,2 Triệu/m²</span>
-              <span className="bg-blue-200 text-red-600 px-2 py-0.5 rounded text-lg font-bold">88 m²</span>
-              <span className="bg-blue-200 px-2 py-0.5 rounded text-md font-medium">Đan Phượng, Hà Nội</span>
+        <div className="">
+          <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <div className="grid grid-cols-3 mt-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+            <div className="flex items-center gap-1"><p className="">Diện tích:</p><p> 100 m²</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/><p className="">Garage:</p><p className="">1</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/><p className="">Giá:</p><p className="">1 Tỷ</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng ngủ:</p><p className="">4</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng tắm:</p><p className="">3</p></div>
+            <div className="flex items-center gap-1 overflow-auto"><img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/><p className="">Phường 2, Thủ Đức</p></div>
           </div>
-          <div className="wrap-break-word line-clamp-2 text-gray-700">
-          Gia đình cần tiền gấp, bán nhanh căn nhà ở ngõ 72 Nguyễn Trãi giá 12,5 Tỷ, có thương lượng-Diện tích 38.5m sổ vuông vắn Gia đình cần tiền gấp, bán nhanh căn nhà ở ngõ 72 Nguyễn Trãi giá 12,5 Tỷ, có thương lượng-Diện tích 38.5m sổ vuông vắn Gia đình cần tiền gấp, bán nhanh căn nhà ở ngõ 72 Nguyễn Trãi giá 12,5 Tỷ, có thương lượng-Diện tích 38.5m sổ vuông vắn....
-          </div>
+        </div>
+
+        <div className="flex justify-between w-full my-3 items-center">
+          <div className="btn w-[90%]">Thông tin thêm</div>
+          <div className="w-[10%]"><img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/></div>
         </div>
         
         
-        {/* contact */}
-        <div className="border-t-[1px] border-gray-400 p-2 flex items-center justify-between">
-          <div className="flex items-center cursor-pointer group">
-            <div className="bg-red-300 rounded-full w-10 h-10 flex items-center justify-center mr-2">
-              <span className="font-bold">A</span>
-            </div>
-            <div className="flex-col ">
-              <p className="text-gray-800 text-xl group-hover:underline">Nguyễn Văn A</p>
-              <p className="text-gray-400 text-sm">Đăng hôm nay</p>
-            </div>
-          </div>
-          <div className="text-right flex gap-2 px-2 cursor-pointer bg-gray-700 border-none text-white rounded-sm p-1 items-center group">
-            <img className="h-4" src="/img/icons/contact.png" alt="" />
-            <p className="">0989 790 ***</p>
-            <p>·</p>
-            <p className="group-hover:underline">Hiện số</p>
-          </div>
-        </div>
       </div>
     </div>
   )
