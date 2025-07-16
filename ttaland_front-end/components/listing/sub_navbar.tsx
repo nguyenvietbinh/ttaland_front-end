@@ -19,7 +19,7 @@ const SubNavbar = () => {
   }
 
   return (
-    <div className={`flex-col sticky rounded-b-lg transition-all duration-500 top-0 mb-2 mt-8 px-2`}>
+    <div className={`flex-col sticky z-40 rounded-b-lg transition-all duration-500 top-0 mb-2 mt-8 px-2`}>
       <div className={`text-3xl flex transition-all duration-100 text-nowrap`}>
         <p className='hidden md:flex'>Bất động sản tại:&ensp;</p>
         <div className='flex overflow-auto'>{locations?.map((loc, index) => (

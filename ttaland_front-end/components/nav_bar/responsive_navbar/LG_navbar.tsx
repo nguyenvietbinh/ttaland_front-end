@@ -17,7 +17,7 @@ const LG_navbar = () => {
     <div>
       {((width > 1024) && (width < 1280)) ? (
       <div className='flex gap-6 justify-start w-[1024px] mx-auto text-gray-300 text-xl'>
-        <Link href="/"><img src="/img/icons/logo.png" alt="" className='h-24'/></Link>
+        <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
         <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
           Tin Tức
           <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 
 
-const Property = () => {
+const Du_an_property = () => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -45,18 +45,35 @@ const Property = () => {
           </div>
         </div>
       </div>
-        <div className="text-black p-4 cursor-pointer flex-col space-y-2">
-          <p className="font-bold text-center">Cho thuê Biệt Thự Q2, căn góc 2 mặt tiền đường Ven Sông Sài Gòn, View trực diện Landmark 81 và Q. 1</p>
-          <div className="flex justify-end gap-2 text-lg">
-            <p className="">Giá: 10 tỷ</p>
-            <p>-</p>
-            <p className="">Diện Tích: 100 m²</p>
-            <p>-</p>
-            <p>Vị Trí: blablablal</p>
+
+
+
+
+
+      <div className="px-2 pt-4 text-black rounded-lg overflow-hidden shadow-md">
+
+        {/* info */}
+        <div className="">
+          <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <div className="grid grid-cols-3 mt-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+            <div className="flex items-center gap-1"><p className="">Diện tích:</p><p> 100 m²</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/><p className="">Garage:</p><p className="">1</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/><p className="">Giá:</p><p className="">1 Tỷ</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng ngủ:</p><p className="">4</p></div>
+            <div className="flex items-center gap-1"><img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/><p className="">Phòng tắm:</p><p className="">3</p></div>
+            <div className="flex items-center gap-1 overflow-auto"><img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/><p className="">Phường 2, Thủ Đức</p></div>
           </div>
         </div>
+
+        <div className="flex justify-between w-full my-3 items-center">
+          <div className="btn w-[90%]">Thông tin thêm</div>
+          <div className="w-[10%]"><img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/></div>
+        </div>
+        
+        
+      </div>
     </div>
   )
 }
 
-export default Property
+export default Du_an_property

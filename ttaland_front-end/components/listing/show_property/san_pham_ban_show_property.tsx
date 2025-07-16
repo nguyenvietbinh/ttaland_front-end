@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 
 
-const Property = () => {
+const San_pham_ban_property = () => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -46,7 +46,7 @@ const Property = () => {
         </div>
       </div>
         <div className="text-black p-4 cursor-pointer flex-col space-y-2">
-          <p className="font-bold text-center">Cho thuê Biệt Thự Q2, căn góc 2 mặt tiền đường Ven Sông Sài Gòn, View trực diện Landmark 81 và Q. 1</p>
+          <p className="font-bold text-center">Ban Biệt Thự Q2, căn góc 2 mặt tiền đường Ven Sông Sài Gòn, View trực diện Landmark 81 và Q. 1</p>
           <div className="flex justify-end gap-2 text-lg">
             <p className="">Giá: 10 tỷ</p>
             <p>-</p>
@@ -59,4 +59,4 @@ const Property = () => {
   )
 }
 
-export default Property
+export default San_pham_ban_property
