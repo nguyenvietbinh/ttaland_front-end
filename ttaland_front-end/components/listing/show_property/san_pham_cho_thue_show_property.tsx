@@ -50,7 +50,7 @@ const San_pham_ban_property = () => {
 
 
 
-      <div className="px-2 pt-4 text-black rounded-lg overflow-hidden shadow-md">
+      <div className="px-2 pt-4 text-black">
 
         {/* info */}
         <div className="">
@@ -90,7 +90,7 @@ const San_pham_ban_property = () => {
 
         <div className="flex justify-between w-full my-3 items-center">
           <div className="btn w-[90%]">Thông tin thêm</div>
-          <div className="w-[10%] cursor-pointer tooltip " data-tip="Thêm vào giỏ hàng">
+          <div className="w-[10%] cursor-pointer tooltip " data-tip="Quan tâm sản phẩm này">
             <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
           </div>
         </div>
