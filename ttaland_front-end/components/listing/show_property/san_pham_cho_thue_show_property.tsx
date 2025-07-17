@@ -1,10 +1,17 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { useRouter, usePathname } from 'next/navigation'
+import NProgress from 'nprogress'
+interface Du_an_propertyProps {
+  projectId?: string;
+  index?: number;
+}
 
 
-
-const San_pham_cho_thue_property = () => {
+const San_pham_cho_thue_property = ({ projectId, index }: Du_an_propertyProps) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -23,11 +30,17 @@ const San_pham_cho_thue_property = () => {
     setListOfImg(Array.from(uniqueNumbers))
   }, [])
 
-
+  const handleNavigateToDetail = () => {
+    NProgress.start()
+    const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
+    const currentPath = pathname
+    const detailPath = `${currentPath}/chi_tiet?id=${currentProjectId}`
+    router.push(detailPath)
+  }
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] border-gray-400 hover:border-gray-200 rounded-sm">
-      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
+      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
         <div className="h-full w-2/3 overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={`/img/example/showcase${listOfImg[0]}.jpg`} alt="" />
         </div>
@@ -54,7 +67,7 @@ const San_pham_cho_thue_property = () => {
 
         {/* info */}
         <div className="">
-          <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <h1 className="font-bold text-xl cursor-pointer hover:underline" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
           <div className="grid grid-cols-3 gap-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
@@ -89,7 +102,7 @@ const San_pham_cho_thue_property = () => {
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <div className="btn w-[90%]">Thông tin thêm</div>
+          <div className="btn w-[90%]" onClick={handleNavigateToDetail}>Thông tin thêm</div>
           <div className="w-[10%] cursor-pointer tooltip " data-tip="Quan tâm sản phẩm này">
             <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
           </div>

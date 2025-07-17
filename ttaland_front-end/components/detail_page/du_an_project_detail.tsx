@@ -9,7 +9,7 @@ interface ProjectDetailProps {
   backPath?: string;
 }
 
-const ProjectDetail = ({ projectId, category, backPath }: ProjectDetailProps) => { 
+const Du_an_project_detail = ({ projectId, category, backPath }: ProjectDetailProps) => { 
     // Mock data based on The Larita project structure
     const projectData = {
       id: projectId || '1',
@@ -397,4 +397,4 @@ const ProjectDetail = ({ projectId, category, backPath }: ProjectDetailProps) =>
     )
 }
 
-export default ProjectDetail;
+export default Du_an_project_detail;

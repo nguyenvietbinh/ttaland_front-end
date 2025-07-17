@@ -18,7 +18,7 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
   }
 
-    useEffect(() => {
+  useEffect(() => {
     const randomNum = getRandomNumber(4, 9)
     setNumberOfImg(randomNum)
 
