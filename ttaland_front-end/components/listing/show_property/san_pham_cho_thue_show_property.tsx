@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 
 
-const San_pham_ban_property = () => {
+const San_pham_cho_thue_property = () => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -12,7 +12,7 @@ const San_pham_ban_property = () => {
     return Math.floor(Math.random() * (y - x + 1)) + x
   }
 
-    useEffect(() => {
+  useEffect(() => {
     const randomNum = getRandomNumber(4, 9)
     setNumberOfImg(randomNum)
 
@@ -99,4 +99,4 @@ const San_pham_ban_property = () => {
   )
 }
 
-export default San_pham_ban_property
+export default San_pham_cho_thue_property

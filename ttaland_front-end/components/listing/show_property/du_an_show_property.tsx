@@ -33,15 +33,15 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
     NProgress.start()
     const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
     const currentPath = pathname
-    const detailPath = `${currentPath}/show/${currentProjectId}`
+    const detailPath = `${currentPath}/chi_tiet?id=${currentProjectId}`
     router.push(detailPath)
   }
 
 
 
   return (
-    <div className="bg-gray-200 h-auto border-[1px] border-gray-400 hover:border-gray-200 rounded-sm">
-      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
+    <div className="bg-gray-200 h-auto border-[1px] border-gray-200 hover:border-gray-400 rounded-sm">
+      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
         <div className="h-full w-2/3 overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={`/img/example/showcase${listOfImg[0]}.jpg`} alt="" />
         </div>
@@ -68,7 +68,7 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
 
         {/* info */}
         <div className="">
-          <h1 className="font-bold text-xl cursor-pointer hover:underline">QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <h1 className="font-bold text-xl cursor-pointer hover:underline" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
           <div className="grid grid-cols-3 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
