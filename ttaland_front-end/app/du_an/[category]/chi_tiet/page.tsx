@@ -1,11 +1,11 @@
 'use client'
-import ProjectDetail from '@/components/detail_page/project_detail';
+import Du_an_project_detail from '@/components/detail_page/du_an_project_detail';
 import _navbar from '@/components/nav_bar/navbar';
 import Footer from "@/components/layout/footer";
 
 import { useParams, usePathname } from 'next/navigation';
 
-const ProjectDetailPage = () => {
+const Du_an_project_detail_page = () => {
   const params = useParams();
   const pathname = usePathname();
   const { category, id } = params;
@@ -18,7 +18,7 @@ const ProjectDetailPage = () => {
       <_navbar/>
       </div>
       <div className="py-8">
-        <ProjectDetail 
+        <Du_an_project_detail 
           projectId={id as string} 
           category={category as string} 
           backPath={backPath}
@@ -29,4 +29,4 @@ const ProjectDetailPage = () => {
   );
 };
 
-export default ProjectDetailPage;
+export default Du_an_project_detail_page;
