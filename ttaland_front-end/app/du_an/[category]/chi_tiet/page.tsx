@@ -15,7 +15,7 @@ const ProjectDetailPage = () => {
   return (
     <div className="min-h-screen bg-gray-800">
       <div className="sticky top-0 z-50">
-        <_navbar/>
+      <_navbar/>
       </div>
       <div className="py-8">
         <ProjectDetail 
