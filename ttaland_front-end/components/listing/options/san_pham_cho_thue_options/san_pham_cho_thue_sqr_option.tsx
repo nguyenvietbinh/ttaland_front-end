@@ -3,6 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from "react"
+import NProgress from 'nprogress'
 
 const San_pham_cho_thue_sqr_option = () => {
   const router = useRouter()
@@ -54,6 +55,7 @@ const San_pham_cho_thue_sqr_option = () => {
       if (bath_room_max) queryParams.bath_room_max = bath_room_max;
 
       const queryString = new URLSearchParams(queryParams).toString();
+      NProgress.start()
       router.push(`/${list_path[1]}/${list_path[2]}?${queryString}`);
   }
 

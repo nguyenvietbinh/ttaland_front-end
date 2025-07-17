@@ -32,10 +32,10 @@ const San_pham_ban_property = ({ projectId, index }: Du_an_propertyProps) => {
   }, [])
 
   const handleNavigateToDetail = () => {
-    NProgress.start()
     const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
     const currentPath = pathname
     const detailPath = `${currentPath}/chi_tiet?id=${currentProjectId}`
+    NProgress.start()
     router.push(detailPath)
   }
 

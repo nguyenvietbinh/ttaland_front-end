@@ -5,6 +5,7 @@ import San_pham_ban_filter_form from './san_pham_ban_filter_form'
 import San_pham_cho_thue_filter_form from './san_pham_cho_thue_filter_form'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import NProgress from 'nprogress'
 
 const Filter_form = () => {
   const router = useRouter()
@@ -71,6 +72,7 @@ const Filter_form = () => {
     if (filter_data.bath_room_max) queryParams.bath_room_max = filter_data.bath_room_max;
 
     const queryString = new URLSearchParams(queryParams).toString();
+    NProgress.start()
     router.push(`/${filter_data.type}/${filter_data.property_type}?${queryString}`);
   }
 
