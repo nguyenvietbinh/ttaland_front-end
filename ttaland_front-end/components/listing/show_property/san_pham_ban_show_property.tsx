@@ -3,14 +3,10 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
 import NProgress from 'nprogress'
-interface Du_an_propertyProps {
-  projectId?: string;
-  index?: number;
-}
 
 
 
-const San_pham_ban_property = ({ projectId, index }: Du_an_propertyProps) => {
+const San_pham_ban_property = () => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
@@ -32,9 +28,8 @@ const San_pham_ban_property = ({ projectId, index }: Du_an_propertyProps) => {
   }, [])
 
   const handleNavigateToDetail = () => {
-    const currentProjectId = projectId || (index ? (index + 1).toString() : '1')
     const currentPath = pathname
-    const detailPath = `${currentPath}/chi_tiet?id=${currentProjectId}`
+    const detailPath = `${currentPath}/chi_tiet?id=${listOfImg.join('')}`
     NProgress.start()
     router.push(detailPath)
   }
