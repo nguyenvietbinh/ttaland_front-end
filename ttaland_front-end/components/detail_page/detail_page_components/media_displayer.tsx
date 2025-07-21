@@ -49,7 +49,7 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
   const currentMedia = mediaItems[currentIndex];
 
   return (
-    <div className="card w-3/5">
+    <div className="card w-full lg:w-3/5">
       <div className="card-body px-0">      
         <div className="relative group">
           {/* display img or vid */}
@@ -124,7 +124,7 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
 
 
         {/* Thumbnail gallery */}
-          <div className="flex w-full overflow-x-auto no-scrollbar gap-2 py-2 mt-4">
+          <div className=" w-full overflow-x-auto no-scrollbar gap-2 py-2 mt-4 hidden md:flex">
             {mediaItems.map((item, index) => (
               <div
                 key={index}
