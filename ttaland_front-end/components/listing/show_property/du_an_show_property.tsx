@@ -40,12 +40,13 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
 
 
   return (
-    <div className="bg-gray-200 h-auto border-[1px] border-gray-200 hover:border-gray-400 rounded-sm">
+    <div className="bg-gray-200 h-auto border-[1px] border-gray-400 hover:border-gray-200 rounded-sm">
       <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
-        <div className="h-full w-2/3 overflow-hidden cursor-pointer">
+        <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={`/img/example/showcase${listOfImg[0]}.jpg`} alt="" />
+          <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 md:hidden">{numberOfImg - 1}+</div>
         </div>
-        <div className="w-1/3 h-full flex-col space-y-[2px] overflow-hidden cursor-pointer">
+        <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden cursor-pointer">
           <div className="w-full h-1/2 overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={`/img/example/showcase${listOfImg[1]}.jpg`} alt="" />
           </div>
@@ -64,12 +65,13 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
 
 
 
+
       <div className="px-2 pt-4 text-black">
 
         {/* info */}
         <div className="">
           <h1 className="font-bold text-xl cursor-pointer hover:underline" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
-          <div className="grid grid-cols-3 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+          <div className="grid md:grid-cols-3 grid-cols-2 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
               <p className="">Quy Mô:</p>
@@ -103,16 +105,11 @@ const Du_an_property = ({ projectId, index }: Du_an_propertyProps) => {
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <button 
-            onClick={handleNavigateToDetail}
-            className="btn w-[90%] cursor-pointer hover:bg-opacity-80 transition-all duration-200"
-          >
-            Thông tin thêm
-          </button>
-          <div className="w-[10%] cursor-pointer tooltip " data-tip="Quan tâm sản phẩm này">
+          <div className="btn bg-black text-white w-[80%] md:w-[90%]" onClick={handleNavigateToDetail}>Thông tin thêm</div>
+          <div className="w-[20%] md:w-[10%] cursor-pointer">
             <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   )

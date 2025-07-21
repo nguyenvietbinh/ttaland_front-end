@@ -15,9 +15,9 @@ const Listing = () => {
 
   return (
     <div>
-      <div className="w-full xl:w-[1280px] 2xl:w-[1536px] h-auto mx-auto text-white">
+      <div className="container mx-auto text-white">
         <_sub_avbar/>
-        <div className={category.includes(list_path[2]) ? "bg-none px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
+        <div className={category.includes(list_path[2]) ? "px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
           {items.map((item, index) => (
             <div key={index}>
               {(list_path[1] === 'san_pham_ban') ? (<San_pham_ban_property/>) : (list_path[1] === 'san_pham_cho_thue') ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
