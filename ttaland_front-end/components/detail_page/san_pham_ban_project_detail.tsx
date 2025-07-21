@@ -39,18 +39,17 @@ const San_pham_ban_project_detail = ({ id }: San_pham_ban_project_detail_props) 
   const data = getDataFromId()
 
   return (
-      <div className="container mx-auto h-auto">
+      <div className="container mx-auto h-auto p-2">
         {(listOfImg?.length) ? (
           <div>
-            <div className="flex h-auto">
+            <div className="lg:flex h-auto">
               <Media_displayer id={id} mediaItems={data}/>
-              <div className="w-2/5 pt-6 ">
-                <div className="w-full h-full p-2 text-3xl">
-                  Thông tin cơ bản
+              <div className="lg:w-2/5 w-full pt-6 ">
+                <div className="w-full h-full p-2 text-3xl ring-2 ring-red-500">
+                  Thông tin chi tiết
                 </div>
               </div>
             </div>
-            <div className="w-full h-150 p-2"><h1 className="text-5xl">Thông tin chi tiết</h1></div>
             <div className="w-full h-150 "><h1 className="text-5xl">Sản Phẩm Tương Tự</h1></div>
           </div>
         ) : (
