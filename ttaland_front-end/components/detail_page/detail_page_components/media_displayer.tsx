@@ -5,19 +5,19 @@ import {
   FaChevronRight, 
 } from 'react-icons/fa';
 
-type MediaItem = {
+export type MediaItem = {
   type: 'image' | 'video';
   url: string;
   poster?: string;
   format?: string;
 };
 
-interface MediaGalleryProps {
+interface media_displayer_props {
   mediaItems: MediaItem[];
   id: string | null
 }
 
-const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
+const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // NEW: refs array cho từng thumbnail
@@ -50,7 +50,7 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
 
   return (
     <div className="card w-full lg:w-3/5">
-      <div className="card-body px-0">      
+      <div className="card-body p-0">      
         <div className="relative group">
           {/* display img or vid */}
           {currentMedia.type === 'image' ? (
@@ -95,14 +95,14 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
           {/* Navigation buttons */}
           <button 
             onClick={goToPrevious}
-            className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-4 text-gray-800 bg-white/50 cursor-pointer rounded-lg p-2"
+            className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
             aria-label="Previous media"
           >
             <FaChevronLeft size={20} />
           </button>
           <button 
             onClick={goToNext}
-            className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-4 text-gray-800 bg-white/50 cursor-pointer rounded-lg p-2"
+            className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
             aria-label="Next media"
           >
             <FaChevronRight size={20} />
@@ -161,7 +161,7 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
         <div className="modal-box p-0 h-screen w-screen max-w-screen">
           {(currentMedia.type === 'image') ? (
             <figure   
-              className="relative h-full w-full rounded-lg overflow-hidden"
+              className="relative h-full w-full overflow-hidden"
               style={{
                 backgroundImage: `url(${currentMedia.url})`,
                 backgroundSize: 'cover',
@@ -184,7 +184,7 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
                   backgroundRepeat: 'no-repeat',
                 }}>
                 <video
-                  className="w-full h-full object-contain rounded-lg backdrop-blur-2xl bg-black/50"
+                  className="w-full h-full object-contain backdrop-blur-2xl bg-black/50"
                   poster={currentMedia.poster}
                   autoPlay
                   controls={true}
@@ -217,14 +217,14 @@ const Media_displayer = ({ mediaItems, id }: MediaGalleryProps) => {
 
         <button 
           onClick={goToPrevious}
-          className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-full mx-4 text-gray-800 bg-white/50 cursor-pointer rounded-lg p-2"
+          className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
           aria-label="Previous media"
         >
           <FaChevronLeft size={20} />
         </button>
         <button 
           onClick={goToNext}
-          className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-full mx-4 text-gray-800 bg-white/50 cursor-pointer rounded-lg p-2"
+          className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
           aria-label="Next media"
         >
           <FaChevronRight size={20} />

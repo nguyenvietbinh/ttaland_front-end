@@ -1,11 +1,11 @@
 'use client'
-import Du_an_project_detail from '@/components/detail_page/du_an_project_detail';
+import Du_an_project_detail from '@/components/detail_page/du_an_detail';
 import _navbar from '@/components/nav_bar/navbar';
 import Footer from "@/components/layout/footer";
 
 import { useParams, usePathname } from 'next/navigation';
 
-const Du_an_project_detail_page = () => {
+const Du_an_detail_page = () => {
   const params = useParams();
   const pathname = usePathname();
   const { category, id } = params;
@@ -29,4 +29,4 @@ const Du_an_project_detail_page = () => {
   );
 };
 
-export default Du_an_project_detail_page;
+export default Du_an_detail_page;
