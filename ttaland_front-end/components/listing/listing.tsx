@@ -1,6 +1,5 @@
 
 'use client'
-import _sub_avbar from '@/components/listing/sub_navbar'
 import { usePathname } from 'next/navigation';
 import Du_an_property from './show_property/du_an_show_property';
 import San_pham_ban_property from './show_property/san_pham_ban_show_property';
@@ -15,8 +14,7 @@ const Listing = () => {
 
   return (
     <div>
-      <div className="container mx-auto text-white">
-        <_sub_avbar/>
+      <div className="">
         <div className={category.includes(list_path[2]) ? "px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
           {items.map((item, index) => (
             <div key={index}>

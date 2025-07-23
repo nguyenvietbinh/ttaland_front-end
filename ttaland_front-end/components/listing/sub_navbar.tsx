@@ -9,7 +9,7 @@ import Du_an_sqr_option from "./options/du_an_options/du_an_sqr_option"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 
-const SubNavbar = () => {
+const Sub_navbar = () => {
   const path_name = usePathname()
   const searchParams = useSearchParams()
   const list_path = path_name.split('/')
@@ -42,4 +42,4 @@ const SubNavbar = () => {
   )
 }
 
-export default SubNavbar
+export default Sub_navbar
