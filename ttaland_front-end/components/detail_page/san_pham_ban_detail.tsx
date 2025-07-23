@@ -3,6 +3,7 @@ import Media_displayer from "./detail_page_components/media_displayer";
 import San_pham_ban_detail_infor from "./detail_infor/san_pham_ban_detail_infor";
 import { detail_infor } from "./detail_infor/san_pham_ban_detail_infor";
 import { MediaItem } from "./detail_page_components/media_displayer";
+import Listing from "../listing/listing";
 
 interface San_pham_ban_details_props {
   id: string | null;
@@ -47,15 +48,17 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
 
 
   return (
-      <div className="container mx-auto h-auto p-2">
+      <div className="container mx-auto p-2">
         {(id?.length) ? (
           <div>
+            <h1 className="w-full text-center text-3xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
               <Media_displayer id={id} mediaItems={media_data}/>
               <div className="w-0.5 block border-[1px] border-gray-600"></div>
               <San_pham_ban_detail_infor information_data={information_data}/>
             </div>
-            <div className="w-full h-150 border-t-[2px] border-gray-600 mt-6 p-4">
+            <div className="w-full border-t-[2px] border-gray-600 mt-20 px-4 pt-8">
+              <Listing/>
             </div>
           </div>
         ) : (

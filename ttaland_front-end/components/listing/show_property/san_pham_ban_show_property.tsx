@@ -28,8 +28,8 @@ const San_pham_ban_property = () => {
   }, [])
 
   const handleNavigateToDetail = () => {
-    const currentPath = pathname
-    const detailPath = `${currentPath}/chi_tiet?id=${listOfImg.join('')}`
+    const currentPath = pathname.split('/')
+    const detailPath = `/${currentPath[1]}/${currentPath[2]}/chi_tiet?id=${listOfImg.join('')}`
     NProgress.start()
     router.push(detailPath)
   }
@@ -47,7 +47,7 @@ const San_pham_ban_property = () => {
           </div>
           <div className="w-full relative h-1/2 cursor-pointer">
             <div className="w-full h-full absolute bg-black/50 transition-all duration-200 hover:bg-black/80 flex justify-center items-center">
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-1 items-center text-white">
                 <p>{numberOfImg - 3}+</p>
               </div>
             </div>

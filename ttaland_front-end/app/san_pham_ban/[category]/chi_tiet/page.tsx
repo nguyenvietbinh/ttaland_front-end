@@ -11,7 +11,7 @@ const San_pham_ban_detail_page = () => {
 
 
   return (
-    <div className="bg-gray-300 w-full min-h-screen text-black h-auto">
+    <div className="bg-gray-300 w-full text-black">
       <NavBar/>
       <San_pham_ban_detail id={id}/>
       <Footer/>
