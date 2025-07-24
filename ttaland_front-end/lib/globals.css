@@ -21,9 +21,11 @@
   --inset-shadow-md: inset 0 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
-.drag-none {
-  -webkit-user-drag: none;
-  user-drag: none;
+.my-custom-carousel {
+  display: inline-flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 
