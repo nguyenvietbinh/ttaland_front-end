@@ -3,7 +3,7 @@ import Media_displayer from "./detail_page_components/media_displayer";
 import San_pham_ban_detail_infor from "./detail_infor/san_pham_ban_detail_infor";
 import { detail_infor } from "./detail_infor/san_pham_ban_detail_infor";
 import { MediaItem } from "./detail_page_components/media_displayer";
-import Listing from "../listing/listing";
+import Similar_produc from "./detail_page_components/similar_produc";
 
 interface San_pham_ban_details_props {
   id: string | null;
@@ -57,9 +57,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
               <div className="w-0.5 block border-[1px] border-gray-600"></div>
               <San_pham_ban_detail_infor information_data={information_data}/>
             </div>
-            <div className="w-full border-t-[2px] border-gray-600 mt-20 px-4 pt-8">
-              <Listing/>
-            </div>
+            <Similar_produc/>
           </div>
         ) : (
           <div>
