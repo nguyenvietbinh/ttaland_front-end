@@ -23,9 +23,9 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
   }
 
   useEffect(() => {
-    if (isUsingRealData && townhouse?.images) {
+    if (isUsingRealData && townhouse?.media) {
       // Use real media data
-      setNumberOfImg(townhouse.images.length)
+      setNumberOfImg(townhouse.media.length)
     } else {
       // Use mock data
       const randomNum = getRandomNumber(4, 9)
@@ -49,17 +49,17 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
 
   // Get image URLs
   const getImageUrl = (index: number): string => {
-    if (isUsingRealData && townhouse?.images?.[index]) {
-      return apiService.getMediaUrl(townhouse.images[index])
+    if (isUsingRealData && townhouse?.media?.[index]) {
+      return apiService.getMediaUrl(townhouse.media[index].file)
     }
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }
 
   // Get property data
   const title = isUsingRealData ? townhouse!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
-  const area = isUsingRealData ? townhouse!.area_formatted : "100 m²"
+  const area = isUsingRealData ? apiService.formatArea(townhouse!.area) : "100 m²"
   const garage = isUsingRealData ? townhouse!.garage : 1
-  const price = isUsingRealData ? townhouse!.price_formatted : "1 Tỷ"
+  const price = isUsingRealData ? apiService.formatPrice(townhouse!.price) : "1 Tỷ"
   const bedrooms = isUsingRealData ? townhouse!.bedrooms : 4
   const bathrooms = isUsingRealData ? townhouse!.bathrooms : 3
   const location = isUsingRealData ? townhouse!.location : "Phường 2, Thủ Đức"
@@ -69,34 +69,29 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
       <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
         <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(0)} alt={title} />
-          {numberOfImg > 1 && (
-            <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 md:hidden flex items-center gap-1">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-              </svg>
-              <span className="text-white text-sm font-medium">{numberOfImg - 1}+</span>
-            </div>
-          )}
+          <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 md:hidden">{numberOfImg - 1}+</div>
         </div>
         <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden cursor-pointer">
           <div className="w-full h-1/2 overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(1)} alt={title} />
           </div>
           <div className="w-full relative h-1/2 cursor-pointer">
-            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(2)} alt={title} />
-            {numberOfImg > 3 && (
-              <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 flex items-center gap-1">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-white text-sm font-medium">{numberOfImg - 3}+</span>
+            <div className="w-full h-full absolute bg-black/50 transition-all duration-200 hover:bg-black/80 flex justify-center items-center">
+              <div className="flex gap-1 items-center text-white">
+                <p>{numberOfImg - 3}+</p>
               </div>
-            )}
+            </div>
+            <img className="w-full h-full object-cover" src={getImageUrl(2)} alt={title} />
           </div>
         </div>
       </div>
 
+
+
+
+
       <div className="px-2 pt-4 text-black">
+
         {/* info */}
         <div className="">
           <h1 className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>
