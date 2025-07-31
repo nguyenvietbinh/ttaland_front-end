@@ -5,71 +5,73 @@ import Du_an_property from './show_property/du_an_show_property';
 import San_pham_ban_property from './show_property/san_pham_ban_show_property';
 import San_pham_cho_thue_property from './show_property/san_pham_cho_thue_show_property';
 import { useTownhouses } from '@/hooks/useTownhouses';
+import { useVillas } from '@/hooks/useVillas';
+import { LoadingErrorState, LoadMoreButton } from './ListingStates';
 
 const Listing = () => {
   const path_name = usePathname()
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho', 'tat_ca']
   const list_path: string[] = path_name.split('/')
 
-  // Use the hook for townhouse data when in nha_pho category
-  const { townhouses, loading, error, loadMore, hasMore } = useTownhouses()
+  // Use hooks for different property types
+  const townhouseData = useTownhouses()
+  const villaData = useVillas()
   
-  // Fallback items for other categories (will be replaced later)
+  // Fallback items for other categories
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
   
-  // Check if we're in the townhouse (nha_pho) section for sale
-  const isTownhouseForSale = list_path[1] === 'san_pham_ban' && list_path[2] === 'nha_pho'
+  // Property type configuration
+  const propertyTypes = {
+    nha_pho: {
+      data: townhouseData,
+      items: townhouseData.townhouses,
+      renderItem: (item: any) => <San_pham_ban_property key={item.id} townhouse={item} />
+    },
+    biet_thu: {
+      data: villaData,
+      items: villaData.villas,
+      renderItem: (item: any) => <San_pham_ban_property key={item.id} villa={item} />
+    }
+  }
+
+  const currentPropertyType = list_path[2] as keyof typeof propertyTypes
+  const isForSale = list_path[1] === 'san_pham_ban'
+  const hasPropertyType = currentPropertyType in propertyTypes && isForSale
+  
+  const currentData = hasPropertyType ? propertyTypes[currentPropertyType] : null
 
   return (
     <div>
       <div className="">
         <div className={category.includes(list_path[2]) ? "px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
           
-          {/* Show loading state */}
-          {isTownhouseForSale && loading && (
-            <div className="col-span-2 text-center py-8 text-white">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-              <p className="mt-2">Đang tải dữ liệu...</p>
-            </div>
+          {/* Show loading/error state for property types with API data */}
+          {hasPropertyType && (
+            <LoadingErrorState 
+              isLoading={currentData!.data.loading} 
+              error={currentData!.data.error}
+            />
           )}
 
-          {/* Show error state */}
-          {isTownhouseForSale && error && (
-            <div className="col-span-2 text-center py-8 text-red-400">
-              <p>Có lỗi xảy ra: {error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
-                className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-              >
-                Thử lại
-              </button>
-            </div>
-          )}
-
-          {/* Render townhouse data for nha_pho category */}
-          {isTownhouseForSale && !loading && !error && townhouses.map((townhouse, index) => (
-            <div key={townhouse.id}>
-              <San_pham_ban_property townhouse={townhouse} />
-            </div>
-          ))}
+          {/* Render API data for supported property types */}
+          {hasPropertyType && !currentData!.data.loading && !currentData!.data.error && 
+            currentData!.items.map((item: any) => currentData!.renderItem(item))
+          }
 
           {/* Render mock data for other categories */}  
-          {!isTownhouseForSale && items.map((item, index) => (
+          {!hasPropertyType && items.map((item, index) => (
             <div key={index}>
               {(list_path[1] === 'san_pham_ban') ? (<San_pham_ban_property />) : (list_path[1] === 'san_pham_cho_thue') ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
             </div>
           ))}
 
-          {/* Load more button for townhouses */}
-          {isTownhouseForSale && !loading && hasMore && (
-            <div className="col-span-2 text-center py-4">
-              <button 
-                onClick={loadMore}
-                className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-              >
-                Tải thêm
-              </button>
-            </div>
+          {/* Load more button for property types with API data */}
+          {hasPropertyType && (
+            <LoadMoreButton 
+              isLoading={currentData!.data.loading}
+              hasMore={currentData!.data.hasMore}
+              onLoadMore={currentData!.data.loadMore}
+            />
           )}
         </div>
       </div>

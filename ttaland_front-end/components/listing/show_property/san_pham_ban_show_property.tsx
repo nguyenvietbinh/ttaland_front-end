@@ -3,29 +3,31 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
 import NProgress from 'nprogress'
-import { apiService, type Townhouse } from '@/services/apiService'
+import { apiService, type Townhouse, type Villa } from '@/services/apiService'
 
 interface San_pham_ban_propertyProps {
   townhouse?: Townhouse
+  villa?: Villa
 }
 
-const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
+const San_pham_ban_property = ({ townhouse, villa }: San_pham_ban_propertyProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
-  // If townhouse data is provided, use it. Otherwise fall back to mock data
-  const isUsingRealData = !!townhouse
+  // Use villa or townhouse data
+  const property = villa || townhouse
+  const isUsingRealData = !!property
   
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
   }
 
   useEffect(() => {
-    if (isUsingRealData && townhouse?.images) {
+    if (isUsingRealData && property?.images) {
       // Use real media data
-      setNumberOfImg(townhouse.images.length)
+      setNumberOfImg(property.images.length)
     } else {
       // Use mock data
       const randomNum = getRandomNumber(4, 9)
@@ -37,11 +39,11 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
       }
       setListOfImg(Array.from(uniqueNumbers))
     }
-  }, [isUsingRealData, townhouse])
+  }, [isUsingRealData, property])
 
   const handleNavigateToDetail = () => {
     const currentPath = pathname.split('/')
-    const detailId = isUsingRealData ? townhouse!.id : listOfImg.join('')
+    const detailId = isUsingRealData ? property!.id : listOfImg.join('')
     const detailPath = `/${currentPath[1]}/${currentPath[2]}/chi_tiet?id=${detailId}`
     NProgress.start()
     router.push(detailPath)
@@ -49,20 +51,20 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
 
   // Get image URLs
   const getImageUrl = (index: number): string => {
-    if (isUsingRealData && townhouse?.images?.[index]) {
-      return apiService.getMediaUrl(townhouse.images[index])
+    if (isUsingRealData && property?.images?.[index]) {
+      return apiService.getMediaUrl(property.images[index])
     }
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }
 
   // Get property data
-  const title = isUsingRealData ? townhouse!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
-  const area = isUsingRealData ? townhouse!.area_formatted : "100 m²"
-  const garage = isUsingRealData ? townhouse!.garage : 1
-  const price = isUsingRealData ? townhouse!.price_formatted : "1 Tỷ"
-  const bedrooms = isUsingRealData ? townhouse!.bedrooms : 4
-  const bathrooms = isUsingRealData ? townhouse!.bathrooms : 3
-  const location = isUsingRealData ? townhouse!.location : "Phường 2, Thủ Đức"
+  const title = isUsingRealData ? property!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
+  const area = isUsingRealData ? property!.area_formatted : "100 m²"
+  const garage = isUsingRealData ? property!.garage : 1
+  const price = isUsingRealData ? property!.price_formatted : "1 Tỷ"
+  const bedrooms = isUsingRealData ? property!.bedrooms : 4
+  const bathrooms = isUsingRealData ? property!.bathrooms : 3
+  const location = isUsingRealData ? property!.location : "Phường 2, Thủ Đức"
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">

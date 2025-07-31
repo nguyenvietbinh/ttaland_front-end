@@ -46,6 +46,21 @@ export interface Townhouse extends Property {
   }
 }
 
+export interface Villa extends Property {
+  bedrooms: number
+  bathrooms: number
+  garage: number
+  villa_details?: {
+    floors: number
+    bedrooms: number
+    bathrooms: number
+    living_room: boolean
+    garden: boolean
+    swimming_pool: boolean
+    garage: number
+  }
+}
+
 export interface MediaFile {
   id: string
   media_type: 'image' | 'video'
@@ -107,6 +122,20 @@ class ApiService {
     return this.fetchFromApi<ApiResponse<Townhouse>>(endpoint)
   }
 
+  // Get villas specifically
+  async getVillas(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Villa>> {
+    const queryParams = new URLSearchParams()
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, value.toString())
+      }
+    })
+    
+    const endpoint = `/villas/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+    return this.fetchFromApi<ApiResponse<Villa>>(endpoint)
+  }
+
   // Get property details
   async getPropertyDetails(propertyId: string): Promise<Property> {
     return this.fetchFromApi<Property>(`/properties/${propertyId}/`)
@@ -115,6 +144,11 @@ class ApiService {
   // Get townhouse details
   async getTownhouseDetails(townhouseId: string): Promise<Townhouse> {
     return this.fetchFromApi<Townhouse>(`/townhouses/${townhouseId}/`)
+  }
+
+  // Get villa details
+  async getVillaDetails(villaId: string): Promise<Villa> {
+    return this.fetchFromApi<Villa>(`/villas/${villaId}/`)
   }
 
   // Search properties
