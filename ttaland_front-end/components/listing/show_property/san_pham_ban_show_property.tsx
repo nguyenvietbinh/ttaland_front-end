@@ -3,21 +3,23 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
 import NProgress from 'nprogress'
-import { apiService, type Townhouse, type Villa } from '@/services/apiService'
+import { apiService, type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
 
 interface San_pham_ban_propertyProps {
   townhouse?: Townhouse
   villa?: Villa
+  apartment?: Apartment
+  land?: Land
 }
 
-const San_pham_ban_property = ({ townhouse, villa }: San_pham_ban_propertyProps) => {
+const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_ban_propertyProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
-  // Use villa or townhouse data
-  const property = villa || townhouse
+  // Use any available property data
+  const property = villa || townhouse || apartment || land
   const isUsingRealData = !!property
   
   const getRandomNumber = (x: number, y: number) => {
@@ -57,14 +59,23 @@ const San_pham_ban_property = ({ townhouse, villa }: San_pham_ban_propertyProps)
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }
 
-  // Get property data
+  // Get property data with type checking
   const title = isUsingRealData ? property!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
   const area = isUsingRealData ? property!.area_formatted : "100 m²"
-  const garage = isUsingRealData ? property!.garage : 1
   const price = isUsingRealData ? property!.price_formatted : "1 Tỷ"
-  const bedrooms = isUsingRealData ? property!.bedrooms : 4
-  const bathrooms = isUsingRealData ? property!.bathrooms : 3
   const location = isUsingRealData ? property!.location : "Phường 2, Thủ Đức"
+  
+  // Handle garage - only available for townhouse, villa, some apartments
+  const garage = isUsingRealData ? 
+    ((property as Townhouse)?.garage || (property as Villa)?.garage || 0) : 1
+  
+  // Handle bedrooms - not available for land
+  const bedrooms = isUsingRealData ? 
+    ((property as Townhouse)?.bedrooms || (property as Villa)?.bedrooms || (property as Apartment)?.bedrooms || 0) : 4
+  
+  // Handle bathrooms - not available for land  
+  const bathrooms = isUsingRealData ? 
+    ((property as Townhouse)?.bathrooms || (property as Villa)?.bathrooms || (property as Apartment)?.bathrooms || 0) : 3
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">
@@ -110,26 +121,32 @@ const San_pham_ban_property = ({ townhouse, villa }: San_pham_ban_propertyProps)
               <p className="">Diện tích:</p>
               <p className="overflow-auto no-scrollbar">{area}</p>
             </div>
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Garage:</p>
-              <p className="overflow-auto no-scrollbar">{garage}</p>
-            </div>
+            {garage > 0 && (
+              <div className="flex items-center gap-1">
+                <img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/>
+                <p className="">Garage:</p>
+                <p className="overflow-auto no-scrollbar">{garage}</p>
+              </div>
+            )}
             <div className="flex items-center gap-1">
               <img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/>
               <p className="">Giá:</p>
               <p className="overflow-auto no-scrollbar">{price}</p>
             </div>
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Phòng ngủ:</p>
-              <p className="overflow-auto no-scrollbar">{bedrooms}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Phòng tắm:</p>
-              <p className="overflow-auto no-scrollbar">{bathrooms}</p>
-            </div>
+            {bedrooms > 0 && (
+              <div className="flex items-center gap-1">
+                <img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/>
+                <p className="">Phòng ngủ:</p>
+                <p className="overflow-auto no-scrollbar">{bedrooms}</p>
+              </div>
+            )}
+            {bathrooms > 0 && (
+              <div className="flex items-center gap-1">
+                <img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/>
+                <p className="">Phòng tắm:</p>
+                <p className="overflow-auto no-scrollbar">{bathrooms}</p>
+              </div>
+            )}
             <div className="flex items-center gap-1">
               <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
               <p className="overflow-auto no-scrollbar">{location}</p>

@@ -61,6 +61,25 @@ export interface Villa extends Property {
   }
 }
 
+export interface Apartment extends Property {
+  bedrooms: number
+  bathrooms: number
+  apartment_details?: {
+    floor_number: number
+    bedrooms: number
+    bathrooms: number
+    balcony: boolean
+  }
+}
+
+export interface Land extends Property {
+  land_details?: {
+    land_type: string
+    road_frontage: string
+    road_frontage_formatted: string
+  }
+}
+
 export interface MediaFile {
   id: string
   media_type: 'image' | 'video'
@@ -136,6 +155,34 @@ class ApiService {
     return this.fetchFromApi<ApiResponse<Villa>>(endpoint)
   }
 
+  // Get apartments specifically
+  async getApartments(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Apartment>> {
+    const queryParams = new URLSearchParams()
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, value.toString())
+      }
+    })
+    
+    const endpoint = `/apartments/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+    return this.fetchFromApi<ApiResponse<Apartment>>(endpoint)
+  }
+
+  // Get land lots specifically
+  async getLand(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Land>> {
+    const queryParams = new URLSearchParams()
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, value.toString())
+      }
+    })
+    
+    const endpoint = `/land/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+    return this.fetchFromApi<ApiResponse<Land>>(endpoint)
+  }
+
   // Get property details
   async getPropertyDetails(propertyId: string): Promise<Property> {
     return this.fetchFromApi<Property>(`/properties/${propertyId}/`)
@@ -149,6 +196,16 @@ class ApiService {
   // Get villa details
   async getVillaDetails(villaId: string): Promise<Villa> {
     return this.fetchFromApi<Villa>(`/villas/${villaId}/`)
+  }
+
+  // Get apartment details
+  async getApartmentDetails(apartmentId: string): Promise<Apartment> {
+    return this.fetchFromApi<Apartment>(`/apartments/${apartmentId}/`)
+  }
+
+  // Get land details
+  async getLandDetails(landId: string): Promise<Land> {
+    return this.fetchFromApi<Land>(`/land/${landId}/`)
   }
 
   // Search properties

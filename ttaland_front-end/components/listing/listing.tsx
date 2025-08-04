@@ -6,6 +6,8 @@ import San_pham_ban_property from './show_property/san_pham_ban_show_property';
 import San_pham_cho_thue_property from './show_property/san_pham_cho_thue_show_property';
 import { useTownhouses } from '@/hooks/useTownhouses';
 import { useVillas } from '@/hooks/useVillas';
+import { useApartments } from '@/hooks/useApartments';
+import { useLand } from '@/hooks/useLand';
 import { LoadingErrorState, LoadMoreButton } from './ListingStates';
 
 const Listing = () => {
@@ -16,6 +18,8 @@ const Listing = () => {
   // Use hooks for different property types
   const townhouseData = useTownhouses()
   const villaData = useVillas()
+  const apartmentData = useApartments()
+  const landData = useLand()
   
   // Fallback items for other categories
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
@@ -31,6 +35,16 @@ const Listing = () => {
       data: villaData,
       items: villaData.villas,
       renderItem: (item: any) => <San_pham_ban_property key={item.id} villa={item} />
+    },
+    can_ho: {
+      data: apartmentData,
+      items: apartmentData.apartments,
+      renderItem: (item: any) => <San_pham_ban_property key={item.id} apartment={item} />
+    },
+    dat_nen: {
+      data: landData,
+      items: landData.landLots,
+      renderItem: (item: any) => <San_pham_ban_property key={item.id} land={item} />
     }
   }
 
