@@ -4,6 +4,7 @@ import San_pham_ban_detail_infor from "./detail_infor/san_pham_ban_detail_infor"
 import { detail_infor } from "./detail_infor/san_pham_ban_detail_infor";
 import { MediaItem } from "./detail_page_components/media_displayer";
 import Similar_produc from "./detail_page_components/similar_produc";
+import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 
 interface San_pham_ban_details_props {
   id: string | null;
@@ -12,29 +13,81 @@ interface San_pham_ban_details_props {
 
 const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
 
-  const get_media_data_from_id = (id: string | null) => {
+  const get_media_data_from_id = (id: string | null, information_data: detail_infor) => {
     const listOfImg = id?.split('')
-    const data: MediaItem[] = [{
-      type: 'video' as const,
-      url: '/img/example/showcasevid.mp4',
-      format: 'mp4',
-    }]
-    if (listOfImg?.length) {
-      for (let i = 0; i < listOfImg.length; i ++) {
+    const data: MediaItem[] = []
+    
+    // Thêm YouTube video nếu có
+    if (information_data.youtubeUrl) {
+      const embedUrl = convertYouTubeToEmbed(information_data.youtubeUrl);
+      if (embedUrl) {
         data.push({
-          type: 'image' as const,
-          url: `/img/example/showcase${listOfImg[i]}.jpg`
-        })
+          type: 'youtube' as const,
+          url: information_data.youtubeUrl,
+          embedUrl: embedUrl
+        });
       }
+    }
+    
+    // Thêm TikTok video nếu có
+    if (information_data.tiktokUrl) {
+      const embedUrl = convertTikTokToEmbed(information_data.tiktokUrl);
+      if (embedUrl) {
+        data.push({
+          type: 'tiktok' as const,
+          url: information_data.tiktokUrl,
+          embedUrl: embedUrl
+        });
+      }
+    }
+    
+    // Nếu không có video nào từ YouTube hoặc TikTok, thêm video demo
+    if (data.length === 0) {
+      data.push({
+        type: 'video' as const,
+        url: '/img/example/showcasevid.mp4',
+        format: 'mp4',
+      });
+    }
+    
+    // Thêm hình ảnh
+    if (listOfImg?.length) {
+      // Danh sách các ảnh có sẵn trong thư mục example
+      const availableImages = ['0', '1', '2', '5', '6', '7', '8', '9', '10', '11', '12'];
+      
+      for (let i = 0; i < listOfImg.length; i++) {
+        const imgNumber = listOfImg[i];
+        // Chỉ thêm ảnh nếu file tồn tại trong danh sách có sẵn
+        if (availableImages.includes(imgNumber)) {
+          data.push({
+            type: 'image' as const,
+            url: `/img/example/showcase${imgNumber}.jpg`
+          });
+        }
+      }
+      
+      // Nếu sau khi filter mà không có ảnh nào hợp lệ, thêm một số ảnh mặc định
+      if (data.filter(item => item.type === 'image').length === 0) {
+        // Thêm một số ảnh mặc định
+        ['0', '1', '2', '5', '6'].forEach(num => {
+          data.push({
+            type: 'image' as const,
+            url: `/img/example/showcase${num}.jpg`
+          });
+        });
+      }
+      
       return data
     }
-    return [{
+    
+    // Nếu không có hình ảnh nào, thêm hình ảnh mặc định
+    data.push({
       type: 'image' as const,
-      url: '/img/example/show.jpg'
-    }]
+      url: '/img/example/showcase0.jpg' // Sử dụng showcase0.jpg thay vì show.jpg
+    });
+    
+    return data;
   }
-  const media_data = get_media_data_from_id(id)
-
   const information_data: detail_infor = {
     price: '1 Tỷ',
     sqr: 100,
@@ -43,8 +96,13 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     bed_room: 4,
     bath_room: 3,
     interior: 'Đầy đủ',
-    description: ['Ngang 5,6m, nở hậu 16m; Dài 25m', 'Tổng diện tích sử dụng ~ 300m2', 'Đang cho thuê 20tr/tháng, dòng tiền ổn định', 'Sổ riêng chính chủ']
+    description: ['Ngang 5,6m, nở hậu 16m; Dài 25m', 'Tổng diện tích sử dụng ~ 300m2', 'Đang cho thuê 20tr/tháng, dòng tiền ổn định', 'Sổ riêng chính chủ'],
+    // Thay đổi URLs này để test - nếu có URL thì hiển thị video, không có thì hiển thị video mẫu
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQj7hrKQxU8', // Đặt thành undefined để không hiển thị
+    tiktokUrl: 'https://www.tiktok.com/@tuananh_nhadat/video/7401361660478246162' // Đặt URL TikTok ở đây nếu muốn hiển thị
   }
+
+  const media_data = get_media_data_from_id(id, information_data)
 
 
   return (
