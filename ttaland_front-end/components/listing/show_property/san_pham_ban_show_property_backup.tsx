@@ -57,9 +57,9 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
 
   // Get property data
   const title = isUsingRealData ? townhouse!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
-  const area = isUsingRealData ? apiService.formatArea(townhouse!.area) : "100 m²"
+  const area = isUsingRealData ? `${townhouse!.area} m²` : "100 m²"
   const garage = isUsingRealData ? townhouse!.garage : 1
-  const price = isUsingRealData ? apiService.formatPrice(townhouse!.price) : "1 Tỷ"
+  const price = isUsingRealData ? `${townhouse!.price} Tỷ` : "1 Tỷ"
   const bedrooms = isUsingRealData ? townhouse!.bedrooms : 4
   const bathrooms = isUsingRealData ? townhouse!.bathrooms : 3
   const location = isUsingRealData ? townhouse!.location : "Phường 2, Thủ Đức"

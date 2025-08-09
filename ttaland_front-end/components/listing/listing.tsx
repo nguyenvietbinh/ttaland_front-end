@@ -4,10 +4,6 @@ import { usePathname } from 'next/navigation';
 import Du_an_property from './show_property/du_an_show_property';
 import San_pham_ban_property from './show_property/san_pham_ban_show_property';
 import San_pham_cho_thue_property from './show_property/san_pham_cho_thue_show_property';
-import { useTownhouses } from '@/hooks/useTownhouses';
-import { useVillas } from '@/hooks/useVillas';
-import { useApartments } from '@/hooks/useApartments';
-import { useLand } from '@/hooks/useLand';
 import { 
   useRentalTownhouses, 
   useRentalVillas, 
@@ -18,6 +14,11 @@ import {
   useSaleApartments,
   useSaleLand
 } from '@/hooks/useRentalProperties';
+
+interface PropertyItem {
+  id: string | number;
+  [key: string]: unknown;
+}
 import { LoadingErrorState, LoadMoreButton } from './ListingStates';
 
 const Listing = () => {
@@ -47,33 +48,33 @@ const Listing = () => {
     nha_pho: {
       data: isForRent ? rentalTownhouseData : saleTownhouseData,
       items: isForRent ? rentalTownhouseData.townhouses : saleTownhouseData.townhouses,
-      renderItem: (item: any) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} townhouse={item} /> : 
-        <San_pham_ban_property key={item.id} townhouse={item} />
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} townhouse={item as never} /> : 
+        <San_pham_ban_property key={item.id} townhouse={item as never} />
     },
     biet_thu: {
       data: isForRent ? rentalVillaData : saleVillaData,
       items: isForRent ? rentalVillaData.villas : saleVillaData.villas,
-      renderItem: (item: any) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} villa={item} /> : 
-        <San_pham_ban_property key={item.id} villa={item} />
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} villa={item as never} /> : 
+        <San_pham_ban_property key={item.id} villa={item as never} />
     },
     can_ho: {
       data: isForRent ? rentalApartmentData : saleApartmentData,
       items: isForRent ? rentalApartmentData.apartments : saleApartmentData.apartments,
-      renderItem: (item: any) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} apartment={item} /> : 
-        <San_pham_ban_property key={item.id} apartment={item} />
+      renderItem: (item: PropertyItem) => isForRent ?
+        <San_pham_cho_thue_property key={item.id} apartment={item as never} /> : 
+        <San_pham_ban_property key={item.id} apartment={item as never} />
     },
     dat_nen: {
       data: isForRent ? rentalLandData : saleLandData,
       items: isForRent ? rentalLandData.landLots : saleLandData.landLots,
-      renderItem: (item: any) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} land={item} /> : 
-        <San_pham_ban_property key={item.id} land={item} />
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} land={item as never} /> : 
+        <San_pham_ban_property key={item.id} land={item as never} />
     }
-  }
-
+  };
+  
   const currentPropertyType = list_path[2] as keyof typeof propertyTypes
   const hasPropertyType = currentPropertyType in propertyTypes && (isForSale || isForRent)
   
@@ -94,7 +95,7 @@ const Listing = () => {
 
           {/* Render API data for supported property types */}
           {hasPropertyType && !currentData!.data.loading && !currentData!.data.error && 
-            currentData!.items.map((item: any) => currentData!.renderItem(item))
+            (currentData!.items as unknown as PropertyItem[]).map((item: PropertyItem) => currentData!.renderItem(item))
           }
 
           {/* Render mock data for other categories */}  

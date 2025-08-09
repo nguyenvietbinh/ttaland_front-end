@@ -1,13 +1,28 @@
 'use client'
 import { useState, useEffect } from 'react'
 
+interface TestResult {
+  status: 'SUCCESS' | 'ERROR' | 'FAILED';
+  data?: unknown;
+  error?: string;
+  sampleMediaUrl?: string;
+  statusCode?: number;
+  count?: number;
+  hasResults?: boolean;
+  firstResult?: unknown;
+}
+
+interface TestResults {
+  [key: string]: TestResult;
+}
+
 const ApiTestComponent = () => {
-  const [testResults, setTestResults] = useState<any>({})
+  const [testResults, setTestResults] = useState<TestResults>({})
   const [loading, setLoading] = useState(false)
 
   const testApiEndpoints = async () => {
     setLoading(true)
-    const results: any = {}
+    const results: TestResults = {}
 
     const endpoints = [
       { name: 'Properties', url: 'http://localhost:8000/api/properties/' },
@@ -71,7 +86,7 @@ const ApiTestComponent = () => {
       </button>
 
       <div className="space-y-4">
-        {Object.entries(testResults).map(([name, result]: [string, any]) => (
+        {Object.entries(testResults).map(([name, result]: [string, TestResult]) => (
           <div key={name} className="border rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold text-gray-700">{name}</h3>
@@ -92,14 +107,14 @@ const ApiTestComponent = () => {
                 {result.sampleMediaUrl && (
                   <p>Sample Media URL: <code className="bg-gray-100 px-1 rounded">{result.sampleMediaUrl}</code></p>
                 )}
-                {result.firstResult && (
+                {result.firstResult && typeof result.firstResult === 'object' ? (
                   <details className="mt-2">
                     <summary className="cursor-pointer text-blue-600">Show First Result</summary>
                     <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto">
                       {JSON.stringify(result.firstResult, null, 2)}
                     </pre>
                   </details>
-                )}
+                ) : null}
               </div>
             )}
             
@@ -114,10 +129,10 @@ const ApiTestComponent = () => {
       </div>
 
       {/* Quick image test */}
-      {Object.values(testResults).some((result: any) => result.sampleMediaUrl) && (
+      {Object.values(testResults).some((result: TestResult) => result.sampleMediaUrl) && (
         <div className="mt-6 border rounded-lg p-4">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Image URL Test</h3>
-          {Object.entries(testResults).map(([name, result]: [string, any]) => 
+          {Object.entries(testResults).map(([name, result]: [string, TestResult]) => 
             result.sampleMediaUrl ? (
               <div key={name} className="mb-4">
                 <p className="text-sm text-gray-600 mb-2">{name} - Media URL: {result.sampleMediaUrl}</p>
