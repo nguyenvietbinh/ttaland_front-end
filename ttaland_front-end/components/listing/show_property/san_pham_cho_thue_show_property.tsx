@@ -28,8 +28,8 @@ const San_pham_cho_thue_property = () => {
   }, [])
 
   const handleNavigateToDetail = () => {
-    const currentPath = pathname.split('/')
-    const detailPath = `/${currentPath[1]}/${currentPath[2]}/chi_tiet?id=${listOfImg.join('')}`
+    const currentPath = pathname?.split('/') || []
+    const detailPath = `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${listOfImg.join('')}`
     NProgress.start()
     router.push(detailPath)
   }

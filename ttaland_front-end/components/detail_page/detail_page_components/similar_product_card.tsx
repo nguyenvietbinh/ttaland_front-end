@@ -48,9 +48,9 @@ const SimilarProductCard = ({
   }, [images])
 
   const handleNavigateToDetail = () => {
-    const currentPath = pathname.split('/')
+    const currentPath = pathname?.split('/') || []
     const productId = id || listOfImg.join('')
-    const detailPath = `/${currentPath[1]}/${currentPath[2]}/chi_tiet?id=${productId}`
+    const detailPath = `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${productId}`
     NProgress.start()
     router.push(detailPath)
   }

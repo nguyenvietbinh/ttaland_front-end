@@ -28,12 +28,6 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
   // refs array cho từng thumbnail
   const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Lấy danh sách chỉ có ảnh
-  const imageItems = mediaItems.filter(item => item.type === 'image');
-  
-  // Lấy danh sách chỉ có video (YouTube, TikTok, video files)
-  const videoItems = mediaItems.filter(item => item.type === 'video' || item.type === 'youtube' || item.type === 'tiktok');
-
   // Fetch TikTok thumbnails
   useEffect(() => {
     const fetchThumbs = async () => {
@@ -120,7 +114,8 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
 
     // Dừng YouTube videos bằng cách thêm parameter autoplay=0
     const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed"]');
-    iframes.forEach((iframe: any) => {
+    iframes.forEach((element) => {
+      const iframe = element as HTMLIFrameElement;
       if (iframe.src && !iframe.src.includes('about:blank')) {
         try {
           const url = new URL(iframe.src);
@@ -135,7 +130,8 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
 
     // Dừng TikTok videos bằng cách reload iframe
     const tiktokIframes = document.querySelectorAll('iframe[src*="tiktok.com/embed"]');
-    tiktokIframes.forEach((iframe: any) => {
+    tiktokIframes.forEach((element) => {
+      const iframe = element as HTMLIFrameElement;
       if (iframe.src && !iframe.src.includes('about:blank')) {
         const originalSrc = iframe.src;
         iframe.src = 'about:blank';

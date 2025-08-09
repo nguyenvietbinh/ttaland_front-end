@@ -3,7 +3,7 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
 } from 'react-icons/fa';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import SimilarProductCard from './similar_product_card';
 
 const Similar_produc = () => {
