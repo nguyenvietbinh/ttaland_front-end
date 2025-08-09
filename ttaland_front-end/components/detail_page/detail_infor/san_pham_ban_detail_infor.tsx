@@ -8,7 +8,9 @@ export type detail_infor = {
   bed_room: number,
   bath_room: number,
   interior: string,
-  description: string[]
+  description: string[],
+  youtubeUrl?: string,
+  tiktokUrl?: string
 }
 
 interface san_pham_ban_detail_infor_props {

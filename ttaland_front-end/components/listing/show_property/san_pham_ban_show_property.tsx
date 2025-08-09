@@ -44,9 +44,9 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
   }, [isUsingRealData, property])
 
   const handleNavigateToDetail = () => {
-    const currentPath = pathname.split('/')
+    const currentPath = pathname?.split('/') || []
     const detailId = isUsingRealData ? property!.id : listOfImg.join('')
-    const detailPath = `/${currentPath[1]}/${currentPath[2]}/chi_tiet?id=${detailId}`
+    const detailPath = `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${detailId}`
     NProgress.start()
     router.push(detailPath)
   }

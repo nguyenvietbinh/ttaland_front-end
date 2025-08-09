@@ -8,9 +8,9 @@ import { useParams, usePathname } from 'next/navigation';
 const Du_an_detail_page = () => {
   const params = useParams();
   const pathname = usePathname();
-  const { category, id } = params;
+  const { category, id } = params as { category: string; id: string };
 
-  const backPath = pathname.split('/').slice(0, -2).join('/');
+  const backPath = pathname?.split('/').slice(0, -2).join('/') || '';
 
   return (
     <div className="min-h-screen bg-gray-800">

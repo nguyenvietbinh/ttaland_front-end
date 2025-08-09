@@ -8,10 +8,10 @@ import NProgress from 'nprogress'
 const San_pham_ban_price_option = () => {
   const router = useRouter()
   const path_name = usePathname()
-  const list_path = path_name.split('/')
+  const list_path = path_name?.split('/') || []
   const searchParams = useSearchParams()
   const [showPriceOption, setShowPriceOption] = useState<boolean>(false)
-  const priceTagName = (searchParams.get('price_min') && searchParams.get('price_max')) ? `${searchParams.get('price_min')} - ${searchParams.get('price_max')}` : 'Mức Giá'
+  const priceTagName = (searchParams?.get('price_min') && searchParams?.get('price_max')) ? `${searchParams?.get('price_min')} - ${searchParams?.get('price_max')}` : 'Mức Giá'
   const optionContainerRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
 
@@ -34,13 +34,13 @@ const San_pham_ban_price_option = () => {
   }, []);
 
   const moveTo = (price_min: string, price_max: string) => {
-      const sqr_min = searchParams.get('sqr_min')
-      const sqr_max = searchParams.get('sqr_max')
-      const locations = searchParams.get('locations')
-      const bed_room_min = searchParams.get('bed_room_min')
-      const bed_room_max = searchParams.get('bed_room_max')
-      const bath_room_min = searchParams.get('bath_room_min')
-      const bath_room_max = searchParams.get('bath_room_max')
+      const sqr_min = searchParams?.get('sqr_min')
+      const sqr_max = searchParams?.get('sqr_max')
+      const locations = searchParams?.get('locations')
+      const bed_room_min = searchParams?.get('bed_room_min')
+      const bed_room_max = searchParams?.get('bed_room_max')
+      const bath_room_min = searchParams?.get('bath_room_min')
+      const bath_room_max = searchParams?.get('bath_room_max')
 
       const queryParams: Record<string, string> = {};
 

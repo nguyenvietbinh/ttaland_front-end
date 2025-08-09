@@ -24,7 +24,7 @@ import { LoadingErrorState, LoadMoreButton } from './ListingStates';
 const Listing = () => {
   const path_name = usePathname()
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho', 'tat_ca']
-  const list_path: string[] = path_name.split('/')
+  const list_path: string[] = path_name?.split('/') || []
 
   const isForSale = list_path[1] === 'san_pham_ban'
   const isForRent = list_path[1] === 'san_pham_cho_thue'

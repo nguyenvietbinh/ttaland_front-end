@@ -23,7 +23,7 @@ const LG_navbar = () => {
           <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
         <div className="dropdown dropdown-hover flex group/main"> 
-          <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
+          <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -44,7 +44,7 @@ const LG_navbar = () => {
           </ul>
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
+          <div tabIndex={0} className={path_name?.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -65,7 +65,7 @@ const LG_navbar = () => {
           </ul>
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
+          <div tabIndex={0} className={path_name?.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul

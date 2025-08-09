@@ -29,9 +29,8 @@ const SM_navbar = () => {
             <ul
               tabIndex={0}
               className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 pr-4 py-4 text-center">
-            <div className="dropdown dropdown-left dropdown-hover flex group/san_pham_ban">
-            <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex cursor-pointer text-white mx-auto my-4" : "flex cursor-pointer mx-auto my-4 group-hover/san_pham_ban:text-white"}>Sản Phẩm Bán
-              <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/san_pham_ban:rotate-180 transition-all duration-200' alt="" />
+              <div className="dropdown dropdown-end dropdown-hover group/san_pham_ban">
+            <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex cursor-pointer text-white mx-auto my-4" : "flex cursor-pointer mx-auto my-4 group-hover/san_pham_ban:text-white"}>Sản Phẩm Bán
             </div>
             <ul
               tabIndex={0}
@@ -51,7 +50,7 @@ const SM_navbar = () => {
             </ul>
           </div>
           <div className="dropdown flex dropdown-left dropdown-hover group/sp_cho_thue mx-auto"> 
-            <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex ml-2 my-4 cursor-pointer text-white" : "flex ml-2 my-4 cursor-pointer group-hover/sp_cho_thue:text-white"}>Sản Phẩm Cho Thuê
+            <div tabIndex={0} className={path_name?.includes('/san_pham_cho_thue') ? "flex ml-2 my-4 cursor-pointer text-white" : "flex ml-2 my-4 cursor-pointer group-hover/sp_cho_thue:text-white"}>Sản Phẩm Cho Thuê
               <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/sp_cho_thue:rotate-180 transition-all duration-200' alt="" />
             </div>
             <ul
@@ -72,7 +71,7 @@ const SM_navbar = () => {
             </ul>
           </div>
           <div className="dropdown flex dropdown-left dropdown-hover group/du_an_moi"> 
-            <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-4 cursor-pointer text-white mx-auto" : "flex my-4 mx-auto cursor-pointer group-hover/du_an_moi:text-white"}>Dự Án Mới
+            <div tabIndex={0} className={path_name?.includes('/du_an') ? "flex my-4 cursor-pointer text-white mx-auto" : "flex my-4 mx-auto cursor-pointer group-hover/du_an_moi:text-white"}>Dự Án Mới
               <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/du_an_moi:rotate-180 transition-all duration-200' alt="" />
             </div>
             <ul
