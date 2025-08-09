@@ -85,28 +85,39 @@ const Listing = () => {
       <div className="">
         <div className={category.includes(list_path[2]) ? "px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
           
-          {/* Show loading/error state for property types with API data */}
-          {hasPropertyType && (
+          {/* Show loading state only when loading and no error */}
+          {hasPropertyType && currentData!.data.loading && !currentData!.data.error && (
             <LoadingErrorState 
-              isLoading={currentData!.data.loading} 
-              error={currentData!.data.error}
+              isLoading={true} 
+              error={null}
             />
           )}
 
-          {/* Render API data for supported property types */}
+          {/* Render API data for supported property types when successful */}
           {hasPropertyType && !currentData!.data.loading && !currentData!.data.error && 
             (currentData!.items as unknown as PropertyItem[]).map((item: PropertyItem) => currentData!.renderItem(item))
           }
 
-          {/* Render mock data for other categories */}  
-          {!hasPropertyType && items.map((item, index) => (
+          {/* Show mock data when: 1) No API integration, 2) API has error, 3) API returns empty results */}
+          {(!hasPropertyType || 
+            (hasPropertyType && currentData!.data.error) ||
+            (hasPropertyType && !currentData!.data.loading && !currentData!.data.error && (currentData!.items as unknown as PropertyItem[]).length === 0)
+          ) && items.map((item, index) => (
             <div key={index}>
               {(list_path[1] === 'san_pham_ban') ? (<San_pham_ban_property />) : (list_path[1] === 'san_pham_cho_thue') ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
             </div>
           ))}
 
-          {/* Load more button for property types with API data */}
-          {hasPropertyType && (
+          {/* Show error message when API fails (optional - alongside mock data) */}
+          {hasPropertyType && currentData!.data.error && (
+            <div className="col-span-2 text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
+              <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
+              <p className="text-sm mt-1">Lỗi: {currentData!.data.error}</p>
+            </div>
+          )}
+
+          {/* Load more button for property types with API data - only show when API is working */}
+          {hasPropertyType && !currentData!.data.error && (
             <LoadMoreButton 
               isLoading={currentData!.data.loading}
               hasMore={currentData!.data.hasMore}

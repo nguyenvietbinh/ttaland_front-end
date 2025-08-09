@@ -10,7 +10,6 @@ interface San_pham_ban_details_props {
   id: string | null;
 }
 
-
 const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
 
   const get_media_data_from_id = (id: string | null, information_data: detail_infor) => {
@@ -88,6 +87,8 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     
     return data;
   }
+  
+  // Luôn sử dụng data có đầy đủ thông tin bao gồm cả video URLs (như trước)
   const information_data: detail_infor = {
     price: '1 Tỷ',
     sqr: 100,
@@ -97,9 +98,9 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     bath_room: 3,
     interior: 'Đầy đủ',
     description: ['Ngang 5,6m, nở hậu 16m; Dài 25m', 'Tổng diện tích sử dụng ~ 300m2', 'Đang cho thuê 20tr/tháng, dòng tiền ổn định', 'Sổ riêng chính chủ'],
-    // Thay đổi URLs này để test - nếu có URL thì hiển thị video, không có thì hiển thị video mẫu
-    youtubeUrl: 'https://www.youtube.com/watch?v=dQj7hrKQxU8', // Đặt thành undefined để không hiển thị
-    tiktokUrl: 'https://www.tiktok.com/@tuananh_nhadat/video/7401361660478246162' // Đặt URL TikTok ở đây nếu muốn hiển thị
+    // Luôn có video URLs để giữ nguyên UI như trước
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQj7hrKQxU8',
+    tiktokUrl: 'https://www.tiktok.com/@tuananh_nhadat/video/7401361660478246162'
   }
 
   const media_data = get_media_data_from_id(id, information_data)

@@ -12,15 +12,34 @@ interface San_pham_cho_thue_propertyProps {
   land?: Land
 }
 
+// Mock data cho trường hợp không có real data
+const mockRentalPropertyData = {
+  id: 'RMOCK001',
+  title: 'Nhà phố cho thuê full nội thất - Khu an ninh',
+  description: 'Gần trường quốc tế, siêu thị, khu dân cư cao cấp với đầy đủ tiện ích',
+  price: '25000000',
+  price_formatted: '25 Triệu/tháng',
+  area: '120',
+  area_formatted: '120 m²',
+  location: 'Quận 7, TP.HCM',
+  for_sale: false,
+  for_sale_display: 'Cho thuê',
+  type: 'townhouse' as const,
+  type_display: 'Nhà phố',
+  created_at: '2024-08-09',
+  media: [],
+  images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg']
+}
+
 const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_pham_cho_thue_propertyProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
-  // Use any available property data
-  const property = villa || townhouse || apartment || land
-  const isUsingRealData = !!property
+  // Use any available property data, fallback to mock data if none available
+  const property = villa || townhouse || apartment || land || mockRentalPropertyData
+  const isUsingRealData = !!(villa || townhouse || apartment || land)
   
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x

@@ -8,7 +8,6 @@ interface San_pham_cho_thue_detail_props {
   id: string | null;
 }
 
-
 const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_detail_props) => {
 
   const get_media_data_from_id = (id: string | null) => {
@@ -34,10 +33,11 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_detail_props) => {
   }
   const media_data = get_media_data_from_id(id)
 
+  // Luôn sử dụng data cố định như trước (không có video URLs vì rental component không support)
   const information_data: detail_infor = {
-    price: '1 Tỷ',
+    price: '25 Triệu/tháng',
     sqr: 100,
-    legal: 'Có sổ hồng',
+    legal: 'Hợp đồng cho thuê',
     structure: '1 trệt - 3 lầu',
     bed_room: 4,
     bath_room: 3,

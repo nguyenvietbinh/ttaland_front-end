@@ -12,15 +12,34 @@ interface San_pham_ban_propertyProps {
   land?: Land
 }
 
+// Mock data cho trường hợp không có real data
+const mockPropertyData = {
+  id: 'MOCK001',
+  title: 'Nhà phố 3 tầng hiện đại - Khu vực trung tâm',
+  description: 'Thiết kế hiện đại, full nội thất, vị trí đẹp gần trường học và chợ',
+  price: '8500000000',
+  price_formatted: '8.5 Tỷ',
+  area: '120',
+  area_formatted: '120 m²',
+  location: 'Quận 7, TP.HCM',
+  for_sale: true,
+  for_sale_display: 'Bán',
+  type: 'townhouse' as const,
+  type_display: 'Nhà phố',
+  created_at: '2024-08-09',
+  media: [],
+  images: ['showcase1.jpg', 'showcase2.jpg', 'showcase3.jpg', 'showcase4.jpg']
+}
+
 const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_ban_propertyProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
-  // Use any available property data
-  const property = villa || townhouse || apartment || land
-  const isUsingRealData = !!property
+  // Use any available property data, fallback to mock data if none available
+  const property = villa || townhouse || apartment || land || mockPropertyData
+  const isUsingRealData = !!(villa || townhouse || apartment || land)
   
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
