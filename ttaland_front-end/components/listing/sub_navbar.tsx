@@ -12,8 +12,8 @@ import { usePathname, useSearchParams } from "next/navigation"
 const Sub_navbar = () => {
   const path_name = usePathname()
   const searchParams = useSearchParams()
-  const list_path = path_name.split('/')
-  let locations = searchParams.get('locations')?.split(',') || ['Thành phố Hồ Chí Minh']
+  const list_path = path_name?.split('/') || []
+  let locations = searchParams?.get('locations')?.split(',') || ['Thành phố Hồ Chí Minh']
   if (locations[0] === '') {
     locations = ['Thành phố Hồ Chí Minh']
   }
@@ -27,10 +27,10 @@ const Sub_navbar = () => {
         ))}</div>
       </div>
       <div className={`hidden h-auto md:flex mx-4 xl:mx-0 justify-between text-3xl`}>
-        <Link className={(list_path[2] === 'nha_pho') ? "w-full text-center border-solid border-gray-300 border-t-2 border-r-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/nha_pho?${searchParams.toString()}`}>Nhà Phố</Link>
-        <Link className={(list_path[2] === 'biet_thu') ? "w-full text-center border-solid border-gray-300 border-t-2 border-x-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/biet_thu?${searchParams.toString()}`}>Biệt Thự</Link>
-        <Link className={(list_path[2] === 'dat_nen') ? "w-full text-center border-solid border-gray-300 border-t-2 border-x-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/dat_nen?${searchParams.toString()}`}>Đất Nền</Link>
-        <Link className={(list_path[2] === 'can_ho') ? "w-full text-center border-solid border-gray-300 border-t-2 border-l-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/can_ho?${searchParams.toString()}`}>Căn Hộ</Link>
+        <Link className={(list_path[2] === 'nha_pho') ? "w-full text-center border-solid border-gray-300 border-t-2 border-r-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/nha_pho?${searchParams?.toString() || ''}`}>Nhà Phố</Link>
+        <Link className={(list_path[2] === 'biet_thu') ? "w-full text-center border-solid border-gray-300 border-t-2 border-x-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/biet_thu?${searchParams?.toString() || ''}`}>Biệt Thự</Link>
+        <Link className={(list_path[2] === 'dat_nen') ? "w-full text-center border-solid border-gray-300 border-t-2 border-x-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/dat_nen?${searchParams?.toString() || ''}`}>Đất Nền</Link>
+        <Link className={(list_path[2] === 'can_ho') ? "w-full text-center border-solid border-gray-300 border-t-2 border-l-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/can_ho?${searchParams?.toString() || ''}`}>Căn Hộ</Link>
       </div>
       
       <div className="md:flex items-center hidden space-y-2 md:space-y-0 py-2 gap-4">

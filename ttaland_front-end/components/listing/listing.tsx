@@ -4,23 +4,126 @@ import { usePathname } from 'next/navigation';
 import Du_an_property from './show_property/du_an_show_property';
 import San_pham_ban_property from './show_property/san_pham_ban_show_property';
 import San_pham_cho_thue_property from './show_property/san_pham_cho_thue_show_property';
+import { 
+  useRentalTownhouses, 
+  useRentalVillas, 
+  useRentalApartments, 
+  useRentalLand,
+  useSaleTownhouses,
+  useSaleVillas,
+  useSaleApartments,
+  useSaleLand
+} from '@/hooks/useRentalProperties';
 
+interface PropertyItem {
+  id: string | number;
+  [key: string]: unknown;
+}
+import { LoadingErrorState, LoadMoreButton } from './ListingStates';
 
 const Listing = () => {
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
   const path_name = usePathname()
   const category: string[] = ['dat_nen', 'nha_pho', 'biet_thu', 'can_ho', 'tat_ca']
-  const list_path: string[] = path_name.split('/')
+  const list_path: string[] = path_name?.split('/') || []
+
+  const isForSale = list_path[1] === 'san_pham_ban'
+  const isForRent = list_path[1] === 'san_pham_cho_thue'
+
+  // Use appropriate hooks based on the page type
+  const saleTownhouseData = useSaleTownhouses()
+  const saleVillaData = useSaleVillas()
+  const saleApartmentData = useSaleApartments()
+  const saleLandData = useSaleLand()
+
+  const rentalTownhouseData = useRentalTownhouses()
+  const rentalVillaData = useRentalVillas()
+  const rentalApartmentData = useRentalApartments()
+  const rentalLandData = useRentalLand()
+  
+  // Fallback items for other categories
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  
+  // Property type configuration
+  const propertyTypes = {
+    nha_pho: {
+      data: isForRent ? rentalTownhouseData : saleTownhouseData,
+      items: isForRent ? rentalTownhouseData.townhouses : saleTownhouseData.townhouses,
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} townhouse={item as never} /> : 
+        <San_pham_ban_property key={item.id} townhouse={item as never} />
+    },
+    biet_thu: {
+      data: isForRent ? rentalVillaData : saleVillaData,
+      items: isForRent ? rentalVillaData.villas : saleVillaData.villas,
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} villa={item as never} /> : 
+        <San_pham_ban_property key={item.id} villa={item as never} />
+    },
+    can_ho: {
+      data: isForRent ? rentalApartmentData : saleApartmentData,
+      items: isForRent ? rentalApartmentData.apartments : saleApartmentData.apartments,
+      renderItem: (item: PropertyItem) => isForRent ?
+        <San_pham_cho_thue_property key={item.id} apartment={item as never} /> : 
+        <San_pham_ban_property key={item.id} apartment={item as never} />
+    },
+    dat_nen: {
+      data: isForRent ? rentalLandData : saleLandData,
+      items: isForRent ? rentalLandData.landLots : saleLandData.landLots,
+      renderItem: (item: PropertyItem) => isForRent ? 
+        <San_pham_cho_thue_property key={item.id} land={item as never} /> : 
+        <San_pham_ban_property key={item.id} land={item as never} />
+    }
+  };
+  
+  const currentPropertyType = list_path[2] as keyof typeof propertyTypes
+  const hasPropertyType = currentPropertyType in propertyTypes && (isForSale || isForRent)
+  
+  const currentData = hasPropertyType ? propertyTypes[currentPropertyType] : null
 
   return (
     <div>
       <div className="">
         <div className={category.includes(list_path[2]) ? "px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8" : "hidden"}>
-          {items.map((item, index) => (
+          
+          {/* Show loading state only when loading and no error */}
+          {hasPropertyType && currentData!.data.loading && !currentData!.data.error && (
+            <LoadingErrorState 
+              isLoading={true} 
+              error={null}
+            />
+          )}
+
+          {/* Render API data for supported property types when successful */}
+          {hasPropertyType && !currentData!.data.loading && !currentData!.data.error && 
+            (currentData!.items as unknown as PropertyItem[]).map((item: PropertyItem) => currentData!.renderItem(item))
+          }
+
+          {/* Show mock data when: 1) No API integration, 2) API has error, 3) API returns empty results */}
+          {(!hasPropertyType || 
+            (hasPropertyType && currentData!.data.error) ||
+            (hasPropertyType && !currentData!.data.loading && !currentData!.data.error && (currentData!.items as unknown as PropertyItem[]).length === 0)
+          ) && items.map((item, index) => (
             <div key={index}>
-              {(list_path[1] === 'san_pham_ban') ? (<San_pham_ban_property/>) : (list_path[1] === 'san_pham_cho_thue') ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
+              {(list_path[1] === 'san_pham_ban') ? (<San_pham_ban_property />) : (list_path[1] === 'san_pham_cho_thue') ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
             </div>
           ))}
+
+          {/* Show error message when API fails (optional - alongside mock data) */}
+          {hasPropertyType && currentData!.data.error && (
+            <div className="col-span-2 text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
+              <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
+              <p className="text-sm mt-1">Lỗi: {currentData!.data.error}</p>
+            </div>
+          )}
+
+          {/* Load more button for property types with API data - only show when API is working */}
+          {hasPropertyType && !currentData!.data.error && (
+            <LoadMoreButton 
+              isLoading={currentData!.data.loading}
+              hasMore={currentData!.data.hasMore}
+              onLoadMore={currentData!.data.loadMore}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation"
 const San_pham_ban_detail_page = () => {
   const searchParams = useSearchParams()
 
-  const id = searchParams.get('id')
+  const id = searchParams?.get('id') || null
 
 
   return (

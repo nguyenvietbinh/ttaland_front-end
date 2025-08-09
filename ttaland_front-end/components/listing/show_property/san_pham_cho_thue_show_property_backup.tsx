@@ -4,7 +4,9 @@ import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
 import NProgress from 'nprogress'
 
-const Du_an_property = () => {
+
+
+const San_pham_cho_thue_property = () => {
   const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
@@ -32,8 +34,6 @@ const Du_an_property = () => {
     router.push(detailPath)
   }
 
-
-
   return (
     <div className="bg-gray-200 h-auto border-[1px] border-white hover:shadow-md rounded-sm">
       <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
@@ -60,41 +60,40 @@ const Du_an_property = () => {
  
 
 
-
       <div className="px-2 pt-4 text-black">
 
         {/* info */}
         <div className="">
           <h1 className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
-          <div className="grid md:grid-cols-3 grid-cols-2 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Quy Mô:</p>
-              <p className="overflow-auto no-scrollbar">3.75 ha</p>
+              <p className="">Diện tích:</p>
+              <p className="overflow-auto no-scrollbar"> 100 m²</p>
             </div>
             <div className="flex items-center gap-1">
-              <img src="/img/icons/clock.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Bàn giao:</p>
-              <p className="overflow-auto no-scrollbar">Quý 4/2025</p>
+              <img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Garage:</p>
+              <p className="overflow-auto no-scrollbar">1</p>
             </div>
             <div className="flex items-center gap-1">
-              <img src="/img/icons/rule.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Pháp lý:</p>
-              <p className="overflow-auto no-scrollbar">Sổ hồng riêng</p>
+              <img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Giá:</p>
+              <p className="overflow-auto no-scrollbar">6 Triệu/ Tháng</p>
             </div>
             <div className="flex items-center gap-1">
-              <img src="/img/icons/houses.png" alt="" className="h-6 hidden md:block"/>
-              <p className=""> Số lượng:</p>
-              <p className="overflow-auto no-scrollbar">199 Căn</p>
+              <img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Phòng ngủ:</p>
+              <p className="overflow-auto no-scrollbar">4</p>
             </div>
-            <div className="flex items-center gap-1 ">
-              <img src="/img/icons/house.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Loại hình:</p>
-              <p className="overflow-auto no-scrollbar">Nhà phố, Shophouse</p>
+            <div className="flex items-center gap-1">
+              <img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/>
+              <p className="">Phòng tắm:</p>
+              <p className="overflow-auto no-scrollbar">3</p>
             </div>
-            <div className="flex items-center gap-1 tooltip cursor-pointer tooltip-bottom" data-tip="Xem bản đồ">
+            <div className="flex items-center gap-1">
               <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
-              <p className="overflow-auto no-scrollbar">Đường Hoàng Phan Thái, Mỹ Yên, Bến Lức, Long An</p>
+              <p className="overflow-auto no-scrollbar">Phường 2, Thủ Đức</p>
             </div>
           </div>
         </div>
@@ -110,4 +109,4 @@ const Du_an_property = () => {
   )
 }
 
-export default Du_an_property
+export default San_pham_cho_thue_property

@@ -20,7 +20,7 @@ const MD_navbar = () => {
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
         <div className="dropdown dropdown-hover flex group/main"> 
-          <div tabIndex={0} className={path_name.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
+          <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -41,7 +41,7 @@ const MD_navbar = () => {
           </ul>
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
+          <div tabIndex={0} className={path_name?.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -62,7 +62,7 @@ const MD_navbar = () => {
           </ul>
         </div>
         <div className="dropdown flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
+          <div tabIndex={0} className={path_name?.includes('/du_an') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Dự Án Mới
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul

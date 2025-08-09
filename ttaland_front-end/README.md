@@ -35,6 +35,26 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Media Integration
+
+### TikTok và YouTube Support
+- Hỗ trợ nhúng video YouTube và TikTok vào trang chi tiết sản phẩm
+- Tự động phát hiện và chuyển đổi URLs thành embed format
+- Hiển thị video demo mặc định nếu không có YouTube hoặc TikTok URLs
+
+### Cách sử dụng:
+
+```typescript
+const information_data: detail_infor = {
+  // ... các thông tin khác
+  youtubeUrl: 'https://www.youtube.com/watch?v=VIDEO_ID', // Tùy chọn
+  tiktokUrl: 'https://www.tiktok.com/@user/video/123456789', // Tùy chọn
+}
+```
+
+### API Endpoints:
+- `/api/tiktok-thumbnail` - Server-side API để lấy TikTok thumbnails (tránh CORS)
+
 ## Color
 
 Basic website color:
