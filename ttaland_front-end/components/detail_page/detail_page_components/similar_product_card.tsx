@@ -61,9 +61,9 @@ const SimilarProductCard = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-75 h-96 flex flex-col">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-50 md:w-90 lg:w-60 xl:w-75 2xl:w-90 flex flex-col mx-auto">
       {/* Image Section - Fixed height */}
-      <div className="relative h-48 overflow-hidden flex-shrink-0" onClick={handleNavigateToDetail}>
+      <div className="relative h-25 md:h-50 lg:h-40 xl:h-50 2xl:h-60 overflow-hidden flex-shrink-0" onClick={handleNavigateToDetail}>
         <img 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
           src={images?.[0] || `/img/example/showcase${listOfImg[0]}.jpg`} 
@@ -71,7 +71,7 @@ const SimilarProductCard = ({
         />
         
         {/* Image count indicator */}
-        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm flex items-center gap-1">
+        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm xl:text-md flex items-center gap-1">
           <FaImages size={12} />
           {numberOfImg}
         </div>
@@ -90,23 +90,23 @@ const SimilarProductCard = ({
       </div>
 
       {/* Content Section - Fixed height with flex layout */}
-      <div className="p-4 flex flex-col justify-between h-48" onClick={handleNavigateToDetail}>
+      <div className="p-1 flex flex-col justify-between" onClick={handleNavigateToDetail}>
         <div className="flex flex-col">
           {/* Title - Fixed height with 2 lines max */}
-          <h3 className="font-semibold text-gray-800 text-base line-clamp-2 mb-3 hover:text-blue-600 transition-colors duration-200 h-12 leading-6">
+          <h3 className="font-semibold text-gray-800 text-sm xl:text-lg line-clamp-2 h-[3em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
             {title}
           </h3>
 
           {/* Price and Area */}
           <div className="flex items-center gap-4 mb-2">
-            <span className="text-xl font-bold text-red-600">{price}</span>
-            <span className="text-xl font-bold text-red-600">{area}</span>
+            <span className="text-lg xl:text-2xl font-bold text-red-600">{price}</span>
+            <span className="text-lg xl:text-2xl font-bold text-red-600">{area}</span>
           </div>
 
           {/* Location */}
-          <div className="flex items-center gap-1 text-gray-500 text-sm">
+          <div className="flex items-center gap-1 text-gray-500 text-sm xl:text-lg">
             <FaMapMarkerAlt size={12} />
-            <span className="line-clamp-1">{location}</span>
+            <span className="line-clamp-1 mb-1">{location}</span>
           </div>
         </div>
 

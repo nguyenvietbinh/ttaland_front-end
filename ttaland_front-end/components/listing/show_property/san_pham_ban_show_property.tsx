@@ -114,7 +114,7 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
           <div className="w-full h-1/2 overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(1)} alt={title} />
           </div>
-          <div className="w-full relative h-1/2 cursor-pointer">
+          <div className="w-full relative h-1/2 cursor-pointer overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(2)} alt={title} />
             {numberOfImg > 3 && (
               <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 flex items-center gap-1">

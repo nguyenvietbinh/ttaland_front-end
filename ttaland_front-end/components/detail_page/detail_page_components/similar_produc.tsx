@@ -16,6 +16,12 @@ const Similar_produc = () => {
   // Sample data for variety - 27 different properties
   const sampleProperties = [
     {
+      title: "full nội thất",
+      price: "4,6 tỷ",
+      area: "70 m²",
+      location: "Quận 9, Hồ Chí Minh"
+    },
+    {
       title: "2PN rẻ nhất Masteri Centre Point, bàn giao full nội thất",
       price: "4,6 tỷ",
       area: "70 m²",
@@ -246,10 +252,10 @@ const Similar_produc = () => {
 
   return (
     <div className='relative flex justify-center'>
-      <div className="w-full max-w-7xl">
+      <div className="container">
         {/* Title and Pagination Controls on same line */}
-        <div className="flex justify-between items-center mt-20 mb-6">
-          <p className='text-3xl'>Sản phẩm tương tự:</p>
+        <div className="flex justify-center lg:justify-between items-center mt-20 mb-6">
+          <p className='text-3xl hidden lg:block'>Sản phẩm tương tự:</p>
         
         <div className="flex items-center space-x-1">
         {/* Previous Arrow */}
@@ -306,10 +312,10 @@ const Similar_produc = () => {
       </div>
       
       {/* Products Grid with Animation */}
-      <div className="relative overflow-hidden">
+      <div className="relative w-102 md:w-full mx-auto overflow-hidden">
         <div 
           ref={carouselRef}
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-300 ease-in-out ${
+          className={`grid grid-cols-2 lg:grid-cols-4 items-center transition-all duration-300 gap-2 md:gap-10 lg:gap-0 mx-auto ease-in-out ${
             isAnimating ? 'opacity-0 transform translate-x-2' : 'opacity-100 transform translate-x-0'
           }`}
         >

@@ -16,7 +16,7 @@ const SM_navbar = () => {
   return (
     <div>
       {width < 768 ? (
-      <div className='flex gap-6 justify-start w-full mx-auto text-gray-300 text-xl '>
+      <div className='SM_navbar flex gap-6 justify-start w-full mx-auto text-gray-300 text-xl '>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
 
@@ -29,9 +29,11 @@ const SM_navbar = () => {
             <ul
               tabIndex={0}
               className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 pr-4 py-4 text-center">
-              <div className="dropdown dropdown-end dropdown-hover group/san_pham_ban">
+            <div className="dropdown dropdown-left dropdown-hover flex group/san_pham_ban">
             <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex cursor-pointer text-white mx-auto my-4" : "flex cursor-pointer mx-auto my-4 group-hover/san_pham_ban:text-white"}>Sản Phẩm Bán
+              <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/san_pham_ban:rotate-180 transition-all duration-200' alt="" />
             </div>
+
             <ul
               tabIndex={0}
               className="dropdown-content bg-blue-950 border-[1px] border-solid border-black z-1 w-full p-4 text-center">

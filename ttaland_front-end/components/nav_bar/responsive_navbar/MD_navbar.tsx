@@ -16,7 +16,7 @@ const MD_navbar = () => {
   return (
     <div>
       {((width > 768) && (width < 1024)) ? (
-      <div className='flex gap-4 justify-start w-[768px] mx-auto text-gray-300 text-xl '>
+      <div className='MD_navbar flex gap-4 justify-start w-[768px] mx-auto text-gray-300 text-xl '>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
         <div className="dropdown dropdown-hover flex group/main"> 

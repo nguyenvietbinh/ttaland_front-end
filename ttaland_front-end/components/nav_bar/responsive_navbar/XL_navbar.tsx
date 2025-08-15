@@ -17,7 +17,7 @@ const XL_navbar = () => {
   return (
     <div>
       {((width > 1280) && (width < 1536)) ? (
-        <div className='flex gap-5 justify-start w-[1280px] mx-auto text-gray-300 text-xl whitespace-nowrap'>
+        <div className='XL_navbar flex gap-5 justify-start w-[1280px] mx-auto text-gray-300 text-xl whitespace-nowrap'>
           <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
                   <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
             Tin Tức
