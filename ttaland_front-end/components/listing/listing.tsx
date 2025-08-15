@@ -110,7 +110,7 @@ const Listing = () => {
 
           {/* Show error message when API fails (optional - alongside mock data) */}
           {hasPropertyType && currentData!.data.error && (
-            <div className="col-span-2 text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
+            <div className="text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
               <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
               <p className="text-sm mt-1">Lỗi: {currentData!.data.error}</p>
             </div>
