@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { FaHeart, FaRegHeart, FaMapMarkerAlt, FaImages } from 'react-icons/fa'
-import NProgress from 'nprogress'
+import Link from "next/link"
 
 interface SimilarProductCardProps {
   id?: string
@@ -24,7 +24,6 @@ const SimilarProductCard = ({
   images,
   isLiked = false
 }: SimilarProductCardProps) => {
-  const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(6)
   const [listOfImg, setListOfImg] = useState<number[]>([])
@@ -47,12 +46,10 @@ const SimilarProductCard = ({
     }
   }, [images])
 
-  const handleNavigateToDetail = () => {
+  const urlToDetail = () => {
     const currentPath = pathname?.split('/') || []
     const productId = id || listOfImg.join('')
-    const detailPath = `/${currentPath[1] || ''}/chi_tiet?id=${productId}`
-    NProgress.start()
-    router.push(detailPath)
+    return `/${currentPath[1] || ''}/chi_tiet?id=${productId}`
   }
 
   const toggleLike = (e: React.MouseEvent) => {
@@ -63,7 +60,7 @@ const SimilarProductCard = ({
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-50 md:w-90 lg:w-60 xl:w-75 2xl:w-90 flex flex-col mx-auto">
       {/* Image Section - Fixed height */}
-      <div className="relative h-25 md:h-50 lg:h-40 xl:h-50 2xl:h-60 overflow-hidden flex-shrink-0" onClick={handleNavigateToDetail}>
+      <Link className="relative h-25 md:h-50 lg:h-40 xl:h-50 2xl:h-60 overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
           src={images?.[0] || `/img/example/showcase${listOfImg[0]}.jpg`} 
@@ -87,10 +84,10 @@ const SimilarProductCard = ({
             <FaRegHeart className="text-white" size={16} />
           )}
         </button>
-      </div>
+      </Link>
 
       {/* Content Section - Fixed height with flex layout */}
-      <div className="p-1 flex flex-col justify-between" onClick={handleNavigateToDetail}>
+      <Link className="p-1 flex flex-col justify-between" href={urlToDetail()}>
         <div className="flex flex-col">
           {/* Title - Fixed height with 2 lines max */}
           <h3 className="font-semibold text-gray-800 text-sm xl:text-lg line-clamp-2 h-[3em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
@@ -114,7 +111,7 @@ const SimilarProductCard = ({
         <div className="text-xs text-gray-400 mt-auto">
           Đăng hôm nay
         </div>
-      </div>
+      </Link>
     </div>
   )
 }

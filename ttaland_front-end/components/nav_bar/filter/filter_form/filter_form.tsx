@@ -3,40 +3,36 @@
 import Du_an_filter_form from './du_an_filter_form'
 import San_pham_ban_filter_form from './san_pham_ban_filter_form'
 import San_pham_cho_thue_filter_form from './san_pham_cho_thue_filter_form'
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import NProgress from 'nprogress'
+import Link from 'next/link';
+
+interface Filter_data {
+  type: 'san_pham_ban' | 'san_pham_cho_thue' | 'du_an';
+  locations: string[];
+  property_type: 'Nhà Phố' | 'Biệt Thự' | 'Đất Nền' | 'Căn Hộ';
+  price_min: string;
+  price_max: string;
+  sqr_min: string;
+  sqr_max: string;
+  bed_room_min?: string;
+  bed_room_max?: string;
+  bath_room_min?: string;
+  bath_room_max?: string;
+}
 
 const Filter_form = () => {
-  const router = useRouter()
   const [activeTab, setActiveTab] = useState<string>('tab1');
   const [locations, setLocations] = useState<string[]>([])
-
+  const filter_data: Filter_data = {
+    type: "san_pham_ban",
+    locations: [''],
+    property_type: 'Nhà Phố',
+    price_min: 'Từ: 0 Triệu',
+    price_max: 'Đến: 60.00 Tỷ',
+    sqr_min: 'Từ: 0 m²',
+    sqr_max: 'Đến: 500 m²'
+  }
   const collect_filter_data = () => {
-    interface Filter_data {
-      type: 'san_pham_ban' | 'san_pham_cho_thue' | 'du_an';
-      locations: string[];
-      property_type: 'Tất Cả' | 'Nhà Phố' | 'Biệt Thự' | 'Đất Nền' | 'Căn Hộ';
-      price_min: string;
-      price_max: string;
-      sqr_min: string;
-      sqr_max: string;
-      bed_room_min?: string;
-      bed_room_max?: string;
-      bath_room_min?: string;
-      bath_room_max?: string;
-    }
-
-    const filter_data: Filter_data = {
-      type: "san_pham_ban",
-      locations: [''],
-      property_type: 'Tất Cả',
-      price_min: 'Từ: 0 Triệu',
-      price_max: 'Đến: 60.00 Tỷ',
-      sqr_min: 'Từ: 0 m²',
-      sqr_max: 'Đến: 500 m²'
-    }
-
     const checkedTab = document.querySelector<HTMLInputElement>('input[name="filter_tab"]:checked')
     const property_type = document.querySelector<HTMLSelectElement>(`.${checkedTab?.value}_property_type`)
     const price = document.querySelectorAll<HTMLSpanElement>(`.${checkedTab?.value}_price`)
@@ -46,7 +42,7 @@ const Filter_form = () => {
 
     filter_data.type = checkedTab?.value as 'san_pham_ban' | 'san_pham_cho_thue' | 'du_an'
     filter_data.locations = locations
-    filter_data.property_type = property_type?.value as 'Tất Cả' | 'Nhà Phố' | 'Biệt Thự' | 'Đất Nền' | 'Căn Hộ'
+    filter_data.property_type = property_type?.value as 'Nhà Phố' | 'Biệt Thự' | 'Đất Nền' | 'Căn Hộ'
     filter_data.price_min = price[0]?.textContent || ''
     filter_data.price_max = price[1]?.textContent || ''
     filter_data.sqr_min = sqr[0]?.textContent || ''
@@ -72,8 +68,7 @@ const Filter_form = () => {
     if (filter_data.bath_room_max) queryParams.bath_room_max = filter_data.bath_room_max;
 
     const queryString = new URLSearchParams(queryParams).toString();
-    NProgress.start()
-    router.push(`/${filter_data.type}/${filter_data.property_type}?${queryString}`);
+    return `/${filter_data.type}/${filter_data.property_type}?${queryString}`
   }
 
   return (
@@ -109,7 +104,7 @@ const Filter_form = () => {
         </div>
       </div>
       <div className='flex justify-center pt-8 px-2'>
-        <button onClick={collect_filter_data} className='btn text-black w-full bg-gray-300'>Tìm Kiếm</button>
+        <Link href={collect_filter_data()} className='btn text-black w-full bg-gray-300'>Tìm Kiếm</Link>
       </div>
     </div>
   )

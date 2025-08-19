@@ -89,8 +89,7 @@ const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props
       </div>
       <div>
         <p className='text-sm my-1 ml-1'>2. Loại Tài Sản</p>
-        <select defaultValue="Tất Cả" className="select focus:outline-0 w-full san_pham_cho_thue_property_type">
-          <option value='tat_ca'>Tất Cả</option>
+        <select defaultValue="Nhà Phố" className="select focus:outline-0 w-full san_pham_cho_thue_property_type">
           <option value='nha_pho'>Nhà Phố</option>
           <option value='biet_thu'>Biệt Thự</option>
           <option value='dat_nen'>Đất Nền</option>
