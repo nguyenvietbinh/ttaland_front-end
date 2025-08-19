@@ -1,9 +1,8 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useRouter } from 'next/navigation'
-import NProgress from 'nprogress'
 import { apiService, type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
+import Link from "next/link"
 
 interface San_pham_ban_propertyProps {
   townhouse?: Townhouse
@@ -32,7 +31,6 @@ const mockPropertyData = {
 }
 
 const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_ban_propertyProps) => {
-  const router = useRouter()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -61,11 +59,9 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
     }
   }, [isUsingRealData, property])
 
-  const handleNavigateToDetail = () => {
+  const urlToDetail = () => {
     const detailId = isUsingRealData ? property!.id : listOfImg.join('')
-    const detailPath = `/san_pham_ban/chi_tiet?id=${detailId}`
-    NProgress.start()
-    router.push(detailPath)
+    return `/san_pham_ban/chi_tiet?id=${detailId}`
   }
 
   // Get image URLs
@@ -96,7 +92,7 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">
-      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
+      <Link className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" href={urlToDetail()}>
         <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(0)} alt={title} />
           {numberOfImg > 1 && (
@@ -124,14 +120,14 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
             )}
           </div>
         </div>
-      </div>
+      </Link>
 
       <div className="px-2 pt-4 text-black">
         {/* info */}
         <div className="">
-          <h1 className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>
+          <Link className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" href={urlToDetail()}>
             {title}
-          </h1>
+          </Link>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
@@ -172,7 +168,7 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <div className="btn bg-black text-white w-[80%] md:w-[90%]" onClick={handleNavigateToDetail}>Thông tin thêm</div>
+          <Link className="btn bg-black text-white w-[80%] md:w-[90%]" href={urlToDetail()}>Thông tin thêm</Link>
           <div className="w-[20%] md:w-[10%] cursor-pointer">
             <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
           </div>

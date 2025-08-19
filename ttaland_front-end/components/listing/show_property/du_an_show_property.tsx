@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useRouter, usePathname } from 'next/navigation'
-import NProgress from 'nprogress'
+import { usePathname } from 'next/navigation'
+import Link from "next/link"
 
 const Du_an_property = () => {
-  const router = useRouter()
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
@@ -25,18 +24,16 @@ const Du_an_property = () => {
     setListOfImg(Array.from(uniqueNumbers))
   }, [])
 
-  const handleNavigateToDetail = () => {
+  const urlToDetail = () => {
     const currentPath = pathname?.split('/') || []
-    const detailPath = `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${listOfImg.join('')}`
-    NProgress.start()
-    router.push(detailPath)
+    return `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${listOfImg.join('')}`
   }
 
 
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] border-white hover:shadow-md rounded-sm">
-      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" onClick={handleNavigateToDetail}>
+      <Link className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" href={urlToDetail()}>
         <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={`/img/example/showcase${listOfImg[0]}.jpg`} alt="" />
           <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 md:hidden">{numberOfImg - 1}+</div>
@@ -54,7 +51,7 @@ const Du_an_property = () => {
             <img className="w-full h-full object-cover" src={`/img/example/showcase${listOfImg[2]}.jpg`} alt="" />
           </div>
         </div>
-      </div>
+      </Link>
 
 
  
@@ -65,7 +62,7 @@ const Du_an_property = () => {
 
         {/* info */}
         <div className="">
-          <h1 className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <Link className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" href={urlToDetail()}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</Link>
           <div className="grid md:grid-cols-3 grid-cols-2 py-3 gap-2 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
@@ -100,7 +97,7 @@ const Du_an_property = () => {
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <div className="btn bg-black text-white w-[80%] md:w-[90%]" onClick={handleNavigateToDetail}>Thông tin thêm</div>
+          <Link className="btn bg-black text-white w-[80%] md:w-[90%]" href={urlToDetail()}>Thông tin thêm</Link>
           <div className="w-[20%] md:w-[10%] cursor-pointer">
             <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
           </div>

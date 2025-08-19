@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useRouter } from 'next/navigation'
-import NProgress from 'nprogress'
 import { apiService, type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
 
 interface San_pham_cho_thue_propertyProps {
@@ -32,7 +30,6 @@ const mockRentalPropertyData = {
 }
 
 const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_pham_cho_thue_propertyProps) => {
-  const router = useRouter()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -63,9 +60,7 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
 
   const handleNavigateToDetail = () => {
     const detailId = isUsingRealData ? property!.id : listOfImg.join('')
-    const detailPath = `/san_pham_cho_thue/chi_tiet?id=${detailId}`
-    NProgress.start()
-    router.push(detailPath)
+    return `/san_pham_cho_thue/chi_tiet?id=${detailId}`
   }
 
   // Get image URLs
