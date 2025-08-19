@@ -1,17 +1,33 @@
 'use client'
+
+import { Suspense } from "react"
 import NavBar from "@/components/nav_bar/navbar"
+import San_pham_ban_detail from "@/components/detail_page/san_pham_ban_detail"
 import Footer from "@/components/layout/footer"
+import { useSearchParams } from "next/navigation"
 
 const San_pham_ban_detail_page = () => {
+  const searchParams = useSearchParams()
 
+  const id = searchParams?.get('id') || null
 
 
   return (
     <div className="bg-gray-300 w-full text-black">
       <NavBar/>
+      <San_pham_ban_detail id={id}/>
       <Footer/>
     </div>
   )
 }
 
-export default San_pham_ban_detail_page
+const Wraped_san_pham_ban_detail_page = () => {
+  
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <San_pham_ban_detail_page/>
+    </Suspense>
+  )
+} 
+
+export default Wraped_san_pham_ban_detail_page

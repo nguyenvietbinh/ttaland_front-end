@@ -76,7 +76,6 @@ const Listing = ({currentPropertyType, isForSale, isForRent}: Listing_props) => 
     }
   };
   
-  console.log(propertyTypes['apartment'])
   
   const currentData = propertyTypes[currentPropertyType]
 
