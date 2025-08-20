@@ -1,11 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { usePathname } from 'next/navigation'
 import Link from "next/link"
 
 const Du_an_property = () => {
-  const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
 
@@ -25,8 +23,7 @@ const Du_an_property = () => {
   }, [])
 
   const urlToDetail = () => {
-    const currentPath = pathname?.split('/') || []
-    return `/${currentPath[1] || ''}/${currentPath[2] || ''}/chi_tiet?id=${listOfImg.join('')}`
+    return `/du_an/chi_tiet?id=${listOfImg.join('')}`
   }
 
 
