@@ -1,9 +1,9 @@
 'use client'
-import Media_displayer from "./detail_page_components/media_displayer";
+import Media_displayer from "./media_displayer/media_displayer";
 import San_pham_ban_detail_infor from "./detail_infor/san_pham_ban_detail_infor";
 import { detail_infor } from "./detail_infor/san_pham_ban_detail_infor";
-import { MediaItem } from "./detail_page_components/media_displayer";
-import Similar_produc from "./detail_page_components/similar_produc";
+import { MediaItem } from "./media_displayer/media_displayer";
+import Similar_produc from "./similar_product/similar_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 
 interface San_pham_ban_details_props {

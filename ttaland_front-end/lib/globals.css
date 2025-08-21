@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+.tab {
+  border-color: var(--color-white);
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+}
+
 .responsive_with {
   width: 100%;
   @media (width >= 48rem /* 768px */) {
