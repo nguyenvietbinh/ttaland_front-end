@@ -112,7 +112,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
           <div>
             <h1 className="w-full text-center text-3xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
-              <Media_displayer id={id} mediaItems={media_data}/>
+              <Media_displayer mediaItems={media_data}/>
               <div className="w-0.5 block border-[1px] border-gray-600"></div>
               <San_pham_ban_detail_infor information_data={information_data}/>
             </div>

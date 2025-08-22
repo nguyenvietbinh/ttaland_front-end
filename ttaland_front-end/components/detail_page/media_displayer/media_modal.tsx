@@ -9,23 +9,21 @@ import Map_modal_tab from "./modal_tab/map_modal_tab"
 
 interface Media_modal_props {
   mediaItems: MediaItem[]
-  startTab: 'video' | 'image' | 'map'
-  currentIndex: number
+  currentMedia: MediaItem
 }
 
-const Media_modal = ({mediaItems, startTab, currentIndex}: Media_modal_props) => {
-  const [currentTab, setCurrentTab] = useState<'video' | 'image' | 'map'>(startTab)
-  const currentMedia = mediaItems[currentIndex]
-  const videoMediaItems = mediaItems.filter(item => item.type === 'video' || item.type === 'youtube' || item.type === 'tiktok')
+const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
+  const [currentTab, setCurrentTab] = useState<'video' | 'image' | 'map'>()
+  const videoMediaItems = mediaItems.filter(item => item.type !== 'image')
   const imageMediaItems = mediaItems.filter(item => item.type === 'image')
   const startImageIndex: number = imageMediaItems.indexOf(currentMedia) === -1 ? 0 : imageMediaItems.indexOf(currentMedia)
-
+  const startVideoIndex: number = videoMediaItems.indexOf(currentMedia) === -1 ? 0 : videoMediaItems.indexOf(currentMedia)
 
 
 
   useEffect(() => {
-    setCurrentTab(startTab)
-  }, [startTab])
+    setCurrentTab(() => (currentMedia.type === 'image' ? 'image' : 'video'))
+  }, [currentMedia])
 
 
 
@@ -65,7 +63,7 @@ const Media_modal = ({mediaItems, startTab, currentIndex}: Media_modal_props) =>
         </div>
 
         {currentTab === 'video' ? (
-          <Video_modal_tab mediaItems={videoMediaItems}/>
+          <Video_modal_tab mediaItems={videoMediaItems} startVideoIndex={startVideoIndex}/>
         ) : currentTab === 'image' ? (
           <Image_modal_tab mediaItems={imageMediaItems} startImageIndex={startImageIndex}/>
         ) : currentTab === 'map' ? (

@@ -17,12 +17,10 @@ export type MediaItem = {
 
 interface media_displayer_props {
   mediaItems: MediaItem[];
-  id: string | null
 }
 
-const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
+const Media_displayer = ({ mediaItems }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [modalTab, setModalTab] = useState<'video' | 'image' | 'map'>('image'); // State cho tab modal
   const [tiktokThumbs, setTiktokThumbs] = useState<Record<string, string>>({});
 
   // refs array cho từng thumbnail
@@ -72,19 +70,6 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
     setCurrentIndex(prev => (prev === mediaItems.length - 1 ? 0 : prev + 1));
   };
 
-
-
-
-
-
-  // Function để đóng TikTok modal
-  const closeTikTokModal = () => {
-    const modal = document.getElementById(`tiktok_modal_id=${id}`) as HTMLDialogElement;
-    if (modal) {
-      modal.close();
-    }
-  };
-
   const currentMedia = mediaItems[currentIndex];
 
   return (
@@ -94,7 +79,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
           {/* display img or vid */}
           {currentMedia.type === 'image' ? (
             <figure   
-              className="relative aspect-video rounded-lg overflow-hidden cursor-pointer"
+              className="relative aspect-video rounded-sm overflow-hidden cursor-pointer"
               style={{
                 backgroundImage: `url(${currentMedia.url})`,
                 backgroundSize: 'cover',
@@ -102,8 +87,6 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                 backgroundRepeat: 'no-repeat',
               }}
               onClick={() => {
-                // Set modal index to current main display index
-                setModalTab('image');
                 (document.getElementById(`media_modal`) as HTMLDialogElement)?.showModal();
               }}>
               <img
@@ -114,6 +97,9 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
             </figure>
           ) : currentMedia.type === 'video' ? (
             <div
+              onClick={() => {
+                (document.getElementById(`media_modal`) as HTMLDialogElement)?.showModal();
+              }}
               className="relative aspect-video"
               style={{
                 backgroundImage: `url(${currentMedia.poster})`,
@@ -138,7 +124,6 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
             <div className="relative aspect-video rounded-lg overflow-hidden cursor-pointer"
                  onClick={() => {
                    // Set modal index to current main display index
-                   setModalTab('video');
                    (document.getElementById(`media_modal`) as HTMLDialogElement)?.showModal();
                  }}>
               {/* YouTube thumbnail với play button overlay */}
@@ -162,11 +147,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                     </svg>
                   </div>
                 </div>
-                
-                {/* YouTube logo */}
-                <div className="absolute bottom-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
-                  YouTube
-                </div>
+
               </div>
             </div>
           ) : currentMedia.type === 'tiktok' ? (
@@ -179,7 +160,6 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                  }}
                  onClick={() => {
                    // Set modal index to current main display index
-                   setModalTab('video');
                    (document.getElementById(`media_modal`) as HTMLDialogElement)?.showModal();
                  }}>
               {/* Background blur overlay */}
@@ -206,42 +186,36 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                 </div>
               </div>
               
-              {/* TikTok logo - positioned on main container */}
-              <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-bold z-20">
-                TikTok
-              </div>
+
             </div>
           ) : null}
 
           {/* Navigation buttons */}
-          <button 
-            onClick={goToPrevious}
-            className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4 z-10"
-            aria-label="Previous media"
-          >
-            <FaChevronLeft size={20} />
-          </button>
-          <button 
-            onClick={goToNext}
-            className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4 z-10"
-            aria-label="Next media"
-          >
-            <FaChevronRight size={20} />
-          </button>
+          <div>
+            <button 
+              onClick={goToPrevious}
+              className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4 z-10"
+              aria-label="Previous media"
+            >
+              <FaChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={goToNext}
+              className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4 z-10"
+              aria-label="Next media"
+            >
+              <FaChevronRight size={20} />
+            </button>
+          </div>
 
-          {/* image infor */}
-          {(currentMedia.type === 'image') ? (
-            <div className='absolute text-lg text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
-              <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
-              <div className='bg-black/60 px-1 rounded-md'>Mô tả?</div>
-            </div>
-          ) : (
-            <div></div>
-          )}
+          {/* media infor */}
+          <div className='absolute text-lg text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
+            <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
+          </div>
         </div>
 
         {/* Thumbnail gallery */}
-          <div className=" w-full overflow-x-auto no-scrollbar gap-2 py-2 mt-4 hidden md:flex">
+          <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 hidden md:flex">
             {mediaItems.map((item, index) => (
               <div
                 key={index}
@@ -249,7 +223,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                   thumbRefs.current[index] = el;
                 }}
                 onClick={() => setCurrentIndex(index)}
-                className={`cursor-pointer rounded-lg overflow-hidden border-2 ${index === currentIndex ? 'border-black' : 'border-transparent brightness-60'}`}
+                className={`cursor-pointer rounded-md overflow-hidden border-2 ${index === currentIndex ? 'border-black' : 'border-transparent brightness-60'}`}
                 style={{ flex: '0 0 auto', width: '100px', height: '70px' }}
               >
                 {item.type === 'image' ? (
@@ -267,6 +241,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                   />
                 ) : item.type === 'youtube' ? (
                   <img 
+
                     src={`https://img.youtube.com/vi/${item.embedUrl?.split('/embed/')[1]?.split('?')[0]}/hqdefault.jpg`}
                     alt="YouTube thumbnail"
                     className="w-full h-full object-cover"
@@ -292,59 +267,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
       </div>
             
       {/* full screen image display */}
-      <Media_modal mediaItems={mediaItems} startTab={modalTab} currentIndex={currentIndex}/>
-      {/* TikTok Modal */}
-      <dialog id={`tiktok_modal_id=${id}`} className="modal">
-        <div className="modal-box p-0 h-screen w-screen max-w-screen bg-black flex items-center justify-center">
-          <div className="relative h-full w-full flex items-center justify-center">
-            {/* TikTok Video Container */}
-            <div className="relative h-full flex items-center justify-center" style={{ maxWidth: '400px' }}>
-              {currentMedia.type === 'tiktok' && currentMedia.embedUrl?.startsWith('https://www.tiktok.com/embed/v2/') ? (
-                <iframe
-                  className="h-full w-full border-0"
-                  src={currentMedia.embedUrl}
-                  title="TikTok video player"
-                  frameBorder="0"
-                  scrolling="no"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  style={{
-                    height: '100vh',
-                    width: '400px',
-                    maxWidth: '100vw',
-                    border: 'none',
-                    overflow: 'hidden'
-                  }}
-                ></iframe>
-              ) : (
-                // Fallback: Link để mở TikTok
-                <div className="flex flex-col items-center justify-center text-white p-8 text-center">
-                  <div className="text-8xl mb-6">🎵</div>
-                  <h3 className="text-3xl font-bold mb-4">TikTok Video</h3>
-                  <p className="text-lg mb-6 opacity-75">Click để xem video trên TikTok</p>
-                  <a 
-                    href={currentMedia.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-lg transition-colors"
-                  >
-                    Xem trên TikTok
-                  </a>
-                </div>
-              )}
-            </div>
-
-            {/* Close Button */}
-            <div className="absolute top-4 right-4 z-10">
-              <button onClick={closeTikTokModal} className="bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </dialog>
+      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
   return (
     <div>
       <figure   
-        className="relative aspect-video select-none rounded-lg overflow-hidden max-h-[80vh] mx-auto">
+        className="relative aspect-video select-none rounded-lg overflow-hidden h-160 mx-auto">
         <img
           src={currentMedia.url} 
           alt='Ảnh đang được tải' 
