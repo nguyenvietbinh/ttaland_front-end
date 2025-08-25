@@ -2,34 +2,6 @@
 @plugin "daisyui";
 
 
-.responsive_with {
-  width: 100%;
-  @media (width >= 48rem /* 768px */) {
-    width: 768px;
-  }
-  @media (width >= 64rem /* 1024px */) {
-    width: 1024px;
-  }
-  @media (width >= 80rem /* 1280px */) {
-    width: 1280px;
-  }
-  @media (width >= 96rem /* 1536px */) {
-    width: 1536px;
-  }
-}
-
-@theme {
-  --inset-shadow-md: inset 0 2px 3px rgba(0, 0, 0, 0.25); 
-}
-
-.my-custom-carousel {
-  display: inline-flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -40,11 +12,31 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE và Edge */
-  scrollbar-width: none;  /* Firefox */
+.responsive_with {
+  width: 100%;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+
+@media (width >= 48rem /* 768px */) {
+  .responsive_with {
+    width: 768px;
+  }
+}
+
+@media (width >= 64rem /* 1024px */) {
+  .responsive_with {
+    width: 1024px;
+  }
+}
+
+@media (width >= 80rem /* 1280px */) {
+  .responsive_with {
+    width: 1280px;
+  }
+}
+
+@media (width >= 96rem /* 1536px */) {
+  .responsive_with {
+    width: 1536px;
+  }
 }

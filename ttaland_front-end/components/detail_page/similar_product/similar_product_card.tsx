@@ -58,9 +58,9 @@ const SimilarProductCard = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-50 md:w-90 lg:w-60 xl:w-75 2xl:w-90 flex flex-col mx-auto">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-[45w] md:w-90 lg:w-60 xl:w-75 2xl:w-90 flex flex-col mx-auto">
       {/* Image Section - Fixed height */}
-      <Link className="relative h-25 md:h-50 lg:h-40 xl:h-50 2xl:h-60 overflow-hidden flex-shrink-0"  href={urlToDetail()}>
+      <Link className="relative aspect-video overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
           src={images?.[0] || `/img/example/showcase${listOfImg[0]}.jpg`} 
@@ -95,9 +95,9 @@ const SimilarProductCard = ({
           </h3>
 
           {/* Price and Area */}
-          <div className="flex items-center gap-4 mb-2">
-            <span className="text-lg xl:text-2xl font-bold text-red-600">{price}</span>
-            <span className="text-lg xl:text-2xl font-bold text-red-600">{area}</span>
+          <div className="flex items-center gap-4">
+            <span className="text-md xl:text-2xl font-bold text-red-600">{price}</span>
+            <span className="text-md xl:text-2xl font-bold text-red-600">{area}</span>
           </div>
 
           {/* Location */}
