@@ -1,8 +1,8 @@
 'use client'
-import Media_displayer from "./detail_page_components/media_displayer";
+import Media_displayer from "./media_displayer/media_displayer";
 import San_pham_cho_thue_detail_infor, { detail_infor } from "./detail_infor/san_pham_cho_thue_detail_infor";
-import { MediaItem } from "./detail_page_components/media_displayer";
-import Similar_produc from "./detail_page_components/similar_produc";
+import { MediaItem } from "./media_displayer/media_displayer";
+import Similar_produc from "./similar_product/similar_product";
 
 interface San_pham_cho_thue_detail_props {
   id: string | null;
@@ -52,7 +52,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_detail_props) => {
           <div>
             <h1 className="w-full text-center text-3xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
-              <Media_displayer id={id} mediaItems={media_data}/>
+              <Media_displayer mediaItems={media_data}/>
               <div className="w-0.5 block border-[1px] border-gray-600"></div>
               <San_pham_cho_thue_detail_infor information_data={information_data}/>
             </div>

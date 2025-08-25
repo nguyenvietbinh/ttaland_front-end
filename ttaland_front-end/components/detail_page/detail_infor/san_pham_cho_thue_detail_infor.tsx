@@ -21,7 +21,7 @@ const San_pham_cho_thue_detail_infor = ({ information_data }: san_pham_cho_thue_
     <div className="lg:w-2/5 w-full h-full overflow-y-auto">
       {/* Thông tin chi tiết */}
       <h1 className="text-2xl mt-4 lg:mt-0">Thông Tin Chi Tiết:</h1>
-      <ul className="grid-cols-2 grid gap-4 w-full text-nowrap">
+      <ul className="grid-cols-1 sm:grid-cols-2 grid gap-4 w-full text-nowrap">
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Mức giá:</p>
           <p className="w-1/2 overflow-auto">{information_data.price}.</p>            

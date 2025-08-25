@@ -254,94 +254,149 @@ const Similar_produc = () => {
     <div className='relative flex justify-center'>
       <div className="container">
         {/* Title and Pagination Controls on same line */}
-        <div className="flex justify-center lg:justify-between items-center mt-20 mb-6">
-          <p className='text-3xl hidden lg:block'>Sản phẩm tương tự:</p>
+        <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
+          <p className='text-2xl sm:text-3xl'>Sản phẩm tương tự:</p>
         
-        <div className="flex items-center space-x-1">
-        {/* Previous Arrow */}
-        <button 
-          onClick={() => scroll('left')}
-          disabled={currentPage === 1 || isAnimating}
-          className={`w-12 h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-            currentPage === 1 || isAnimating 
-              ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-          }`}
-          aria-label="Previous page"
-        >
-          <FaChevronLeft size={16} />
-        </button>
+          {/* desktop Pagination Controls */}
+          <div className="items-center space-x-1 hidden sm:flex">
+          {/* Previous Arrow */}
+          <button 
+            onClick={() => scroll('left')}
+            disabled={currentPage === 1 || isAnimating}
+            className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+              currentPage === 1 || isAnimating 
+                ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+            }`}
+            aria-label="Previous page"
+          >
+            <FaChevronLeft size={16} />
+          </button>
 
-        {/* Page Numbers */}
-        {getPaginationNumbers().map((page, index) => (
-          <div key={index}>
-            {page === '...' ? (
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-lg font-bold">
-                ...
-              </div>
-            ) : (
-              <button
-                onClick={() => goToPage(page as number)}
-                disabled={isAnimating}
-                className={`w-12 h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-lg font-bold ${
-                  currentPage === page
-                    ? 'bg-blue-500 text-white border-blue-500'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
-                } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              >
-                {page}
-              </button>
-            )}
+          {/* Page Numbers */}
+          {getPaginationNumbers().map((page, index) => (
+            <div key={index}>
+              {page === '...' ? (
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-lg font-bold">
+                  ...
+                </div>
+              ) : (
+                <button
+                  onClick={() => goToPage(page as number)}
+                  disabled={isAnimating}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-lg font-bold ${
+                    currentPage === page
+                      ? 'bg-blue-500 text-white border-blue-500'
+                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                  } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                >
+                  {page}
+                </button>
+              )}
+            </div>
+          ))}
+
+          {/* Next Arrow */}
+          <button 
+            onClick={() => scroll('right')}
+            disabled={currentPage === totalPages || isAnimating}
+            className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+              currentPage === totalPages || isAnimating 
+                ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+            }`}
+            aria-label="Next page"
+          >
+            <FaChevronRight size={16} />
+          </button>
           </div>
-        ))}
-
-        {/* Next Arrow */}
-        <button 
-          onClick={() => scroll('right')}
-          disabled={currentPage === totalPages || isAnimating}
-          className={`w-12 h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-            currentPage === totalPages || isAnimating 
-              ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-          }`}
-          aria-label="Next page"
-        >
-          <FaChevronRight size={16} />
-        </button>
         </div>
-      </div>
       
-      {/* Products Grid with Animation */}
-      <div className="relative w-102 md:w-full mx-auto overflow-hidden">
-        <div 
-          ref={carouselRef}
-          className={`grid grid-cols-2 lg:grid-cols-4 items-center transition-all duration-300 gap-2 md:gap-10 lg:gap-0 mx-auto ease-in-out ${
-            isAnimating ? 'opacity-0 transform translate-x-2' : 'opacity-100 transform translate-x-0'
-          }`}
-        >
-          {getCurrentItems().map((propertyData, index) => {
-            const actualIndex = (currentPage - 1) * itemsPerPage + index;
-            const delayClass = index === 0 ? '' : index === 1 ? 'delay-75' : index === 2 ? 'delay-150' : 'delay-300';
-            
-            return (
-              <div
-                key={`${currentPage}-${index}`} 
-                className={`transition-all duration-300 ${delayClass} ${
-                  isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'
-                }`}
-              >
-                <SimilarProductCard 
-                  id={`similar-${actualIndex}`}
-                  title={propertyData.title}
-                  price={propertyData.price}
-                  area={propertyData.area}
-                  location={propertyData.location}
-                />
-              </div>
-            );
-          })}
+        {/* Products Grid with Animation */}
+        <div className="relative mx-auto overflow-hidden">
+          <div 
+            ref={carouselRef}
+            className={`grid grid-cols-2 lg:grid-cols-4 items-center transition-all duration-300 gap-2 md:gap-10 lg:gap-0 mx-auto ease-in-out ${
+              isAnimating ? 'opacity-0 transform translate-x-2' : 'opacity-100 transform translate-x-0'
+            }`}
+          >
+            {getCurrentItems().map((propertyData, index) => {
+              const actualIndex = (currentPage - 1) * itemsPerPage + index;
+              const delayClass = index === 0 ? '' : index === 1 ? 'delay-75' : index === 2 ? 'delay-150' : 'delay-300';
+              
+              return (
+                <div
+                  key={`${currentPage}-${index}`} 
+                  className={`transition-all duration-300 ${delayClass} ${
+                    isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'
+                  }`}
+                >
+                  <SimilarProductCard 
+                    id={`similar-${actualIndex}`}
+                    title={propertyData.title}
+                    price={propertyData.price}
+                    area={propertyData.area}
+                    location={propertyData.location}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
+
+        {/* mobile Pagination Controls */}
+          <div className="flex justify-center mt-6 sm:hidden">
+            {/* Previous Arrow */}
+            <button 
+              onClick={() => scroll('left')}
+              disabled={currentPage === 1 || isAnimating}
+              className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+                currentPage === 1 || isAnimating 
+                  ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+              }`}
+              aria-label="Previous page"
+            >
+              <FaChevronLeft size={16} />
+            </button>
+
+            {/* Page Numbers */}
+            {getPaginationNumbers().map((page, index) => (
+              <div key={index}>
+                {page === '...' ? (
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-lg font-bold">
+                    ...
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => goToPage(page as number)}
+                    disabled={isAnimating}
+                    className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-lg font-bold ${
+                      currentPage === page
+                        ? 'bg-blue-500 text-white border-blue-500'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                    } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  >
+                    {page}
+                  </button>
+                )}
+              </div>
+            ))}
+
+            {/* Next Arrow */}
+            <button 
+              onClick={() => scroll('right')}
+              disabled={currentPage === totalPages || isAnimating}
+              className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+                currentPage === totalPages || isAnimating 
+                  ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+              }`}
+              aria-label="Next page"
+            >
+              <FaChevronRight size={16} />
+            </button>
+          </div>
       </div>
     </div>
   );
