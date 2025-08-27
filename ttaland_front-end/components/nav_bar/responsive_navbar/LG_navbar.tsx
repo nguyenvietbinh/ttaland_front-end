@@ -16,7 +16,7 @@ const LG_navbar = () => {
   return (
     <div>
       {((width > 1024) && (width < 1280)) ? (
-      <div className='LG_navbar flex gap-6 justify-start w-[1024px] mx-auto text-gray-300 text-2xl'>
+      <div className='LG_navbar flex gap-6 justify-start w-[1024px] h-25 mx-auto text-gray-300 text-2xl'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
         <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
           Tin Tức
@@ -28,7 +28,7 @@ const LG_navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black z-1 w-full mt-24 p-4 text-center">
+            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black z-1 w-full mt-25 p-4 text-center">
             <li className='py-2.5'><Link href='/san_pham_ban/nha_pho' className={path_name === '/san_pham_ban/nha_pho' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Nhà Phố
               <div className={path_name === '/san_pham_ban/nha_pho' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
             </Link></li>
@@ -49,7 +49,7 @@ const LG_navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black z-1 w-full mt-24 p-4 text-center">
+            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black z-1 w-full mt-25 p-4 text-center">
             <li className='py-2.5'><Link href='/san_pham_cho_thue/nha_pho' className={path_name === '/san_pham_cho_thue/nha_pho' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Nhà Phố
               <div className={path_name === '/san_pham_cho_thue/nha_pho' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
             </Link></li>
@@ -70,7 +70,7 @@ const LG_navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 w-40 p-4 text-center">
+            className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-25 z-1 w-40 p-4 text-center">
             <li className='py-2.5'><Link href='/du_an/nha_pho' className={path_name === '/du_an/nha_pho' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Nhà Phố
               <div className={path_name === '/du_an/nha_pho' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
             </Link></li>
@@ -93,7 +93,7 @@ const LG_navbar = () => {
               </div>
             <ul
               tabIndex={0}
-              className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-24 z-1 right-0 p-4 text-center">
+              className="dropdown-content bg-blue-950 border-[1px] border-solid border-black mt-25 z-1 right-0 p-4 text-center">
               <li className='py-2.5'><Link href='/lien_he' className={path_name === '/lien_he' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Liên Hệ
                 <div className={path_name === '/lien_he' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
               </Link></li>

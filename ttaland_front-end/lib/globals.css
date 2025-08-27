@@ -2,8 +2,14 @@
 @plugin "daisyui";
 
 body {
-  font-size: 1.125rem
+  font-size: 1.125rem;
 }
+
+:root {
+  --text-2xl--line-height: 1;
+}
+
+
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -13,33 +19,4 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE và Edge */
   scrollbar-width: none;  /* Firefox */
-}
-
-.responsive_with {
-  width: 100%;
-}
-
-
-@media (width >= 48rem /* 768px */) {
-  .responsive_with {
-    width: 768px;
-  }
-}
-
-@media (width >= 64rem /* 1024px */) {
-  .responsive_with {
-    width: 1024px;
-  }
-}
-
-@media (width >= 80rem /* 1280px */) {
-  .responsive_with {
-    width: 1280px;
-  }
-}
-
-@media (width >= 96rem /* 1536px */) {
-  .responsive_with {
-    width: 1536px;
-  }
 }
