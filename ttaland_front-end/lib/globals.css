@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+body {
+  font-size: 1.125rem
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

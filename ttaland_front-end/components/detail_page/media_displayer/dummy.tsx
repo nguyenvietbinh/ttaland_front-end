@@ -245,7 +245,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                 </div>
                 
                 {/* YouTube logo */}
-                <div className="absolute bottom-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                <div className="absolute bottom-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold">
                   YouTube
                 </div>
               </div>
@@ -289,7 +289,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
               </div>
               
               {/* TikTok logo - positioned on main container */}
-              <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-bold z-20">
+              <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm font-bold z-20">
                 TikTok
               </div>
             </div>
@@ -313,7 +313,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
 
           {/* image infor */}
           {(currentMedia.type === 'image') ? (
-            <div className='absolute text-lg text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
+            <div className='absolute text-xl text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
               <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
               <div className='bg-black/60 px-1 rounded-md'>Mô tả?</div>
             </div>
@@ -356,7 +356,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                       // Fallback to colored div if thumbnail fails
                       (e.target as HTMLImageElement).style.display = 'none';
                       const fallback = document.createElement('div');
-                      fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-xs font-bold';
+                      fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-sm font-bold';
                       fallback.textContent = 'YT';
                       (e.target as HTMLImageElement).parentNode?.appendChild(fallback);
                     }}
@@ -459,7 +459,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                 ) : (
                   <div className="flex flex-col items-center justify-center text-white text-center h-full">
                     <div className="text-6xl mb-4">🖼️</div>
-                    <h3 className="text-2xl font-bold mb-2">Không có hình ảnh</h3>
+                    <h3 className="text-3xl font-bold mb-2">Không có hình ảnh</h3>
                     <p className="text-gray-400">Sản phẩm này chưa có hình ảnh</p>
                   </div>
                 )}
@@ -475,7 +475,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                     return (
                       <div className="flex flex-col items-center justify-center text-white text-center">
                         <div className="text-6xl mb-4">📹</div>
-                        <h3 className="text-2xl font-bold mb-2">Không có video</h3>
+                        <h3 className="text-3xl font-bold mb-2">Không có video</h3>
                         <p className="text-gray-400">Sản phẩm này chưa có video</p>
                       </div>
                     );
@@ -553,13 +553,13 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                             // Fallback: Link để mở TikTok
                             <div className="flex flex-col items-center justify-center text-white p-8 text-center">
                               <div className="text-8xl mb-6">🎵</div>
-                              <h3 className="text-3xl font-bold mb-4">TikTok Video</h3>
-                              <p className="text-lg mb-6 opacity-75">Click để xem video trên TikTok</p>
+                              <h3 className="text-4xl font-bold mb-4">TikTok Video</h3>
+                              <p className="text-xl mb-6 opacity-75">Click để xem video trên TikTok</p>
                               <a 
                                 href={currentMedia.url} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-lg transition-colors"
+                                className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-xl transition-colors"
                               >
                                 Xem trên TikTok
                               </a>
@@ -577,7 +577,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
               <div className="h-full w-full flex items-center justify-center">
                 <div className="flex flex-col items-center justify-center text-white text-center">
                   <div className="text-6xl mb-4">🗺️</div>
-                  <h3 className="text-2xl font-bold mb-2">Bản đồ vị trí</h3>
+                  <h3 className="text-3xl font-bold mb-2">Bản đồ vị trí</h3>
                   <p className="text-gray-400 mb-6">Hiển thị vị trí của bất động sản</p>
                   {/* Placeholder cho bản đồ - có thể tích hợp Google Maps sau */}
                   <div className="w-4/5 h-3/5 bg-gray-800 rounded-lg border border-gray-600 flex items-center justify-center">
@@ -607,7 +607,7 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
               </button>
 
               {/* Media info */}
-              <div className='absolute text-xl text-white p-4 flex items-center justify-between bottom-0 w-full h-auto z-10'>
+              <div className='absolute text-2xl text-white p-4 flex items-center justify-between bottom-0 w-full h-auto z-10'>
                 <div className='bg-black/60 px-3 py-1 rounded-md'>{modalMediaIndex + 1}/{mediaItems.length}</div>
                 <div className='bg-black/60 px-3 py-1 rounded-md'>
                   {mediaItems[modalMediaIndex]?.type === 'youtube' ? 'YouTube' : 
@@ -648,13 +648,13 @@ const Media_displayer = ({ mediaItems, id }: media_displayer_props) => {
                 // Fallback: Link để mở TikTok
                 <div className="flex flex-col items-center justify-center text-white p-8 text-center">
                   <div className="text-8xl mb-6">🎵</div>
-                  <h3 className="text-3xl font-bold mb-4">TikTok Video</h3>
-                  <p className="text-lg mb-6 opacity-75">Click để xem video trên TikTok</p>
+                  <h3 className="text-4xl font-bold mb-4">TikTok Video</h3>
+                  <p className="text-xl mb-6 opacity-75">Click để xem video trên TikTok</p>
                   <a 
                     href={currentMedia.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-lg transition-colors"
+                    className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-xl transition-colors"
                   >
                     Xem trên TikTok
                   </a>

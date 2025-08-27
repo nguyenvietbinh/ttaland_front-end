@@ -67,7 +67,7 @@ export function Input({
         onBlur={handleBlur}
       />
       {isInvalid && (
-        <p className="mt-1 text-sm text-red-500">{errorMessage}</p>
+        <p className="mt-1 text-base text-red-500">{errorMessage}</p>
       )}
     </div>
   );

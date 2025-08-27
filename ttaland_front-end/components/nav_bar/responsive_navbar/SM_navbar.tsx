@@ -16,7 +16,7 @@ const SM_navbar = () => {
   return (
     <div>
       {width < 768 ? (
-      <div className='SM_navbar flex gap-6 justify-start w-full mx-auto text-gray-300 text-xl '>
+      <div className='SM_navbar flex gap-6 justify-start w-full mx-auto text-gray-300 text-2xl '>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
 
 

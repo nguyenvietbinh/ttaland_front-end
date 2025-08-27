@@ -10,7 +10,7 @@ const FormSale = () => {
     <div>
       <Navbar/>
       <div className="p-6 max-w-4xl max-h-3xl my-6 md:my-12 px-0 md:px-4 mx-auto bg-gray-800 rounded-none md:rounded-xl shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center md:text-left">Thông Tin Sản Phẩm</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center md:text-left">Thông Tin Sản Phẩm</h1>
         <div className="space-y-4">
           {/* san_pham_ban */}
           <div className="tabs tabs-border">

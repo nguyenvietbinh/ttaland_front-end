@@ -60,13 +60,13 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
             // Fallback: Link để mở TikTok
             <div className="flex flex-col items-center justify-center text-white p-8 text-center">
               <div className="text-8xl mb-6">🎵</div>
-              <h3 className="text-3xl font-bold mb-4">TikTok Video</h3>
-              <p className="text-lg mb-6 opacity-75">Click để xem video trên TikTok</p>
+              <h3 className="text-4xl font-bold mb-4">TikTok Video</h3>
+              <p className="text-xl mb-6 opacity-75">Click để xem video trên TikTok</p>
               <a 
                 href={currentMedia.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-lg transition-colors"
+                className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-xl transition-colors"
               >
                 Xem trên TikTok
               </a>
@@ -115,7 +115,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
         </div>
       )}
 
-      <div className='absolute text-lg text-white p-4 items-center justify-between top-0 h-auto'>
+      <div className='absolute text-xl text-white p-4 items-center justify-between top-0 h-auto'>
         <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
       </div>
 

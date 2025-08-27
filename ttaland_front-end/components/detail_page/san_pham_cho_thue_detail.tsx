@@ -50,7 +50,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_detail_props) => {
       <div className="container mx-auto p-2">
         {(id?.length) ? (
           <div>
-            <h1 className="w-full text-center text-3xl font-bold mt-6">Tên sản phẩm</h1>
+            <h1 className="w-full text-center text-4xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
               <Media_displayer mediaItems={media_data}/>
               <div className="w-0.5 block border-[1px] border-gray-600"></div>

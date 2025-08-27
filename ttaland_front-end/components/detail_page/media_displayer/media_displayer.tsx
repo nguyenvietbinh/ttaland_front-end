@@ -209,7 +209,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
           </div>
 
           {/* media infor */}
-          <div className='absolute text-lg text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
+          <div className='absolute text-xl text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
             <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
           </div>
         </div>
@@ -249,7 +249,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
                       // Fallback to colored div if thumbnail fails
                       (e.target as HTMLImageElement).style.display = 'none';
                       const fallback = document.createElement('div');
-                      fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-xs font-bold';
+                      fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-sm font-bold';
                       fallback.textContent = 'YT';
                       (e.target as HTMLImageElement).parentNode?.appendChild(fallback);
                     }}

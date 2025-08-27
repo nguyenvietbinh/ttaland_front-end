@@ -109,7 +109,7 @@ const Listing = ({currentPropertyType, isForSale, isForRent}: Listing_props) => 
         {currentData!.data.error && (
           <div className="text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
             <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
-            <p className="text-sm mt-1">Lỗi: {currentData!.data.error}</p>
+            <p className="text-base mt-1">Lỗi: {currentData!.data.error}</p>
           </div>
         )}
 

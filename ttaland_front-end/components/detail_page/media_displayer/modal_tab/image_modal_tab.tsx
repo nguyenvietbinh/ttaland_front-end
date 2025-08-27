@@ -68,7 +68,7 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
         <FaChevronRight size={20} />
       </button>
 
-      <div className='absolute text-lg text-white p-4 items-center justify-between top-0 h-auto'>
+      <div className='absolute text-xl text-white p-4 items-center justify-between top-0 h-auto'>
         <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
       </div>
 

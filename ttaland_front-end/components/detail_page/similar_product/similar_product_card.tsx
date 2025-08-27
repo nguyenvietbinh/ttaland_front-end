@@ -68,7 +68,7 @@ const SimilarProductCard = ({
         />
         
         {/* Image count indicator */}
-        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm xl:text-md flex items-center gap-1">
+        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-base xl:text-md flex items-center gap-1">
           <FaImages size={12} />
           {numberOfImg}
         </div>
@@ -90,25 +90,25 @@ const SimilarProductCard = ({
       <Link className="p-1 flex flex-col justify-between" href={urlToDetail()}>
         <div className="flex flex-col">
           {/* Title - Fixed height with 2 lines max */}
-          <h3 className="font-semibold text-gray-800 text-sm xl:text-lg line-clamp-2 h-[3em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
+          <h3 className="font-semibold text-gray-800 text-base xl:text-xl line-clamp-2 h-[3em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
             {title}
           </h3>
 
           {/* Price and Area */}
           <div className="flex items-center gap-4">
-            <span className="text-md xl:text-2xl font-bold text-red-600">{price}</span>
-            <span className="text-md xl:text-2xl font-bold text-red-600">{area}</span>
+            <span className="text-md xl:text-3xl font-bold text-red-600">{price}</span>
+            <span className="text-md xl:text-3xl font-bold text-red-600">{area}</span>
           </div>
 
           {/* Location */}
-          <div className="flex items-center gap-1 text-gray-500 text-sm xl:text-lg">
+          <div className="flex items-center gap-1 text-gray-500 text-base xl:text-xl">
             <FaMapMarkerAlt size={12} />
             <span className="line-clamp-1 mb-1">{location}</span>
           </div>
         </div>
 
         {/* Status - Pushed to bottom */}
-        <div className="text-xs text-gray-400 mt-auto">
+        <div className="text-sm text-gray-400 mt-auto">
           Đăng hôm nay
         </div>
       </Link>
