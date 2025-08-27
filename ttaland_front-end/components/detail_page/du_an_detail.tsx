@@ -91,34 +91,34 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                  }}>
                 <div className="w-full xl:w-[1280px] 2xl:w-[1536px] mx-auto px-4 xl:px-0">
                     <div className="text-center">
-                        <p className="text-lg mb-2">{projectData.subtitle}</p>
+                        <p className="text-xl mb-2">{projectData.subtitle}</p>
                         <h1 className="text-5xl font-bold mb-4">{projectData.name}</h1>
                         
                         {/* Hero Stats */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
                             <div className="bg-white bg-opacity-10 p-4 rounded-lg">
                                 <div className="text-m text-blue-600 font-bold">MỞ BÁN</div>
-                                <div className="text-2xl text-blue-600 font-bold">50 CĂN</div>
+                                <div className="text-3xl text-blue-600 font-bold">50 CĂN</div>
                                 <div className="text-m text-blue-600 font-bold">ĐẦU TIÊN</div>
                             </div>
                             <div className="bg-white bg-opacity-10 p-4 rounded-lg">
                                 <div className="text-m text-blue-600 font-bold">CHIẾT KHẤU</div>
-                                <div className="text-2xl text-blue-600 font-bold">{projectData.discount}</div>
+                                <div className="text-3xl text-blue-600 font-bold">{projectData.discount}</div>
                                 <div className="text-m text-blue-600 font-bold">THANH TOÁN</div>
                             </div>
                             <div className="bg-white bg-opacity-10 p-4 rounded-lg">
                                 <div className="text-m text-blue-600 font-bold">MIỄN PHÍ</div>
-                                <div className="text-2xl text-blue-600 font-bold">5 NĂM</div>
+                                <div className="text-3xl text-blue-600 font-bold">5 NĂM</div>
                                 <div className="text-m text-blue-600 font-bold">PHÍ QUẢN LÝ</div>
                             </div>
                             <div className="bg-white bg-opacity-10 p-4 rounded-lg">
                                 <div className="text-m text-blue-600 font-bold">BÀN GIAO</div>
-                                <div className="text-2xl text-blue-600 font-bold">Q4/2025</div>
+                                <div className="text-3xl text-blue-600 font-bold">Q4/2025</div>
                                 <div className="text-m text-blue-600 font-bold">HOÀN THIỆN</div>
                             </div>
                         </div>
                         
-                        <button className="mt-8 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors">
+                        <button className="mt-8 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full text-xl font-semibold transition-colors">
                             NHẬN BẢNG GIÁ MỚI NHẤT QUA ZALO
                         </button>
                     </div>
@@ -128,25 +128,25 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
             <div className="w-full xl:w-[1280px] 2xl:w-[1536px] mx-auto px-4 xl:px-0">
                 {/* Project Overview */}
                 <section className="py-12">
-                    <h2 className="text-3xl font-bold text-center mb-8">GIỚI THIỆU THÔNG TIN TỔNG QUAN</h2>
+                    <h2 className="text-4xl font-bold text-center mb-8">GIỚI THIỆU THÔNG TIN TỔNG QUAN</h2>
                     
                     {/* Stats Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                         <div className="text-center bg-gray-600 p-6 rounded-lg">
-                            <div className="text-blue-400 text-sm mb-2">QUY MÔ</div>
-                            <div className="text-2xl font-bold">{projectData.totalArea}</div>
+                            <div className="text-blue-400 text-base mb-2">QUY MÔ</div>
+                            <div className="text-3xl font-bold">{projectData.totalArea}</div>
                         </div>
                         <div className="text-center bg-gray-600 p-6 rounded-lg">
-                            <div className="text-blue-400 text-sm mb-2">SỐ LƯỢNG</div>
-                            <div className="text-2xl font-bold">{projectData.totalUnits}</div>
+                            <div className="text-blue-400 text-base mb-2">SỐ LƯỢNG</div>
+                            <div className="text-3xl font-bold">{projectData.totalUnits}</div>
                         </div>
                         <div className="text-center bg-gray-600 p-6 rounded-lg">
-                            <div className="text-blue-400 text-sm mb-2">VẬN HÀNH</div>
-                            <div className="text-lg font-bold">ANABUKI</div>
+                            <div className="text-blue-400 text-base mb-2">VẬN HÀNH</div>
+                            <div className="text-xl font-bold">ANABUKI</div>
                         </div>
                         <div className="text-center bg-gray-600 p-6 rounded-lg">
-                            <div className="text-blue-400 text-sm mb-2">BÀN GIAO</div>
-                            <div className="text-lg font-bold">{projectData.handover}</div>
+                            <div className="text-blue-400 text-base mb-2">BÀN GIAO</div>
+                            <div className="text-xl font-bold">{projectData.handover}</div>
                         </div>
                     </div>
 
@@ -203,23 +203,23 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
 
                 {/* Products Section */}
                 <section className="py-12">
-                    <h2 className="text-3xl font-bold text-center mb-8">SẢN PHẨM ĐANG MỞ BÁN</h2>
+                    <h2 className="text-4xl font-bold text-center mb-8">SẢN PHẨM ĐANG MỞ BÁN</h2>
                     
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* T-House */}
                         <div className="bg-gray-800 rounded-lg overflow-hidden">
                             <img src={projectData.images[5]} alt="T-House" className="w-full h-64 object-cover" />
                             <div className="p-6">
-                                <h3 className="text-xl font-bold mb-4">NHÀ PHỐ T-HOUSE</h3>
+                                <h3 className="text-2xl font-bold mb-4">NHÀ PHỐ T-HOUSE</h3>
                                 <ul className="space-y-2 mb-4">
                                     <li>• Diện tích: 5×17 – 5×19</li>
                                     <li>• Kết cấu: 1 trệt – 2 lầu</li>
                                     <li>• Giá bán: 4,1 – 5 tỷ</li>
                                 </ul>
                                 <div className="text-center bg-blue-900 p-3 rounded">
-                                    <div className="text-sm">MỖI ĐỢT THANH TOÁN CHỈ</div>
-                                    <div className="text-xl font-bold">100 triệu</div>
-                                    <div className="text-sm">TƯƠNG ĐƯƠNG 2,5%</div>
+                                    <div className="text-base">MỖI ĐỢT THANH TOÁN CHỈ</div>
+                                    <div className="text-2xl font-bold">100 triệu</div>
+                                    <div className="text-base">TƯƠNG ĐƯƠNG 2,5%</div>
                                 </div>
                             </div>
                         </div>
@@ -228,16 +228,16 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                         <div className="bg-gray-800 rounded-lg overflow-hidden">
                             <img src={projectData.images[4]} alt="E-House" className="w-full h-64 object-cover" />
                             <div className="p-6">
-                                <h3 className="text-xl font-bold mb-4">NHÀ PHỐ E-HOUSE</h3>
+                                <h3 className="text-2xl font-bold mb-4">NHÀ PHỐ E-HOUSE</h3>
                                 <ul className="space-y-2 mb-4">
                                     <li>• Diện tích: 5×17 – 5×19</li>
                                     <li>• Kết cấu: 1 trệt – 1 lửng – 2 lầu</li>
                                     <li>• Giá bán: 4,6 – 5,1 tỷ</li>
                                 </ul>
                                 <div className="text-center bg-blue-900 p-3 rounded">
-                                    <div className="text-sm">MỖI ĐỢT THANH TOÁN CHỈ</div>
-                                    <div className="text-xl font-bold">120 triệu</div>
-                                    <div className="text-sm">TƯƠNG ĐƯƠNG 2,5%</div>
+                                    <div className="text-base">MỖI ĐỢT THANH TOÁN CHỈ</div>
+                                    <div className="text-2xl font-bold">120 triệu</div>
+                                    <div className="text-base">TƯƠNG ĐƯƠNG 2,5%</div>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                 {/* Special Offers */}
                 <section className="py-12">
                     <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-lg p-8">
-                        <h2 className="text-2xl font-bold text-center mb-6">CHÍNH SÁCH BÁN HÀNG ĐẶC BIỆT</h2>
+                        <h2 className="text-3xl font-bold text-center mb-6">CHÍNH SÁCH BÁN HÀNG ĐẶC BIỆT</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {projectData.specialOffers.map((offer, index) => (
                                 <div key={index} className="flex items-center">
@@ -265,7 +265,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
 
                 {/* Location Section */}
                 <section className="py-12">
-                    <h2 className="text-3xl font-bold text-center mb-8">VỊ TRÍ DỰ ÁN</h2>
+                    <h2 className="text-4xl font-bold text-center mb-8">VỊ TRÍ DỰ ÁN</h2>
                     <div className="bg-gray-600 rounded-lg p-6">
                         <img src={projectData.images[2]} alt="Vị trí dự án" className="w-3/4 h-3/4 object-cover rounded mb-6 mx-auto" />
                         <p className="text-gray-300 leading-relaxed mb-4 w-3/4 mx-auto text-justify">{projectData.description}</p>
@@ -281,7 +281,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                 {/* Contact Section */}
                 <section className="py-12">
                     <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg p-8 text-center">
-                        <h2 className="text-2xl font-bold mb-4">LIÊN HỆ TƯ VẤN</h2>
+                        <h2 className="text-3xl font-bold mb-4">LIÊN HỆ TƯ VẤN</h2>
                         <p className="mb-6">Nhận ngay bảng giá và thông tin chi tiết dự án</p>
                         <div className="flex flex-col md:flex-row justify-center gap-4">
                             <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-bold transition-colors">
@@ -297,7 +297,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
 
                 {/* Overall Plan */}
                 <section className="py-12">
-                    <h2 className="text-3xl font-bold text-center mb-8">MẶT BẰNG TỔNG THỂ</h2>
+                    <h2 className="text-4xl font-bold text-center mb-8">MẶT BẰNG TỔNG THỂ</h2>
                     <div className="bg-gray-600 rounded-lg p-6">
                         <div className="text-black bg-gray-200 px-6 pb-2 pt-4 rounded-lg leading-relaxed mb-4 w-3/4 mx-auto text-justify">
                             {projectData.overallPlan.split('\n').map((line, index) => (
@@ -313,7 +313,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                             </p>
 
                                 <div className="text-black bg-gray-200 rounded-lg p-6">
-                                    <h3 className="text-xl font-bold mb-4">Nằm rải rác là khu tiện ích quy mô lớn với đầy đủ tiện nghi:</h3>
+                                    <h3 className="text-2xl font-bold mb-4">Nằm rải rác là khu tiện ích quy mô lớn với đầy đủ tiện nghi:</h3>
                                     <ul className="list-disc pl-6 space-y-1 mb-6">
                                         <li>Trường mầm non chuẩn quốc tế</li>
                                         <li>Khu thương mại với siêu thị, nhà hàng, quán cà phê</li>
@@ -330,7 +330,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                                 </div>
                             
                             <div className="mt-8">
-                                <h3 className="text-xl font-bold mb-4 text-center">Phân khu nhà ở bao gồm hai loại hình chính:</h3>
+                                <h3 className="text-2xl font-bold mb-4 text-center">Phân khu nhà ở bao gồm hai loại hình chính:</h3>
                             </div>
                         </div>
                         {/* Layout Images Section */}
@@ -345,7 +345,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                                             alt="Layout E-House" 
                                             className="w-full h-auto object-cover rounded mb-4"
                                         />
-                                        <h4 className="text-lg font-semibold text-blue-400">T-house (Townhouse):</h4>
+                                        <h4 className="text-xl font-semibold text-blue-400">T-house (Townhouse):</h4>
                                         <ul className="list-disc pl-6 space-y-1 text-black">
                                             <li>Diện tích: 5x16m, 5x17m, 5x18m, 5x19m</li>
                                             <li>Kết cấu: 1 trệt – 2 lầu</li>
@@ -362,7 +362,7 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
                                             alt="Layout T-House" 
                                             className="w-full h-auto object-cover rounded mb-4"
                                         />
-                                        <h4 className="text-lg font-semibold text-blue-400">E-house (Eco-house):</h4>
+                                        <h4 className="text-xl font-semibold text-blue-400">E-house (Eco-house):</h4>
                                         <ul className="list-disc pl-6 space-y-1 text-black">
                                             <li>Diện tích: 5x16m, 5x17m, 5x18m, 5x19m</li>
                                             <li>Kết cấu: 1 trệt – 1 lửng – 2 lầu</li>
@@ -378,12 +378,12 @@ const Du_an_detail = ({ projectId, category, backPath }: ProjectDetailProps) => 
 
                 {/* Amenities */}
                 <section className="py-12">
-                    <h2 className="text-3xl font-bold text-center mb-8">TIỆN ÍCH TẠI DỰ ÁN</h2>
+                    <h2 className="text-4xl font-bold text-center mb-8">TIỆN ÍCH TẠI DỰ ÁN</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {projectData.amenities.map((amenity, index) => (
                             <div key={index} className="bg-gray-800 p-4 rounded-lg text-center">
                                 <div className="text-blue-400 mb-2">
-                                    <FontAwesomeIcon icon={faBuilding} className="text-2xl" />
+                                    <FontAwesomeIcon icon={faBuilding} className="text-3xl" />
                                 </div>
                                 <p className="font-semibold">{amenity}</p>
                             </div>

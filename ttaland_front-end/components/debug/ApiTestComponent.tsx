@@ -75,7 +75,7 @@ const ApiTestComponent = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">API Connectivity Test</h2>
+      <h2 className="text-3xl font-bold mb-4 text-gray-800">API Connectivity Test</h2>
       
       <button 
         onClick={testApiEndpoints}
@@ -89,8 +89,8 @@ const ApiTestComponent = () => {
         {Object.entries(testResults).map(([name, result]: [string, TestResult]) => (
           <div key={name} className="border rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-700">{name}</h3>
-              <span className={`px-2 py-1 rounded text-sm font-medium ${
+              <h3 className="text-xl font-semibold text-gray-700">{name}</h3>
+              <span className={`px-2 py-1 rounded text-base font-medium ${
                 result.status === 'SUCCESS' ? 'bg-green-100 text-green-800' :
                 result.status === 'ERROR' ? 'bg-yellow-100 text-yellow-800' :
                 'bg-red-100 text-red-800'
@@ -100,7 +100,7 @@ const ApiTestComponent = () => {
             </div>
             
             {result.status === 'SUCCESS' && (
-              <div className="text-sm text-gray-600 space-y-1">
+              <div className="text-base text-gray-600 space-y-1">
                 <p>Status Code: {result.statusCode}</p>
                 <p>Total Count: {result.count}</p>
                 <p>Has Results: {result.hasResults ? 'Yes' : 'No'}</p>
@@ -110,7 +110,7 @@ const ApiTestComponent = () => {
                 {result.firstResult && typeof result.firstResult === 'object' ? (
                   <details className="mt-2">
                     <summary className="cursor-pointer text-blue-600">Show First Result</summary>
-                    <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto">
+                    <pre className="mt-2 p-2 bg-gray-100 rounded text-sm overflow-auto">
                       {JSON.stringify(result.firstResult, null, 2)}
                     </pre>
                   </details>
@@ -119,7 +119,7 @@ const ApiTestComponent = () => {
             )}
             
             {(result.status === 'ERROR' || result.status === 'FAILED') && (
-              <div className="text-sm text-red-600">
+              <div className="text-base text-red-600">
                 <p>Error: {result.error}</p>
                 {result.statusCode && <p>Status Code: {result.statusCode}</p>}
               </div>
@@ -131,12 +131,12 @@ const ApiTestComponent = () => {
       {/* Quick image test */}
       {Object.values(testResults).some((result: TestResult) => result.sampleMediaUrl) && (
         <div className="mt-6 border rounded-lg p-4">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Image URL Test</h3>
+          <h3 className="text-xl font-semibold text-gray-700 mb-2">Image URL Test</h3>
           {Object.entries(testResults).map(([name, result]: [string, TestResult]) => 
             result.sampleMediaUrl ? (
               <div key={name} className="mb-4">
-                <p className="text-sm text-gray-600 mb-2">{name} - Media URL: {result.sampleMediaUrl}</p>
-                <p className="text-sm text-gray-600 mb-2">
+                <p className="text-base text-gray-600 mb-2">{name} - Media URL: {result.sampleMediaUrl}</p>
+                <p className="text-base text-gray-600 mb-2">
                   Full URL: {result.sampleMediaUrl?.startsWith('http') ? result.sampleMediaUrl : `http://localhost:8000${result.sampleMediaUrl}`}
                 </p>
                 <img 

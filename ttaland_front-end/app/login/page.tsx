@@ -24,7 +24,7 @@ export default function Login() {
       <BackButton/>
       <div className="card w-full max-w-md shadow-2xl bg-gray-800">
         <div className="card-body">
-          <h1 className="text-2xl font-bold text-center">Đăng nhập</h1>
+          <h1 className="text-3xl font-bold text-center">Đăng nhập</h1>
           <form onSubmit={handleSubmit} className="mt-6">
             <div className="form-control flex justify-between">
               <label className="label">
@@ -57,10 +57,10 @@ export default function Login() {
             </div>
           </form>
           <div className="text-center flex justify-between mt-4">
-            <a href="/login/quen_mat_khau" className="link link-hover text-sm">
+            <a href="/login/quen_mat_khau" className="link link-hover text-base">
               Quên mật khẩu?
             </a>
-            <a href="/dang_ki" className="link link-hover text-sm">
+            <a href="/dang_ki" className="link link-hover text-base">
               Chưa có tài khoản?
             </a>
           </div>

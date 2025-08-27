@@ -25,7 +25,7 @@ export default function SignUp() {
       <BackButton href="/"/>
       <div className="card w-full max-w-md shadow-2xl bg-gray-800">
         <div className="card-body">
-          <h1 className="text-2xl font-bold text-center">Đăng kí</h1>
+          <h1 className="text-3xl font-bold text-center">Đăng kí</h1>
           <form onSubmit={handleSubmit} className="mt-6">
             <div className="form-control flex justify-between">
               <label className="label">

@@ -157,12 +157,12 @@ useEffect(() => {
               <img src={(isMinDown) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-270 cursor-pointer select-none drag-none hover:h-5' style={(isMinDown) ? { height: '20px' } : {}} onMouseDown={() => setIsMinDown(true)} onMouseUp={() => setIsMinDown(false)} onMouseLeave={() => setIsMinDown} alt="" />
               <img src={(isMinUp) ? "/img/icons/gray_cirle_arrow.png" : "/img/icons/circle_arrow.png"} className='h-4 w-auto rotate-90 cursor-pointer select-none drag-none hover:h-5' style={(isMinUp) ? { height: '20px' } : {}} onMouseDown={() => setIsMinUp(true)} onMouseUp={() => setIsMinUp(false)} onMouseLeave={() => setIsMinUp} alt="" />
             </div>
-            <span className={"text-sm font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
+            <span className={"text-base font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
               Từ: {setUnit(type, minVal)[0]} {setUnit(type, minVal)[1]}
             </span>
           </div>
           <div className='flex gap-2'>
-            <span className={"text-sm font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
+            <span className={"text-base font-medium flex items-center gap-1" + ' ' + dual_input_range_name}>
               Đến: {setUnit(type, maxVal)[0]} {setUnit(type, maxVal)[1]}
             </span>
             <div className='flex gap-1 items-center'>

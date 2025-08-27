@@ -40,7 +40,7 @@ const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props
   return (
     <div className='space-y-4 flex-col'>
       <div>
-        <p className='text-sm my-1 ml-1'>1. Vị Trí</p>
+        <p className='text-base my-1 ml-1'>1. Vị Trí</p>
         <div className="flex px-2 justify-between  items-center">
           <div className='max-h-36 overflow-auto pr-4'>
             {locations.map((item, index) => (
@@ -49,7 +49,7 @@ const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props
           </div>
           <div className='flex btn gap-2 border-[1px] rounded-sm border-gray-600 bg-black hover:border-white p-2 cursor-pointer items-center' onClick={() => (document.getElementById('san_pham_cho_thue_map') as HTMLDialogElement)?.showModal()}>
             <img src="/img/icons/map.png" alt="" className='h-6'/>
-            <p className='text-sm text-nowrap'>Bản đồ</p>
+            <p className='text-base text-nowrap'>Bản đồ</p>
             <dialog id={'san_pham_cho_thue_map'} className="modal">
               <div className="modal-box absolute top-[12%] bg-black p-4 pb-8 max-w-2xl max-h-5xl h-auto">
                 <div className="modal-action flex justify-start items-center mt-0 mb-2 px-2">
@@ -88,7 +88,7 @@ const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props
         </div>
       </div>
       <div>
-        <p className='text-sm my-1 ml-1'>2. Loại Tài Sản</p>
+        <p className='text-base my-1 ml-1'>2. Loại Tài Sản</p>
         <select defaultValue="Nhà Phố" className="select focus:outline-0 w-full san_pham_cho_thue_property_type">
           <option value='nha_pho'>Nhà Phố</option>
           <option value='biet_thu'>Biệt Thự</option>
@@ -97,19 +97,19 @@ const San_pham_cho_thue_filter_form = ({ sendLocaions }: san_pham_cho_thue_props
         </select>
       </div>
       <div>
-        <p className='text-sm my-1 ml-1'>3. Giá</p>
+        <p className='text-base my-1 ml-1'>3. Giá</p>
         <DualRangeSlider dual_input_range_name='san_pham_cho_thue_price' min={0} max={1000} step={50} type='san_pham_cho_thue_price'/>
       </div>
       <div>
-        <p className='text-sm my-1 ml-1'>4. Diện Tích</p>
+        <p className='text-base my-1 ml-1'>4. Diện Tích</p>
         <DualRangeSlider dual_input_range_name='san_pham_cho_thue_sqr' min={0} max={500} step={50} type='sqr'/>
       </div>
       <div>
-        <p className='text-sm my-1 ml-1'>5. Phòng Ngủ</p>
+        <p className='text-base my-1 ml-1'>5. Phòng Ngủ</p>
         <DualRangeSlider dual_input_range_name='san_pham_cho_thue_bed_room' min={1} max={5} step={1} type='room'/>
       </div>
       <div>
-        <p className='text-sm my-1 ml-1'>5. Phòng Tắm</p>
+        <p className='text-base my-1 ml-1'>5. Phòng Tắm</p>
         <DualRangeSlider dual_input_range_name='san_pham_cho_thue_bath_room' min={1} max={5} step={1} type='room'/>
       </div>
     </div>

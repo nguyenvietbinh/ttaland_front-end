@@ -255,7 +255,7 @@ const Similar_produc = () => {
       <div className="container">
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
-          <p className='text-2xl sm:text-3xl'>Sản phẩm tương tự:</p>
+          <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
         
           {/* desktop Pagination Controls */}
           <div className="items-center space-x-1 hidden sm:flex">
@@ -277,14 +277,14 @@ const Similar_produc = () => {
           {getPaginationNumbers().map((page, index) => (
             <div key={index}>
               {page === '...' ? (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-lg font-bold">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-xl font-bold">
                   ...
                 </div>
               ) : (
                 <button
                   onClick={() => goToPage(page as number)}
                   disabled={isAnimating}
-                  className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-lg font-bold ${
+                  className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-xl font-bold ${
                     currentPage === page
                       ? 'bg-blue-500 text-white border-blue-500'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
@@ -364,14 +364,14 @@ const Similar_produc = () => {
             {getPaginationNumbers().map((page, index) => (
               <div key={index}>
                 {page === '...' ? (
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-lg font-bold">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-xl font-bold">
                     ...
                   </div>
                 ) : (
                   <button
                     onClick={() => goToPage(page as number)}
                     disabled={isAnimating}
-                    className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-lg font-bold ${
+                    className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-xl font-bold ${
                       currentPage === page
                         ? 'bg-blue-500 text-white border-blue-500'
                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'

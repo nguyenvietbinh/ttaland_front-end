@@ -64,8 +64,8 @@ const San_pham_cho_thue_property = () => {
 
         {/* info */}
         <div className="">
-          <h1 className="font-bold text-xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
-          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-lg text-nowrap border-y-[1px] font-bold border-gray-600">
+          <h1 className="font-bold text-2xl cursor-pointer hover:underline wrap-break-word line-clamp-2" onClick={handleNavigateToDetail}>QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2</h1>
+          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-xl text-nowrap border-y-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
               <p className="">Diện tích:</p>

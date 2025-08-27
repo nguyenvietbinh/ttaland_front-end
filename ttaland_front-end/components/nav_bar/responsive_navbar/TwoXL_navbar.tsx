@@ -18,7 +18,7 @@ const TwoXL_navbar = () => {
   return (
     <div>
       {width > 1536 ? (
-        <div className='TwoXL_navbar flex gap-6 justify-start w-[1536px] mx-auto text-gray-300 text-xl'>
+        <div className='TwoXL_navbar flex gap-6 justify-start w-[1536px] mx-auto text-gray-300 text-2xl'>
           <Link href="/"><img src="/img/logo.png" alt="" className='h-20 xl:h-24'/></Link>
           <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
             Tin Tức
