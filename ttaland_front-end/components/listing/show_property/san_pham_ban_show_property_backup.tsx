@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from 'next/navigation'
 import NProgress from 'nprogress'
-import { apiService, type Townhouse } from '@/services/apiService'
+import { type Townhouse } from '@/services/apiService'
 
 interface San_pham_ban_propertyProps {
   townhouse?: Townhouse
@@ -23,9 +23,9 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
   }
 
   useEffect(() => {
-    if (isUsingRealData && townhouse?.media) {
+    if (isUsingRealData && townhouse?.main_images) {
       // Use real media data
-      setNumberOfImg(townhouse.media.length)
+      setNumberOfImg(townhouse.main_images.length)
     } else {
       // Use mock data
       const randomNum = getRandomNumber(4, 9)
@@ -49,8 +49,8 @@ const San_pham_ban_property = ({ townhouse }: San_pham_ban_propertyProps) => {
 
   // Get image URLs
   const getImageUrl = (index: number): string => {
-    if (isUsingRealData && townhouse?.media?.[index]) {
-      return apiService.getMediaUrl(townhouse.media[index].file)
+    if (isUsingRealData && townhouse?.main_images?.[index]) {
+      return townhouse.main_images[index]
     }
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { apiService, type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
+import { type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
 import Link from "next/link"
 
 interface San_pham_cho_thue_propertyProps {
@@ -27,7 +27,8 @@ const mockRentalPropertyData = {
   type_display: 'Nhà phố',
   created_at: '2024-08-09',
   media: [],
-  images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg']
+  images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg'],
+  main_images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg']
 }
 
 const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_pham_cho_thue_propertyProps) => {
@@ -43,9 +44,9 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
   }
 
   useEffect(() => {
-    if (isUsingRealData && property?.images) {
+    if (isUsingRealData && property?.main_images) {
       // Use real media data
-      setNumberOfImg(property.images.length)
+      setNumberOfImg(property.main_images.length)
     } else {
       // Use mock data
       const randomNum = getRandomNumber(4, 9)
@@ -66,8 +67,8 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
 
   // Get image URLs
   const getImageUrl = (index: number): string => {
-    if (isUsingRealData && property?.images?.[index]) {
-      return apiService.getMediaUrl(property.images[index])
+    if (isUsingRealData && property?.main_images?.[index]) {
+      return property.main_images[index]
     }
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }
