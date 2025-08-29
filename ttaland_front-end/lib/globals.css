@@ -5,6 +5,10 @@ body {
   font-size: 1.125rem
 }
 
+:root {
+  --text-2xl--line-height: 1
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
