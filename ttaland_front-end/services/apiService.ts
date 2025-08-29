@@ -28,6 +28,7 @@ export interface Property {
   created_at: string
   media: MediaFile[]
   images: string[]
+  main_images: string[]
 }
 
 export interface Townhouse extends Property {
