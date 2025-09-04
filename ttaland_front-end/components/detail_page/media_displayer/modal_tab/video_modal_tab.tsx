@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { MediaItem } from "../media_displayer"
+import { useSwipe } from "@/hooks/useSwipe";
 import { 
   FaChevronLeft, 
   FaChevronRight, 
@@ -17,6 +18,15 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
     const [currentIndex, setCurrentIndex] = useState<number>(startVideoIndex);
     const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
   
+    useSwipe({
+      onSwipe: (direction) => {
+        if (direction === 'right') {
+          goToPrevious()
+        } else if (direction === 'left') {
+          goToNext()
+        }
+      },
+    })
   
     useEffect(() => {
       setCurrentIndex(startVideoIndex)
@@ -44,7 +54,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
   return (
     <div>
       {currentMedia.type === 'tiktok' ? (
-        <div className="mx-auto select-none h-190 max-w-[98vw] aspect-video bg-black rounded-lg overflow-hidden">
+        <div className="mx-auto select-none h-[80vh] max-w-[98vw] aspect-video bg-black rounded-lg overflow-scroll">
           {currentMedia.embedUrl?.startsWith('https://www.tiktok.com/embed/v2/') ? (
             <iframe
               className="h-full w-full"
@@ -93,7 +103,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
 
 
       {mediaItems.length > 1 ? (
-        <div>
+        <div className="hidden md:block">
           <button 
             onClick={goToPrevious}
             className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
@@ -115,7 +125,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
         </div>
       )}
 
-      <div className='absolute text-xl text-white p-4 items-center justify-between top-0 h-auto'>
+      <div className='absolute hidden md:block text-xl text-white p-4 items-center justify-between top-0 h-auto'>
         <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
       </div>
 
