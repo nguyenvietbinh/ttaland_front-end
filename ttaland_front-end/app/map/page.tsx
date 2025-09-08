@@ -10,7 +10,7 @@ const Map = () => {
 
   return (
     <div className="h-[100vh] w-[100vw]">
-      <MapComponent locations={['22 Nguyễn Huệ, Quận 1, TP.HCM']}/>
+      <MapComponent locations={['40 Nguyễn Đình Chi, Phường 9, Quận 6, Hồ Chí Minh']}/>
     </div>
   )
 }

@@ -11,9 +11,10 @@ import { useSwipe } from "@/hooks/useSwipe"
 interface Media_modal_props {
   mediaItems: MediaItem[]
   currentMedia: MediaItem
+  location: string
 }
 
-const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
+const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) => {
   const media_modalRef = useRef<HTMLDialogElement>(null);
   const [currentTab, setCurrentTab] = useState<'video' | 'image' | 'map'>()
   const videoMediaItems = mediaItems.filter(item => item.type !== 'image')
@@ -40,7 +41,7 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
   return (
     <dialog id="media_modal" ref={media_modalRef} className="modal">
       <div className="modal-box bg-black text-white w-screen h-screen p-0 pr-4 rounded-none max-w-screen">
-        <div className="flex items-center gap-1 justify-center p-2 my-2">
+        <div className="flex items-center gap-1 justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div
             className={`flex transition-all duration-300 items-center gap-1 rounded-full border-[2px] px-2 cursor-pointer ${currentTab === 'video' ? 'bg-white text-black border-white' : 'border-gray-500 hover:border-white'}`} 
             onClick={() => setCurrentTab('video')}
@@ -77,7 +78,7 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
         ) : currentTab === 'image' ? (
           <Image_modal_tab mediaItems={imageMediaItems} startImageIndex={startImageIndex}/>
         ) : currentTab === 'map' ? (
-          <Map_modal_tab/>
+          <Map_modal_tab location={location}/>
         ): null}
 
 
@@ -86,13 +87,7 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
         {/* close button */}
         <div className="modal-action mt-0">
           <form method="dialog">
-              <button 
-                className="w-12 h-12 absolute hidden md:flex top-2 right-6 bg-black/50 hover:bg-white text-white hover:text-black rounded-full transition-all duration-300 cursor-pointer hover:scale-110 hover:shadow-lg items-center justify-center"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+
           </form>
         </div>
       </div>

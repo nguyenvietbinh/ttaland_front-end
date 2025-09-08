@@ -82,13 +82,11 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
         </button>
       </div>
 
-      <div className='absolute hidden md:block text-xl text-white p-4 items-center justify-between top-0 h-auto'>
-        <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
-      </div>
+
 
 
       {/* Thumbnail gallery */}
-      <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 m-4 hidden md:flex">
+      <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 m-4 hidden md:flex select-none">
         {mediaItems.map((item, index) => (
           <div
             key={index}
