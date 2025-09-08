@@ -18,9 +18,10 @@ export type MediaItem = {
 
 interface media_displayer_props {
   mediaItems: MediaItem[];
+  location: string
 }
 
-const Media_displayer = ({ mediaItems }: media_displayer_props) => {
+const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [tiktokThumbs, setTiktokThumbs] = useState<Record<string, string>>({});
 
@@ -278,7 +279,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
       </div>
             
       {/* full screen image display */}
-      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
+      <Media_modal location={location} mediaItems={mediaItems} currentMedia={currentMedia}/>
     </div>
   );
 };

@@ -41,10 +41,26 @@ const MapComponent = ({ locations }: mapComponentProps) => {
         const [lng, lat] = data.features[0]?.center || [];
 
         if (lat && lng && map.current) {
+          const popupContent = `
+            <div class="p-2 max-w-xs text-sm text-gray-800">
+              <h3 class="text-base font-semibold mb-1">${location}</h3>
+              <img src="/img/example/showcase1.jpg" alt="${location}" class="rounded-md mb-2" />
+              <p class="text-xs">Đây là mô tả chi tiết cho địa điểm <strong>${location}</strong>.</p>
+            </div>
+          `;
+
           new mapboxgl.Marker()
             .setLngLat([lng, lat])
-            .setPopup(new mapboxgl.Popup().setText(location))
+            .setPopup(new mapboxgl.Popup(
+              { 
+                offset: 25,
+                closeButton: false
+              }
+            ).setHTML(popupContent))
             .addTo(map.current);
+
+            
+          
         }
       }
     };

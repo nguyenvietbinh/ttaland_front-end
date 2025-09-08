@@ -4,6 +4,7 @@ export type detail_infor = {
   price: string,
   sqr: number,
   legal: string,
+  location: string,
   structure: string,
   bed_room: number,
   bath_room: number,

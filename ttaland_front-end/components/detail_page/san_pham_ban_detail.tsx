@@ -40,15 +40,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       }
     }
     
-    // Nếu không có video nào từ YouTube hoặc TikTok, thêm video demo
-    if (data.length === 0) {
-      data.push({
-        type: 'video' as const,
-        url: '/img/example/showcasevid.mp4',
-        format: 'mp4',
-      });
-    }
-    
     // Thêm hình ảnh
     if (listOfImg?.length) {
       // Danh sách các ảnh có sẵn trong thư mục example
@@ -93,6 +84,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     price: '1 Tỷ',
     sqr: 100,
     legal: 'Có sổ hồng',
+    location: '22 Nguyễn Huệ, Quận 1, TP.HCM',
     structure: '1 trệt - 3 lầu',
     bed_room: 4,
     bath_room: 3,
@@ -112,7 +104,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
           <div>
             <h1 className="w-full text-center text-4xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
-              <Media_displayer mediaItems={media_data}/>
+              <Media_displayer location={information_data.location} mediaItems={media_data}/>
               <div className="w-0.5 block border-[1px] border-gray-600"></div>
               <San_pham_ban_detail_infor information_data={information_data}/>
             </div>

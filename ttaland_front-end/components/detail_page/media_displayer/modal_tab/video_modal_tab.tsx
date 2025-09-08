@@ -54,7 +54,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
   return (
     <div>
       {currentMedia.type === 'tiktok' ? (
-        <div className="mx-auto select-none h-[80vh] max-w-[98vw] aspect-video bg-black rounded-lg overflow-scroll">
+        <div className="mx-auto select-none h-[90vh] max-w-[98vw] aspect-video bg-black rounded-lg">
           {currentMedia.embedUrl?.startsWith('https://www.tiktok.com/embed/v2/') ? (
             <iframe
               className="h-full w-full"
@@ -124,12 +124,6 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
 
         </div>
       )}
-
-      <div className='absolute hidden md:block text-xl text-white p-4 items-center justify-between top-0 h-auto'>
-        <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
-      </div>
-
-
 
     </div>
   )
