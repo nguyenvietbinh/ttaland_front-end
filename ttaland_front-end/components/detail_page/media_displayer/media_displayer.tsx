@@ -6,6 +6,7 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
 } from 'react-icons/fa';
+import { useSwipe } from '@/hooks/useSwipe';
 
 export type MediaItem = {
   type: 'image' | 'video' | 'youtube' | 'tiktok';
@@ -17,14 +18,27 @@ export type MediaItem = {
 
 interface media_displayer_props {
   mediaItems: MediaItem[];
+  location: string
 }
 
-const Media_displayer = ({ mediaItems }: media_displayer_props) => {
+const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [tiktokThumbs, setTiktokThumbs] = useState<Record<string, string>>({});
 
   // refs array cho từng thumbnail
   const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posterRef = useRef<HTMLDivElement>(null)
+
+  useSwipe({
+    onSwipe: (direction) => {
+      if (direction === 'right') {
+        goToPrevious()
+      } else if (direction === 'left') {
+        goToNext()
+      }
+    },
+    targetRef: posterRef
+  })
 
   // Fetch TikTok thumbnails
   useEffect(() => {
@@ -75,7 +89,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
   return (
     <div className="card w-full lg:w-3/5">
       <div className="card-body p-0">      
-        <div className="relative group">
+        <div ref={posterRef} className="relative group">
           {/* display img or vid */}
           {currentMedia.type === 'image' ? (
             <figure   
@@ -191,7 +205,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
           ) : null}
 
           {/* Navigation buttons */}
-          <div>
+          <div className='hidden md:block'>
             <button 
               onClick={goToPrevious}
               className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4 z-10"
@@ -267,7 +281,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
       </div>
             
       {/* full screen image display */}
-      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
+      <Media_modal location={location} mediaItems={mediaItems} currentMedia={currentMedia}/>
     </div>
   );
 };

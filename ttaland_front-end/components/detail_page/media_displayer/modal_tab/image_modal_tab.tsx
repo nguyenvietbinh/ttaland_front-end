@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { MediaItem } from "../media_displayer"
+import { useSwipe } from "@/hooks/useSwipe";
 import { 
   FaChevronLeft, 
   FaChevronRight, 
@@ -15,7 +16,18 @@ interface Image_modal_tab_props {
 const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(startImageIndex);
   const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posterRef = useRef<HTMLDivElement>(null)
 
+  useSwipe({
+    onSwipe: (direction) => {
+      if (direction === 'right') {
+        goToPrevious()
+      } else if (direction === 'left') {
+        goToNext()
+      }
+    },
+    targetRef: posterRef
+  })
 
   useEffect(() => {
     setCurrentIndex(startImageIndex)
@@ -43,38 +55,40 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
   const currentMedia = mediaItems[currentIndex];
   return (
     <div>
-      <figure   
-        className="relative aspect-video select-none rounded-lg overflow-hidden h-160 mx-auto">
-        <img
-          src={currentMedia.url} 
-          alt='Ảnh đang được tải' 
-          className="w-full h-full object-contain"
-        />
-      </figure>
+      <div ref={posterRef} className="h-[80vh] full">
+        <figure   
+          className="relative aspect-video h-full max-w-[98vw] select-none rounded-lg overflow-hidden mx-auto">
+          <img
+            src={currentMedia.url} 
+            alt='Ảnh đang được tải' 
+            className="w-full h-full object-contain"
+          />
+        </figure>
+      </div>
 
       {/* Navigation buttons */}
-      <button 
-        onClick={goToPrevious}
-        className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
-        aria-label="Previous media"
-      >
-        <FaChevronLeft size={20} />
-      </button>
-      <button 
-        onClick={goToNext}
-        className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-8 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
-        aria-label="Next media"
-      >
-        <FaChevronRight size={20} />
-      </button>
-
-      <div className='absolute text-xl text-white p-4 items-center justify-between top-0 h-auto'>
-        <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
+      <div className="hidden md:block">
+        <button 
+          onClick={goToPrevious}
+          className="absolute top-1/2 hover:ring-2 ring-white left-0 -translate-y-1/2 mx-2 sm:mx-4 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
+          aria-label="Previous media"
+        >
+          <FaChevronLeft size={20} />
+        </button>
+        <button 
+          onClick={goToNext}
+          className="absolute top-1/2 hover:ring-2 ring-white right-0 -translate-y-1/2 mx-2 sm:mx-8 text-gray-800 bg-white/30 hover:bg-white/70 cursor-pointer rounded-full p-2 sm:p-4"
+          aria-label="Next media"
+        >
+          <FaChevronRight size={20} />
+        </button>
       </div>
 
 
+
+
       {/* Thumbnail gallery */}
-      <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 m-4 hidden md:flex">
+      <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 m-4 hidden md:flex select-none">
         {mediaItems.map((item, index) => (
           <div
             key={index}
