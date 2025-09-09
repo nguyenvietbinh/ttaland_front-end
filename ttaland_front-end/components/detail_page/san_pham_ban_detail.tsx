@@ -182,7 +182,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
           <div className="w-0.5 block border-[1px] border-gray-600"></div>
           <San_pham_ban_detail_infor information_data={information_data}/>
         </div>
-        <Similar_produc/>
+        <Similar_produc productId={propertyData.id}/>
       </div>
     </div>
   )

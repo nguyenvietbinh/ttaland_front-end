@@ -25,7 +25,7 @@ const SimilarProductCard = ({
   isLiked = false
 }: SimilarProductCardProps) => {
   const pathname = usePathname()
-  const [numberOfImg, setNumberOfImg] = useState<number>(6)
+  const [numberOfImg, setNumberOfImg] = useState<number>(1)
   const [listOfImg, setListOfImg] = useState<number[]>([])
   const [liked, setLiked] = useState<boolean>(isLiked)
 
@@ -34,7 +34,10 @@ const SimilarProductCard = ({
   }
 
   useEffect(() => {
-    if (!images) {
+    if (images && images.length > 0) {
+      setNumberOfImg(images.length)
+    } else {
+      // Fallback to random images for mock data
       const randomNum = getRandomNumber(4, 9)
       setNumberOfImg(randomNum)
 
@@ -48,8 +51,18 @@ const SimilarProductCard = ({
 
   const urlToDetail = () => {
     const currentPath = pathname?.split('/') || []
+    // Use the actual product ID if available, otherwise fallback to generated ID
     const productId = id || listOfImg.join('')
     return `/${currentPath[1] || ''}/chi_tiet?id=${productId}`
+  }
+
+  // Get the main image URL
+  const getMainImage = () => {
+    if (images && images.length > 0) {
+      return images[0]
+    }
+    // Fallback to example image
+    return `/img/example/showcase${listOfImg[0] || 0}.jpg`
   }
 
   const toggleLike = (e: React.MouseEvent) => {
@@ -63,7 +76,7 @@ const SimilarProductCard = ({
       <Link className="relative aspect-video overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
-          src={images?.[0] || `/img/example/showcase${listOfImg[0]}.jpg`} 
+          src={getMainImage()} 
           alt={title}
         />
         
