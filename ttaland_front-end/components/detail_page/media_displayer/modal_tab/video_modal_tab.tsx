@@ -17,6 +17,7 @@ interface Video_modal_tab_props {
 const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) => {
     const [currentIndex, setCurrentIndex] = useState<number>(startVideoIndex);
     const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const posterRef = useRef<HTMLDivElement>(null)
   
     useSwipe({
       onSwipe: (direction) => {
@@ -26,6 +27,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
           goToNext()
         }
       },
+      targetRef: posterRef
     })
   
     useEffect(() => {
@@ -52,7 +54,7 @@ const Video_modal_tab = ({mediaItems, startVideoIndex}: Video_modal_tab_props) =
     };
   const currentMedia = mediaItems[currentIndex]
   return (
-    <div>
+    <div ref={posterRef}>
       {currentMedia.type === 'tiktok' ? (
         <div className="mx-auto select-none h-[90vh] max-w-[98vw] aspect-video bg-black rounded-lg">
           {currentMedia.embedUrl?.startsWith('https://www.tiktok.com/embed/v2/') ? (

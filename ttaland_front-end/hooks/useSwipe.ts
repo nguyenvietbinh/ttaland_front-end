@@ -5,10 +5,14 @@ type SwipeDirection = 'up' | 'down' | 'left' | 'right';
 interface UseSwipeOptions {
   onSwipe: (direction: SwipeDirection) => void;
   minDistance?: number;
+  targetRef: React.RefObject<HTMLElement | null>; // phần tử cần lắng nghe
 }
 
-export function useSwipe({ onSwipe, minDistance = 50 }: UseSwipeOptions) {
+export function useSwipe({ onSwipe, minDistance = 50, targetRef }: UseSwipeOptions) {
   useEffect(() => {
+    const element = targetRef.current;
+    if (!element) return;
+
     let touchStartX = 0;
     let touchStartY = 0;
     let touchEndX = 0;
@@ -37,12 +41,12 @@ export function useSwipe({ onSwipe, minDistance = 50 }: UseSwipeOptions) {
       }
     };
 
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+    element.addEventListener('touchstart', handleTouchStart, { passive: true });
+    element.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      element.removeEventListener('touchstart', handleTouchStart);
+      element.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [onSwipe, minDistance]);
+  }, [onSwipe, minDistance, targetRef]);
 }
