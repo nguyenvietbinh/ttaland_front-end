@@ -1,14 +1,20 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { type Townhouse, type Villa, type Apartment, type Land } from '@/services/apiService'
+import { type Townhouse, type Villa, type Apartment, type LandLot } from '@/services/apiService'
 import Link from "next/link"
+
+// Helper interface for property with main_images
+interface PropertyWithImages {
+  main_images?: string[]
+  [key: string]: unknown
+}
 
 interface San_pham_cho_thue_propertyProps {
   townhouse?: Townhouse
   villa?: Villa
   apartment?: Apartment
-  land?: Land
+  land?: LandLot
 }
 
 // Mock data cho trường hợp không có real data
@@ -26,9 +32,40 @@ const mockRentalPropertyData = {
   type: 'townhouse' as const,
   type_display: 'Nhà phố',
   created_at: '2024-08-09',
-  media: [],
-  images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg'],
-  main_images: ['showcase4.jpg', 'showcase6.jpg', 'showcase8.jpg', 'showcase10.jpg']
+  media: [
+    {
+      id: 'media1',
+      media_type: 'image',
+      file: 'showcase4.jpg',
+      file_url: '/img/example/showcase4.jpg',
+      uploaded_at: '2024-08-09',
+      order: 1
+    },
+    {
+      id: 'media2',
+      media_type: 'image', 
+      file: 'showcase6.jpg',
+      file_url: '/img/example/showcase6.jpg',
+      uploaded_at: '2024-08-09',
+      order: 2
+    },
+    {
+      id: 'media3',
+      media_type: 'image',
+      file: 'showcase8.jpg', 
+      file_url: '/img/example/showcase8.jpg',
+      uploaded_at: '2024-08-09',
+      order: 3
+    },
+    {
+      id: 'media4',
+      media_type: 'image',
+      file: 'showcase10.jpg',
+      file_url: '/img/example/showcase10.jpg',
+      uploaded_at: '2024-08-09',
+      order: 4
+    }
+  ]
 }
 
 const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_pham_cho_thue_propertyProps) => {
@@ -44,11 +81,11 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
   }
 
   useEffect(() => {
-    if (isUsingRealData && property?.main_images) {
+    if (isUsingRealData && (property as PropertyWithImages)?.main_images) {
       // Use real media data
-      setNumberOfImg(property.main_images.length)
+      setNumberOfImg((property as PropertyWithImages).main_images!.length)
     } else {
-      // Use mock data
+      // Generate random data only as last resort
       const randomNum = getRandomNumber(4, 9)
       setNumberOfImg(randomNum)
 
@@ -67,8 +104,8 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
 
   // Get image URLs
   const getImageUrl = (index: number): string => {
-    if (isUsingRealData && property?.main_images?.[index]) {
-      return property.main_images[index]
+    if (isUsingRealData && (property as PropertyWithImages)?.main_images?.[index]) {
+      return (property as PropertyWithImages).main_images![index]
     }
     return `/img/example/showcase${listOfImg[index] || 0}.jpg`
   }
@@ -79,17 +116,17 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
   const price = isUsingRealData ? property!.price_formatted : "1 Tỷ"
   const location = isUsingRealData ? property!.location : "Phường 2, Thủ Đức"
   
-  // Handle garage - only available for townhouse, villa, some apartments
+  // Handle garage - only available for townhouse, villa
   const garage = isUsingRealData ? 
-    ((property as Townhouse)?.garage || (property as Villa)?.garage || 0) : 1
+    ((property as Townhouse)?.townhouse_details?.garage || (property as Villa)?.villa_details?.garage || 0) : 1
   
   // Handle bedrooms - not available for land
   const bedrooms = isUsingRealData ? 
-    ((property as Townhouse)?.bedrooms || (property as Villa)?.bedrooms || (property as Apartment)?.bedrooms || 0) : 4
+    ((property as Townhouse)?.townhouse_details?.bedrooms || (property as Villa)?.villa_details?.bedrooms || (property as Apartment)?.apartment_details?.bedrooms || 0) : 4
   
   // Handle bathrooms - not available for land  
   const bathrooms = isUsingRealData ? 
-    ((property as Townhouse)?.bathrooms || (property as Villa)?.bathrooms || (property as Apartment)?.bathrooms || 0) : 3
+    ((property as Townhouse)?.townhouse_details?.bathrooms || (property as Villa)?.villa_details?.bathrooms || (property as Apartment)?.apartment_details?.bathrooms || 0) : 3
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">

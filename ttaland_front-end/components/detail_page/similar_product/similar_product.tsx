@@ -3,190 +3,61 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
 } from 'react-icons/fa';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import SimilarProductCard from './similar_product_card';
+import { apiService, SimilarProductItem } from '../../../services/apiService';
 
-const Similar_produc = () => {
+interface SimilarProductProps {
+  productId?: string;
+}
+
+const Similar_produc = ({ productId }: SimilarProductProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  
+  // State for API data
+  const [similarProducts, setSimilarProducts] = useState<SimilarProductItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   // Pagination state
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
-  
-  // Sample data for variety - 27 different properties
-  const sampleProperties = [
-    {
-      title: "full nội thất",
-      price: "4,6 tỷ",
-      area: "70 m²",
-      location: "Quận 9, Hồ Chí Minh"
-    },
-    {
-      title: "2PN rẻ nhất Masteri Centre Point, bàn giao full nội thất",
-      price: "4,6 tỷ",
-      area: "70 m²",
-      location: "Quận 9, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ cao cấp Vinhomes Grand Park, view sông",
-      price: "3,2 tỷ",
-      area: "65 m²",
-      location: "Quận 9, Hồ Chí Minh"
-    },
-    {
-      title: "Chung cư The Sun Avenue, nội thất đầy đủ",
-      price: "5,8 tỷ",
-      area: "85 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Apartment Landmark 81, tầng cao view đẹp",
-      price: "7,2 tỷ",
-      area: "90 m²",
-      location: "Quận 1, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Saigon Pearl, full nội thất cao cấp",
-      price: "6,5 tỷ",
-      area: "88 m²",
-      location: "Quận Bình Thạnh, Hồ Chí Minh"
-    },
-    {
-      title: "Penthouse Vinhomes Central Park, view panorama",
-      price: "12,5 tỷ",
-      area: "120 m²",
-      location: "Quận Bình Thạnh, Hồ Chí Minh"
-    },
-    {
-      title: "Studio Gateway Thảo Điền, giá tốt nhất thị trường",
-      price: "2,8 tỷ",
-      area: "45 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Diamond Island, view sông Sài Gòn",
-      price: "8,9 tỷ",
-      area: "95 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Chung cư The Manor, nội thất sang trọng",
-      price: "6,2 tỷ",
-      area: "78 m²",
-      location: "Quận Bình Thạnh, Hồ Chí Minh"
-    },
-    {
-      title: "Officetel Millennium, đầu tư sinh lời cao",
-      price: "3,5 tỷ",
-      area: "52 m²",
-      location: "Quận 4, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Estella Heights, view công viên",
-      price: "5,1 tỷ",
-      area: "75 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Duplex The Vista An Phú, thiết kế hiện đại",
-      price: "9,8 tỷ",
-      area: "110 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Times City Park Hill, tiện ích đầy đủ",
-      price: "4,3 tỷ",
-      area: "68 m²",
-      location: "Quận 10, Hồ Chí Minh"
-    },
-    {
-      title: "Chung cư Sunrise City, ban công rộng rãi",
-      price: "5,7 tỷ",
-      area: "82 m²",
-      location: "Quận 7, Hồ Chí Minh"
-    },
-    {
-      title: "Apartment Feliz En Vista, view thành phố",
-      price: "4,9 tỷ",
-      area: "71 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Palm Heights, không gian xanh",
-      price: "6,8 tỷ",
-      area: "86 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Penthouse Riverpark Premier, tầng cao nhất",
-      price: "15,2 tỷ",
-      area: "140 m²",
-      location: "Quận 7, Hồ Chí Minh"
-    },
-    {
-      title: "Studio The Gold View, view sông đẹp",
-      price: "3,1 tỷ",
-      area: "48 m²",
-      location: "Quận 4, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Masteri Millennium, trung tâm quận 4",
-      price: "5,4 tỷ",
-      area: "77 m²",
-      location: "Quận 4, Hồ Chí Minh"
-    },
-    {
-      title: "Chung cư New City Thu Thiem, khu đô thị mới",
-      price: "7,6 tỷ",
-      area: "92 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Times City Park Hill, tiện ích đầy đủ",
-      price: "4,3 tỷ",
-      area: "68 m²",
-      location: "Quận 10, Hồ Chí Minh"
-    },
-    {
-      title: "Chung cư Sunrise City, ban công rộng rãi",
-      price: "5,7 tỷ",
-      area: "82 m²",
-      location: "Quận 7, Hồ Chí Minh"
-    },
-    {
-      title: "Apartment Feliz En Vista, view thành phố",
-      price: "4,9 tỷ",
-      area: "71 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Palm Heights, không gian xanh",
-      price: "6,8 tỷ",
-      area: "86 m²",
-      location: "Quận 2, Hồ Chí Minh"
-    },
-    {
-      title: "Penthouse Riverpark Premier, tầng cao nhất",
-      price: "15,2 tỷ",
-      area: "140 m²",
-      location: "Quận 7, Hồ Chí Minh"
-    },
-    {
-      title: "Studio The Gold View, view sông đẹp",
-      price: "3,1 tỷ",
-      area: "48 m²",
-      location: "Quận 4, Hồ Chí Minh"
-    },
-    {
-      title: "Căn hộ Masteri Millennium, trung tâm quận 4",
-      price: "5,4 tỷ",
-      area: "77 m²",
-      location: "Quận 4, Hồ Chí Minh"
-    }
-  ];
 
-  // Calculate total pages based on sample properties
-  const totalPages = Math.ceil(sampleProperties.length / itemsPerPage);
+  // Fetch similar products from API
+  useEffect(() => {
+    const fetchSimilarProducts = async () => {
+      if (!productId) {
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        const result = await apiService.getSimilarPropertiesWithFallback(productId);
+        
+        if (result.data) {
+          setSimilarProducts(result.data.similar_products);
+        }
+        setIsUsingMockData(result.isUsingMockData);
+        setError(result.error || null);
+        
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load similar products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSimilarProducts();
+  }, [productId]);
+
+  // Reset pagination when products change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [similarProducts]);
+
+  // Calculate total pages based on similar products
+  const totalPages = Math.ceil(similarProducts.length / itemsPerPage);
   
   // Animation state
   const [isAnimating, setIsAnimating] = useState(false);
@@ -215,14 +86,14 @@ const Similar_produc = () => {
     setTimeout(() => setIsAnimating(false), 300);
   };
 
-  // Get current items to display
+  // Get current items to display - using API data instead of mock
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return sampleProperties.slice(startIndex, endIndex);
+    return similarProducts.slice(startIndex, endIndex);
   };
 
-  // Generate pagination numbers - specific pattern for all cases
+  // Generate pagination numbers - keep original logic
   const getPaginationNumbers = () => {
     const pages = [];
     
@@ -253,6 +124,17 @@ const Similar_produc = () => {
   return (
     <div className='relative flex justify-center'>
       <div className="container">
+        {/* Mock Data Warning */}
+        {isUsingMockData && (
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">
+            <p className="font-bold">⚠️ TESTING MODE</p>
+            <p className="text-sm">
+              {productId ? 'API không khả dụng, đang sử dụng dữ liệu mock để test.' : 'Không có productId, sử dụng mock data.'} 
+              {error && <span className="block">Chi tiết lỗi: {error}</span>}
+            </p>
+          </div>
+        )}
+
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
           <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
@@ -311,95 +193,127 @@ const Similar_produc = () => {
           </button>
           </div>
         </div>
-      
-        {/* Products Grid with Animation */}
-        <div className="relative mx-auto overflow-hidden">
-          <div 
-            ref={carouselRef}
-            className={`grid grid-cols-2 lg:grid-cols-4 items-center transition-all duration-300 gap-2 md:gap-10 lg:gap-0 mx-auto ease-in-out ${
-              isAnimating ? 'opacity-0 transform translate-x-2' : 'opacity-100 transform translate-x-0'
-            }`}
-          >
-            {getCurrentItems().map((propertyData, index) => {
-              const actualIndex = (currentPage - 1) * itemsPerPage + index;
-              const delayClass = index === 0 ? '' : index === 1 ? 'delay-75' : index === 2 ? 'delay-150' : 'delay-300';
-              
-              return (
-                <div
-                  key={`${currentPage}-${index}`} 
-                  className={`transition-all duration-300 ${delayClass} ${
-                    isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'
-                  }`}
-                >
-                  <SimilarProductCard 
-                    id={`similar-${actualIndex}`}
-                    title={propertyData.title}
-                    price={propertyData.price}
-                    area={propertyData.area}
-                    location={propertyData.location}
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex justify-center items-center h-32">
+            <div className="text-lg">Đang tải sản phẩm tương tự...</div>
+          </div>
+        )}
+
+        {/* Desktop Products Grid */}
+        {!isLoading && (
+          <div className="hidden lg:block">
+            <div 
+              className={`grid grid-cols-4 gap-4 transition-opacity duration-300 ${isAnimating ? 'opacity-50' : 'opacity-100'}`}
+            >
+              {getCurrentItems().map((property, index) => (
+                <SimilarProductCard
+                  key={`${property.id}-${currentPage}-${index}`}
+                  id={property.id}
+                  title={property.title}
+                  price={property.price_formatted}
+                  area={property.area_formatted}
+                  location={property.location}
+                  images={[property.main_image]}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Products Carousel */}
+        {!isLoading && (
+          <div className="lg:hidden">
+            <div 
+              ref={carouselRef}
+              className="flex overflow-x-auto gap-4 pb-4"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
+              {similarProducts.map((property, index) => (
+                <div key={`${property.id}-mobile-${index}`} className="flex-shrink-0 w-64">
+                  <SimilarProductCard
+                    id={property.id}
+                    title={property.title}
+                    price={property.price_formatted}
+                    area={property.area_formatted}
+                    location={property.location}
+                    images={[property.main_image]}
                   />
                 </div>
-              );
-            })}
+              ))}
+            </div>
+
+            {/* mobile Pagination Controls */}
+            <div className="flex justify-center items-center space-x-1 mt-4">
+              {/* Previous Arrow */}
+              <button 
+                onClick={() => scroll('left')}
+                disabled={currentPage === 1 || isAnimating}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+                  currentPage === 1 || isAnimating 
+                    ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+                }`}
+                aria-label="Previous page"
+              >
+                <FaChevronLeft size={12} />
+              </button>
+
+              {/* Page Numbers */}
+              {getPaginationNumbers().map((page, index) => (
+                <div key={index}>
+                  {page === '...' ? (
+                    <div className="w-8 h-8 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-sm font-bold">
+                      ...
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => goToPage(page as number)}
+                      disabled={isAnimating}
+                      className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 text-sm font-bold ${
+                        currentPage === page
+                          ? 'bg-blue-500 text-white border-blue-500'
+                          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                      } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    >
+                      {page}
+                    </button>
+                  )}
+                </div>
+              ))}
+
+              {/* Next Arrow */}
+              <button 
+                onClick={() => scroll('right')}
+                disabled={currentPage === totalPages || isAnimating}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 ${
+                  currentPage === totalPages || isAnimating 
+                    ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
+                }`}
+                aria-label="Next page"
+              >
+                <FaChevronRight size={12} />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* mobile Pagination Controls */}
-          <div className="flex justify-center mt-6 sm:hidden">
-            {/* Previous Arrow */}
-            <button 
-              onClick={() => scroll('left')}
-              disabled={currentPage === 1 || isAnimating}
-              className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-                currentPage === 1 || isAnimating 
-                  ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-              }`}
-              aria-label="Previous page"
-            >
-              <FaChevronLeft size={16} />
-            </button>
-
-            {/* Page Numbers */}
-            {getPaginationNumbers().map((page, index) => (
-              <div key={index}>
-                {page === '...' ? (
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-xl font-bold">
-                    ...
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => goToPage(page as number)}
-                    disabled={isAnimating}
-                    className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 text-xl font-bold ${
-                      currentPage === page
-                        ? 'bg-blue-500 text-white border-blue-500'
-                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
-                    } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-                  >
-                    {page}
-                  </button>
-                )}
-              </div>
-            ))}
-
-            {/* Next Arrow */}
-            <button 
-              onClick={() => scroll('right')}
-              disabled={currentPage === totalPages || isAnimating}
-              className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-                currentPage === totalPages || isAnimating 
-                  ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-              }`}
-              aria-label="Next page"
-            >
-              <FaChevronRight size={16} />
-            </button>
+        {/* Error Display */}
+        {error && !isUsingMockData && (
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-red-700 text-sm">
+              Lỗi tải dữ liệu: {error}
+            </p>
           </div>
+        )}
       </div>
     </div>
-  );
+  )
 }
 
-export default Similar_produc;
+export default Similar_produc

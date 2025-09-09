@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { apiService, type Land, type ApiResponse, type ApiFilters } from '@/services/apiService'
+import { apiService, type LandLot, type ApiResponse, type ApiFilters } from '@/services/apiService'
 
 interface UseLandReturn {
-  landLots: Land[]
+  landLots: LandLot[]
   loading: boolean
   error: string | null
   hasMore: boolean
@@ -15,7 +15,7 @@ interface UseLandReturn {
 }
 
 export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
-  const [landLots, setLandLots] = useState<Land[]>([])
+  const [landLots, setLandLots] = useState<LandLot[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
@@ -31,7 +31,7 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
       setLoading(true)
       setError(null)
 
-      const response: ApiResponse<Land> = await apiService.getLand({
+      const response: ApiResponse<LandLot> = await apiService.getLandLots({
         ...filters,
         page
       })
@@ -89,14 +89,14 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
 
 // Hook for single land details
 interface UseLandDetailsReturn {
-  land: Land | null
+  land: LandLot | null
   loading: boolean
   error: string | null
   refresh: () => void
 }
 
 export const useLandDetails = (landId: string | null): UseLandDetailsReturn => {
-  const [land, setLand] = useState<Land | null>(null)
+  const [land, setLand] = useState<LandLot | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -107,7 +107,7 @@ export const useLandDetails = (landId: string | null): UseLandDetailsReturn => {
       setLoading(true)
       setError(null)
 
-      const response = await apiService.getLandDetails(landId)
+      const response = await apiService.getLandLotDetails(landId)
       setLand(response)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch land details')
