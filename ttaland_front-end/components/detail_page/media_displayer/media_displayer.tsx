@@ -27,6 +27,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
 
   // refs array cho từng thumbnail
   const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posterRef = useRef<HTMLDivElement>(null)
 
   useSwipe({
     onSwipe: (direction) => {
@@ -36,6 +37,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
         goToNext()
       }
     },
+    targetRef: posterRef
   })
 
   // Fetch TikTok thumbnails
@@ -87,7 +89,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
   return (
     <div className="card w-full lg:w-3/5">
       <div className="card-body p-0">      
-        <div className="relative group">
+        <div ref={posterRef} className="relative group">
           {/* display img or vid */}
           {currentMedia.type === 'image' ? (
             <figure   

@@ -16,6 +16,7 @@ interface Image_modal_tab_props {
 const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(startImageIndex);
   const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posterRef = useRef<HTMLDivElement>(null)
 
   useSwipe({
     onSwipe: (direction) => {
@@ -25,6 +26,7 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
         goToNext()
       }
     },
+    targetRef: posterRef
   })
 
   useEffect(() => {
@@ -53,7 +55,7 @@ const Image_modal_tab = ({mediaItems, startImageIndex}: Image_modal_tab_props) =
   const currentMedia = mediaItems[currentIndex];
   return (
     <div>
-      <div className="h-[80vh] full">
+      <div ref={posterRef} className="h-[80vh] full">
         <figure   
           className="relative aspect-video h-full max-w-[98vw] select-none rounded-lg overflow-hidden mx-auto">
           <img

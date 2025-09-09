@@ -5,7 +5,6 @@ import { MediaItem } from "./media_displayer"
 import Video_modal_tab from "./modal_tab/video_modal_tab"
 import Image_modal_tab from "./modal_tab/image_modal_tab"
 import Map_modal_tab from "./modal_tab/map_modal_tab"
-import { useSwipe } from "@/hooks/useSwipe"
 
 
 interface Media_modal_props {
@@ -23,13 +22,7 @@ const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) =>
   const startVideoIndex: number = videoMediaItems.indexOf(currentMedia) === -1 ? 0 : videoMediaItems.indexOf(currentMedia)
 
 
-      useSwipe({
-      onSwipe: (direction) => {
-        if (direction === 'up' || direction === 'down') {
-          media_modalRef.current?.close()
-        }
-      },
-    })
+
 
 
   useEffect(() => {
@@ -40,8 +33,8 @@ const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) =>
 
   return (
     <dialog id="media_modal" ref={media_modalRef} className="modal">
-      <div className="modal-box bg-black text-white w-screen h-screen p-0 pr-4 rounded-none max-w-screen">
-        <div className="flex items-center gap-1 justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="modal-box bg-black text-white w-screen h-screen p-0 md:pr-4 rounded-none max-w-screen">
+        <div className="flex items-center gap-1 justify-center p-4 bg-black/30 backdrop-blur-sm">
           <div
             className={`flex transition-all duration-300 items-center gap-1 rounded-full border-[2px] px-2 cursor-pointer ${currentTab === 'video' ? 'bg-white text-black border-white' : 'border-gray-500 hover:border-white'}`} 
             onClick={() => setCurrentTab('video')}
@@ -87,7 +80,23 @@ const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) =>
         {/* close button */}
         <div className="modal-action mt-0">
           <form method="dialog">
-
+                <button className="text-white border-2 hidden md:block border-gray-400 hover:border-white transition-all duration-300 p-1 cursor-pointer rounded-full m-3 absolute top-0 left-0"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    />
+                  </svg>
+                </button>
           </form>
         </div>
       </div>
