@@ -7,6 +7,7 @@ import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 import { apiService, Townhouse } from "../../services/apiService";
+import Map_window from "./map_window";
 
 interface San_pham_ban_details_props {
   id: string | null;
@@ -191,10 +192,11 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             {propertyData?.title || 'Tên sản phẩm'}
           </h1>
           <div className="lg:flex lg:gap-4 h-auto mt-6">
-            <Media_displayer location={information_data.location} mediaItems={media_data}/>
+            <Media_displayer mediaItems={media_data}/>
             <div className="w-0.5 block border-[1px] border-gray-600"></div>
             <San_pham_ban_detail_infor information_data={information_data}/>
           </div>
+          <Map_window/>
           <Similar_produc productId={propertyData?.id}/>
         </div>
       ) : (
