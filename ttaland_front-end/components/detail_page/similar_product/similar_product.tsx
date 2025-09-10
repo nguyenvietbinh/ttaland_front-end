@@ -126,17 +126,12 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
       <div className="container">
         {/* Mock Data Warning */}
         {isUsingMockData && (
-          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">
-            <p className="font-bold">⚠️ TESTING MODE</p>
-            <p className="text-sm">
-              {productId ? 'API không khả dụng, đang sử dụng dữ liệu mock để test.' : 'Không có productId, sử dụng mock data.'} 
-              {error && <span className="block">Chi tiết lỗi: {error}</span>}
-            </p>
+          <div className="">
           </div>
         )}
 
         {/* Title and Pagination Controls on same line */}
-        <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
+        <div className="flex justify-start lg:justify-between items-center mt-10 mb-6">
           <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
         
           {/* desktop Pagination Controls */}

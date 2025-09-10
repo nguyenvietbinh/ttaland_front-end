@@ -18,10 +18,9 @@ export type MediaItem = {
 
 interface media_displayer_props {
   mediaItems: MediaItem[];
-  location: string
 }
 
-const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
+const Media_displayer = ({ mediaItems }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [tiktokThumbs, setTiktokThumbs] = useState<Record<string, string>>({});
 
@@ -87,7 +86,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
   const currentMedia = mediaItems[currentIndex];
 
   return (
-    <div className="card w-full lg:w-3/5">
+    <div className="card w-full lg:w-[70%]">
       <div className="card-body p-0">      
         <div ref={posterRef} className="relative group">
           {/* display img or vid */}
@@ -222,10 +221,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
             </button>
           </div>
 
-          {/* media infor */}
-          <div className='absolute text-xl text-white p-4 flex items-center justify-between bottom-0 w-full h-auto'>
-            <div className='bg-black/60 px-1 rounded-md'>{currentIndex + 1}/{mediaItems.length}</div>
-          </div>
+
         </div>
 
         {/* Thumbnail gallery */}
@@ -281,7 +277,7 @@ const Media_displayer = ({ mediaItems, location }: media_displayer_props) => {
       </div>
             
       {/* full screen image display */}
-      <Media_modal location={location} mediaItems={mediaItems} currentMedia={currentMedia}/>
+      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 'use client'
 
+import Map_window from "../map_window"
+
 export type detail_infor = {
   price: string,
   sqr: number,
@@ -21,10 +23,10 @@ interface san_pham_ban_detail_infor_props {
 
 const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_infor_props) => {
   return (
-    <div className="lg:w-2/5 w-full h-full overflow-y-auto">
+    <div className="lg:w-[30%] w-full h-auto">
       {/* Thông tin chi tiết */}
       <h1 className="text-3xl mt-4 lg:mt-0">Thông Tin Chi Tiết:</h1>
-      <ul className="grid-cols-1 sm:grid-cols-2 grid gap-4 w-full text-nowrap">
+      <ul className="grid-cols-1 gap-4 w-full text-nowrap">
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Mức giá:</p>
           <p className="w-1/2 overflow-auto">{information_data.price}.</p>            
@@ -62,6 +64,7 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
           <li key={index}>- {item}.</li>
         ))}
       </ul>
+      <Map_window/>
     </div>
   )
 }

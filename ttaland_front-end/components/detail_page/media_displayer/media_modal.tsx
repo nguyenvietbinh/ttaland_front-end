@@ -10,10 +10,9 @@ import Map_modal_tab from "./modal_tab/map_modal_tab"
 interface Media_modal_props {
   mediaItems: MediaItem[]
   currentMedia: MediaItem
-  location: string
 }
 
-const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) => {
+const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
   const media_modalRef = useRef<HTMLDialogElement>(null);
   const [currentTab, setCurrentTab] = useState<'video' | 'image' | 'map'>()
   const videoMediaItems = mediaItems.filter(item => item.type !== 'image')
@@ -71,7 +70,7 @@ const Media_modal = ({mediaItems, currentMedia, location}: Media_modal_props) =>
         ) : currentTab === 'image' ? (
           <Image_modal_tab mediaItems={imageMediaItems} startImageIndex={startImageIndex}/>
         ) : currentTab === 'map' ? (
-          <Map_modal_tab location={location}/>
+          <Map_modal_tab/>
         ): null}
 
 
