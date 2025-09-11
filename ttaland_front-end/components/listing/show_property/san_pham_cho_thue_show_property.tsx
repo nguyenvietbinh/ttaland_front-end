@@ -71,6 +71,7 @@ const mockRentalPropertyData = {
 const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_pham_cho_thue_propertyProps) => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
+  const [isMounted, setIsMounted] = useState(false)
 
   // Use any available property data, fallback to mock data if none available
   const property = villa || townhouse || apartment || land || mockRentalPropertyData
@@ -81,6 +82,12 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
   }
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return // Chỉ chạy khi component đã mount trên client
+    
     if (isUsingRealData && (property as PropertyWithImages)?.main_images) {
       // Use real media data
       setNumberOfImg((property as PropertyWithImages).main_images!.length)
@@ -95,7 +102,7 @@ const San_pham_cho_thue_property = ({ townhouse, villa, apartment, land }: San_p
       }
       setListOfImg(Array.from(uniqueNumbers))
     }
-  }, [isUsingRealData, property])
+  }, [isMounted, isUsingRealData, property])
 
   const urlToDetail = () => {
     const detailId = isUsingRealData ? property!.id : listOfImg.join('')

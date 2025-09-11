@@ -6,12 +6,19 @@ import Link from "next/link"
 const Du_an_property = () => {
   const [numberOfImg, setNumberOfImg] = useState<number>(0)
   const [listOfImg, setListOfImg] = useState<number[]>([])
+  const [isMounted, setIsMounted] = useState(false)
 
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
   }
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return // Chỉ chạy khi component đã mount trên client
+    
     const randomNum = getRandomNumber(4, 9)
     setNumberOfImg(randomNum)
 
@@ -20,7 +27,7 @@ const Du_an_property = () => {
       uniqueNumbers.add(getRandomNumber(0, 9))
     }
     setListOfImg(Array.from(uniqueNumbers))
-  }, [])
+  }, [isMounted])
 
   const urlToDetail = () => {
     return `/du_an/chi_tiet?id=${listOfImg.join('')}`

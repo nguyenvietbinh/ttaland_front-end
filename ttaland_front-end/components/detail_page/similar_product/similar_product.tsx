@@ -19,13 +19,21 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUsingMockData, setIsUsingMockData] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   
   // Pagination state
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Mount check to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Fetch similar products from API
   useEffect(() => {
+    if (!isMounted) return;
+    
     const fetchSimilarProducts = async () => {
       if (!productId) {
         return;
@@ -49,7 +57,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
     };
 
     fetchSimilarProducts();
-  }, [productId]);
+  }, [productId, isMounted]);
 
   // Reset pagination when products change
   useEffect(() => {
@@ -120,6 +128,19 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
     
     return pages;
   };
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!isMounted) {
+    return (
+      <div className='relative flex justify-center'>
+        <div className="container">
+          <div className="text-center py-8">
+            <div className="text-lg">Đang tải sản phẩm tương tự...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='relative flex justify-center'>

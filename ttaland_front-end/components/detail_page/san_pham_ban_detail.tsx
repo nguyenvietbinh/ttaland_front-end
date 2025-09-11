@@ -195,7 +195,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             <div className="h-auto w-full lg:w-[65%]">
               <Media_displayer mediaItems={media_data}/>
               <div className="hidden lg:block">
-                <Similar_produc productId={'12345'}/>
+                <Similar_produc productId={propertyData?.id || id || '12345'}/>
               </div>
             </div>
             <div className="h-auto w-full lg:w-[35%]">
@@ -203,7 +203,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
               <Map_window/>
             </div>
             <div className="block lg:hidden">
-              <Similar_produc productId={'12345'}/>
+              <Similar_produc productId={propertyData?.id || id || '12345'}/>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/api'
+const API_BASE_URL = 'https://tta-backend-iji0.onrender.com/api'
 
 export interface ApiResponse<T> {
   count: number
@@ -629,7 +629,7 @@ class ApiService {
     if (relativePath.startsWith('http')) {
       return relativePath
     }
-    return `http://127.0.0.1:8000${relativePath}`
+    return `https://tta-backend-iji0.onrender.com${relativePath}`
   }
 }
 

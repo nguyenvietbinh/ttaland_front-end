@@ -25,12 +25,19 @@ const SimilarProductCard = ({
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(1)
   const [listOfImg, setListOfImg] = useState<number[]>([])
+  const [isMounted, setIsMounted] = useState(false)
 
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
   }
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return // Chỉ chạy khi component đã mount trên client
+    
     if (images && images.length > 0) {
       setNumberOfImg(images.length)
     } else {
@@ -44,7 +51,7 @@ const SimilarProductCard = ({
       }
       setListOfImg(Array.from(uniqueNumbers))
     }
-  }, [images])
+  }, [images, isMounted])
 
   const urlToDetail = () => {
     const currentPath = pathname?.split('/') || []
