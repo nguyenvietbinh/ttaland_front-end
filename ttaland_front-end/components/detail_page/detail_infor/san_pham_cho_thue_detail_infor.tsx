@@ -21,7 +21,7 @@ interface san_pham_cho_thue_detail_infor_props {
 
 const San_pham_cho_thue_detail_infor = ({ information_data }: san_pham_cho_thue_detail_infor_props) => {
   return (
-    <div className="lg:w-[30%] w-full h-full overflow-y-auto">
+    <div className="w-full h-auto overflow-y-auto">
       {/* Thông tin chi tiết */}
       <h1 className="text-3xl mt-4 lg:mt-0">Thông Tin Chi Tiết:</h1>
       <ul className="grid-cols-1 grid gap-4 w-full text-nowrap">

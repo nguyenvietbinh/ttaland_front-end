@@ -53,11 +53,19 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_detail_props) => {
           <div>
             <h1 className="w-full text-center text-4xl font-bold mt-6">Tên sản phẩm</h1>
             <div className="lg:flex lg:gap-4 h-auto mt-6">
-              <Media_displayer mediaItems={media_data}/>
-              <div className="w-0.5 block border-[1px] border-gray-600"></div>
-              <San_pham_cho_thue_detail_infor information_data={information_data}/>
+              <div className="w-full lg:w-[65%]">
+                <Media_displayer mediaItems={media_data}/>
+                <div className="hidden lg:block">
+                  <Similar_produc productId="1234"/>
+                </div>
+              </div>
+              <div className="w-full lg:w-[35%]">
+                <San_pham_cho_thue_detail_infor information_data={information_data}/>
+              </div>
+              <div className="block lg:hidden">
+                <Similar_produc productId="1234"/>
+              </div>
             </div>
-          <Similar_produc/>
           </div>
         ) : (
           <div>

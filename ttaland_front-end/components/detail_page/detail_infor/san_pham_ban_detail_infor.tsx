@@ -1,6 +1,6 @@
 'use client'
 
-import Map_window from "../map_window"
+import { useState } from "react"
 
 export type detail_infor = {
   price: string,
@@ -22,8 +22,11 @@ interface san_pham_ban_detail_infor_props {
 
 
 const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_infor_props) => {
+  const [expanded, setExpanded] = useState(false);
+
+
   return (
-    <div className="lg:w-[30%] w-full h-auto">
+    <div className="w-full h-auto">
       {/* Thông tin chi tiết */}
       <h1 className="text-3xl mt-4 lg:mt-0">Thông Tin Chi Tiết:</h1>
       <ul className="grid-cols-1 gap-4 w-full text-nowrap">
@@ -58,13 +61,15 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
       </ul>
 
       {/* Mô tả đặc điểm */}
-      <h1 className="text-3xl mt-4">Mô Tả Đặc Điểm:</h1>
-      <ul className="space-y-4 p-2">
-        {information_data.description.map((item, index) => (
-          <li key={index}>- {item}.</li>
-        ))}
-      </ul>
-      <Map_window/>
+      <div className="">
+        <h1 className="text-3xl mt-4">Mô Tả Đặc Điểm:</h1>
+        <ul className={`space-y-4 px-2 ${(expanded) ? '' : 'line-clamp-5'}`}>
+          {information_data.description.map((item, index) => (
+            <li key={index}>- {item}.</li>
+          ))}
+        </ul>
+        <p onClick={() => setExpanded(true)} className={(expanded) ? 'hidden' : 'hover:underline flex justify-center text-xl cursor-pointer'}>Xem thêm</p>
+      </div>
     </div>
   )
 }
