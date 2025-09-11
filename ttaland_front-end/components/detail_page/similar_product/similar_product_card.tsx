@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { usePathname } from 'next/navigation'
-import { FaHeart, FaRegHeart, FaMapMarkerAlt, FaImages } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaImages } from 'react-icons/fa'
 import Link from "next/link"
 
 interface SimilarProductCardProps {
@@ -12,7 +12,6 @@ interface SimilarProductCardProps {
   area?: string
   location?: string
   images?: string[]
-  isLiked?: boolean
 }
 
 const SimilarProductCard = ({
@@ -22,12 +21,10 @@ const SimilarProductCard = ({
   area = "70 m²",
   location = "Quận 9, Hồ Chí Minh",
   images,
-  isLiked = false
 }: SimilarProductCardProps) => {
   const pathname = usePathname()
   const [numberOfImg, setNumberOfImg] = useState<number>(1)
   const [listOfImg, setListOfImg] = useState<number[]>([])
-  const [liked, setLiked] = useState<boolean>(isLiked)
 
   const getRandomNumber = (x: number, y: number) => {
     return Math.floor(Math.random() * (y - x + 1)) + x
@@ -65,13 +62,9 @@ const SimilarProductCard = ({
     return `/img/example/showcase${listOfImg[0] || 0}.jpg`
   }
 
-  const toggleLike = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setLiked(!liked)
-  }
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer w-[45w] md:w-90 lg:w-60 xl:w-75 2xl:w-90 flex flex-col mx-auto">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col mx-auto">
       {/* Image Section - Fixed height */}
       <Link className="relative aspect-video overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 
@@ -81,42 +74,32 @@ const SimilarProductCard = ({
         />
         
         {/* Image count indicator */}
-        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-base xl:text-md flex items-center gap-1">
+        <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-base xl:text-md flex items-center gap-1">
           <FaImages size={12} />
           {numberOfImg}
         </div>
 
-        {/* Heart icon */}
-        <button 
-          onClick={toggleLike}
-          className="absolute top-2 left-2 p-2 rounded-full bg-white/20 hover:bg-white/40 transition-colors duration-200"
-        >
-          {liked ? (
-            <FaHeart className="text-red-500" size={16} />
-          ) : (
-            <FaRegHeart className="text-white" size={16} />
-          )}
-        </button>
+
       </Link>
 
       {/* Content Section - Fixed height with flex layout */}
       <Link className="p-1 flex flex-col justify-between" href={urlToDetail()}>
         <div className="flex flex-col">
           {/* Title - Fixed height with 2 lines max */}
-          <h3 className="font-semibold text-gray-800 text-base xl:text-xl line-clamp-2 h-[3em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
+          <h3 className="font-semibold text-gray-800 text-base xl:text-xl line-clamp-2 h-[2.2em] mb-1 hover:text-blue-600 transition-colors duration-200 leading-6">
             {title}
           </h3>
 
           {/* Price and Area */}
           <div className="flex items-center gap-4">
-            <span className="text-md xl:text-3xl font-bold text-red-600">{price}</span>
-            <span className="text-md xl:text-3xl font-bold text-red-600">{area}</span>
+            <span className="text-md xl:text-2xl font-bold text-red-600">{price}</span>
+            <span className="text-md xl:text-2xl font-bold text-red-600">{area}</span>
           </div>
 
           {/* Location */}
           <div className="flex items-center gap-1 text-gray-500 text-base xl:text-xl">
             <FaMapMarkerAlt size={12} />
-            <span className="line-clamp-1 mb-1">{location}</span>
+            <span className="line-clamp-1 ">{location}</span>
           </div>
         </div>
 

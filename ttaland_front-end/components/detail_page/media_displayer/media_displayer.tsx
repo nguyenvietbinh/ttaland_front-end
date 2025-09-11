@@ -86,7 +86,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
   const currentMedia = mediaItems[currentIndex];
 
   return (
-    <div className="card w-full lg:w-[70%]">
+    <div className="card w-full">
       <div className="card-body p-0">      
         <div ref={posterRef} className="relative group">
           {/* display img or vid */}
@@ -275,6 +275,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
             ))}
           </div>
       </div>
+
             
       {/* full screen image display */}
       <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
