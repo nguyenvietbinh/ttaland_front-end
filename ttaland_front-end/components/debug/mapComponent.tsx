@@ -26,6 +26,12 @@ const MapComponent = ({ places }: mapComponentProps) => {
     // Avoid SSR
     if (typeof window === 'undefined') return;
 
+    // Check if Mapbox token is available
+    if (!process.env.NEXT_PUBLIC_MAPBOX_TOKEN) {
+      console.warn('Mapbox token không được cấu hình');
+      return;
+    }
+
     // Khởi tạo bản đồ tại TP.HCM
     map.current = new mapboxgl.Map({
       container: mapContainer.current,

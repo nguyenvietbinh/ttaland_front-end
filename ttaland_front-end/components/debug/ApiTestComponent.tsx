@@ -25,12 +25,12 @@ const ApiTestComponent = () => {
     const results: TestResults = {}
 
     const endpoints = [
-      { name: 'Properties', url: 'http://localhost:8000/api/properties/' },
-      { name: 'Projects', url: 'http://localhost:8000/api/projects/' },
-      { name: 'Apartments', url: 'http://localhost:8000/api/apartments/' },
-      { name: 'Townhouses', url: 'http://localhost:8000/api/townhouses/' },
-      { name: 'Villas', url: 'http://localhost:8000/api/villas/' },
-      { name: 'Land', url: 'http://localhost:8000/api/land/' }
+      { name: 'Properties', url: 'https://tta-backend-iji0.onrender.com/api/properties/' },
+      { name: 'Projects', url: 'https://tta-backend-iji0.onrender.com/api/projects/' },
+      { name: 'Apartments', url: 'https://tta-backend-iji0.onrender.com/api/apartments/' },
+      { name: 'Townhouses', url: 'https://tta-backend-iji0.onrender.com/api/townhouses/' },
+      { name: 'Villas', url: 'https://tta-backend-iji0.onrender.com/api/villas/' },
+      { name: 'Land', url: 'https://tta-backend-iji0.onrender.com/api/land/' }
     ]
 
     for (const endpoint of endpoints) {
@@ -137,10 +137,10 @@ const ApiTestComponent = () => {
               <div key={name} className="mb-4">
                 <p className="text-base text-gray-600 mb-2">{name} - Media URL: {result.sampleMediaUrl}</p>
                 <p className="text-base text-gray-600 mb-2">
-                  Full URL: {result.sampleMediaUrl?.startsWith('http') ? result.sampleMediaUrl : `http://localhost:8000${result.sampleMediaUrl}`}
+                  Full URL: {result.sampleMediaUrl?.startsWith('http') ? result.sampleMediaUrl : `https://tta-backend-iji0.onrender.com${result.sampleMediaUrl}`}
                 </p>
                 <img 
-                  src={result.sampleMediaUrl?.startsWith('http') ? result.sampleMediaUrl : `http://localhost:8000${result.sampleMediaUrl}`}
+                  src={result.sampleMediaUrl?.startsWith('http') ? result.sampleMediaUrl : `https://tta-backend-iji0.onrender.com${result.sampleMediaUrl}`}
                   alt={`Test image from ${name}`}
                   className="w-32 h-32 object-cover border rounded"
                   onLoad={() => console.log(`✅ Image loaded successfully: ${result.sampleMediaUrl}`)}
