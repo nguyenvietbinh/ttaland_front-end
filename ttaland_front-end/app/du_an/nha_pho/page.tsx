@@ -12,7 +12,7 @@ const Du_an_nha_pho = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
       <div className="container mx-auto">
-        <Listing currentPropertyType="townhouse" isForSale={false} isForRent={false}/>
+        <Listing currentPropertyType="townhouse" isForSale={false} isForRent={false} isProject={true}/>
       </div>
       <Footer/>
     </Suspense>

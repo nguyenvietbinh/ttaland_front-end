@@ -12,7 +12,7 @@ const Du_an_biet_thu = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
       <div className="container mx-auto">
-        <Listing currentPropertyType="villa" isForSale={false} isForRent={false}/>
+        <Listing currentPropertyType="villa" isForSale={false} isForRent={false} isProject={true}/>
       </div>
       <Footer/>
     </Suspense>
