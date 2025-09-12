@@ -12,7 +12,7 @@ const Du_an_dat_nen = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
       <div className="container mx-auto">
-        <Listing currentPropertyType="land" isForSale={false} isForRent={false}/>
+        <Listing currentPropertyType="land" isForSale={false} isForRent={false} isProject={true}/>
       </div>
       <Footer/>
     </Suspense>

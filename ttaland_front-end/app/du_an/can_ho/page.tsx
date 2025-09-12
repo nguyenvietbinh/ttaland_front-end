@@ -12,7 +12,7 @@ const Du_an_can_ho = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
       <div className="container mx-auto">
-        <Listing currentPropertyType="apartment" isForSale={false} isForRent={false}/>
+        <Listing currentPropertyType="apartment" isForSale={false} isForRent={false} isProject={true}/>
       </div>
       <Footer/>
     </Suspense>

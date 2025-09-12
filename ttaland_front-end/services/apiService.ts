@@ -14,6 +14,24 @@ export interface DevelopmentProject {
   location: string
 }
 
+// Full Project interface for /api/projects/ endpoint
+export interface Project {
+  id: string
+  name: string
+  location: string
+  developer: string
+  general_contractor: string
+  project_type: string
+  delivery_time: string
+  completion_standard: string
+  management_unit: string
+  distributor: string
+  area_size: string
+  area_size_formatted: string
+  quantity: string
+  policy: string
+}
+
 export interface MediaFile {
   id: string
   media_type: 'image' | 'video'
@@ -167,6 +185,20 @@ class ApiService {
     
     const endpoint = `/properties/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
     return this.fetchFromApi<ApiResponse<Property>>(endpoint)
+  }
+
+  // Get all projects
+  async getProjects(filters: { page?: number } = {}): Promise<ApiResponse<Project>> {
+    const queryParams = new URLSearchParams()
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, value.toString())
+      }
+    })
+    
+    const endpoint = `/projects/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+    return this.fetchFromApi<ApiResponse<Project>>(endpoint)
   }
 
   // Get townhouses specifically
