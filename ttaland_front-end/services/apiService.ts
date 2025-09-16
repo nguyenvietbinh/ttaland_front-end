@@ -58,6 +58,7 @@ export interface RealEstateProduct {
   project?: DevelopmentProject | null
   created_at: string
   media: MediaFile[]
+  main_images: string[]
   youtube_url?: string | null
   tiktok_url?: string | null
 }
@@ -279,74 +280,7 @@ class ApiService {
     return this.fetchFromApi<LandLot>(`/land/${landId}/`)
   }
 
-  // Get townhouse details with fallback to mock data
-  async getTownhouseDetailsWithFallback(townhouseId: string): Promise<{
-    data: Townhouse | null,
-    isUsingMockData: boolean,
-    error?: string
-  }> {
-    try {
-      const data = await this.getTownhouseDetails(townhouseId)
-      return {
-        data,
-        isUsingMockData: false
-      }
-    } catch (error) {
-      // API failed, using mock data fallback
-      const mockData: Townhouse = {
-        id: townhouseId,
-        title: `Nhà phố ${townhouseId}`,
-        description: "Nhà phố hiện đại, thiết kế đẹp",
-        area: "120.00",
-        area_formatted: "120 m²",
-        location: "Test Location, Testing District",
-        price: "7300000000.00",
-        price_formatted: "7.3 Tỷ",
-        for_sale: true,
-        for_sale_display: "For Sale",
-        type: "townhouse",
-        type_display: "Townhouse",
-        created_at: new Date().toISOString(),
-        project: null,
-        media: [
-          {
-            id: "mock-1",
-            media_type: "image",
-            file: "/img/example/showcase0.jpg",
-            file_url: "/img/example/showcase0.jpg",
-            uploaded_at: new Date().toISOString(),
-            order: 0
-          },
-          {
-            id: "mock-2", 
-            media_type: "image",
-            file: "/img/example/showcase1.jpg",
-            file_url: "/img/example/showcase1.jpg",
-            uploaded_at: new Date().toISOString(),
-            order: 1
-          }
-        ],
-        youtube_url: "https://www.youtube.com/watch?v=dQj7hrKQxU8",
-        tiktok_url: "https://www.tiktok.com/@tuananh_nhadat/video/7401361660478246162",
-        townhouse_details: {
-          floors: 3,
-          bedrooms: 4,
-          bathrooms: 3,
-          living_room: true,
-          garage: 1,
-          policy: "Sổ hồng chính chủ",
-          structure: "1 trệt - 3 lầu",
-          interior: "Đầy đủ nội thất"
-        }
-      }
-      
-      return {
-        data: mockData,
-        isUsingMockData: true,
-        error: error instanceof Error ? error.message : 'Unknown error'
-      }
-    }
-  }
+
 
   // Search properties
   async searchProperties(query: string): Promise<ApiResponse<Property>> {
