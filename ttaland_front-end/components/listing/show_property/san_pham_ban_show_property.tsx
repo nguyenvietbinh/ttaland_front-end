@@ -1,13 +1,11 @@
 'use client'
 
-import { useEffect, useState } from "react"
 import { type Townhouse, type Villa, type Apartment, type LandLot } from '@/services/apiService'
 import Link from "next/link"
 
 // Helper interface for property with main_images
 interface PropertyWithImages {
   main_images?: string[]
-  [key: string]: unknown
 }
 
 interface San_pham_ban_propertyProps {
@@ -18,120 +16,50 @@ interface San_pham_ban_propertyProps {
 }
 
 // Mock data cho trường hợp không có real data
-const mockPropertyData = {
-  id: 'MOCK001',
-  title: 'Nhà phố 3 tầng hiện đại - Khu vực trung tâm',
-  description: 'Thiết kế hiện đại, full nội thất, vị trí đẹp gần trường học và chợ',
-  price: '8500000000',
-  price_formatted: '8.5 Tỷ',
-  area: '120',
-  area_formatted: '120 m²',
-  location: 'Quận 7, TP.HCM',
-  for_sale: true,
-  for_sale_display: 'Bán',
-  type: 'townhouse' as const,
-  type_display: 'Nhà phố',
-  created_at: '2024-08-09',
-  media: [],
-  images: ['showcase1.jpg', 'showcase2.jpg', 'showcase3.jpg', 'showcase4.jpg'],
-  main_images: ['showcase1.jpg', 'showcase2.jpg', 'showcase3.jpg', 'showcase4.jpg']
-}
+
 
 const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_ban_propertyProps) => {
-  const [numberOfImg, setNumberOfImg] = useState<number>(0)
-  const [listOfImg, setListOfImg] = useState<number[]>([])
-  const [isMounted, setIsMounted] = useState(false)
 
   // Use any available property data, fallback to mock data if none available
-  const property = villa || townhouse || apartment || land || mockPropertyData
-  const isUsingRealData = !!(villa || townhouse || apartment || land)
+  const property = villa || townhouse || apartment || land
   
-  const getRandomNumber = (x: number, y: number) => {
-    return Math.floor(Math.random() * (y - x + 1)) + x
-  }
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
-  useEffect(() => {
-    if (!isMounted) return // Chỉ chạy khi component đã mount trên client
-    
-    if (isUsingRealData && (property as PropertyWithImages)?.main_images) {
-      // Use real media data
-      setNumberOfImg((property as PropertyWithImages).main_images!.length)
-    } else {
-      // Use mock data
-      const randomNum = getRandomNumber(4, 9)
-      setNumberOfImg(randomNum)
-
-      const uniqueNumbers = new Set<number>()
-      while (uniqueNumbers.size < randomNum) {
-        uniqueNumbers.add(getRandomNumber(0, 9))
-      }
-      setListOfImg(Array.from(uniqueNumbers))
-    }
-  }, [isMounted, isUsingRealData, property])
 
   const urlToDetail = () => {
-    const detailId = isUsingRealData ? property!.id : listOfImg.join('')
-    return `/san_pham_ban/chi_tiet?id=${detailId}`
+    return `/san_pham_ban/chi_tiet?id=${property?.id}`
   }
 
   // Get image URLs
-  const getImageUrl = (index: number): string => {
-    if (isUsingRealData && (property as PropertyWithImages)?.main_images?.[index]) {
-      return (property as PropertyWithImages).main_images![index]
-    }
-    return `/img/example/showcase${listOfImg[index] || 0}.jpg`
-  }
+
 
   // Get property data with type checking
-  const title = isUsingRealData ? property!.title : "QUỸ CĂN GIÁ RẺ NHẤT TẠI VINHOMES WONDER CITY CÓ HỘI VÀNG CHỈ 150 TRIỆU/M2"
-  const area = isUsingRealData ? property!.area_formatted : "100 m²"
-  const price = isUsingRealData ? property!.price_formatted : "1 Tỷ"
-  const location = isUsingRealData ? property!.location : "Phường 2, Thủ Đức"
+  const title = property!.title
+  const area = property!.area_formatted
+  const price = property!.price_formatted
+  const location = property!.location
   
   // Handle garage - only available for townhouse, villa
-  const garage = isUsingRealData ? 
-    ((property as Townhouse)?.townhouse_details?.garage || (property as Villa)?.villa_details?.garage || 0) : 1
+  const garage = ((property as Townhouse)?.townhouse_details?.garage || (property as Villa)?.villa_details?.garage || 0)
   
   // Handle bedrooms - not available for land
-  const bedrooms = isUsingRealData ? 
-    ((property as Townhouse)?.townhouse_details?.bedrooms || (property as Villa)?.villa_details?.bedrooms || (property as Apartment)?.apartment_details?.bedrooms || 0) : 4
+  const bedrooms = ((property as Townhouse)?.townhouse_details?.bedrooms || (property as Villa)?.villa_details?.bedrooms || (property as Apartment)?.apartment_details?.bedrooms || 0)
   
   // Handle bathrooms - not available for land  
-  const bathrooms = isUsingRealData ? 
-    ((property as Townhouse)?.townhouse_details?.bathrooms || (property as Villa)?.villa_details?.bathrooms || (property as Apartment)?.apartment_details?.bathrooms || 0) : 3
+  const bathrooms = ((property as Townhouse)?.townhouse_details?.bathrooms || (property as Villa)?.villa_details?.bathrooms || (property as Apartment)?.apartment_details?.bathrooms || 0) 
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">
       <Link className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" href={urlToDetail()}>
         <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
-          <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(0)} alt={title} />
-          {numberOfImg > 1 && (
-            <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 md:hidden flex items-center gap-1">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-              </svg>
-              <span className="text-white text-base font-medium">{numberOfImg - 1}+</span>
-            </div>
-          )}
+          <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![0]} alt={title} />
         </div>
         <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden cursor-pointer">
           <div className="w-full h-1/2 overflow-hidden">
-            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(1)} alt={title} />
+            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property as PropertyWithImages).main_images![1]} alt={title} />
           </div>
           <div className="w-full relative h-1/2 cursor-pointer overflow-hidden">
-            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={getImageUrl(2)} alt={title} />
-            {numberOfImg > 3 && (
-              <div className="absolute bg-black/50 p-1 rounded-sm right-2 bottom-2 flex items-center gap-1">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-white text-base font-medium">{numberOfImg - 3}+</span>
-              </div>
-            )}
+            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property as PropertyWithImages).main_images![2]} alt={title} />
           </div>
         </div>
       </Link>

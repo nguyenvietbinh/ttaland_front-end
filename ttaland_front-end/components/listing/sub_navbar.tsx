@@ -1,21 +1,14 @@
 'use client'
 
-import San_pham_ban_price_option from "./options/san_pham_ban_options/san_pham_ban_price_option"
-import San_pham_ban_sqr_option from "./options/san_pham_ban_options/san_pham_ban_sqr_option"
-import San_pham_cho_thue_price_option from "./options/san_pham_cho_thue_options/san_pham_cho_thue_price_option"
-import San_pham_cho_thue_sqr_option from "./options/san_pham_cho_thue_options/san_pham_cho_thue_sqr_option"
-import Du_an_price_option from "./options/du_an_options/du_an_price_option"
-import Du_an_sqr_option from "./options/du_an_options/du_an_sqr_option"
+
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 
 interface Sub_navbar_props {
   currentPropertyType: 'townhouse' | 'villa' | 'apartment' | 'land'
-  isForSale: boolean
-  isForRent: boolean
 }
 
-const Sub_navbar = ({currentPropertyType, isForSale, isForRent}: Sub_navbar_props) => {
+const Sub_navbar = ({currentPropertyType}: Sub_navbar_props) => {
   const path_name = usePathname()
   const searchParams = useSearchParams()
   const list_path = path_name?.split('/') || []
@@ -38,10 +31,7 @@ const Sub_navbar = ({currentPropertyType, isForSale, isForRent}: Sub_navbar_prop
         <Link className={(currentPropertyType === 'apartment') ? "w-full text-center border-solid border-gray-300 border-t-2 border-l-2 py-2 rounded-t-sm" : "w-full text-gray-400 text-center py-2 border-solid border-gray-300 border-b-2"} href={`/${list_path[1]}/can_ho${(searchParams?.toString()) ? `?${searchParams?.toString}` : ''}`}>Căn Hộ</Link>
       </div>
       
-      <div className="md:flex items-center hidden space-y-2 md:space-y-0 py-2 gap-4">
-        {(isForSale) ? (<San_pham_ban_price_option />) : (isForRent) ? (<San_pham_cho_thue_price_option />) : (<Du_an_price_option />)}
-        {(isForSale) ? (<San_pham_ban_sqr_option />) : (isForRent) ? (<San_pham_cho_thue_sqr_option />) : (<Du_an_sqr_option />)}
-      </div>
+
     </div>
     
   )

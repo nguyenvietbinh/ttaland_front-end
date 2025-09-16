@@ -30,7 +30,7 @@ interface Listing_props {
   isProject?: boolean // New flag to indicate if this is a project listing
 }
 
-const Listing = ({currentPropertyType, isForSale, isForRent, isProject = false}: Listing_props) => {
+const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_props) => {
 
   // Use appropriate hooks based on the page type
   const saleTownhouseData = useSaleTownhouses()
@@ -45,15 +45,13 @@ const Listing = ({currentPropertyType, isForSale, isForRent, isProject = false}:
 
   // Project data hook
   const projectData = useProjects()
-  
-  // Fallback items for other categories
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
+  
   // If this is a project listing, use project data
   if (isProject) {
     return (
       <div>
-        <Sub_navbar currentPropertyType={currentPropertyType} isForSale={isForSale} isForRent={isForRent}/>
+        <Sub_navbar currentPropertyType={currentPropertyType}/>
         <div className="px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8">
           
           {/* Show loading state only when loading and no error */}
@@ -71,21 +69,13 @@ const Listing = ({currentPropertyType, isForSale, isForRent, isProject = false}:
             ))
           }
 
-          {/* Show mock data when: 1) API has error, 2) API returns empty results */}
-          {(projectData.error || (!projectData.loading && !projectData.error && projectData.projects.length === 0)
-          ) && items.map((item, index) => (
-            <div key={index}>
-              <Du_an_property/>
-            </div>
-          ))}
-
-          {/* Show error message when API fails (optional - alongside mock data) */}
-          {projectData.error && (
-            <div className="text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
-              <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
-              <p className="text-base mt-1">Lỗi: {projectData.error}</p>
+          {(projectData.projects.length === 0)
+           && (
+            <div >
+              Không tìm thấy sản phẩm nào!
             </div>
           )}
+
 
           {/* Load more button for projects - only show when API is working */}
           {!projectData.error && (
@@ -137,7 +127,7 @@ const Listing = ({currentPropertyType, isForSale, isForRent, isProject = false}:
 
   return (
     <div>
-      <Sub_navbar currentPropertyType={currentPropertyType} isForSale={isForSale} isForRent={isForRent}/>
+      <Sub_navbar currentPropertyType={currentPropertyType} />
       <div className="px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8">
         
         {/* Show loading state only when loading and no error */}
@@ -154,12 +144,11 @@ const Listing = ({currentPropertyType, isForSale, isForRent, isProject = false}:
         }
 
         {/* Show mock data when: 1) No API integration, 2) API has error, 3) API returns empty results */}
-        {(currentData!.data.error || (!currentData!.data.loading && !currentData!.data.error && (currentData!.items as unknown as PropertyItem[]).length === 0)
-        ) && items.map((item, index) => (
-          <div key={index}>
-            {(isForSale) ? (<San_pham_ban_property />) : (isForRent) ? (<San_pham_cho_thue_property/>) : (<Du_an_property/>)}
+        {(!currentData!.data.loading && (currentData!.items as unknown as PropertyItem[]).length === 0) && (
+          <div>
+            Không tìm thấy sản phẩm nào!
           </div>
-        ))}
+        )}
 
         {/* Show error message when API fails (optional - alongside mock data) */}
         {currentData!.data.error && (
