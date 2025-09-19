@@ -1,12 +1,9 @@
 'use client'
 
-import { type Townhouse, type Villa, type Apartment, type LandLot } from '@/services/apiService'
+import { type Townhouse, type Villa, type Apartment, type LandLot } from '@/types/product'
 import Link from "next/link"
 
-// Helper interface for property with main_images
-interface PropertyWithImages {
-  main_images?: string[]
-}
+
 
 interface San_pham_ban_propertyProps {
   townhouse?: Townhouse
@@ -15,22 +12,17 @@ interface San_pham_ban_propertyProps {
   land?: LandLot
 }
 
-// Mock data cho trường hợp không có real data
 
 
 const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_ban_propertyProps) => {
 
-  // Use any available property data, fallback to mock data if none available
   const property = villa || townhouse || apartment || land
   
-
-
 
   const urlToDetail = () => {
     return `/san_pham_ban/chi_tiet?id=${property?.id}`
   }
 
-  // Get image URLs
 
 
   // Get property data with type checking
@@ -56,10 +48,10 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
         </div>
         <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden cursor-pointer">
           <div className="w-full h-1/2 overflow-hidden">
-            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property as PropertyWithImages).main_images![1]} alt={title} />
+            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![1]} alt={title} />
           </div>
           <div className="w-full relative h-1/2 cursor-pointer overflow-hidden">
-            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property as PropertyWithImages).main_images![2]} alt={title} />
+            <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![2]} alt={title} />
           </div>
         </div>
       </Link>
@@ -67,10 +59,11 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
       <div className="px-2 pt-4 text-black">
         {/* info */}
         <div className="">
-          <Link className="font-bold text-2xl cursor-pointer hover:underline wrap-break-word line-clamp-2" href={urlToDetail()}>
+          <Link className="font-bold text-3xl cursor-pointer hover:underline wrap-break-word line-clamp-2" href={urlToDetail()}>
             {title}
           </Link>
-          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-xl text-nowrap border-y-[1px] font-bold border-gray-600">
+          <Link href={urlToDetail()} className='hover:underline cursor-pointer'>{location}</Link>
+          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-xl text-nowrap border-t-[1px] font-bold border-gray-600">
             <div className="flex items-center gap-1">
               <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
               <p className="">Diện tích:</p>
@@ -102,18 +95,12 @@ const San_pham_ban_property = ({ townhouse, villa, apartment, land }: San_pham_b
                 <p className="overflow-auto no-scrollbar">{bathrooms}</p>
               </div>
             )}
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
-              <p className="overflow-auto no-scrollbar">{location}</p>
-            </div>
           </div>
         </div>
 
         <div className="flex justify-between w-full my-3 items-center">
-          <Link className="btn bg-black text-white w-[80%] md:w-[90%]" href={urlToDetail()}>Thông tin thêm</Link>
-          <div className="w-[20%] md:w-[10%] cursor-pointer">
-            <img src="/img/icons/heart.png" alt="" className="h-8 mx-auto"/>
-          </div>
+          <Link className="btn bg-black text-base w-[100%]" href={urlToDetail()}>Thông tin thêm</Link>
+
         </div>  
       </div>
     </div>

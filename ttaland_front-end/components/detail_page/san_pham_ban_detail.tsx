@@ -1,12 +1,13 @@
 'use client'
 import { useEffect, useState } from "react";
 import Media_displayer from "./media_displayer/media_displayer";
-import San_pham_ban_detail_infor from "./detail_infor/san_pham_ban_detail_infor";
-import { detail_infor } from "./detail_infor/san_pham_ban_detail_infor";
+import Detail_info from "./detail_infor/detail_infor";
+import { detail_infor } from "./detail_infor/detail_infor";
 import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
-import { Apartment, apiService, LandLot, Townhouse, Villa } from "../../services/apiService";
+import { apiService } from "../../services/apiService";
+import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
 import Map_window from "./map_window";
 
 interface San_pham_ban_details_props {
@@ -30,7 +31,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
         setPropertyData(result);
-        console.log(result)
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
       } finally {
@@ -104,7 +104,9 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       price: apiData.price_formatted,
       sqr: Number(apiData.area),
       location: apiData.location,
-      description: apiData.description
+      description: apiData.description,
+      latitude: apiData.latitude,
+      longitude: apiData.longitude
     }
     if (productDetail) {
       if ('policy' in productDetail && productDetail.policy) {
@@ -121,6 +123,9 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       }
       if ('interior' in productDetail && productDetail.interior) {
         result.interior = productDetail.interior;
+      }
+      if ('road_frontage_formatted' in productDetail && productDetail.road_frontage_formatted) {
+        result.road_frontage_formatted = productDetail.road_frontage_formatted;
       }
     }
     return result
@@ -160,7 +165,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
               </div>
             </div>
             <div className="h-auto w-full lg:w-[35%]">
-              <San_pham_ban_detail_infor information_data={informationData}/>
+              <Detail_info information_data={informationData}/>
               <Map_window/>
             </div>
             <div className="block lg:hidden">

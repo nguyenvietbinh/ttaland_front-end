@@ -11,15 +11,18 @@ export type detail_infor = {
   bedrooms?: number,
   bathrooms?: number,
   interior?: string,
-  description: string,  
+  description: string,
+  latitude: string,
+  longitude: string,
+  road_frontage_formatted?: string,
 }
 
-interface san_pham_ban_detail_infor_props {
+interface Detail_infor_props {
   information_data: detail_infor
 }
 
 
-const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_infor_props) => {
+const Detail_infor = ({ information_data }: Detail_infor_props) => {
   const [expanded, setExpanded] = useState(false);
 
 
@@ -30,20 +33,20 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
       <ul className="grid-cols-1 gap-4 w-full text-nowrap">
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Mức giá:</p>
-          <p className="w-1/2 overflow-auto">{information_data.price}.</p>            
+          <p className="w-1/2 overflow-auto no-scrollbar">{information_data.price}.</p>            
         </li>
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Diện tích:</p>
-          <p className="w-1/2 overflow-auto">{information_data.sqr} m².</p>            
+          <p className="w-1/2 overflow-auto no-scrollbar">{information_data.sqr} m².</p>            
         </li>
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Vị Trí:</p>
-          <p className="w-1/2 overflow-auto">{information_data.location}.</p>            
+          <p className="w-1/2 overflow-auto no-scrollbar">{information_data.location}.</p>            
         </li>
         {(information_data.policy) ? (
         <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
           <p className="w-1/2">Pháp lý:</p>
-          <p className="w-1/2 overflow-auto">{information_data.policy}.</p>            
+          <p className="w-1/2 overflow-auto no-scrollbar">{information_data.policy}.</p>            
         </li>
         ) : (
           <div></div>
@@ -51,7 +54,7 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
         {(information_data.structure) ? (
           <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
             <p className="w-1/2">Kết cấu:</p>
-            <p className="w-1/2 overflow-auto">{information_data.structure}.</p>            
+            <p className="w-1/2 overflow-auto no-scrollbar">{information_data.structure}.</p>            
           </li>
         ) : (
           <div></div>
@@ -59,7 +62,7 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
         {(information_data.bedrooms) ? (
           <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
             <p className="w-1/2">Phòng ngủ:</p>
-            <p className="w-1/2 overflow-auto">{information_data.bedrooms}.</p>            
+            <p className="w-1/2 overflow-auto no-scrollbar">{information_data.bedrooms}.</p>            
           </li>
         ) : (
           <div></div>
@@ -80,6 +83,14 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
         ) : (
           <div></div>
         )}
+        {(information_data.road_frontage_formatted) ? (
+          <li className="border-b-[1px] border-gray-400 px-2 pt-2 pb-0.5 flex justify-between">
+            <p className="w-1/2">Đường vào:</p>
+            <p className="w-1/2 overflow-auto">{information_data.road_frontage_formatted}.</p>            
+          </li>
+        ) : (
+          <div></div>
+        )}
       </ul>
 
       {/* Mô tả đặc điểm */}
@@ -95,4 +106,4 @@ const San_pham_ban_detail_infor = ({ information_data }: san_pham_ban_detail_inf
 }
 
 
-export default San_pham_ban_detail_infor
+export default Detail_infor

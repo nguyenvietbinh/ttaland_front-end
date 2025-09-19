@@ -5,7 +5,8 @@ import {
 } from 'react-icons/fa';
 import { useRef, useState, useEffect } from 'react';
 import SimilarProductCard from './similar_product_card';
-import { apiService, SimilarProductItem } from '../../../services/apiService';
+import { apiService } from '../../../services/apiService';
+import { SimilarProductItem } from '@/types/similar';
 
 interface SimilarProductProps {
   productId?: string;
