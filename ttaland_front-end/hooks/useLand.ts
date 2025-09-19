@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { apiService, type LandLot, type ApiResponse, type ApiFilters } from '@/services/apiService'
+import { apiService } from '@/services/apiService'
+import { LandLot } from '@/types/product'
+import { ApiResponse, ApiFilters } from '@/types/api'
 
 interface UseLandReturn {
   landLots: LandLot[]

@@ -23,7 +23,6 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
 
 
 
-
   useEffect(() => {
     setCurrentTab(() => (currentMedia.type === 'image' ? 'image' : 'video'))
   }, [currentMedia])
@@ -65,9 +64,9 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
           </div>
         </div>
 
-        {currentTab === 'video' ? (
+        {currentTab === 'video' && videoMediaItems.length ? (
           <Video_modal_tab mediaItems={videoMediaItems} startVideoIndex={startVideoIndex}/>
-        ) : currentTab === 'image' ? (
+        ) : currentTab === 'image' && imageMediaItems.length ? (
           <Image_modal_tab mediaItems={imageMediaItems} startImageIndex={startImageIndex}/>
         ) : currentTab === 'map' ? (
           <Map_modal_tab/>

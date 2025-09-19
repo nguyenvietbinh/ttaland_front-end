@@ -14,7 +14,7 @@ import {
   useSaleLand
 } from '@/hooks/useRentalProperties';
 import { useProjects } from '@/hooks/useProjects';
-import type { Project } from '@/services/apiService';
+import type { Project } from '@/types/project';
 
 interface PropertyItem {
   id: string | number;
@@ -143,17 +143,15 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
           (currentData!.items as unknown as PropertyItem[]).map((item: PropertyItem) => currentData!.renderItem(item))
         }
 
-        {/* Show mock data when: 1) No API integration, 2) API has error, 3) API returns empty results */}
         {(!currentData!.data.loading && (currentData!.items as unknown as PropertyItem[]).length === 0) && (
           <div>
             Không tìm thấy sản phẩm nào!
           </div>
         )}
 
-        {/* Show error message when API fails (optional - alongside mock data) */}
         {currentData!.data.error && (
           <div className="text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
-            <p>🔧 Backend không hoạt động - hiển thị mock data để tiện development</p>
+            <p>🔧 Backend không hoạt động</p>
             <p className="text-base mt-1">Lỗi: {currentData!.data.error}</p>
           </div>
         )}

@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { apiService, type Project, type ApiResponse } from '@/services/apiService'
+import { apiService } from '@/services/apiService'
+import { Project } from '@/types/project'
+import { ApiResponse } from '@/types/api'
 
 interface UseProjectsReturn {
   projects: Project[]
