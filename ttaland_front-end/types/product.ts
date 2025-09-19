@@ -79,5 +79,78 @@ export interface LandLot extends RealEstateProduct {
   land_details: LandLotDetails
 }
 
+export interface TownhouseShowProperty {
+  id: string
+  title: string
+  area: string
+  area_formatted: string
+  location: string
+  price: string
+  price_formatted: string
+  for_sale: boolean
+  for_sale_display: string
+  type: string
+  type_display: string
+  created_at: string
+  main_images: string[]
+  bedrooms: number
+  bathrooms: number
+  garage: number
+}
+
+export interface VillaShowProperty {
+  id: string
+  title: string
+  area: string
+  area_formatted: string
+  location: string
+  price: string
+  price_formatted: string
+  for_sale: boolean
+  for_sale_display: string
+  type: string
+  type_display: string
+  created_at: string
+  main_images: string[]
+  bedrooms: number
+  bathrooms: number
+  garage: number
+}
+
+export interface ApartmentShowProperty {
+  id: string
+  title: string
+  area: string
+  area_formatted: string
+  location: string
+  price: string
+  price_formatted: string
+  for_sale: boolean
+  for_sale_display: string
+  type: string
+  type_display: string
+  created_at: string
+  main_images: string[]
+  bedrooms: number
+  bathrooms: number
+}
+
+export interface LandLotShowProperty {
+  id: string
+  title: string
+  area: string
+  area_formatted: string
+  location: string
+  price: string
+  price_formatted: string
+  for_sale: boolean
+  for_sale_display: string
+  type: string
+  type_display: string
+  created_at: string
+  main_images: string[]
+}
+
 // Union type
 export type Property = Townhouse | Villa | Apartment | LandLot
+export type ShowProperty = TownhouseShowProperty | VillaShowProperty | ApartmentShowProperty | LandLotShowProperty

@@ -45,7 +45,6 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
 
   // Project data hook
   const projectData = useProjects()
-
   
   // If this is a project listing, use project data
   if (isProject) {
@@ -63,13 +62,13 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
           )}
 
           {/* Render project data when successful */}
-          {!projectData.loading && !projectData.error && 
+          {!projectData.loading && !projectData.error && projectData.projects.length > 0 && 
             projectData.projects.map((project: Project) => (
               <Du_an_property key={project.id} />
             ))
           }
 
-          {(projectData.projects.length === 0)
+          {(projectData.projects.length === 0 && !projectData.loading)
            && (
             <div >
               Không tìm thấy sản phẩm nào!
@@ -96,29 +95,29 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
       data: isForRent ? rentalTownhouseData : saleTownhouseData,
       items: isForRent ? rentalTownhouseData.townhouses : saleTownhouseData.townhouses,
       renderItem: (item: PropertyItem) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} townhouse={item as never} /> : 
-        <San_pham_ban_property key={item.id} townhouse={item as never} />
+        <San_pham_cho_thue_property key={item.id} property={item as never} /> : 
+        <San_pham_ban_property key={item.id} property={item as never} />
     },
     villa: {
       data: isForRent ? rentalVillaData : saleVillaData,
       items: isForRent ? rentalVillaData.villas : saleVillaData.villas,
       renderItem: (item: PropertyItem) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} villa={item as never} /> : 
-        <San_pham_ban_property key={item.id} villa={item as never} />
+        <San_pham_cho_thue_property key={item.id} property={item as never} /> : 
+        <San_pham_ban_property key={item.id} property={item as never} />
     },
     apartment: {
       data: isForRent ? rentalApartmentData : saleApartmentData,
       items: isForRent ? rentalApartmentData.apartments : saleApartmentData.apartments,
       renderItem: (item: PropertyItem) => isForRent ?
-        <San_pham_cho_thue_property key={item.id} apartment={item as never} /> : 
-        <San_pham_ban_property key={item.id} apartment={item as never} />
+        <San_pham_cho_thue_property key={item.id} property={item as never} /> : 
+        <San_pham_ban_property key={item.id} property={item as never} />
     },
     land: {
       data: isForRent ? rentalLandData : saleLandData,
       items: isForRent ? rentalLandData.landLots : saleLandData.landLots,
       renderItem: (item: PropertyItem) => isForRent ? 
-        <San_pham_cho_thue_property key={item.id} land={item as never} /> : 
-        <San_pham_ban_property key={item.id} land={item as never} />
+        <San_pham_cho_thue_property key={item.id} property={item as never} /> : 
+        <San_pham_ban_property key={item.id} property={item as never} />
     }
   };
   
