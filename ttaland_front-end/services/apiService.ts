@@ -115,10 +115,9 @@ class ApiService {
   async getSimilarPropertiesWithFallback(propertyId: string) {
     try {
       const data = await this.fetchFromApi<SimilarProductsResponse>(`/similar/${propertyId}/`)
-      return { data, isUsingMockData: false }
+      return { data }
     } catch (error) {
-      // mock data fallback ở đây
-      return { data: null, isUsingMockData: true, error: error instanceof Error ? error.message : 'Unknown error' }
+      return { data: null, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   }
 

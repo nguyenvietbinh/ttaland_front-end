@@ -43,7 +43,7 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
       <div className="px-2 pt-4 text-black">
         {/* info */}
         <div className="">
-          <Link className="font-bold text-3xl cursor-pointer hover:underline wrap-break-word line-clamp-2" href={urlToDetail()}>
+          <Link className="font-bold text-3xl cursor-pointer hover:underline wrap-break-word line-clamp-2 h-20" href={urlToDetail()}>
             {property.title}
           </Link>
           <div className="flex justify-between">

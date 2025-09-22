@@ -6,7 +6,8 @@ export interface SimilarProductItem {
   area: string
   area_formatted: string
   location: string
-  main_image: string
+  images: string[]
+  create_at: string
 }
 
 export interface SimilarProductsResponse {
