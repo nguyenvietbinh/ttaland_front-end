@@ -18,22 +18,16 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
   // State for API data
   const [similarProducts, setSimilarProducts] = useState<SimilarProductItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUsingMockData, setIsUsingMockData] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
   
   // Pagination state
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Mount check to prevent hydration mismatch
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+
 
   // Fetch similar products from API
   useEffect(() => {
-    if (!isMounted) return;
     
     const fetchSimilarProducts = async () => {
       if (!productId) {
@@ -45,9 +39,9 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
         const result = await apiService.getSimilarPropertiesWithFallback(productId);
         
         if (result.data) {
+          console.log(result.data)
           setSimilarProducts(result.data.similar_products);
         }
-        setIsUsingMockData(result.isUsingMockData);
         setError(result.error || null);
         
       } catch (err) {
@@ -58,7 +52,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
     };
 
     fetchSimilarProducts();
-  }, [productId, isMounted]);
+  }, [productId]);
 
   // Reset pagination when products change
   useEffect(() => {
@@ -99,6 +93,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
+    console.log(similarProducts.slice(startIndex, endIndex))
     return similarProducts.slice(startIndex, endIndex);
   };
 
@@ -130,28 +125,9 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
     return pages;
   };
 
-  // Don't render until mounted to prevent hydration mismatch
-  if (!isMounted) {
-    return (
-      <div className='relative flex justify-center'>
-        <div className="container">
-          <div className="text-center py-8">
-            <div className="text-lg">Đang tải sản phẩm tương tự...</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className='relative flex justify-center'>
-      <div className="container">
-        {/* Mock Data Warning */}
-        {isUsingMockData && (
-          <div className="">
-          </div>
-        )}
-
+      <div>
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
           <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
@@ -225,15 +201,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
               className={`grid grid-cols-4 gap-4 transition-opacity duration-300 ${isAnimating ? 'opacity-50' : 'opacity-100'}`}
             >
               {getCurrentItems().map((property, index) => (
-                <SimilarProductCard
-                  key={`${property.id}-${currentPage}-${index}`}
-                  id={property.id}
-                  title={property.title}
-                  price={property.price_formatted}
-                  area={property.area_formatted}
-                  location={property.location}
-                  images={[property.main_image]}
-                />
+                <SimilarProductCard key={index} similerproductIteam={property}/>
               ))}
             </div>
           </div>
@@ -252,14 +220,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
             >
               {similarProducts.map((property, index) => (
                 <div key={`${property.id}-mobile-${index}`} className="flex-shrink-0 w-64">
-                  <SimilarProductCard
-                    id={property.id}
-                    title={property.title}
-                    price={property.price_formatted}
-                    area={property.area_formatted}
-                    location={property.location}
-                    images={[property.main_image]}
-                  />
+                  <SimilarProductCard similerproductIteam={property}/>
                 </div>
               ))}
             </div>
@@ -321,7 +282,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
         )}
 
         {/* Error Display */}
-        {error && !isUsingMockData && (
+        {error && (
           <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
             <p className="text-red-700 text-sm">
               Lỗi tải dữ liệu: {error}
