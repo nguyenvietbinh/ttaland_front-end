@@ -9,6 +9,8 @@ import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-u
 import { apiService } from "../../services/apiService";
 import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
 import Map_window from "./map_window";
+import Watched_project from "./watched_product/watched_product";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface San_pham_cho_thue_details_props {
   id: string | null;
@@ -19,6 +21,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [mediaData, setMediaData] = useState<MediaItem[]>()
   const [informationData, setInformationData] = useState<detail_infor>()
+  const { addWatchedProduct } = useLocalStorage()
 
   useEffect(() => {
     const fetchPropertyData = async () => {
@@ -30,6 +33,18 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
+        addWatchedProduct({
+          id: result.id,
+          title: result.title,
+          price: result.price,
+          price_formatted: result.price_formatted,
+          area: result.area,
+          area_formatted: result.area_formatted,
+          location: result.location,
+          main_image: result.media[0].file_url,
+          num_images: result.media.length,
+          created_at: result.created_at
+        })
         setPropertyData(result);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
@@ -161,7 +176,8 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
             <div className="h-auto w-full lg:w-[65%]">
               <Media_displayer mediaItems={mediaData}/>
               <div className="hidden lg:block">
-                <Similar_produc productId={propertyData?.id || id || '12345'}/>
+                <Similar_produc productId={propertyData?.id}/>
+                <Watched_project/>
               </div>
             </div>
             <div className="h-auto w-full lg:w-[35%]">
@@ -169,7 +185,8 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
               <Map_window/>
             </div>
             <div className="block lg:hidden">
-              <Similar_produc productId={propertyData?.id || id || '12345'}/>
+              <Similar_produc productId={propertyData?.id}/>
+              <Watched_project/>
             </div>
           </div>
         </div>

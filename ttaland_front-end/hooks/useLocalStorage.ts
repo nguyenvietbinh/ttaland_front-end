@@ -1,30 +1,46 @@
-import { useEffect, useState } from 'react';
+// hooks/useProductStorage.ts
+'use client';
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState<T>(initialValue);
+import { SimilarProductItem } from '@/types/similar';
 
-  // Lấy dữ liệu từ localStorage khi component mount
-  useEffect(() => {
-    if (typeof window === 'undefined') return; // Đảm bảo chạy client
-    try {
-      const storedValue = localStorage.getItem(key);
-      if (storedValue !== null) {
-        setValue(JSON.parse(storedValue));
+
+export function useLocalStorage() {
+
+  const watchedProductData = window.localStorage.getItem('watched_product_data')
+
+
+  const getWatchedProductData = () => {
+    if (watchedProductData) {
+      return JSON.parse(watchedProductData)
+    }
+    return []
+  }
+
+
+  const isRepeatedProduct = (product_id: string) => {
+    const watchedProductData = getWatchedProductData()
+    for (let i = 0; i < watchedProductData.length; i ++) {
+      if (watchedProductData[i].id === product_id) {
+        return true
       }
-    } catch (err) {
-      console.error('Error reading localStorage:', err);
     }
-  }, [key]);
+    return false
+  }
 
-  // Ghi dữ liệu vào localStorage mỗi khi value thay đổi
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch (err) {
-      console.error('Error writing localStorage:', err);
+  const addWatchedProduct = (product: SimilarProductItem) => {
+    let watchedProductData: SimilarProductItem[] = getWatchedProductData()
+    if (!isRepeatedProduct(product.id)) {
+      watchedProductData.push(product)
+      window.localStorage.setItem('watched_product_data', JSON.stringify(watchedProductData))
     }
-  }, [key, value]);
 
-  return [value, setValue] as const;
+  }
+
+
+
+
+  return {
+    getWatchedProductData,
+    addWatchedProduct
+  };
 }
