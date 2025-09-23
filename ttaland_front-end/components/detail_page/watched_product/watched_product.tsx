@@ -4,62 +4,34 @@ import {
   FaChevronRight, 
 } from 'react-icons/fa';
 import { useRef, useState, useEffect } from 'react';
-import SimilarProductCard from './similar_product_card';
-import { apiService } from '../../../services/apiService';
+import SimilarProductCard from '../similar_product/similar_product_card';
 import { SimilarProductItem } from '@/types/similar';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-interface SimilarProductProps {
-  productId?: string;
-}
 
-const Similar_produc = ({ productId }: SimilarProductProps) => {
+
+const Watched_project = () => {
+  const { getWatchedProductData } = useLocalStorage()
   const carouselRef = useRef<HTMLDivElement>(null);
   
   // State for API data
-  const [similarProducts, setSimilarProducts] = useState<SimilarProductItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [watchedProducts, setWatchedProducts] = useState<SimilarProductItem[]>([]);
   
   // Pagination state
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-
-
-  // Fetch similar products from API
   useEffect(() => {
-    
-    const fetchSimilarProducts = async () => {
-      if (!productId) {
-        return;
-      }
-
-      try {
-        setIsLoading(true);
-        const result = await apiService.getSimilarPropertiesWithFallback(productId);
-        
-        if (result.data) {
-          setSimilarProducts(result.data.similar_products);
-        }
-        setError(result.error || null);
-        
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load similar products');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSimilarProducts();
-  }, [productId]);
+    setWatchedProducts(getWatchedProductData())
+  }, [])
 
   // Reset pagination when products change
   useEffect(() => {
     setCurrentPage(1);
-  }, [similarProducts]);
+  }, [watchedProducts]);
 
   // Calculate total pages based on similar products
-  const totalPages = Math.ceil(similarProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(watchedProducts.length / itemsPerPage);
   
   // Animation state
   const [isAnimating, setIsAnimating] = useState(false);
@@ -92,7 +64,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return similarProducts.slice(startIndex, endIndex);
+    return watchedProducts.slice(startIndex, endIndex);
   };
 
   // Generate pagination numbers - keep original logic
@@ -125,10 +97,10 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
 
   return (
     <div className='relative flex justify-center'>
-      <div className='w-full'>
+      <div>
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
-          <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
+          <p className='text-3xl sm:text-4xl'>Sản phẩm đã xem:</p>
         
           {/* desktop Pagination Controls */}
           <div className="items-center space-x-1 hidden lg:flex">
@@ -185,15 +157,10 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
           </div>
         </div>
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="flex justify-center items-center h-32">
-            <div className="text-lg">Đang tải sản phẩm tương tự...</div>
-          </div>
-        )}
+
 
         {/* Desktop Products Grid */}
-        {!isLoading && (
+        {(
           <div className="hidden lg:block">
             <div 
               className={`grid grid-cols-4 gap-4 transition-opacity duration-300 ${isAnimating ? 'opacity-50' : 'opacity-100'}`}
@@ -206,7 +173,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
         )}
 
         {/* Mobile Products Carousel */}
-        {!isLoading && (
+        {(
           <div className="lg:hidden">
             <div 
               ref={carouselRef}
@@ -216,7 +183,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
                 msOverflowStyle: 'none',
               }}
             >
-              {similarProducts.map((property, index) => (
+              {watchedProducts.map((property, index) => (
                 <div key={`${property.id}-mobile-${index}`} className="flex-shrink-0 w-64">
                   <SimilarProductCard similerproductIteam={property}/>
                 </div>
@@ -279,15 +246,9 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
           </div>
         )}
 
-        {/* Error Display */}
-        {error || similarProducts.length === 0 && (
-          <div className="text-center">
-              không có sản phẩm tương tự! {error}
-          </div>
-        )}
       </div>
     </div>
   )
 }
 
-export default Similar_produc
+export default Watched_project

@@ -11,7 +11,7 @@ interface SimilarProductCardProps {
 
 const SimilarProductCard = ({ similerproductIteam }: SimilarProductCardProps) => {
   const pathname = usePathname()
-  
+  const created_at = similerproductIteam.created_at.slice(0, 10).split('-')
   const urlToDetail = () => {
     const currentPath = pathname?.split('/') || []
     return `/${currentPath[1] || ''}/chi_tiet?id=${similerproductIteam.id}`
@@ -23,14 +23,14 @@ const SimilarProductCard = ({ similerproductIteam }: SimilarProductCardProps) =>
       <Link className="relative aspect-video overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
-          src={similerproductIteam.images?.[0]} 
+          src={similerproductIteam.main_image} 
           alt={similerproductIteam.title}
         />
         
         {/* Image count indicator */}
         <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-base xl:text-md flex items-center gap-1">
           <FaImages size={12} />
-          {similerproductIteam.images?.length}
+          {similerproductIteam.num_images}
         </div>
       </Link>
 
@@ -49,15 +49,15 @@ const SimilarProductCard = ({ similerproductIteam }: SimilarProductCardProps) =>
           </div>
 
           {/* Location */}
-          <div className="flex items-center gap-1 text-gray-500 text-base xl:text-xl">
+          <div className="flex items-center gap-1 text-gray-800 text-base xl:text-xl">
             <FaMapMarkerAlt size={12} />
             <span className="line-clamp-1 ">{similerproductIteam.location}</span>
           </div>
         </div>
 
         {/* Status - Pushed to bottom */}
-        <div className="text-sm text-gray-400 mt-auto">
-          {similerproductIteam.create_at}
+        <div className="text-sm text-gray-600 mt-auto">
+          {created_at[2]}/{created_at[1]}/{created_at[0]}
         </div>
       </Link>
     </div>
