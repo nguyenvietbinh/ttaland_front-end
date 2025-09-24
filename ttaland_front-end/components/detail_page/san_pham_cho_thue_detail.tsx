@@ -174,7 +174,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
           </h1>
           <div className="lg:flex lg:gap-4 h-auto mt-6">
             <div className="h-auto w-full lg:w-[65%]">
-              <Media_displayer mediaItems={mediaData}/>
+              <Media_displayer mediaItems={mediaData} place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
               <div className="hidden lg:block">
                 <Similar_produc productId={propertyData?.id}/>
                 <Watched_project/>
@@ -182,7 +182,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
             </div>
             <div className="h-auto w-full lg:w-[35%]">
               <Detail_info information_data={informationData}/>
-              <Map_window/>
+              <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
             </div>
             <div className="block lg:hidden">
               <Similar_produc productId={propertyData?.id}/>
