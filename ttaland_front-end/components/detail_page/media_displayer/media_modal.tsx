@@ -5,14 +5,15 @@ import { MediaItem } from "./media_displayer"
 import Video_modal_tab from "./modal_tab/video_modal_tab"
 import Image_modal_tab from "./modal_tab/image_modal_tab"
 import Map_modal_tab from "./modal_tab/map_modal_tab"
-
+import { place_infor } from "@/components/debug/mapComponent"
 
 interface Media_modal_props {
   mediaItems: MediaItem[]
   currentMedia: MediaItem
+  place_infor: place_infor
 }
 
-const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
+const Media_modal = ({mediaItems, currentMedia, place_infor}: Media_modal_props) => {
   const media_modalRef = useRef<HTMLDialogElement>(null);
   const [currentTab, setCurrentTab] = useState<'video' | 'image' | 'map'>()
   const videoMediaItems = mediaItems.filter(item => item.type !== 'image')
@@ -69,7 +70,7 @@ const Media_modal = ({mediaItems, currentMedia}: Media_modal_props) => {
         ) : currentTab === 'image' && imageMediaItems.length ? (
           <Image_modal_tab mediaItems={imageMediaItems} startImageIndex={startImageIndex}/>
         ) : currentTab === 'map' ? (
-          <Map_modal_tab/>
+          <Map_modal_tab place_infor={place_infor}/>
         ): null}
 
 

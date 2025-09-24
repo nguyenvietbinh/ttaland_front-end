@@ -7,6 +7,7 @@ import {
   FaChevronRight, 
 } from 'react-icons/fa';
 import { useSwipe } from '@/hooks/useSwipe';
+import { place_infor } from '@/components/debug/mapComponent';
 
 export type MediaItem = {
   type: 'image' | 'video' | 'youtube' | 'tiktok';
@@ -18,9 +19,10 @@ export type MediaItem = {
 
 interface media_displayer_props {
   mediaItems: MediaItem[];
+  place_infor: place_infor
 }
 
-const Media_displayer = ({ mediaItems }: media_displayer_props) => {
+const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [tiktokThumbs, setTiktokThumbs] = useState<Record<string, string>>({});
 
@@ -278,7 +280,7 @@ const Media_displayer = ({ mediaItems }: media_displayer_props) => {
 
             
       {/* full screen image display */}
-      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia}/>
+      <Media_modal mediaItems={mediaItems} currentMedia={currentMedia} place_infor={place_infor}/>
     </div>
   );
 };

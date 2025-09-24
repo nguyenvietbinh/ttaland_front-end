@@ -30,7 +30,7 @@ export function useLocalStorage() {
   const addWatchedProduct = (product: SimilarProductItem) => {
     let watchedProductData: SimilarProductItem[] = getWatchedProductData()
     if (!isRepeatedProduct(product.id)) {
-      watchedProductData.push(product)
+      watchedProductData.unshift(product)
       window.localStorage.setItem('watched_product_data', JSON.stringify(watchedProductData))
     }
 
