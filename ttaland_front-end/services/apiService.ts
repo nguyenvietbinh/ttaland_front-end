@@ -3,7 +3,9 @@ import { Project } from '../types/project'
 import { Property, Townhouse, Villa, Apartment, LandLot } from '../types/product'
 import { SimilarProductsResponse } from '../types/similar'
 
-const API_BASE_URL = 'https://tta-backend-iji0.onrender.com/api'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+
+const API_BASE_URL = `${BACKEND_URL}/api`
 
 class ApiService {
   private async fetchFromApi<T>(endpoint: string): Promise<T> {
@@ -124,7 +126,8 @@ class ApiService {
   getMediaUrl(relativePath: string): string {
     return relativePath.startsWith('http')
       ? relativePath
-      : `https://tta-backend-iji0.onrender.com${relativePath}`
+      : `${BACKEND_URL}${relativePath}`
+      // : `https://tta-backend-iji0.onrender.com${relativePath}` # check before deploy
   }
 }
 
