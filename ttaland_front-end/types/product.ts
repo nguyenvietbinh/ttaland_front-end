@@ -82,6 +82,7 @@ export interface LandLot extends RealEstateProduct {
 export interface TownhouseShowProperty {
   id: string
   title: string
+  mini_description: string
   area: string
   area_formatted: string
   location: string
@@ -101,6 +102,7 @@ export interface TownhouseShowProperty {
 export interface VillaShowProperty {
   id: string
   title: string
+  mini_description: string
   area: string
   area_formatted: string
   location: string
@@ -120,6 +122,7 @@ export interface VillaShowProperty {
 export interface ApartmentShowProperty {
   id: string
   title: string
+  mini_description: string
   area: string
   area_formatted: string
   location: string
@@ -138,6 +141,7 @@ export interface ApartmentShowProperty {
 export interface LandLotShowProperty {
   id: string
   title: string
+  mini_description: string
   area: string
   area_formatted: string
   location: string

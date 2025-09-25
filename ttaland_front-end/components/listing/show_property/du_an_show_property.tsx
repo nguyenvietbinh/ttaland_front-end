@@ -33,7 +33,28 @@ const Du_an_property = () => {
     return `/du_an/chi_tiet?id=${listOfImg.join('')}`
   }
 
-
+  // Không render content có random cho đến khi mounted
+  if (!isMounted) {
+    return (
+      <div className="bg-gray-200 h-auto border-[1px] border-white hover:shadow-md rounded-sm">
+        <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
+          <div className="h-full relative md:w-2/3 w-full overflow-hidden animate-pulse bg-gray-300">
+          </div>
+          <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden">
+            <div className="w-full h-1/2 overflow-hidden animate-pulse bg-gray-300">
+            </div>
+            <div className="w-full h-1/2 overflow-hidden animate-pulse bg-gray-300">
+            </div>
+          </div>
+        </div>
+        <div className="px-2 pt-2 text-black">
+          <div className="h-4 bg-gray-300 animate-pulse rounded mb-2"></div>
+          <div className="h-3 bg-gray-300 animate-pulse rounded mb-1 w-3/4"></div>
+          <div className="h-3 bg-gray-300 animate-pulse rounded mb-2 w-1/2"></div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-gray-200 h-auto border-[1px] border-white hover:shadow-md rounded-sm">

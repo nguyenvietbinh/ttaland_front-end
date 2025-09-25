@@ -59,7 +59,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
   const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
   const bathrooms = ((property as TownhouseShowProperty)?.bathrooms || (property as VillaShowProperty)?.bathrooms || (property as ApartmentShowProperty)?.bathrooms || 0) 
-
+  const mini_description = property?.mini_description?.length > 300 ? property.mini_description.slice(0, 300) + '...' : (property?.mini_description || '')
   return (
     <Link href={urlToDetail()} className="bg-gray-200 h-auto border-[1px] m-1  border-white hover:shadow-md rounded-sm">
       <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
@@ -106,7 +106,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             )}
             <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
-          <div className="mb-2 text-sm line-clamp-2">Biệt thự nguyên căn gồm phòng ngủ lớn phòng ngủ nhỏ,thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trong tiện nghi. - 2 khu bếp ăn trong thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trongnhà và ngoài trời Sân vườn lớn, hồ cá Koi. - Nội thất cao cấp sẵn có đầy đủ, chỉ cần xách vali vào là ở. - Nhà vị trí 2 mặt tiền thoáng mát, view sông cực đẹp.</div>
+          <div className="mb-2 line-clamp-2">{mini_description}</div>
         </div>
 
       </div>
