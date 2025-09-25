@@ -55,7 +55,6 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
     }
   }
 
-  console.log(property)
 
   const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)

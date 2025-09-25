@@ -19,78 +19,100 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
   }
 
 
-  const create_at = property.created_at.slice(0, 10).split('-')
+  function formatNumber(value: number, unit: string) {
+    // Làm tròn đến 1 chữ số thập phân nếu cần
+    if (Math.abs(value) >= 10) {
+        // Nếu giá trị >= 10, làm tròn đến số nguyên
+        return Math.round(value) + ' ' + unit;
+    } else {
+        // Nếu giá trị < 10, làm tròn đến 1 chữ số thập phân
+        const rounded = Math.round(value * 10) / 10;
+        
+        // Kiểm tra nếu là số nguyên thì không hiển thị phần thập phân
+        if (rounded === Math.floor(rounded)) {
+            return Math.round(value) + ' ' + unit;
+        } else {
+            return rounded.toFixed(1).replace('.', ',') + ' ' + unit;
+        }
+    }
+  }
+
+  const get_price_per_square_meter = (price: number, area: number) => {
+    const price_per_square_meter = price/area
+
+        if (Math.abs(price_per_square_meter) >= 1000000000) {
+        // Tỷ
+        const ty = price_per_square_meter / 1000000000;
+        return formatNumber(ty, 'tỷ');
+    } else if (Math.abs(price_per_square_meter) >= 1000000) {
+        // Triệu
+        const trieu = price_per_square_meter / 1000000;
+        return formatNumber(trieu, 'tr');
+    } else if (Math.abs(price_per_square_meter) >= 1000) {
+        // Nghìn
+        const nghin = price_per_square_meter / 1000;
+        return formatNumber(nghin, 'k');
+    } else {
+        // Dưới 1000
+        return Math.round(price_per_square_meter).toString();
+    }
+  }
+
+
   const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
   const bathrooms = ((property as TownhouseShowProperty)?.bathrooms || (property as VillaShowProperty)?.bathrooms || (property as ApartmentShowProperty)?.bathrooms || 0) 
 
   return (
-    <div className="bg-gray-200 h-auto border-[1px] m-1 border-white hover:shadow-md rounded-sm">
-      <Link className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden" href={urlToDetail()}>
-        <div className="h-full relative md:w-2/3 w-full overflow-hidden cursor-pointer">
+    <Link href={urlToDetail()} className="bg-gray-200 h-auto border-[1px] m-1  border-white hover:shadow-md rounded-sm">
+      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
+        <div className="h-full relative md:w-2/3 w-full overflow-hidden ">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![0]} alt={property.title} />
         </div>
-        <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden cursor-pointer">
+        <div className="w-1/3 h-full hidden md:block flex-col space-y-[2px] overflow-hidden ">
           <div className="w-full h-1/2 overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![1]} alt={property.title} />
           </div>
-          <div className="w-full relative h-1/2 cursor-pointer overflow-hidden">
+          <div className="w-full relative h-1/2  overflow-hidden">
             <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![2]} alt={property.title} />
           </div>
         </div>
-      </Link>
+      </div>
 
-      <div className="px-2 pt-4 text-black">
+      <div className="px-2 pt-2 text-black">
         {/* info */}
         <div className="">
-          <Link className="font-bold text-3xl cursor-pointer hover:underline wrap-break-word line-clamp-2 h-20" href={urlToDetail()}>
+          <div className="font-bold hover:underline text-3xl  wrap-break-word line-clamp-1">
             {property.title}
-          </Link>
-          <div className="flex justify-between">
-            <p>Ngày đăng: {create_at[2]}/{create_at[1]}/{create_at[0]}</p>
-            <Link href={urlToDetail()} className='hover:underline cursor-pointer'>{property.location}</Link>
           </div>
-          <div className="grid md:grid-cols-3 grid-cols-2 gap-2 py-3 text-left text-xl text-nowrap border-y-[1px] font-bold border-gray-600">
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/sqr.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Diện tích:</p>
-              <p className="overflow-auto no-scrollbar">{property.area_formatted}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <img src="/img/icons/vnd.png" alt="" className="h-6 hidden md:block"/>
-              <p className="">Giá:</p>
-              <p className="overflow-auto no-scrollbar">{property.price_formatted}/Tháng</p>
-            </div>
-            {bedrooms > 0 && (
-              <div className="flex items-center gap-1">
-                <img src="/img/icons/bed.png" alt="" className="h-6 hidden md:block"/>
-                <p className="">Phòng ngủ:</p>
-                <p className="overflow-auto no-scrollbar">{bedrooms}</p>
-              </div>
+          <div className="flex justify-start gap-2 mb-2 items-baseline">
+            <p className="text-red-600 font-extrabold text-2xl">{property.area_formatted}</p> <div className="text-gray-400">·</div>
+            <p className="text-red-600 font-extrabold text-2xl">{property.price_formatted}/Tháng</p> <div className="text-gray-400">·</div>
+            {(bedrooms > 0) && (
+              <p className="flex items-baseline"><img src="/img/icons/bed.png" className="h-4" alt="" />{bedrooms}</p>
             )}
-            {bathrooms > 0 && (
-              <div className="flex items-center gap-1">
-                <img src="/img/icons/bath.png" alt="" className="h-6 hidden md:block"/>
-                <p className="">Phòng tắm:</p>
-                <p className="overflow-auto no-scrollbar">{bathrooms}</p>
-              </div>
+            {(bedrooms > 0) && (
+              <div className="text-gray-400">·</div>
             )}
-            {garage > 0 && (
-              <div className="flex items-center gap-1">
-                <img src="/img/icons/car.png" alt="" className="h-6 hidden md:block"/>
-                <p className="">Garage:</p>
-                <p className="overflow-auto no-scrollbar">{garage}</p>
-              </div>
+            {(bathrooms > 0) && (
+              <p className="flex items-baseline gap-0.5"><img src="/img/icons/bath.png" className="h-3.5" alt="" />{bathrooms}</p>
             )}
+            {(bathrooms > 0) && (
+              <div className="text-gray-400">·</div>
+            )}
+            {(garage > 0) && (
+              <p className="flex items-baseline gap-1"><img src="/img/icons/car.png" className="h-4.5" alt="" />{garage}</p>
+            )}
+            {(garage > 0) && (
+              <div className="text-gray-400">·</div>
+            )}
+            <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
+          <div className="mb-2 text-sm line-clamp-2">Biệt thự nguyên căn gồm phòng ngủ lớn phòng ngủ nhỏ,thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trong tiện nghi. - 2 khu bếp ăn trong thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trongnhà và ngoài trời Sân vườn lớn, hồ cá Koi. - Nội thất cao cấp sẵn có đầy đủ, chỉ cần xách vali vào là ở. - Nhà vị trí 2 mặt tiền thoáng mát, view sông cực đẹp.</div>
         </div>
 
-        <div className="flex justify-between w-full my-3 items-center">
-          <Link className="btn bg-black text-base w-[100%]" href={urlToDetail()}>Thông tin thêm</Link>
-
-        </div>  
       </div>
-    </div>
+    </Link>
   )
 }
 
