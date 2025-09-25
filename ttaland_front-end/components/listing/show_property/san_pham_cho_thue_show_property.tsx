@@ -19,45 +19,6 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
   }
 
 
-  function formatNumber(value: number, unit: string) {
-    // Làm tròn đến 1 chữ số thập phân nếu cần
-    if (Math.abs(value) >= 10) {
-        // Nếu giá trị >= 10, làm tròn đến số nguyên
-        return Math.round(value) + ' ' + unit;
-    } else {
-        // Nếu giá trị < 10, làm tròn đến 1 chữ số thập phân
-        const rounded = Math.round(value * 10) / 10;
-        
-        // Kiểm tra nếu là số nguyên thì không hiển thị phần thập phân
-        if (rounded === Math.floor(rounded)) {
-            return Math.round(value) + ' ' + unit;
-        } else {
-            return rounded.toFixed(1).replace('.', ',') + ' ' + unit;
-        }
-    }
-  }
-
-  const get_price_per_square_meter = (price: number, area: number) => {
-    const price_per_square_meter = price/area
-
-        if (Math.abs(price_per_square_meter) >= 1000000000) {
-        // Tỷ
-        const ty = price_per_square_meter / 1000000000;
-        return formatNumber(ty, 'tỷ');
-    } else if (Math.abs(price_per_square_meter) >= 1000000) {
-        // Triệu
-        const trieu = price_per_square_meter / 1000000;
-        return formatNumber(trieu, 'tr');
-    } else if (Math.abs(price_per_square_meter) >= 1000) {
-        // Nghìn
-        const nghin = price_per_square_meter / 1000;
-        return formatNumber(nghin, 'k');
-    } else {
-        // Dưới 1000
-        return Math.round(price_per_square_meter).toString();
-    }
-  }
-
 
   const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
