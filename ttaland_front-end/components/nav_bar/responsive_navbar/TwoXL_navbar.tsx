@@ -92,9 +92,9 @@ const TwoXL_navbar = () => {
             Liên Hệ
             <div className={path_name === '/lien_he' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
           </Link>
-          <Link href='/sale' className={path_name === '/sale' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
+          <Link href='/dang_san_pham' className={path_name === '/dang_san_pham' ? 'my-auto text-white' : 'my-auto group hover:text-white'}>
             Đăng Sản Phẩm
-            <div className={path_name === '/sale' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
+            <div className={path_name === '/dang_san_pham' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
           </Link>
           <div className='ml-auto flex'>
             <Search_bar modal_name='twoXL_navbar'/>

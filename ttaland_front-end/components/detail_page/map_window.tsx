@@ -1,6 +1,6 @@
 'use client'
-import MapComponent from "../debug/mapComponent"
-import { place_infor } from "../debug/mapComponent"
+import MapComponent from "../utils/location_map_component"
+import { place_infor } from "../utils/location_map_component"
 
 interface Map_window_props {
   place_infor: place_infor

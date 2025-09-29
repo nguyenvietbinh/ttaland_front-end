@@ -5,7 +5,7 @@ import { MediaItem } from "./media_displayer"
 import Video_modal_tab from "./modal_tab/video_modal_tab"
 import Image_modal_tab from "./modal_tab/image_modal_tab"
 import Map_modal_tab from "./modal_tab/map_modal_tab"
-import { place_infor } from "@/components/debug/mapComponent"
+import { place_infor } from "@/components/utils/location_map_component"
 
 interface Media_modal_props {
   mediaItems: MediaItem[]

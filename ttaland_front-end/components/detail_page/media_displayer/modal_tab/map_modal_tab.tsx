@@ -1,7 +1,7 @@
 'use client'
 
-import MapComponent from "@/components/debug/mapComponent"
-import { place_infor } from "@/components/debug/mapComponent"
+import MapComponent from "@/components/utils/location_map_component"
+import { place_infor } from "@/components/utils/location_map_component"
 
 interface Map_modal_tab_props {
   place_infor: place_infor

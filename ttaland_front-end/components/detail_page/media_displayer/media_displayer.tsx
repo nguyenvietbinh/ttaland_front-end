@@ -7,7 +7,7 @@ import {
   FaChevronRight, 
 } from 'react-icons/fa';
 import { useSwipe } from '@/hooks/useSwipe';
-import { place_infor } from '@/components/debug/mapComponent';
+import { place_infor } from '@/components/utils/location_map_component';
 
 export type MediaItem = {
   type: 'image' | 'video' | 'youtube' | 'tiktok';

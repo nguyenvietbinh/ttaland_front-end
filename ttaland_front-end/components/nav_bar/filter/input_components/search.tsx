@@ -7,10 +7,9 @@ type Search_props = {
   placeholder: string,
   setData?: (data: string) => void,
   disable: boolean,
-  seach_name: string,
 }
 
-const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disable, seach_name }) => {
+const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disable }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -99,7 +98,10 @@ const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disabl
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion);
     setData?.(suggestion)
-    setShowSuggestions(false);
+    setTimeout(() => {
+      inputRef.current?.blur();
+      setShowSuggestions(false);
+    }, 0);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -120,34 +122,44 @@ const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disabl
   };
 
   return (
-    <div className="relative w-full text-white">
-      <div className="form-control">
-        <label className="label">
-        </label>
+    <div className="w-full">
+      <label className='flex gap-2 items-center'>
+        <svg className="h-[1.5rem] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
         <input
           ref={inputRef}
           type="text"
           placeholder={placeholder}
-          className={"input focus:outline-0 w-full" + " " + seach_name}
+          className={"outline-0 w-full text-xl"}
           value={inputValue}
           onChange={handleInputChange}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           disabled={disable}
         />
-      </div>
+      </label>
 
       {showSuggestions && suggestions.length > 0 && (
         <div 
           ref={suggestionsRef}
-          className="absolute z-10 mt-2 w-full bg-gray-900 border border-base-300 rounded-box shadow-lg max-h-60 overflow-auto"
+          className="z-10 w-full mt-2 text-black max-h-40 overflow-auto border-t-1 border-gray-300"
         >
-          <ul className="menu menu-compact w-full">
+          <ul className="w-full gap-2 p-2 text-lg">
             {suggestions.map((suggestion, index) => (
-              <li key={suggestion} className={`${index === activeSuggestionIndex ? 'bg-base-200' : ''}`} onClick={() => handleSuggestionClick(suggestion)}>
-                <a className="py-2 px-4 hover:bg-base-200">
+              <li key={suggestion} className={`${index === activeSuggestionIndex ? 'bg-gray-200 rounded-sm' : ''}`} onClick={() => handleSuggestionClick(suggestion)}>
+                <div className="p-2 rounded-sm cursor-pointer hover:bg-gray-300">
                   {suggestion}
-                </a>
+                </div>
               </li>
             ))}
           </ul>

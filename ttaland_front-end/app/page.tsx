@@ -3,8 +3,7 @@
 
 import _navbar from '@/components/nav_bar/navbar';
 import Footer from "@/components/layout/footer";
-import ApiTestComponent from '@/components/debug/ApiTestComponent';
-import 'leaflet/dist/leaflet.css';
+import ApiTestComponent from '@/components/home_page/ApiTestComponent';
 
 const Home = () => {
   return (

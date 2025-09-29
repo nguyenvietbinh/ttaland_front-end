@@ -106,7 +106,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             )}
             <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
-          <div className="mb-2 line-clamp-2">{mini_description}</div>
+          <div className="mb-2 line-clamp-2 text-sm">{mini_description}</div>
         </div>
 
       </div>
