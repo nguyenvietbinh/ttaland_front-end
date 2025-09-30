@@ -82,8 +82,6 @@ const Area_map_component = ({ coordinate, onCenterChange, districtGeoJSONFeature
       if (!map.current) return;
       const center = map.current.getCenter();
       const lngLat: [number, number] = [center.lng, center.lat];
-
-      console.log('Tọa độ trung tâm mới:', lngLat);
       if (onCenterChange) onCenterChange(lngLat);
     });
 

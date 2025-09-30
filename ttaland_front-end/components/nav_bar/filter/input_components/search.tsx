@@ -152,7 +152,7 @@ const Search: React.FC<Search_props> = ({ keywords, placeholder, setData, disabl
       {showSuggestions && suggestions.length > 0 && (
         <div 
           ref={suggestionsRef}
-          className="z-10 w-full mt-2 text-black max-h-40 overflow-auto border-t-1 border-gray-300"
+          className="z-10 w-full mt-2 text-black max-h-50 overflow-auto border-t-1 border-gray-300"
         >
           <ul className="w-full gap-2 p-2 text-lg">
             {suggestions.map((suggestion, index) => (

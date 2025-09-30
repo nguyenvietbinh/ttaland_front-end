@@ -1,9 +1,13 @@
 'use client'
 import Area_map_component from "@/components/utils/area_map_component"
 import { point, booleanPointInPolygon } from '@turf/turf';
+import rawData from '@/public/data/hcm.json';
+import { useEffect, useState } from "react";
+const HCMGeoJSON = rawData as CustomGeoJSON;
 
-interface Area_map_component_props {
+interface Select_location_on_map_props {
   district: string
+  setCoordinateProps: (val: [number, number]) => void
 }
 
 export interface CustomFeature {
@@ -21,19 +25,15 @@ export interface CustomFeature {
   };
 }
 
-interface CustomGeoJSON {
+export interface CustomGeoJSON {
   type: "FeatureCollection";
   features: CustomFeature[];
 }
 
-import rawData from '@/public/data/hcm.json';
-import { useEffect, useState } from "react";
-const HCMGeoJSON = rawData as CustomGeoJSON;
 
 
 
-
-const Select_location_on_map = ({district} : Area_map_component_props) => {
+const Select_location_on_map = ({district, setCoordinateProps} : Select_location_on_map_props) => {
   const [coordinate, setCoordinate] = useState<[number, number]>()
   const [isValidCoordinate, setIsValidCoordinate] = useState<boolean>(true)
   const [feature, setFeature] = useState<CustomFeature[]>() 
@@ -49,7 +49,7 @@ const Select_location_on_map = ({district} : Area_map_component_props) => {
 
   useEffect(() => {
     if (coordinate && feature) {
-    const pt = point(coordinate)
+      const pt = point(coordinate)
       if (booleanPointInPolygon(pt, feature[0].geometry.geometries[0])) {
         setIsValidCoordinate(true)
       } else {
@@ -80,7 +80,7 @@ const Select_location_on_map = ({district} : Area_map_component_props) => {
       <div className="absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]">
         {isValidCoordinate ? (
         <svg width="24" height="24" viewBox="0 0 24 24" aria-label="Plus" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
         ) : (
           <svg 
@@ -93,19 +93,19 @@ const Select_location_on_map = ({district} : Area_map_component_props) => {
               cx="12" cy="12" r="10" 
               fill="none" 
               stroke="currentColor" 
-              stroke-width="2"
+              strokeWidth="2"
             />
             <line 
               x1="5" y1="5" x2="19" y2="19" 
               stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round"
+              strokeWidth="2" 
+              strokeLinecap="round"
             />
           </svg>
         )}
       </div>
       <div className="absolute bottom-4 right-4">
-        <button disabled={!isValidCoordinate} className="btn bg-red-600 text-xl">Tiếp</button>
+        <button disabled={!isValidCoordinate} className="btn bg-red-600 text-xl" onClick={() => {if (coordinate) {setCoordinateProps(coordinate)}}}>Xong</button>
       </div>
     </div>
 

@@ -9,14 +9,7 @@ interface San_pham_ban_propertyProps {
 }
 
 
-
-const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
-
-  const urlToDetail = () => {
-    return `/san_pham_ban/chi_tiet?id=${property?.id}`
-  }
-
-  function formatNumber(value: number, unit: string) {
+ export function formatNumber(value: number, unit: string) {
     // Làm tròn đến 1 chữ số thập phân nếu cần
     if (Math.abs(value) >= 10) {
         // Nếu giá trị >= 10, làm tròn đến số nguyên
@@ -34,27 +27,64 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
     }
 }
 
-  const get_price_per_square_meter = (price: number, area: number) => {
-    const price_per_square_meter = price/area
+export function formatVietnameseNumber(n: number): string {
+  if (n === 0) return '0';
 
-        if (Math.abs(price_per_square_meter) >= 1000000000) {
-        // Tỷ
-        const ty = price_per_square_meter / 1000000000;
-        return formatNumber(ty, 'tỷ');
-    } else if (Math.abs(price_per_square_meter) >= 1000000) {
-        // Triệu
-        const trieu = price_per_square_meter / 1000000;
-        return formatNumber(trieu, 'tr');
-    } else if (Math.abs(price_per_square_meter) >= 1000) {
-        // Nghìn
-        const nghin = price_per_square_meter / 1000;
-        return formatNumber(nghin, 'k');
+  const units = ['nghìn', 'triệu', 'tỷ'];
+  const parts: string[] = [];
+
+  const chunks = [];
+  let num = n;
+  while (num > 0) {
+    chunks.push(num % 1000);
+    num = Math.floor(num / 1000);
+  }
+
+  for (let i = chunks.length - 1; i >= 0; i--) {
+    const val = chunks[i];
+    if (val === 0) continue;
+
+    const unit = i === 0 ? '' : units[(i - 1) % 3];
+    if (i === 3) {
+      parts.push(`${val} tỷ`);
+    } else if (unit) {
+      parts.push(`${val} ${unit}`);
     } else {
-        // Dưới 1000
-        return Math.round(price_per_square_meter).toString();
+      parts.push(`${val}`);
     }
   }
 
+  return parts.join(' ').replace(/\s+/g, ' ').trim();
+}
+
+export const get_price_per_square_meter = (price: number, area: number) => {
+  const price_per_square_meter = price/area
+
+      if (Math.abs(price_per_square_meter) >= 1000000000) {
+      // Tỷ
+      const ty = price_per_square_meter / 1000000000;
+      return formatNumber(ty, 'tỷ');
+  } else if (Math.abs(price_per_square_meter) >= 1000000) {
+      // Triệu
+      const trieu = price_per_square_meter / 1000000;
+      return formatNumber(trieu, 'tr');
+  } else if (Math.abs(price_per_square_meter) >= 1000) {
+      // Nghìn
+      const nghin = price_per_square_meter / 1000;
+      return formatNumber(nghin, 'nghìn');
+  } else {
+      // Dưới 1000
+      return Math.round(price_per_square_meter).toString();
+  }
+}
+
+
+
+const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
+
+  const urlToDetail = () => {
+    return `/san_pham_ban/chi_tiet?id=${property?.id}`
+  }
 
   const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
