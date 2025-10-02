@@ -30,7 +30,7 @@ interface San_pham_ban_propertyProps {
 export function formatVietnameseNumber(n: number): string {
   if (n === 0) return '0';
 
-  const units = ['nghìn', 'triệu', 'tỷ'];
+  const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ', 'triệu tỷ', 'tỷ tỷ'];
   const parts: string[] = [];
 
   const chunks = [];
@@ -44,14 +44,8 @@ export function formatVietnameseNumber(n: number): string {
     const val = chunks[i];
     if (val === 0) continue;
 
-    const unit = i === 0 ? '' : units[(i - 1) % 3];
-    if (i === 3) {
-      parts.push(`${val} tỷ`);
-    } else if (unit) {
-      parts.push(`${val} ${unit}`);
-    } else {
-      parts.push(`${val}`);
-    }
+    const unit = units[i] || ''; // phòng trường hợp > tỷ tỷ
+    parts.push(`${val} ${unit}`.trim());
   }
 
   return parts.join(' ').replace(/\s+/g, ' ').trim();
