@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import Sale_or_rent from "./steps/sale_or_rent"
 import Select_location from "./steps/select_location"
+import Discribe_component from "./steps/discribe"
 import Information_component from "./steps/information"
 import { CustomGeoJSON } from "./steps/select_location_on_map"
 import { point, booleanPointInPolygon } from '@turf/turf';
@@ -15,6 +16,13 @@ export interface Information {
   area: string
 }
 
+export interface Discribe {
+  title: string
+  images: File[]
+  video?: string
+  discribe: string
+}
+
 
 const Dang_san_pham_container = () => {
   const [step, setStep] = useState<number>(0)
@@ -23,6 +31,7 @@ const Dang_san_pham_container = () => {
   const [location, setLocation] = useState<string>()
   const [coordinate, setCoordinate] = useState<[number, number]>()
   const [Information, setInformation] = useState<Information>()
+  const [discribeData, setDiscribeData] = useState<Discribe>()
 
   const moveBack = (targetStep: number, currentStep: number) => {
     if (targetStep < currentStep) {
@@ -49,24 +58,27 @@ const Dang_san_pham_container = () => {
     let stepCount = 0
     if (isForRent || isForSale) {
       stepCount ++
-    }
-    if ((coordinate && location)) {
-      for (let i = 0; i < HCMGeoJSON.features.length; i ++) {
-        if (HCMGeoJSON.features[i].properties.name === location && booleanPointInPolygon(point(coordinate), HCMGeoJSON.features[i].geometry.geometries[0])) {
-          stepCount ++
+      if ((coordinate && location)) {
+        for (let i = 0; i < HCMGeoJSON.features.length; i ++) {
+          if (HCMGeoJSON.features[i].properties.name === location && booleanPointInPolygon(point(coordinate), HCMGeoJSON.features[i].geometry.geometries[0])) {
+            stepCount ++
+            if (Information) {
+              stepCount ++
+                if (discribeData) {
+                  stepCount ++
+                }
+            }
+          }
         }
       }
     }
-    if (Information) {
-      stepCount ++
-    }
     setStep(stepCount)
-  }, [isForRent, isForSale, coordinate, location, Information])
+  }, [isForRent, isForSale, coordinate, location, Information, discribeData])
 
 
   return (
     <div className="w-2/3 mx-auto px-4 py-6 mt-10 rounded-3xl bg-white text-black flex flex-col gap-6">
-      <ul className="steps steps-vertical lg:steps-horizontal">
+      <ul className="steps steps-vertical lg:steps-horizontal mb-8">
         <li onClick={() => moveBack(0, step)} className={`step ${step >= 0 ? 'step-primary cursor-pointer' : ''}`}>{isForRent ? 'Cho thuê' : (isForSale) ? 'Bán': 'Nhu cầu'}</li>
         <li onClick={() => moveBack(1, step)} className={`step ${step >= 1 ? 'step-primary cursor-pointer' : ''}`}>{ location ? location : 'Vị trí' }</li>
         <li onClick={() => moveBack(2, step)} className={`step ${step >= 2 ? 'step-primary cursor-pointer' : ''}`}>{Information ? Information.property_type : 'Thông tin chính'}</li>
@@ -81,6 +93,9 @@ const Dang_san_pham_container = () => {
       )}
       {step === 2 && (
         <Information_component isForSale={isForSale} setInformationProp={setInformation}/>
+      )}
+      {step === 3 && (
+        <Discribe_component setData={setDiscribeData}/>
       )}
     </div>
   )
