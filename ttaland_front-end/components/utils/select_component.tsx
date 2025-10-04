@@ -40,7 +40,7 @@ const Select_component = ({options, default_value, setData}: Select_component_pr
 
 
   return (
-    <div className="">
+    <div className="w-full">
       <div ref={inputRef} onClick={() => setIsOpen(val => !val)} className={`w-full py-2 px-4 shadow-lg cursor-pointer hover:bg-gray-100 border-1 transition-all duration-200 ${isOpen ? 'border-gray-500' : 'border-gray-400'} items-center rounded-3xl flex flex-col justify-between`}>
         <div className="flex items-center justify-between w-full px-4">
           <p className="text-xl">{val}</p>
