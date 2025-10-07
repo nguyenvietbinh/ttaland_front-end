@@ -17,6 +17,7 @@
     "@mapbox/mapbox-gl-geocoder": "^5.1.2",
     "@netlify/plugin-nextjs": "^5.10.7",
     "@react-leaflet/core": "^3.0.0",
+    "@turf/turf": "^7.2.0",
     "axios": "^1.8.4",
     "daisyui": "^5.0.28",
     "leaflet": "^1.9.4",
