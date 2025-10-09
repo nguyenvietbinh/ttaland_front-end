@@ -181,9 +181,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             <div className="flex justify-start gap-8 lg:gap-16 border-y-1 border-gray-500 py-2">
               <div>
                 <p className="text-2xl text-gray-500">Khoảng giá</p>
-                <div>
-                  
-                </div>
                 <p className="text-3xl ">{propertyData.price_formatted}</p>
                 <p className="text-gray-800">(~{get_price_per_square_meter(Number(propertyData.price), Number(propertyData.area))}/m²)</p>
               </div>
