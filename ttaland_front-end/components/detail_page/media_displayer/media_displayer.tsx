@@ -94,7 +94,7 @@ const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => 
           {/* display img or vid */}
           {currentMedia.type === 'image' ? (
             <figure   
-              className="relative aspect-video rounded-sm overflow-hidden cursor-pointer"
+              className="relative aspect-video overflow-hidden cursor-pointer"
               style={{
                 backgroundImage: `url(${currentMedia.url})`,
                 backgroundSize: 'cover',
@@ -123,7 +123,7 @@ const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => 
                 backgroundRepeat: 'no-repeat',
               }}>
               <video
-                className="w-full h-full object-contain rounded-lg backdrop-blur-2xl bg-black/50"
+                className="w-full h-full object-contain backdrop-blur-2xl bg-black/50"
                 poster={currentMedia.poster}
                 autoPlay
                 controls={true}
@@ -136,7 +136,7 @@ const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => 
               </video>
             </div>
           ) : currentMedia.type === 'youtube' ? (
-            <div className="relative aspect-video rounded-lg overflow-hidden cursor-pointer"
+            <div className="relative aspect-video overflow-hidden cursor-pointer"
                  onClick={() => {
                    // Set modal index to current main display index
                    (document.getElementById(`media_modal`) as HTMLDialogElement)?.showModal();
@@ -227,55 +227,55 @@ const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => 
         </div>
 
         {/* Thumbnail gallery */}
-          <div className="w-full overflow-x-auto no-scrollbar gap-2 py-2 hidden md:flex">
-            {mediaItems.map((item, index) => (
-              <div
-                key={index}
-                ref={el => {
-                  thumbRefs.current[index] = el;
-                }}
-                onClick={() => setCurrentIndex(index)}
-                className={`cursor-pointer rounded-md overflow-hidden border-2 ${index === currentIndex ? 'border-black' : 'border-transparent'}`}
-                style={{ flex: '0 0 auto', width: '100px', height: '70px' }}
-              >
-                {item.type === 'image' ? (
-                  <img 
-                    src={item.url} 
-                    alt={`Media ${index + 1}`} 
-                    className="w-full h-full object-cover"
-                  />
-                ) : item.type === 'video' ? (
-                  <video 
-                    src={item.url} 
-                    poster={item.poster}
-                    className="w-full h-full object-cover"
-                    muted
-                  />
-                ) : item.type === 'youtube' ? (
-                  <img 
+        <div className="w-full overflow-x-auto no-scrollbar gap-2 flex">
+          {mediaItems.map((item, index) => (
+            <div
+              key={index}
+              ref={el => {
+                thumbRefs.current[index] = el;
+              }}
+              onClick={() => setCurrentIndex(index)}
+              className={`cursor-pointer rounded-sm overflow-hidden border-1 rounded- ${index === currentIndex ? 'border-black p-1' : 'border-transparent'}`}
+              style={{ flex: '0 0 auto', width: '100px', height: '70px' }}
+            >
+              {item.type === 'image' ? (
+                <img 
+                  src={item.url} 
+                  alt={`Media ${index + 1}`} 
+                  className="w-full h-full object-cover"
+                />
+              ) : item.type === 'video' ? (
+                <video 
+                  src={item.url} 
+                  poster={item.poster}
+                  className="w-full h-full object-cover"
+                  muted
+                />
+              ) : item.type === 'youtube' ? (
+                <img 
 
-                    src={`https://img.youtube.com/vi/${item.embedUrl?.split('/embed/')[1]?.split('?')[0]}/hqdefault.jpg`}
-                    alt="YouTube thumbnail"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback to colored div if thumbnail fails
-                      (e.target as HTMLImageElement).style.display = 'none';
-                      const fallback = document.createElement('div');
-                      fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-sm font-bold';
-                      fallback.textContent = 'YT';
-                      (e.target as HTMLImageElement).parentNode?.appendChild(fallback);
-                    }}
-                  />
-                ) : item.type === 'tiktok' ? (
-                  <img
-                    src={item.poster || tiktokThumbs[item.url]}
-                    alt="TikTok thumbnail"
-                    className="w-full h-full object-cover"
-                  />
-                ) : null}
-              </div>
-            ))}
-          </div>
+                  src={`https://img.youtube.com/vi/${item.embedUrl?.split('/embed/')[1]?.split('?')[0]}/hqdefault.jpg`}
+                  alt="YouTube thumbnail"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to colored div if thumbnail fails
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.className = 'w-full h-full bg-red-600 flex items-center justify-center text-white text-sm font-bold';
+                    fallback.textContent = 'YT';
+                    (e.target as HTMLImageElement).parentNode?.appendChild(fallback);
+                  }}
+                />
+              ) : item.type === 'tiktok' ? (
+                <img
+                  src={item.poster || tiktokThumbs[item.url]}
+                  alt="TikTok thumbnail"
+                  className="w-full h-full object-cover"
+                />
+              ) : null}
+            </div>
+          ))}
+        </div>
       </div>
 
             

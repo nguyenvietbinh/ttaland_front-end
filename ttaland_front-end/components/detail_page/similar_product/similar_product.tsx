@@ -9,7 +9,7 @@ import { apiService } from '../../../services/apiService';
 import { SimilarProductItem } from '@/types/similar';
 
 interface SimilarProductProps {
-  productId?: string;
+  productId: string;
 }
 
 const Similar_produc = ({ productId }: SimilarProductProps) => {

@@ -117,7 +117,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
     }
     const result: detail_infor = {
       price: apiData.price_formatted,
-      sqr: Number(apiData.area),
+      area: apiData.area,
       location: apiData.location,
       description: apiData.description,
       latitude: apiData.latitude,

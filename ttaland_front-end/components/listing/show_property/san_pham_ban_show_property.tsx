@@ -111,13 +111,13 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             <p className="text-red-600 font-extrabold text-2xl">{property.price_formatted}</p> <div className="text-gray-400">·</div>
             <p className="">{get_price_per_square_meter(Number(property.price), Number(property.area))}/m²</p> <div className="text-gray-400">·</div>
             {(bedrooms > 0) && (
-              <p className="flex items-baseline"><img src="/img/icons/bed.png" className="h-4" alt="" />{bedrooms}</p>
+              <p className="flex items-baseline gap-0.5"><img src="/img/icons/bed.png" className="h-3.5" alt="" />{bedrooms}</p>
             )}
             {(bedrooms > 0) && (
               <div className="text-gray-400">·</div>
             )}
             {(bathrooms > 0) && (
-              <p className="flex items-baseline gap-0.5"><img src="/img/icons/bath.png" className="h-3.5" alt="" />{bathrooms}</p>
+              <p className="flex items-baseline gap-0.5"><img src="/img/icons/bathtub.png" className="h-3.5" alt="" />{bathrooms}</p>
             )}
             {(bathrooms > 0) && (
               <div className="text-gray-400">·</div>

@@ -18,7 +18,7 @@ const SimilarProductCard = ({ similerproductIteam }: SimilarProductCardProps) =>
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col mx-auto">
+    <div className="bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col mx-auto">
       {/* Image Section - Fixed height */}
       <Link className="relative aspect-video overflow-hidden flex-shrink-0"  href={urlToDetail()}>
         <img 

@@ -9,13 +9,15 @@ import { useSearchParams } from "next/navigation"
 const San_pham_ban_detail_page = () => {
   const searchParams = useSearchParams()
 
-  const id = searchParams?.get('id') || null
+  const id = searchParams?.get('id')
 
 
   return (
-    <div className="bg-gray-300 w-full text-black">
+    <div className="bg-white w-full min-h-screen text-black">
       <NavBar/>
-      <San_pham_ban_detail id={id}/>
+      {id && (
+        <San_pham_ban_detail id={id}/>
+      )}
       <Footer/>
     </div>
   )
@@ -24,7 +26,7 @@ const San_pham_ban_detail_page = () => {
 const Wraped_san_pham_ban_detail_page = () => {
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="bg-white min-h-screen">Loading...</div>}>
       <San_pham_ban_detail_page/>
     </Suspense>
   )
