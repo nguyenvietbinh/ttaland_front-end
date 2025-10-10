@@ -4,7 +4,6 @@
 body {
   font-size: 1.125rem
 }
-
 :root {
   --text-2xl--line-height: 1
 }
@@ -19,31 +18,82 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
-.responsive_with {
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ẩn trên Firefox */
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
+.container {
+  min-height: 100vh
+}
+
+.main_container {
+  width: 98%;
+  min-height: 100vh;
+  display: flex;
+  margin-inline: auto
+}
+
+.content_container {
   width: 100%;
+  margin-top: 16px;
 }
 
+.sidebar_container {
+  width: 292px;
+  margin-top: 16px;
+  border: black 1px solid;
+  display: none;
+}
 
-@media (width >= 48rem /* 768px */) {
-  .responsive_with {
-    width: 768px;
+.footer_container {
+  width: 98%;
+  display: flex;
+  margin-inline: auto
+}
+
+/* responsive */
+
+@media (width >= 64rem  /* lg 1024px */) {
+  .main_container {
+    width: 936px;
+    display: flex;
+  }
+  .content_container {
+    width: 614px;
+    margin-right: 30px;
+  }
+  .sidebar_container {
+    display: block;
+  }
+  .footer_container {
+    width: 936px;
+    display: flex;
   }
 }
 
-@media (width >= 64rem /* 1024px */) {
-  .responsive_with {
-    width: 1024px;
-  }
-}
 
-@media (width >= 80rem /* 1280px */) {
-  .responsive_with {
-    width: 1280px;
-  }
-}
 
-@media (width >= 96rem /* 1536px */) {
-  .responsive_with {
-    width: 1536px;
+@media (width >= 96rem /* 2xl 1536px */) {
+  .main_container {
+    width: 1140px;
+    display: flex;
+  }
+  .content_container {
+    width: 818px;
+    margin-right: 30px;
+  }
+  .sidebar_container {
+    display: block
+  }
+  .footer_container {
+    width: 1140px;
+    display: flex;
   }
 }

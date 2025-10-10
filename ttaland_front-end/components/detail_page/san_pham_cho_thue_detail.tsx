@@ -13,7 +13,7 @@ import Watched_project from "./watched_product/watched_product";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface San_pham_cho_thue_details_props {
-  id: string | null;
+  id: string;
 }
 
 const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
@@ -116,8 +116,8 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
         productDetail = apiData.apartment_details;
     }
     const result: detail_infor = {
-      price: apiData.price_formatted,
-      sqr: Number(apiData.area),
+      price: `${apiData.price_formatted}/Tháng`,
+      area: apiData.area_formatted,
       location: apiData.location,
       description: apiData.description,
       latitude: apiData.latitude,
@@ -166,28 +166,44 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
 
 
   return (
-    <div className="container mx-auto p-2">
+    <div className="">
       {propertyData && mediaData && informationData ? (
-        <div>
-          <h1 className="w-full text-center text-5xl font-bold mt-6">
-            {propertyData?.title || 'Tên sản phẩm'}
-          </h1>
-          <div className="lg:flex lg:gap-4 h-auto mt-6">
-            <div className="h-auto w-full lg:w-[65%]">
+        <div className="main_container">
+          <div className="content_container flex flex-col gap-8">
+            <div>
               <Media_displayer mediaItems={mediaData} place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
-              <div className="hidden lg:block">
-                <Similar_produc productId={propertyData?.id}/>
-                <Watched_project/>
+              <p className="text-4xl mt-4">{propertyData.title}</p>
+              <p className="text-xl text-gray-800">{propertyData.location}</p>
+            </div>
+            <div className="flex justify-start gap-8 lg:gap-16 border-y-1 border-gray-500 py-2">
+              <div>
+                <p className="text-2xl text-gray-500">Khoảng giá</p>
+                <p className="text-3xl ">{propertyData.price_formatted}</p>
               </div>
+              <div>
+                <p className="text-2xl text-gray-500">Diện tích</p>
+                <p className="text-3xl ">{propertyData.area_formatted}</p>
+              </div>
+              {informationData.bedrooms && (
+                <div>
+                  <p className="text-2xl text-gray-500">Phòng ngủ</p>
+                  <p className="text-3xl  text-center">{informationData.bedrooms}</p>
+                </div>
+              )}
+              {informationData.bathrooms && (
+                <div>
+                  <p className="text-2xl text-gray-500">Phòng Tắm</p>
+                  <p className="text-3xl  text-center">{informationData.bathrooms}</p>
+                </div>
+              )}
             </div>
-            <div className="h-auto w-full lg:w-[35%]">
-              <Detail_info information_data={informationData}/>
-              <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
-            </div>
-            <div className="block lg:hidden">
-              <Similar_produc productId={propertyData?.id}/>
-              <Watched_project/>
-            </div>
+            <Detail_info information_data={informationData}/>
+            <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
+            <Similar_produc productId={id}/>
+            <Watched_project/>
+          </div>
+          <div className="sidebar_container">
+            sidebar 
           </div>
         </div>
       ) : (

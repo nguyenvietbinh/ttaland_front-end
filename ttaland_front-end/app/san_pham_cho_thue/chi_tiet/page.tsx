@@ -13,9 +13,11 @@ const San_pham_cho_thue_detail_page = () => {
 
 
   return (
-    <div className="bg-gray-300 w-full text-black">
+    <div className="bg-white w-full text-black">
       <NavBar/>
-      <San_pham_cho_thue_detail id={id}/>
+      {id && (
+        <San_pham_cho_thue_detail id={id}/>
+      )}
       <Footer/>
     </div>
   )

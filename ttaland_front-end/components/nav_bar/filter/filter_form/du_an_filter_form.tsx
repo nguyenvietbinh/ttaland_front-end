@@ -1,6 +1,6 @@
 'use client'
 
-import HCMap from '@/components/element/HCMCmap';
+import HCMap from '@/components/utils/HCMCmap';
 interface CustomFeature {
   type: "Feature";
   properties: {

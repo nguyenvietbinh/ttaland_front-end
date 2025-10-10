@@ -15,9 +15,10 @@ export interface place_infor {
 
 interface mapComponentProps {
   places: place_infor[]
+  allow_interact: boolean
 }
 
-const MapComponent = ({ places }: mapComponentProps) => {
+const MapComponent = ({ places, allow_interact }: mapComponentProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const center: [number, number] = places[0].coordinate
@@ -40,6 +41,7 @@ const MapComponent = ({ places }: mapComponentProps) => {
       style: 'mapbox://styles/mapbox/streets-v12',
       center: center,
       zoom: 12,
+      interactive: allow_interact
     });
 
     map.current.addControl(new mapboxgl.NavigationControl());

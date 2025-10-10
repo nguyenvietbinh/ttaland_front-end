@@ -115,7 +115,7 @@ const Du_an_property = () => {
               <p className="overflow-auto no-scrollbar">Nhà phố, Shophouse</p>
             </div>
             <div className="flex items-center gap-1 tooltip cursor-pointer tooltip-bottom" data-tip="Xem bản đồ">
-              <img src="/img/icons/loc.png" alt="" className="h-6 hidden md:block"/>
+              <img src="/img/icons/placeholder.png" alt="" className="h-6 hidden md:block"/>
               <p className="overflow-auto no-scrollbar">Đường Hoàng Phan Thái, Mỹ Yên, Bến Lức, Long An</p>
             </div>
           </div>

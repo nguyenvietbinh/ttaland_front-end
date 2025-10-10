@@ -5,15 +5,15 @@ import Detail_info from "./detail_infor/detail_infor";
 import { detail_infor } from "./detail_infor/detail_infor";
 import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
-import Watched_project from "./watched_product/watched_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 import { apiService } from "../../services/apiService";
 import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
 import Map_window from "./map_window";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { get_price_per_square_meter } from "../listing/show_property/san_pham_ban_show_property";
 
 interface San_pham_ban_details_props {
-  id: string | null;
+  id: string
 }
 
 const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
@@ -33,7 +33,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
-        console.log(result)
         addWatchedProduct({
           id: result.id,
           title: result.title,
@@ -119,7 +118,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     }
     const result: detail_infor = {
       price: apiData.price_formatted,
-      sqr: Number(apiData.area),
+      area: apiData.area_formatted,
       location: apiData.location,
       description: apiData.description,
       latitude: apiData.latitude,
@@ -165,31 +164,48 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     );
   }
 
+  console.log(informationData)
 
 
   return (
-    <div className="container mx-auto p-2">
+    <div className="">
       {propertyData && mediaData && informationData ? (
-        <div>
-          <h1 className="w-full text-center text-5xl font-bold mt-6">
-            {propertyData?.title || 'Tên sản phẩm'}
-          </h1>
-          <div className="lg:flex lg:gap-4 h-auto mt-6">
-            <div className="h-auto w-full lg:w-[65%]">
+        <div className="main_container">
+          <div className="content_container flex flex-col gap-8">
+            <div>
               <Media_displayer mediaItems={mediaData} place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
-              <div className="hidden lg:block">
-                <Similar_produc productId={propertyData?.id}/>
-                <Watched_project/>
+              <p className="text-4xl mt-4">{propertyData.title}</p>
+              <p className="text-xl text-gray-800">{propertyData.location}</p>
+            </div>
+            <div className="flex justify-start gap-8 lg:gap-16 border-y-1 border-gray-500 py-2">
+              <div>
+                <p className="text-2xl text-gray-500">Khoảng giá</p>
+                <p className="text-3xl ">{propertyData.price_formatted}</p>
+                <p className="text-gray-800">(~{get_price_per_square_meter(Number(propertyData.price), Number(propertyData.area))}/m²)</p>
               </div>
+              <div>
+                <p className="text-2xl text-gray-500">Diện tích</p>
+                <p className="text-3xl ">{propertyData.area_formatted}</p>
+              </div>
+              {informationData.bedrooms && (
+                <div>
+                  <p className="text-2xl text-gray-500">Phòng ngủ</p>
+                  <p className="text-3xl  text-center">{informationData.bedrooms}</p>
+                </div>
+              )}
+              {informationData.bathrooms && (
+                <div>
+                  <p className="text-2xl text-gray-500">Phòng Tắm</p>
+                  <p className="text-3xl  text-center">{informationData.bathrooms}</p>
+                </div>
+              )}
             </div>
-            <div className="h-auto w-full lg:w-[35%]">
-              <Detail_info information_data={informationData}/>
-              <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
-            </div>
-            <div className="block lg:hidden">
-              <Similar_produc productId={propertyData?.id}/>
-              <Watched_project/>
-            </div>
+            <Detail_info information_data={informationData}/>
+            <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
+            <Similar_produc productId={id}/>
+          </div>
+          <div className="sidebar_container">
+            sidebar 
           </div>
         </div>
       ) : (
