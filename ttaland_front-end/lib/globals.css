@@ -52,6 +52,12 @@ body {
   display: none;
 }
 
+.footer_container {
+  width: 98%;
+  display: flex;
+  margin-inline: auto
+}
+
 /* responsive */
 
 @media (width >= 64rem  /* lg 1024px */) {
@@ -65,6 +71,10 @@ body {
   }
   .sidebar_container {
     display: block;
+  }
+  .footer_container {
+    width: 936px;
+    display: flex;
   }
 }
 
@@ -81,5 +91,9 @@ body {
   }
   .sidebar_container {
     display: block
+  }
+  .footer_container {
+    width: 1140px;
+    display: flex;
   }
 }

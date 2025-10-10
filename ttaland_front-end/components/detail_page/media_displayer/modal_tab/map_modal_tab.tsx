@@ -11,7 +11,7 @@ const Map_modal_tab = ({ place_infor }: Map_modal_tab_props) => {
 
   return (
     <div className="h-full absolute top-0 -z-10 pt-14 pr-0 md:pr-4 w-full text-black">
-      <MapComponent places={[place_infor]}/>
+      <MapComponent allow_interact={true} places={[place_infor]}/>
     </div>
   )
 }

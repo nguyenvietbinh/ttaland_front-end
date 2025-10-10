@@ -5,7 +5,6 @@ import Detail_info from "./detail_infor/detail_infor";
 import { detail_infor } from "./detail_infor/detail_infor";
 import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
-import Watched_project from "./watched_product/watched_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 import { apiService } from "../../services/apiService";
 import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
@@ -204,7 +203,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             <Detail_info information_data={informationData}/>
             <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
             <Similar_produc productId={id}/>
-            <Watched_project/>
           </div>
           <div className="sidebar_container">
             sidebar 

@@ -5,52 +5,47 @@ import Link from "next/link"
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-gray-950 mt-20 py-10 text-white">
-          <div className="flex justify-center gap-28">
-              <div>
-                <Link href='/' className="flex items-center cursor-pointer h-24 group">
-                  <img src="/img/logo.png" className="h-24" alt="" />
-                  <div className="flex flex-col">
-                    <p className="text-right text-gray-400">.netlify.app</p>
-                    <p className="text-4xl group-hover:underline">TTALand</p>
-                  </div>
-                </Link>
-                <ul className="text-right mt-10">
-                  <li className="hover:text-gray-400 cursor-pointer">Về chúng tôi</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Báo giá và hỗ trợ</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Câu hỏi thường gặp</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Sitemap</li>
-                </ul>
+      <footer className="bg-gray-200 text-black mt-20 py-20">
+        <div className="footer_container lg:justify-between flex-col lg:flex-row">
+          <div className="flex flex-col gap-8">
+            <Link href='/' className="flex items-center-safe cursor-pointer h-24 group">
+              <img src="/img/logo.png" className="h-32" alt="" />
+              <div className="flex flex-col">
+                <p className="text-right text-gray-700">.com</p>
+                <p className="text-4xl group-hover:underline">TTALand</p>
               </div>
-              <div>
-                <Link href='/' className="flex items-center cursor-pointer h-24 group">
-                  <img src="/img/icons/phone_call.png" className="h-12 mx-4" alt="" />
-                  <div className="flex flex-col">
-                    <p className="text-gray-400">liên hệ</p>
-                    <p className="text-2xl group-hover:underline">6677 1508</p>
-                  </div>
-                </Link>
-                <ul className="text-right mt-10">
-                  <li className="hover:text-gray-400 cursor-pointer">Góp ý, báo lỗi</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Quy định đăng tin</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Quy chế hoạt động</li>
-                </ul>
+            </Link>
+            <div className="ml-8 flex flex-col gap-4">
+              <p className="text-2xl font-medium">CÔNG TY TNHH TTA Land</p>
+              <div className="flex w-60 leading-4 items-center gap-2">
+                <img className="h-8" src="/img/icons/placeholder.png" alt="" />
+                <p className="hover:underline cursor-pointer font-medium">The Global City, Đỗ Xuân Hợp, Phú Hữu, Thủ Đức, Hồ Chí Minh</p>
               </div>
-              <div>
-                <Link href='/' className="flex items-center cursor-pointer h-24 group">
-                  <img src="/img/icons/support.png" className="h-10 mx-4" alt="" />
-                  <div className="flex flex-col">
-                    <p className="text-gray-400">hỗ trợ</p>
-                    <p className="text-2xl group-hover:underline">support@ttaland.com.vn</p>
-                  </div>
-                </Link>
-                <ul className="text-right mt-10">
-                  <li className="hover:text-gray-400 cursor-pointer">Điều khoản bảo mật</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Chính sách bảo mật</li>
-                  <li className="hover:text-gray-400 cursor-pointer">Giải quyết khiếu nại</li>
-                </ul>
+              <div className="flex w-60 leading-4 items-center gap-2">
+                <img className="h-8" src="/img/icons/phone-call.png" alt="" />
+                <p className="hover:underline cursor-pointer text-2xl">0971707779</p>
               </div>
+              <div className="flex w-60 leading-4 items-center gap-2">
+                <img className="h-8" src="/img/icons/admin.png" alt="" />
+                <p className="hover:underline cursor-pointer text-2xl">support@ttaland.com.vn</p>
+              </div>
+            </div>
           </div>
+          <div className="flex flex-col mt-6 lg:mt-11 gap-2 text-xl ml-8 lg:ml-0">
+            <p className="text-3xl mb-2">HƯỚNG DẪN</p>
+            <p className="hover:text-gray-700 cursor-pointer">Về chúng tôi</p>
+            <p className="hover:text-gray-700 cursor-pointer">Báo giá và hỗ trợ</p>
+            <p className="hover:text-gray-700 cursor-pointer">Câu hỏi thường gặp</p>
+            <p className="hover:text-gray-700 cursor-pointer">Góp ý - Báo lỗi</p>
+          </div>
+          <div className="flex flex-col mt-6 lg:mt-11 gap-2 text-xl ml-8 lg:ml-0">
+            <p className="text-3xl mb-2">QUY ĐỊNH</p>
+            <p className="hover:text-gray-700 cursor-pointer">Quy định đăng</p>
+            <p className="hover:text-gray-700 cursor-pointer">Quy chế hoạt động</p>
+            <p className="hover:text-gray-700 cursor-pointer">Điều khoản thỏa thuận</p>
+            <p className="hover:text-gray-700 cursor-pointer">Chính sách bảo mật</p>
+          </div>
+        </div>
 
 
 

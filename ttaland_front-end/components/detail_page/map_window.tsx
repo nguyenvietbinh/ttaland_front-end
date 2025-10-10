@@ -12,7 +12,7 @@ const Map_window = ({ place_infor }: Map_window_props) => {
       <p className='text-xl font-bold'>Vị trí</p>
       <div className="mt-2">
         <div className="w-full h-60 rounded-lg overflow-hidden cursor-pointer relative border-gray-700 border-2">
-          <MapComponent places={[place_infor]}/>
+          <MapComponent allow_interact={false} places={[place_infor]}/>
           <div
             className="absolute top-2 left-2 text-blue-600 link px-1 bg-white"
             onClick={() => {
