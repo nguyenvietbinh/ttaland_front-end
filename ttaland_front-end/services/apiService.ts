@@ -1,7 +1,7 @@
 import { ApiResponse, ApiFilters } from '../types/api'
 import { Project } from '../types/project'
 import { Property, Townhouse, Villa, Apartment, LandLot } from '../types/product'
-import { SimilarProductsResponse } from '../types/similar'
+import { SimilarProductsResponse, SimilarProductItem } from '../types/similar'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
@@ -122,6 +122,39 @@ class ApiService {
       return { data: null, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   }
+async getWatchedProperties(propertiesID: string[]) {
+  let ans: SimilarProductItem[] = []
+
+  for (let i = 0; i < propertiesID.length; i++) {
+    try {
+      const data: Property = await this.fetchFromApi(`/properties/${propertiesID[i]}`)
+
+      let main_image: string | undefined
+      for (let j = 0; j < data.media.length; j++) { 
+        if (!main_image && data.media[j].media_type === 'image') {
+          main_image = data.media[j].file
+        }
+      }
+
+      ans.push({
+        id: data.id,
+        title: data.title,
+        price: data.price,
+        price_formatted: data.price_formatted,
+        area: data.area,
+        area_formatted: data.area_formatted,
+        location: data.location,
+        main_image: main_image,
+        num_images: data.media.length,
+        created_at: data.created_at
+      })
+    } catch (err) {
+      console.warn(`Skipping property ${propertiesID[i]}:`, err)
+      continue
+    }
+  }
+  return ans
+}
 
   getMediaUrl(relativePath: string): string {
     return relativePath.startsWith('http')

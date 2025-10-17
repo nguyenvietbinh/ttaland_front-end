@@ -1,39 +1,39 @@
 // hooks/useProductStorage.ts
 'use client';
 
-import { SimilarProductItem } from '@/types/similar';
 
 
 export function useLocalStorage() {
 
-  const watchedProductData = window.localStorage.getItem('watched_product_data')
+  const primeryWatchedProductData = window.localStorage.getItem('watched_product_id')?.trimEnd()
 
 
   const getWatchedProductData = () => {
-    if (watchedProductData) {
-      return JSON.parse(watchedProductData)
+    if (primeryWatchedProductData) {
+      return primeryWatchedProductData.split(' ')
     }
     return []
   }
 
 
   const isRepeatedProduct = (product_id: string) => {
-    const watchedProductData = getWatchedProductData()
-    for (let i = 0; i < watchedProductData.length; i ++) {
-      if (watchedProductData[i].id === product_id) {
-        return true
-      }
+    const watchedProductData: string[] = getWatchedProductData()
+    if (watchedProductData.includes(product_id.trimEnd())) {
+      return true
     }
     return false
   }
 
-  const addWatchedProduct = (product: SimilarProductItem) => {
-    let watchedProductData: SimilarProductItem[] = getWatchedProductData()
-    if (!isRepeatedProduct(product.id)) {
-      watchedProductData.unshift(product)
-      window.localStorage.setItem('watched_product_data', JSON.stringify(watchedProductData))
+  const addWatchedProduct = (product_id: string) => {
+    if (!isRepeatedProduct(product_id)) {
+      let newWatchedProducts
+      if (primeryWatchedProductData) {
+        newWatchedProducts = primeryWatchedProductData + ' ' + product_id
+      } else {
+        newWatchedProducts = product_id
+      }
+      window.localStorage.setItem('watched_product_id', newWatchedProducts)
     }
-
   }
 
 

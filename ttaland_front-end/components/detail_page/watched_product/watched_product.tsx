@@ -3,35 +3,35 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
 } from 'react-icons/fa';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SimilarProductCard from '../similar_product/similar_product_card';
 import { SimilarProductItem } from '@/types/similar';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { apiService } from '@/services/apiService';
 
 
-
-const Watched_project = () => {
+const Watched_product = () => {
   const { getWatchedProductData } = useLocalStorage()
-  const carouselRef = useRef<HTMLDivElement>(null);
   
   // State for API data
-  const [watchedProducts, setWatchedProducts] = useState<SimilarProductItem[]>([]);
-  
+  const [watchedProductsID] = useState(getWatchedProductData())
+  const [watchedProductsItems, setWatchedProductsItems] = useState<SimilarProductItem[]>([])
   // Pagination state
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    setWatchedProducts(getWatchedProductData())
-  }, [])
-
+  const fetchWatchedProperties = async () => {
+    const data = await apiService.getWatchedProperties(watchedProductsID)
+    setWatchedProductsItems(data)
+  }
+  
   // Reset pagination when products change
   useEffect(() => {
     setCurrentPage(1);
-  }, [watchedProducts]);
+    fetchWatchedProperties()
+  }, [watchedProductsID]);
 
   // Calculate total pages based on similar products
-  const totalPages = Math.ceil(watchedProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(watchedProductsID.length / itemsPerPage);
   
   // Animation state
   const [isAnimating, setIsAnimating] = useState(false);
@@ -64,7 +64,7 @@ const Watched_project = () => {
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return watchedProducts.slice(startIndex, endIndex);
+    return watchedProductsItems.slice(startIndex, endIndex);
   };
 
   // Generate pagination numbers - keep original logic
@@ -172,83 +172,9 @@ const Watched_project = () => {
           </div>
         )}
 
-        {/* Mobile Products Carousel */}
-        {(
-          <div className="lg:hidden">
-            <div 
-              ref={carouselRef}
-              className="flex overflow-x-auto gap-4 pb-4"
-              style={{
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-              }}
-            >
-              {watchedProducts.map((property, index) => (
-                <div key={`${property.id}-mobile-${index}`} className="flex-shrink-0 w-64">
-                  <SimilarProductCard similerproductIteam={property}/>
-                </div>
-              ))}
-            </div>
-
-            {/* mobile Pagination Controls */}
-            <div className="flex justify-center items-center space-x-1 mt-4">
-              {/* Previous Arrow */}
-              <button 
-                onClick={() => scroll('left')}
-                disabled={currentPage === 1 || isAnimating}
-                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-                  currentPage === 1 || isAnimating 
-                    ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-                }`}
-                aria-label="Previous page"
-              >
-                <FaChevronLeft size={12} />
-              </button>
-
-              {/* Page Numbers */}
-              {getPaginationNumbers().map((page, index) => (
-                <div key={index}>
-                  {page === '...' ? (
-                    <div className="w-8 h-8 flex items-center justify-center rounded-lg border bg-white border-gray-300 text-gray-500 text-sm font-bold">
-                      ...
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => goToPage(page as number)}
-                      disabled={isAnimating}
-                      className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 text-sm font-bold ${
-                        currentPage === page
-                          ? 'bg-blue-500 text-white border-blue-500'
-                          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
-                      } ${isAnimating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-                    >
-                      {page}
-                    </button>
-                  )}
-                </div>
-              ))}
-
-              {/* Next Arrow */}
-              <button 
-                onClick={() => scroll('right')}
-                disabled={currentPage === totalPages || isAnimating}
-                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-200 ${
-                  currentPage === totalPages || isAnimating 
-                    ? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200' 
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400 cursor-pointer'
-                }`}
-                aria-label="Next page"
-              >
-                <FaChevronRight size={12} />
-              </button>
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   )
 }
 
-export default Watched_project
+export default Watched_product
