@@ -5,6 +5,7 @@ import Detail_info from "./detail_infor/detail_infor";
 import { detail_infor } from "./detail_infor/detail_infor";
 import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
+import Watched_product from "./watched_product/watched_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 import { apiService } from "../../services/apiService";
 import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
@@ -33,19 +34,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
-        addWatchedProduct({
-          id: result.id,
-          title: result.title,
-          price: result.price,
-          price_formatted: result.price_formatted,
-          area: result.area,
-          area_formatted: result.area_formatted,
-          location: result.location,
-          main_image: result.media[0].file_url,
-          num_images: result.media.length,
-          created_at: result.created_at
-        })
-        
+        addWatchedProduct(result.id + ' ')
         setPropertyData(result);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
@@ -164,7 +153,6 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
     );
   }
 
-  console.log(informationData)
 
 
   return (
@@ -203,13 +191,14 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             <Detail_info information_data={informationData}/>
             <Map_window place_infor={{location: propertyData.location, coordinate: [Number(propertyData.longitude), Number(propertyData.latitude)], image: propertyData.media[0].file_url, title: propertyData.title }}/>
             <Similar_produc productId={id}/>
+            <Watched_product/>
           </div>
           <div className="sidebar_container">
             sidebar 
           </div>
         </div>
       ) : (
-        <div>
+        <div className="main_container">
           Không tìm thấy sản phẩm!
         </div>
       )}

@@ -33,18 +33,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
-        addWatchedProduct({
-          id: result.id,
-          title: result.title,
-          price: result.price,
-          price_formatted: result.price_formatted,
-          area: result.area,
-          area_formatted: result.area_formatted,
-          location: result.location,
-          main_image: result.media[0].file_url,
-          num_images: result.media.length,
-          created_at: result.created_at
-        })
+        addWatchedProduct(result.id + ' ')
         setPropertyData(result);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
