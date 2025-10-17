@@ -33,7 +33,7 @@ const San_pham_cho_thue_detail = ({ id }: San_pham_cho_thue_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
-        addWatchedProduct(result.id + ' ')
+        addWatchedProduct(result.id)
         setPropertyData(result);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
