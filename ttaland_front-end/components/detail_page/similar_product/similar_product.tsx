@@ -128,7 +128,7 @@ const Similar_produc = ({ productId }: SimilarProductProps) => {
       <div className='w-full'>
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
-          <p className='text-3xl sm:text-4xl'>Sản phẩm tương tự:</p>
+          <p className='text-xl font-bold text-left'>Sản phẩm tương tự:</p>
         
           {/* desktop Pagination Controls */}
           <div className="items-center space-x-1 hidden lg:flex">

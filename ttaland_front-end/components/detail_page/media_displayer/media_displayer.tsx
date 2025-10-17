@@ -235,7 +235,7 @@ const Media_displayer = ({ mediaItems, place_infor }: media_displayer_props) => 
                 thumbRefs.current[index] = el;
               }}
               onClick={() => setCurrentIndex(index)}
-              className={`cursor-pointer rounded-sm overflow-hidden border-1 rounded- ${index === currentIndex ? 'border-black p-1' : 'border-transparent'}`}
+              className={`cursor-pointer rounded-sm overflow-hidden border-2 rounded- ${index === currentIndex ? 'border-black' : 'border-transparent'}`}
               style={{ flex: '0 0 auto', width: '100px', height: '70px' }}
             >
               {item.type === 'image' ? (

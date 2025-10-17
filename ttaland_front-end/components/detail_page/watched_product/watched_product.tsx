@@ -14,7 +14,7 @@ const Watched_product = () => {
   const { getWatchedProductData } = useLocalStorage()
   
   // State for API data
-  const [watchedProductsID] = useState(getWatchedProductData())
+  const [watchedProductsID] = useState<string[]>(getWatchedProductData())
   const [watchedProductsItems, setWatchedProductsItems] = useState<SimilarProductItem[]>([])
   // Pagination state
   const itemsPerPage = 4;
@@ -100,7 +100,7 @@ const Watched_product = () => {
       <div>
         {/* Title and Pagination Controls on same line */}
         <div className="flex justify-start lg:justify-between items-center mt-20 mb-6">
-          <p className='text-3xl sm:text-4xl'>Sản phẩm đã xem:</p>
+          <p className='text-xl font-bold text-left'>Sản phẩm đã xem:</p>
         
           {/* desktop Pagination Controls */}
           <div className="items-center space-x-1 hidden lg:flex">
@@ -161,9 +161,9 @@ const Watched_product = () => {
 
         {/* Desktop Products Grid */}
         {(
-          <div className="hidden lg:block">
+          <div className="">
             <div 
-              className={`grid grid-cols-4 gap-4 transition-opacity duration-300 ${isAnimating ? 'opacity-50' : 'opacity-100'}`}
+              className={`grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-2 2xl:gap-4 transition-opacity duration-300 ${isAnimating ? 'opacity-50' : 'opacity-100'}`}
             >
               {getCurrentItems().map((property, index) => (
                 <SimilarProductCard key={index} similerproductIteam={property}/>
