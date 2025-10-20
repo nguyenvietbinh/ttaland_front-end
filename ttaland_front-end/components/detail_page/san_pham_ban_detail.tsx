@@ -12,6 +12,7 @@ import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
 import Map_window from "./map_window";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { get_price_per_square_meter } from "../listing/show_property/san_pham_ban_show_property";
+import Detail_sidebar from "./detail_sidebar";
 
 interface San_pham_ban_details_props {
   id: string
@@ -34,7 +35,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
       try {
         setIsLoading(true);
         const result = await apiService.getPropertyDetails(id);
-        addWatchedProduct(result.id + ' ')
+        addWatchedProduct(result.id)
         setPropertyData(result);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Failed to load property data');
@@ -193,9 +194,7 @@ const San_pham_ban_detail = ({ id }: San_pham_ban_details_props) => {
             <Similar_produc productId={id}/>
             <Watched_product/>
           </div>
-          <div className="sidebar_container">
-            sidebar 
-          </div>
+          <Detail_sidebar/>
         </div>
       ) : (
         <div className="main_container">

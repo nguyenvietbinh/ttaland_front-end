@@ -48,7 +48,6 @@ body {
 .sidebar_container {
   width: 292px;
   margin-top: 16px;
-  border: black 1px solid;
   display: none;
 }
 
@@ -70,7 +69,8 @@ body {
     margin-right: 30px;
   }
   .sidebar_container {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
   .footer_container {
     width: 936px;
@@ -90,7 +90,8 @@ body {
     margin-right: 30px;
   }
   .sidebar_container {
-    display: block
+    display: flex;
+    flex-direction: column;
   }
   .footer_container {
     width: 1140px;

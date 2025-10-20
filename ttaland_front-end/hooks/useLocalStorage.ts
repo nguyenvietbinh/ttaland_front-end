@@ -4,7 +4,6 @@
 
 
 export function useLocalStorage() {
-
   const primeryWatchedProductData = window.localStorage.getItem('watched_product_id')?.trimEnd()
 
 
@@ -28,9 +27,9 @@ export function useLocalStorage() {
     if (!isRepeatedProduct(product_id)) {
       let newWatchedProducts
       if (primeryWatchedProductData) {
-        newWatchedProducts = primeryWatchedProductData + ' ' + product_id
+        newWatchedProducts = product_id + ' ' + primeryWatchedProductData
       } else {
-        newWatchedProducts = product_id
+        newWatchedProducts = (primeryWatchedProductData ? primeryWatchedProductData : product_id)
       }
       window.localStorage.setItem('watched_product_id', newWatchedProducts)
     }
