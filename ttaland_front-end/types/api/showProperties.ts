@@ -1,7 +1,4 @@
-
-
-
-
+// /api/townhouses 
 export interface TownhouseShowProperty {
   id: string
   title: string
@@ -13,16 +10,15 @@ export interface TownhouseShowProperty {
   price_formatted: string
   for_sale: boolean
   for_sale_display: string
-  type: 'townhouse' | 'villa' | 'apartment' | 'land'
   type_display: string
   created_at: string
   main_images: [string, string, string, string]
   number_of_images: number
-  have_video: boolean
   bedrooms: number
   bathrooms: number
 }
 
+// /api/villas
 export interface VillaShowProperty {
   id: string
   title: string
@@ -34,16 +30,15 @@ export interface VillaShowProperty {
   price_formatted: string
   for_sale: boolean
   for_sale_display: string
-  type: 'townhouse' | 'villa' | 'apartment' | 'land'
   type_display: string
   created_at: string
   main_images: [string, string, string, string]
   number_of_images: number
-  have_video: boolean
   bedrooms: number
   bathrooms: number
 }
 
+// /api/apartments
 export interface ApartmentShowProperty {
   id: string
   title: string
@@ -55,16 +50,15 @@ export interface ApartmentShowProperty {
   price_formatted: string
   for_sale: boolean
   for_sale_display: string
-  type: 'townhouse' | 'villa' | 'apartment' | 'land'
   type_display: string
   created_at: string
   main_images: [string, string, string, string]
   number_of_images: number
-  have_video: boolean
   bedrooms: number
   bathrooms: number
 }
 
+// /api/land
 export interface LandLotShowProperty {
   id: string
   title: string
@@ -76,13 +70,17 @@ export interface LandLotShowProperty {
   price_formatted: string
   for_sale: boolean
   for_sale_display: string
-  type: 'townhouse' | 'villa' | 'apartment' | 'land'
   type_display: string
   created_at: string
   main_images: [string, string, string, string]
   number_of_images: number
-  have_video: boolean
 }
+
+// api/properties
+export type ShowProperty = TownhouseShowProperty | VillaShowProperty | ApartmentShowProperty | LandLotShowProperty
+
+
+
 
 export interface UseTownhousesReturn {
   properties: TownhouseShowProperty[]
@@ -132,7 +130,5 @@ export interface UseApartmentsReturn {
   refresh: () => void
 }
 
-
-export type ShowProperty = TownhouseShowProperty | VillaShowProperty | ApartmentShowProperty | LandLotShowProperty
 
 export type ShowPropertyReturn = UseTownhousesReturn | UseVillasReturn | UseLandReturn | UseApartmentsReturn
