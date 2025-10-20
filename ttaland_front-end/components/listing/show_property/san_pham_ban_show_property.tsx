@@ -80,13 +80,11 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
     return `/san_pham_ban/chi_tiet?id=${property?.id}`
   }
 
-  const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
   const bathrooms = ((property as TownhouseShowProperty)?.bathrooms || (property as VillaShowProperty)?.bathrooms || (property as ApartmentShowProperty)?.bathrooms || 0) 
-  const mini_description = property?.mini_description?.length > 300 ? property.mini_description.slice(0, 300) + '...' : (property?.mini_description || '')
   return (
-    <Link href={urlToDetail()} className="bg-gray-200 h-auto border-[1px] m-1  border-white hover:shadow-md rounded-sm">
-      <div className="w-full h-80 rounded-sm gap-[2px] flex overflow-hidden">
+    <Link href={urlToDetail()} className="h-auto shadow-md">
+      <div className="w-full h-60 gap-[2px] flex overflow-hidden">
         <div className="h-full relative md:w-2/3 w-full overflow-hidden ">
           <img className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={(property)?.main_images![0]} alt={property.title} />
         </div>
@@ -100,7 +98,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
         </div>
       </div>
 
-      <div className="px-2 pt-2 text-black">
+      <div className="px-1">
         {/* info */}
         <div className="">
           <div className="font-bold hover:underline text-3xl  wrap-break-word line-clamp-1">
@@ -122,15 +120,9 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             {(bathrooms > 0) && (
               <div className="text-gray-400">·</div>
             )}
-            {(garage > 0) && (
-              <p className="flex items-baseline gap-1"><img src="/img/icons/car.png" className="h-4.5" alt="" />{garage}</p>
-            )}
-            {(garage > 0) && (
-              <div className="text-gray-400">·</div>
-            )}
             <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
-          <div className="mb-2 line-clamp-2 text-sm">{mini_description}</div>
+          <div className="mb-2 line-clamp-2 text-sm">{property.description}</div>
         </div>
 
       </div>

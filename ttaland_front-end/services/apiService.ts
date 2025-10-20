@@ -21,14 +21,6 @@ class ApiService {
     }
   }
 
-  async getProperties(filters: ApiFilters = {}): Promise<ApiResponse<Property>> {
-    const queryParams = new URLSearchParams()
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) queryParams.append(key, value.toString())
-    })
-    return this.fetchFromApi(`/properties/${queryParams ? `?${queryParams}` : ''}`)
-  }
-
   async getProjects(filters: { page?: number } = {}): Promise<ApiResponse<Project>> {
     const queryParams = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {

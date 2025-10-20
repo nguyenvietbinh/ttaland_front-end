@@ -125,9 +125,9 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
   const currentData = propertyTypes[currentPropertyType]
 
   return (
-    <div>
+    <div className='main_container flex-col'>
       <Sub_navbar currentPropertyType={currentPropertyType} />
-      <div className="px-2 xl:mx-0 grid grid-cols-1  lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 content_container gap-8">
         
         {/* Show loading state only when loading and no error */}
         {currentData!.data.loading && !currentData!.data.error && (
@@ -141,27 +141,13 @@ const Listing = ({currentPropertyType, isForRent, isProject = false}: Listing_pr
         {!currentData!.data.loading && !currentData!.data.error && 
           (currentData!.items as unknown as PropertyItem[]).map((item: PropertyItem) => currentData!.renderItem(item))
         }
-
         {(!currentData!.data.loading && (currentData!.items as unknown as PropertyItem[]).length === 0) && (
           <div>
             Không tìm thấy sản phẩm nào!
           </div>
         )}
-
         {currentData!.data.error && (
-          <div className="text-center py-4 text-yellow-400 bg-yellow-900/20 rounded">
-            <p>🔧 Backend không hoạt động</p>
-            <p className="text-base mt-1">Lỗi: {currentData!.data.error}</p>
-          </div>
-        )}
-
-        {/* Load more button for property types with API data - only show when API is working */}
-        {!currentData!.data.error && (
-          <LoadMoreButton 
-            isLoading={currentData!.data.loading}
-            hasMore={currentData!.data.hasMore}
-            onLoadMore={currentData!.data.loadMore}
-          />
+          <p>🔧 Backend không hoạt động</p>
         )}
       </div>
     </div>

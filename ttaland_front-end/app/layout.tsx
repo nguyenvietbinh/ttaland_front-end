@@ -16,12 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${myCustomFont.className} relative`}>
-        <div className='h-full w-full bg-[url(/img/background.jpg)] bg-cover bg-center bg-no-repeat fixed brightness-50'></div>
+      <body className={`${myCustomFont.className} bg-white text-black`}>
         <ProgressBar/>
-        <div className='absolute w-full top-0'>
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   )

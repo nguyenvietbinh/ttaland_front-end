@@ -11,9 +11,7 @@ const San_pham_ban_biet_thu = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
-      <div className="container mx-auto">
-        <Listing currentPropertyType="villa" isForSale={true} isForRent={false}/>
-      </div>
+      <Listing currentPropertyType="villa" isForSale={true} isForRent={false}/>
       <Footer/>
     </Suspense>
   )

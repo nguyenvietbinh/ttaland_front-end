@@ -82,7 +82,7 @@ export interface LandLot extends RealEstateProduct {
 export interface TownhouseShowProperty {
   id: string
   title: string
-  mini_description: string
+  description: string
   area: string
   area_formatted: string
   location: string
@@ -93,16 +93,17 @@ export interface TownhouseShowProperty {
   type: string
   type_display: string
   created_at: string
-  main_images: string[]
+  main_images: [string, string, string, string]
+  number_of_images: number
+  have_video: boolean
   bedrooms: number
   bathrooms: number
-  garage: number
 }
 
 export interface VillaShowProperty {
   id: string
   title: string
-  mini_description: string
+  description: string
   area: string
   area_formatted: string
   location: string
@@ -113,16 +114,17 @@ export interface VillaShowProperty {
   type: string
   type_display: string
   created_at: string
-  main_images: string[]
+  main_images: [string, string, string, string]
+  number_of_images: number
+  have_video: boolean
   bedrooms: number
   bathrooms: number
-  garage: number
 }
 
 export interface ApartmentShowProperty {
   id: string
   title: string
-  mini_description: string
+  description: string
   area: string
   area_formatted: string
   location: string
@@ -133,7 +135,9 @@ export interface ApartmentShowProperty {
   type: string
   type_display: string
   created_at: string
-  main_images: string[]
+  main_images: [string, string, string, string]
+  number_of_images: number
+  have_video: boolean
   bedrooms: number
   bathrooms: number
 }
@@ -141,7 +145,7 @@ export interface ApartmentShowProperty {
 export interface LandLotShowProperty {
   id: string
   title: string
-  mini_description: string
+  description: string
   area: string
   area_formatted: string
   location: string
@@ -152,7 +156,9 @@ export interface LandLotShowProperty {
   type: string
   type_display: string
   created_at: string
-  main_images: string[]
+  main_images: [string, string, string, string]
+  number_of_images: number
+  have_video: boolean
 }
 
 // Union type
