@@ -7,7 +7,7 @@ import { MediaItem } from "./media_displayer/media_displayer";
 import Similar_produc from "./similar_product/similar_product";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
 import { apiService } from "../../services/apiService";
-import { Apartment, Townhouse, Villa, LandLot } from "@/types/product";
+import { Apartment, Townhouse, Villa, LandLot } from "@/types/api/propertiesDetail";
 import Map_window from "./map_window";
 import Watched_project from "./watched_product/watched_product";
 import { useLocalStorage } from "@/hooks/useLocalStorage";

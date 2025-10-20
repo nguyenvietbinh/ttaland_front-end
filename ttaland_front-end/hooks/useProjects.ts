@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { apiService } from '@/services/apiService'
 import { Project } from '@/types/project'
-import { ApiResponse } from '@/types/api'
+import { ApiResponse } from '@/types/api/api'
 
 interface UseProjectsReturn {
   projects: Project[]

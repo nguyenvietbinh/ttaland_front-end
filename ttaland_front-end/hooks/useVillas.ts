@@ -1,29 +1,19 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { apiService } from '@/services/apiService'
-import { Villa } from '@/types/product'
-import { ApiResponse, ApiFilters } from '@/types/api'
+import { VillaShowProperty, UseVillasReturn } from '@/types/api/showProperties'
+import { Villa } from '@/types/api/propertiesDetail'
+import { ApiResponse, ApiFilters } from '@/types/api/api'
 
-interface UseVillasReturn {
-  villas: Villa[]
-  loading: boolean
-  error: string | null
-  hasMore: boolean
-  totalCount: number
-  currentPage: number
-  loadMore: () => void
-  refresh: () => void
-  setFilters: (filters: Partial<ApiFilters>) => void
-}
 
 export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
-  const [villas, setVillas] = useState<Villa[]>([])
+  const [properties, setProperties] = useState<VillaShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [filters, setFiltersState] = useState<ApiFilters>({
+  const filters = useState<ApiFilters>({
     for_sale: true, // Default to for sale
     ...initialFilters
   })
@@ -33,15 +23,15 @@ export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
       setLoading(true)
       setError(null)
 
-      const response: ApiResponse<Villa> = await apiService.getVillas({
+      const response: ApiResponse<VillaShowProperty> = await apiService.getVillas({
         ...filters,
         page
       })
 
       if (append) {
-        setVillas(prev => [...prev, ...response.results])
+        setProperties(prev => [...prev, ...response.results])
       } else {
-        setVillas(response.results)
+        setProperties(response.results)
       }
 
       setTotalCount(response.count)
@@ -66,10 +56,6 @@ export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
     fetchVillas(1, false)
   }
 
-  const setFilters = (newFilters: Partial<ApiFilters>) => {
-    setFiltersState(prev => ({ ...prev, ...newFilters }))
-    setCurrentPage(1)
-  }
 
   // Fetch data when filters change
   useEffect(() => {
@@ -77,7 +63,8 @@ export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
   }, [filters])
 
   return {
-    villas,
+    properties,
+    type: 'villa',
     loading,
     error,
     hasMore,
@@ -85,7 +72,6 @@ export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
     currentPage,
     loadMore,
     refresh,
-    setFilters
   }
 }
 

@@ -1,4 +1,3 @@
-import { Property } from './product'
 
 export interface ApiResponse<T> {
   count: number

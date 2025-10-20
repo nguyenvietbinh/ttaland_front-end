@@ -1,29 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { apiService } from '@/services/apiService'
-import { Townhouse } from '@/types/product'
-import { ApiResponse, ApiFilters } from '@/types/api'
-
-interface UseTownhousesReturn {
-  townhouses: Townhouse[]
-  loading: boolean
-  error: string | null
-  hasMore: boolean
-  totalCount: number
-  currentPage: number
-  loadMore: () => void
-  refresh: () => void
-  setFilters: (filters: Partial<ApiFilters>) => void
-}
+import { TownhouseShowProperty, UseTownhousesReturn } from '@/types/api/showProperties'
+import { Townhouse } from '@/types/api/propertiesDetail'
+import { ApiResponse, ApiFilters } from '@/types/api/api'
 
 export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesReturn => {
-  const [townhouses, setTownhouses] = useState<Townhouse[]>([])
+  const [properties, setProperties] = useState<TownhouseShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [filters, setFiltersState] = useState<ApiFilters>({
+  const [filters] = useState<ApiFilters>({
     for_sale: true, // Default to for sale
     ...initialFilters
   })
@@ -33,15 +22,15 @@ export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesRet
       setLoading(true)
       setError(null)
 
-      const response: ApiResponse<Townhouse> = await apiService.getTownhouses({
+      const response: ApiResponse<TownhouseShowProperty> = await apiService.getTownhouses({
         ...filters,
         page
       })
 
       if (append) {
-        setTownhouses(prev => [...prev, ...response.results])
+        setProperties(prev => [...prev, ...response.results])
       } else {
-        setTownhouses(response.results)
+        setProperties(response.results)
       }
 
       setTotalCount(response.count)
@@ -66,18 +55,14 @@ export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesRet
     fetchTownhouses(1, false)
   }
 
-  const setFilters = (newFilters: Partial<ApiFilters>) => {
-    setFiltersState(prev => ({ ...prev, ...newFilters }))
-    setCurrentPage(1)
-  }
-
   // Fetch data when filters change
   useEffect(() => {
     fetchTownhouses(1, false)
   }, [filters])
 
   return {
-    townhouses,
+    properties,
+    type: 'townhouse',
     loading,
     error,
     hasMore,
@@ -85,7 +70,6 @@ export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesRet
     currentPage,
     loadMore,
     refresh,
-    setFilters
   }
 }
 

@@ -4,14 +4,14 @@ import { Suspense } from "react"
 import Listing from "@/components/listing/listing"
 import NavBar from "@/components/nav_bar/navbar"
 import Footer from "@/components/layout/footer"
-
+import { useVillas } from "@/hooks/useVillas"
 
 const San_pham_ban_biet_thu = () => {
-
+  const properties = useVillas({ for_sale: true})
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar/>
-      <Listing currentPropertyType="villa" isForSale={true} isForRent={false}/>
+      <Listing listing_return={properties}/>
       <Footer/>
     </Suspense>
   )

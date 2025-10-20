@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { ShowProperty, TownhouseShowProperty, VillaShowProperty, ApartmentShowProperty } from '@/types/product'
+import { ShowProperty, TownhouseShowProperty, VillaShowProperty, ApartmentShowProperty } from '@/types/api/showProperties'
 
 
 interface San_pham_ban_propertyProps {
