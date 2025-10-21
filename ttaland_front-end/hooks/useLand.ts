@@ -1,30 +1,20 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { apiService } from '@/services/apiService'
-import { LandLot } from '@/types/product'
-import { ApiResponse, ApiFilters } from '@/types/api'
+import { LandLotShowProperty, UseLandReturn } from '@/types/api/showProperties'
+import { LandLot } from '@/types/api/propertiesDetail'
+import { ApiResponse, ApiFilters } from '@/types/api/api'
 
-interface UseLandReturn {
-  landLots: LandLot[]
-  loading: boolean
-  error: string | null
-  hasMore: boolean
-  totalCount: number
-  currentPage: number
-  loadMore: () => void
-  refresh: () => void
-  setFilters: (filters: Partial<ApiFilters>) => void
-}
 
-export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
-  const [landLots, setLandLots] = useState<LandLot[]>([])
+
+export const useLand = (initialFilters: ApiFilters = {for_sale: true}): UseLandReturn => {
+  const [properties, setProperties] = useState<LandLotShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [filters, setFiltersState] = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
+  const [filters] = useState<ApiFilters>({
     ...initialFilters
   })
 
@@ -33,15 +23,15 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
       setLoading(true)
       setError(null)
 
-      const response: ApiResponse<LandLot> = await apiService.getLandLots({
+      const response: ApiResponse<LandLotShowProperty> = await apiService.getLandLots({
         ...filters,
         page
       })
 
       if (append) {
-        setLandLots(prev => [...prev, ...response.results])
+        setProperties(prev => [...prev, ...response.results])
       } else {
-        setLandLots(response.results)
+        setProperties(response.results)
       }
 
       setTotalCount(response.count)
@@ -66,10 +56,6 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
     fetchLand(1, false)
   }
 
-  const setFilters = (newFilters: Partial<ApiFilters>) => {
-    setFiltersState(prev => ({ ...prev, ...newFilters }))
-    setCurrentPage(1)
-  }
 
   // Fetch data when filters change
   useEffect(() => {
@@ -77,7 +63,9 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
   }, [filters])
 
   return {
-    landLots,
+    properties,
+    type: 'land',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,
@@ -85,7 +73,6 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
     currentPage,
     loadMore,
     refresh,
-    setFilters
   }
 }
 

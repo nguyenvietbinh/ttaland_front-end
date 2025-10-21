@@ -1,6 +1,7 @@
-import { ApiResponse, ApiFilters } from '../types/api'
+import { ApiResponse, ApiFilters } from '../types/api/api'
 import { Project } from '../types/project'
-import { Property, Townhouse, Villa, Apartment, LandLot } from '../types/product'
+import { Property, Townhouse, Villa, Apartment, LandLot } from '../types/api/propertiesDetail'
+import { TownhouseShowProperty, VillaShowProperty, ApartmentShowProperty, LandLotShowProperty } from '../types/api/showProperties'
 import { SimilarProductsResponse, SimilarProductItem } from '../types/similar'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
@@ -21,14 +22,6 @@ class ApiService {
     }
   }
 
-  async getProperties(filters: ApiFilters = {}): Promise<ApiResponse<Property>> {
-    const queryParams = new URLSearchParams()
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) queryParams.append(key, value.toString())
-    })
-    return this.fetchFromApi(`/properties/${queryParams ? `?${queryParams}` : ''}`)
-  }
-
   async getProjects(filters: { page?: number } = {}): Promise<ApiResponse<Project>> {
     const queryParams = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {
@@ -38,7 +31,7 @@ class ApiService {
   }
 
   // Get townhouses specifically
-  async getTownhouses(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Townhouse>> {
+  async getTownhouses(filters: ApiFilters): Promise<ApiResponse<TownhouseShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -48,11 +41,11 @@ class ApiService {
     })
     
     const endpoint = `/townhouses/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
-    return this.fetchFromApi<ApiResponse<Townhouse>>(endpoint)
+    return this.fetchFromApi<ApiResponse<TownhouseShowProperty>>(endpoint)
   }
 
   // Get villas specifically
-  async getVillas(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Villa>> {
+  async getVillas(filters: ApiFilters): Promise<ApiResponse<VillaShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -62,11 +55,11 @@ class ApiService {
     })
     
     const endpoint = `/villas/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
-    return this.fetchFromApi<ApiResponse<Villa>>(endpoint)
+    return this.fetchFromApi<ApiResponse<VillaShowProperty>>(endpoint)
   }
 
   // Get apartments specifically
-  async getApartments(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<Apartment>> {
+  async getApartments(filters: ApiFilters): Promise<ApiResponse<ApartmentShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -76,11 +69,11 @@ class ApiService {
     })
     
     const endpoint = `/apartments/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
-    return this.fetchFromApi<ApiResponse<Apartment>>(endpoint)
+    return this.fetchFromApi<ApiResponse<ApartmentShowProperty>>(endpoint)
   }
 
   // Get land lots specifically
-  async getLandLots(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<LandLot>> {
+  async getLandLots(filters: ApiFilters): Promise<ApiResponse<LandLotShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -90,7 +83,7 @@ class ApiService {
     })
     
     const endpoint = `/land/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
-    return this.fetchFromApi<ApiResponse<LandLot>>(endpoint)
+    return this.fetchFromApi<ApiResponse<LandLotShowProperty>>(endpoint)
   }
 
   // Get property details (generic)

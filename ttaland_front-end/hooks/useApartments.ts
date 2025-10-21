@@ -1,30 +1,20 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { apiService } from '@/services/apiService'
-import { Apartment } from '@/types/product'
-import { ApiResponse, ApiFilters } from '@/types/api'
+import { ApartmentShowProperty, UseApartmentsReturn } from '@/types/api/showProperties'
+import { Apartment } from '@/types/api/propertiesDetail'
+import { ApiResponse, ApiFilters } from '@/types/api/api'
 
-interface UseApartmentsReturn {
-  apartments: Apartment[]
-  loading: boolean
-  error: string | null
-  hasMore: boolean
-  totalCount: number
-  currentPage: number
-  loadMore: () => void
-  refresh: () => void
-  setFilters: (filters: Partial<ApiFilters>) => void
-}
 
-export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsReturn => {
-  const [apartments, setApartments] = useState<Apartment[]>([])
+
+export const useApartments = (initialFilters: ApiFilters = {for_sale: true}): UseApartmentsReturn => {
+  const [properties, setProperties] = useState<ApartmentShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [filters, setFiltersState] = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
+  const [filters] = useState<ApiFilters>({
     ...initialFilters
   })
 
@@ -33,15 +23,15 @@ export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsRet
       setLoading(true)
       setError(null)
 
-      const response: ApiResponse<Apartment> = await apiService.getApartments({
+      const response: ApiResponse<ApartmentShowProperty> = await apiService.getApartments({
         ...filters,
         page
       })
 
       if (append) {
-        setApartments(prev => [...prev, ...response.results])
+        setProperties(prev => [...prev, ...response.results])
       } else {
-        setApartments(response.results)
+        setProperties(response.results)
       }
 
       setTotalCount(response.count)
@@ -66,18 +56,15 @@ export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsRet
     fetchApartments(1, false)
   }
 
-  const setFilters = (newFilters: Partial<ApiFilters>) => {
-    setFiltersState(prev => ({ ...prev, ...newFilters }))
-    setCurrentPage(1)
-  }
-
   // Fetch data when filters change
   useEffect(() => {
     fetchApartments(1, false)
   }, [filters])
 
   return {
-    apartments,
+    properties,
+    type: 'apartment',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,
@@ -85,7 +72,6 @@ export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsRet
     currentPage,
     loadMore,
     refresh,
-    setFilters
   }
 }
 

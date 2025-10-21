@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Search_bar from '../filter/filter';
 import { useEffect, useState } from 'react';
 
 const MD_navbar = () => {
@@ -84,7 +83,6 @@ const MD_navbar = () => {
         </div>
 
         <div className='flex ml-auto'>
-          <Search_bar modal_name='md_navbar'/>
           <div className="dropdown flex dropdown-hover group/main"> 
               <div tabIndex={0} className="flex">
                 <img src="/img/icons/bars.png" alt="" className='bars h-7 my-auto mx-4'/>

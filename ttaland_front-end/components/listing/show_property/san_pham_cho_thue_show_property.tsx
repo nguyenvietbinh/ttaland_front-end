@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { ShowProperty, TownhouseShowProperty, VillaShowProperty, ApartmentShowProperty } from '@/types/product'
+import { ShowProperty, TownhouseShowProperty, VillaShowProperty, ApartmentShowProperty } from '@/types/api/showProperties'
 
 
 
@@ -20,7 +20,6 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
 
 
   
-  const garage = ((property as TownhouseShowProperty)?.garage || (property as VillaShowProperty)?.garage || 0)
   const bedrooms = ((property as TownhouseShowProperty)?.bedrooms || (property as VillaShowProperty)?.bedrooms || (property as ApartmentShowProperty)?.bedrooms || 0)
   const bathrooms = ((property as TownhouseShowProperty)?.bathrooms || (property as VillaShowProperty)?.bathrooms || (property as ApartmentShowProperty)?.bathrooms || 0) 
 
@@ -61,15 +60,9 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
             {(bathrooms > 0) && (
               <div className="text-gray-400">·</div>
             )}
-            {(garage > 0) && (
-              <p className="flex items-baseline gap-1"><img src="/img/icons/car.png" className="h-4.5" alt="" />{garage}</p>
-            )}
-            {(garage > 0) && (
-              <div className="text-gray-400">·</div>
-            )}
             <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
-          <div className="mb-2 text-sm line-clamp-2">Biệt thự nguyên căn gồm phòng ngủ lớn phòng ngủ nhỏ,thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trong tiện nghi. - 2 khu bếp ăn trong thự nguyên căn gồm: - 4 phòng ngủ lớn + 1 phòng ngủ nhỏ, 5 toilet tiện nghi. - 2 khu bếp ăn trongnhà và ngoài trời Sân vườn lớn, hồ cá Koi. - Nội thất cao cấp sẵn có đầy đủ, chỉ cần xách vali vào là ở. - Nhà vị trí 2 mặt tiền thoáng mát, view sông cực đẹp.</div>
+          <div className="mb-2 text-sm line-clamp-2">{property.description}</div>
         </div>
 
       </div>
