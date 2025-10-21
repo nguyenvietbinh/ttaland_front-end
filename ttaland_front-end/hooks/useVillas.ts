@@ -6,15 +6,14 @@ import { Villa } from '@/types/api/propertiesDetail'
 import { ApiResponse, ApiFilters } from '@/types/api/api'
 
 
-export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
+export const useVillas = (initialFilters: ApiFilters = {for_sale: true}): UseVillasReturn => {
   const [properties, setProperties] = useState<VillaShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const filters = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
+  const [filters] = useState<ApiFilters>({
     ...initialFilters
   })
 
@@ -65,6 +64,7 @@ export const useVillas = (initialFilters: ApiFilters = {}): UseVillasReturn => {
   return {
     properties,
     type: 'villa',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,

@@ -27,14 +27,9 @@ const Listing = ({listing_return}: Listing_props) => {
               )}
             </div>
           ))}
-          {(listing_return.loading) && (
-            <div>
-              Loading!!!
-            </div>
-          )}
         </div>
         <div>
-          <Listing_sidebar/>
+          <Listing_sidebar for_sale={listing_return.for_sale}/>
         </div>
       </div>
     </div>

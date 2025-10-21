@@ -7,7 +7,7 @@ import { ApiResponse, ApiFilters } from '@/types/api/api'
 
 
 
-export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
+export const useLand = (initialFilters: ApiFilters = {for_sale: true}): UseLandReturn => {
   const [properties, setProperties] = useState<LandLotShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -15,7 +15,6 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters] = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
     ...initialFilters
   })
 
@@ -66,6 +65,7 @@ export const useLand = (initialFilters: ApiFilters = {}): UseLandReturn => {
   return {
     properties,
     type: 'land',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,

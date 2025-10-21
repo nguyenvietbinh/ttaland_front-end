@@ -5,7 +5,7 @@ import { TownhouseShowProperty, UseTownhousesReturn } from '@/types/api/showProp
 import { Townhouse } from '@/types/api/propertiesDetail'
 import { ApiResponse, ApiFilters } from '@/types/api/api'
 
-export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesReturn => {
+export const useTownhouses = (initialFilters: ApiFilters = {for_sale: true}): UseTownhousesReturn => {
   const [properties, setProperties] = useState<TownhouseShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -13,7 +13,6 @@ export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesRet
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters] = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
     ...initialFilters
   })
 
@@ -63,6 +62,7 @@ export const useTownhouses = (initialFilters: ApiFilters = {}): UseTownhousesRet
   return {
     properties,
     type: 'townhouse',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,

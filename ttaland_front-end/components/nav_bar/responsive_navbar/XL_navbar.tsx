@@ -1,8 +1,6 @@
 'use client'
 
 import Link from 'next/link';
-import Search_bar from '../filter/filter';
-import User_dropdown from '../user_dropdown';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -94,11 +92,10 @@ const XL_navbar = () => {
             Đăng Sản Phẩm
             <div className={path_name === '/dang_san_pham' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
           </Link>
-          <div className='ml-auto flex'>
-            <Search_bar modal_name='XL_navbar'/>
-
-            <User_dropdown/>
-          </div>
+          <Link href='/login' className={path_name === '/login' ? 'my-auto text-white ml-auto' : 'my-auto group hover:text-white ml-auto'}>
+            <p>Đăng nhập</p>
+            <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
+          </Link>
 
         </div>
       ) : (

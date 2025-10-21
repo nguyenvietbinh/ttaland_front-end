@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Search_bar from '../filter/filter';
 import { useEffect, useState } from 'react';
 
 const SM_navbar = () => {
@@ -21,7 +20,6 @@ const SM_navbar = () => {
 
 
         <div className='flex ml-auto'>
-          <Search_bar modal_name='sm_navbar'/>
           <div className="dropdown ml-auto flex dropdown-hover whitespace-nowrap"> 
               <div tabIndex={0} className="flex">
                 <img src="/img/icons/bars.png" alt="" className='bars h-7 my-auto mx-4'/>

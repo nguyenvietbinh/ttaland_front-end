@@ -7,7 +7,7 @@ import { ApiResponse, ApiFilters } from '@/types/api/api'
 
 
 
-export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsReturn => {
+export const useApartments = (initialFilters: ApiFilters = {for_sale: true}): UseApartmentsReturn => {
   const [properties, setProperties] = useState<ApartmentShowProperty[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -15,7 +15,6 @@ export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsRet
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters] = useState<ApiFilters>({
-    for_sale: true, // Default to for sale
     ...initialFilters
   })
 
@@ -65,6 +64,7 @@ export const useApartments = (initialFilters: ApiFilters = {}): UseApartmentsRet
   return {
     properties,
     type: 'apartment',
+    for_sale: filters.for_sale,
     loading,
     error,
     hasMore,

@@ -85,6 +85,7 @@ export type ShowProperty = TownhouseShowProperty | VillaShowProperty | Apartment
 export interface UseTownhousesReturn {
   properties: TownhouseShowProperty[]
   type: 'townhouse'
+  for_sale: boolean
   loading: boolean
   error: string | null
   hasMore: boolean
@@ -97,6 +98,7 @@ export interface UseTownhousesReturn {
 export interface UseVillasReturn {
   properties: VillaShowProperty[]
   type: 'villa'
+  for_sale: boolean
   loading: boolean
   error: string | null
   hasMore: boolean
@@ -109,6 +111,7 @@ export interface UseVillasReturn {
 export interface UseLandReturn {
   properties: LandLotShowProperty[]
   type: 'land'
+  for_sale: boolean
   loading: boolean
   error: string | null
   hasMore: boolean
@@ -121,6 +124,7 @@ export interface UseLandReturn {
 export interface UseApartmentsReturn {
   properties: ApartmentShowProperty[]
   type: 'apartment'
+  for_sale: boolean
   loading: boolean
   error: string | null
   hasMore: boolean

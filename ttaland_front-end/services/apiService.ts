@@ -31,7 +31,7 @@ class ApiService {
   }
 
   // Get townhouses specifically
-  async getTownhouses(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<TownhouseShowProperty>> {
+  async getTownhouses(filters: ApiFilters): Promise<ApiResponse<TownhouseShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -45,7 +45,7 @@ class ApiService {
   }
 
   // Get villas specifically
-  async getVillas(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<VillaShowProperty>> {
+  async getVillas(filters: ApiFilters): Promise<ApiResponse<VillaShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -59,7 +59,7 @@ class ApiService {
   }
 
   // Get apartments specifically
-  async getApartments(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<ApartmentShowProperty>> {
+  async getApartments(filters: ApiFilters): Promise<ApiResponse<ApartmentShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -73,7 +73,7 @@ class ApiService {
   }
 
   // Get land lots specifically
-  async getLandLots(filters: Omit<ApiFilters, 'type'> = {}): Promise<ApiResponse<LandLotShowProperty>> {
+  async getLandLots(filters: ApiFilters): Promise<ApiResponse<LandLotShowProperty>> {
     const queryParams = new URLSearchParams()
     
     Object.entries(filters).forEach(([key, value]) => {
