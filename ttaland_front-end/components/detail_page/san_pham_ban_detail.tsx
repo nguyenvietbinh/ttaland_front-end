@@ -12,7 +12,7 @@ import { Apartment, Townhouse, Villa, LandLot } from "@/types/api/propertiesDeta
 import Map_window from "./map_window";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { get_price_per_square_meter } from "../listing/show_property/san_pham_ban_show_property";
-import Detail_sidebar from "./detail_sidebar";
+import Detail_sidebar from "../sidebar/detail_sidebar";
 
 interface San_pham_ban_details_props {
   id: string
