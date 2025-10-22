@@ -5,21 +5,42 @@ import San_pham_cho_thue_property from './show_property/san_pham_cho_thue_show_p
 import Sub_navbar from './sub_navbar';
 import { ShowPropertyReturn } from '@/types/api/showProperties';
 import Listing_sidebar from '../sidebar/listing_sidebar';
+import { useEffect, useState } from 'react';
+import { ShowProperty } from '@/types/api/showProperties';
+import { filter_with_price, filter_with_area, filter_with_location } from './utils';
 
 interface Listing_props {
   listing_return: ShowPropertyReturn
 }
 
 const Listing = ({listing_return}: Listing_props) => {
+  const [priceConditionLst, setPriceConditionLst] = useState<string[]>([])
+  const [areaConditionLst, setAreaConditionLst] = useState<string[]>([])
+  const [locationConditionLst, setLocationConditionLst] = useState<string[]>([])
+  const [filteredProperties, setFilteredProperties] = useState<ShowProperty[]>([])
+
   
+  useEffect(() => {
+    const newProperties = filter_with_price(priceConditionLst, filter_with_area(areaConditionLst, filter_with_location(locationConditionLst, listing_return.properties)))
+    setFilteredProperties(newProperties)
+  }, [priceConditionLst, areaConditionLst, listing_return.properties, locationConditionLst])
+
   return (
     <div className='main_container flex-col'>
       <Sub_navbar currentPropertyType={listing_return.type} />
       <div className='flex'>
-        <div className="grid grid-cols-1 content_container gap-8">
-          {/* Render API data for supported property types when successful */}
-          {listing_return.properties.map((item, index) => (
-            <div key={index}>
+        <div className="content_container">
+          {listing_return.loading && (
+            <div>Đang tải dữ liệu sản phẩm...</div>
+          )}
+          {filteredProperties.length === 0 && (
+            <div>Không có sản phẩm nào!!!</div>
+          )}
+
+
+        <div className='grid grid-cols-1 gap-16'>
+          {filteredProperties.map((item, index) => (
+            <div className='' key={index}>
               {(item.for_sale) ? (
                 <San_pham_ban_property property={item}/>
               ) : (
@@ -28,8 +49,9 @@ const Listing = ({listing_return}: Listing_props) => {
             </div>
           ))}
         </div>
+        </div>
         <div>
-          <Listing_sidebar for_sale={listing_return.for_sale}/>
+          <Listing_sidebar for_sale={listing_return.for_sale} setPriceConditionLstProp={setPriceConditionLst} setAreaConditionLstProp={(setAreaConditionLst)} setLocationConditionLstProp={setLocationConditionLst}/>
         </div>
       </div>
     </div>
