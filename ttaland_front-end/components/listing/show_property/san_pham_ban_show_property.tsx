@@ -107,13 +107,13 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
         </div>
       </div>
 
-      <div className="px-1 bg-gray-100 shadow-sm">
+      <div className="shadow-sm p-2">
         {/* info */}
         <div className="">
           <div className="font-bold hover:underline text-3xl  wrap-break-word line-clamp-1">
             {property.title}
           </div>
-          <div className="flex justify-start gap-2 mb-2 items-baseline">
+          <div className="flex justify-start gap-2 items-baseline">
             <p className="text-red-600 font-extrabold text-2xl">{property.area_formatted}</p> <div className="text-gray-400">·</div>
             <p className="text-red-600 font-extrabold text-2xl">{property.price_formatted}</p> <div className="text-gray-400">·</div>
             <p className="">{get_price_per_square_meter(Number(property.price), Number(property.area))}/m²</p> <div className="text-gray-400">·</div>
@@ -131,7 +131,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             )}
             <p className=''>{property.location.split(',').slice(-2)[0]},{property.location.split(',').slice(-2)[1]}</p>
           </div>
-          <div className="mb-2 line-clamp-2 text-sm text-gray-800">{property.description}</div>
+          <div className="line-clamp-2 text-sm text-gray-900">{property.description}</div>
         </div>
 
       </div>

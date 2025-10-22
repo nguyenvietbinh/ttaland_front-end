@@ -16,7 +16,7 @@ const Listing = ({listing_return}: Listing_props) => {
     <div className='main_container flex-col'>
       <Sub_navbar currentPropertyType={listing_return.type} />
       <div className='flex'>
-        <div className="grid grid-cols-1 content_container gap-8">
+        <div className="grid grid-cols-1 content_container gap-16">
           {/* Render API data for supported property types when successful */}
           {listing_return.properties.map((item, index) => (
             <div key={index}>
