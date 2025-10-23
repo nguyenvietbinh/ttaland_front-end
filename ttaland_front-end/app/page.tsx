@@ -3,16 +3,13 @@
 
 import _navbar from '@/components/nav_bar/navbar';
 import Footer from "@/components/layout/footer";
-import ApiTestComponent from '@/components/home_page/ApiTestComponent';
+import Home_page from '@/components/home_page/home_page';
 
 const Home = () => {
   return (
     <div>
       <_navbar/>
-      <div className="container mx-auto py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">API Connectivity Test</h1>
-        <ApiTestComponent />
-      </div>
+      <Home_page/>
       <Footer/>
     </div>
   );
