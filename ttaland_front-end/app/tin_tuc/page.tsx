@@ -6,7 +6,7 @@ import Footer from "@/components/layout/footer"
 const about = () => {
 
   return (
-    <div className="bg-black">
+    <div className="">
       <_navbar/>
       <div className="container mx-auto">
         
