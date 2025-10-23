@@ -17,7 +17,7 @@ const Listing = ({listing_return}: Listing_props) => {
   const [priceConditionLst, setPriceConditionLst] = useState<string[]>([])
   const [areaConditionLst, setAreaConditionLst] = useState<string[]>([])
   const [locationConditionLst, setLocationConditionLst] = useState<string[]>([])
-  const [filteredProperties, setFilteredProperties] = useState<ShowProperty[]>([])
+  const [filteredProperties, setFilteredProperties] = useState<ShowProperty[]>()
 
   
   useEffect(() => {
@@ -30,25 +30,31 @@ const Listing = ({listing_return}: Listing_props) => {
       <Sub_navbar currentPropertyType={listing_return.type} />
       <div className='flex'>
         <div className="content_container">
-          {listing_return.loading && (
+          {listing_return.loading ? (
             <div>Đang tải dữ liệu sản phẩm...</div>
-          )}
-          {filteredProperties.length === 0 && (
-            <div>Không có sản phẩm nào!!!</div>
-          )}
-
-
-        <div className='grid grid-cols-1 gap-16'>
-          {filteredProperties.map((item, index) => (
-            <div className='' key={index}>
-              {(item.for_sale) ? (
-                <San_pham_ban_property property={item}/>
-              ) : (
-                <San_pham_cho_thue_property property={item}/>
+          ) : (
+            <div>
+              {filteredProperties && filteredProperties.length === 0 && (
+                <div>Không có sản phẩm nào!!!</div>
               )}
             </div>
-          ))}
-        </div>
+          )}
+
+
+
+          {filteredProperties && (
+            <div className='grid grid-cols-1 gap-16'>
+              {filteredProperties.map((item, index) => (
+                <div className='' key={index}>
+                  {(item.for_sale) ? (
+                    <San_pham_ban_property property={item}/>
+                  ) : (
+                    <San_pham_cho_thue_property property={item}/>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div>
           <Listing_sidebar for_sale={listing_return.for_sale} setPriceConditionLstProp={setPriceConditionLst} setAreaConditionLstProp={(setAreaConditionLst)} setLocationConditionLstProp={setLocationConditionLst}/>
