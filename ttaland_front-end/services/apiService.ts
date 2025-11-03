@@ -6,7 +6,7 @@ import { SimilarProductsResponse, SimilarProductItem } from '../types/similar'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
-const API_BASE_URL = `${BACKEND_URL}/api`
+const API_BASE_URL = `${BACKEND_URL}`
 
 class ApiService {
   private async fetchFromApi<T>(endpoint: string): Promise<T> {
@@ -20,6 +20,11 @@ class ApiService {
       console.error(`Failed to fetch from ${endpoint}:`, error)
       throw error
     }
+  }
+
+
+  async getUsers(): Promise<ApiResponse<Project>> {
+    return this.fetchFromApi(`/users`)
   }
 
   async getProjects(filters: { page?: number } = {}): Promise<ApiResponse<Project>> {
@@ -153,7 +158,6 @@ async getWatchedProperties(propertiesID: string[]) {
     return relativePath.startsWith('http')
       ? relativePath
       : `${BACKEND_URL}${relativePath}`
-      // : `https://tta-backend-iji0.onrender.com${relativePath}` # check before deploy
   }
 }
 

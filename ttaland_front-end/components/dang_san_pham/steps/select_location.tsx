@@ -1,5 +1,5 @@
 'use client'
-import Search from "@/components/nav_bar/filter/input_components/search"
+import Search from "@/components/utils/search"
 import location from '../location.json'
 import Select_location_on_map from "./select_location_on_map"
 import { useEffect, useState } from "react"
