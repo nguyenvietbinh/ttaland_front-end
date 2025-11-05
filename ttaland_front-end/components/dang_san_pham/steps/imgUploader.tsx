@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 type Props = {
   onImagesSelected?: (files: File[]) => void;
@@ -19,7 +19,6 @@ const ImageUploader: React.FC<Props> = ({ onImagesSelected }) => {
     const newPreviews = imageFiles.map(file => URL.createObjectURL(file));
     setFiles(prev => [...prev, ...imageFiles]);
     setPreviewUrls(prev => [...prev, ...newPreviews]);
-
     onImagesSelected?.([...files, ...imageFiles]);
   };
 
@@ -33,9 +32,6 @@ const ImageUploader: React.FC<Props> = ({ onImagesSelected }) => {
     onImagesSelected?.(newFiles);
   };
 
-  useEffect(() => {
-    console.log(previewUrls)
-  }, [previewUrls])
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

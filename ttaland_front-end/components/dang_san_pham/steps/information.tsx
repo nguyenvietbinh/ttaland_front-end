@@ -83,7 +83,7 @@ const Information_component = ({setInformationProp, isForSale}: Information_prop
 
   return (
     <div className="flex flex-col p-4 rounded-3xl overflow-hidden">
-      <Select_component setData={setPropertyType} options={['Nhà Phố', 'Biệt Thự', 'Đất Nền', 'Căn Hộ']}/>
+      <Select_component open={true} setData={setPropertyType} options={['Nhà Phố', 'Biệt Thự', 'Đất Nền', 'Căn Hộ']}/>
       <div className={`px-8 mt-8 text-xl shadow-lg py-2 border-1 rounded-3xl flex ${isValidArea ? 'border-gray-400 hover:bg-gray-100' : 'border-red-400'}`}>
         <input value={areaDisplayVal} onChange={(e) => {setArea(e.target.value.replace(/\D/g, '')); if (Number(e.target.value.replace(/\D/g, '')) > 0) {setIsValidArea(true)}}} className="w-full outline-0 no-spinner" type="text" inputMode="numeric" placeholder="Diện tích"/>
         <p className="bg-blue-100 px-1 rounded-sm">m²</p>
@@ -122,14 +122,13 @@ const Information_component = ({setInformationProp, isForSale}: Information_prop
         </div>
       )}
       <button onClick={() => {
-        console.log('area:', Number(area), 'price:', Number(price))
         if (price && area && (propertType === 'Nhà Phố' || propertType === 'Biệt Thự' || propertType === 'Đất Nền' || propertType === 'Căn Hộ')) {
           if ((Number(area) <= 0) || (Number(area) > Number(price)) || (Number(area) > 1000000)) {
             setIsValidArea(false)
           } else if (Number(price) < 100000) {
             setIsValidPrice(false)
           } else {
-            setInformationProp({ property_type: propertType, price: price, area: area})
+            setInformationProp({ property_type: (propertType === 'Nhà Phố') ? 'townhouse' : (propertType === 'Biệt Thự') ? 'villa' : (propertType === 'Đất Nền') ? 'land' : 'apartment', price: Number(price), area: Number(area)})
           }
         }
       }} disabled={(price && area)? false : true} className="p-1 w-20 ml-auto bg-red-600 btn">Xong</button>

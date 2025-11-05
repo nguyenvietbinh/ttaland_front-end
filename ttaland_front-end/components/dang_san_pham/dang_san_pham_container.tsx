@@ -9,12 +9,23 @@ import Additional_information from "./steps/additional_information"
 import { point, booleanPointInPolygon } from '@turf/turf';
 import rawData from '@/public/data/hcm.json';
 const HCMGeoJSON = rawData as CustomGeoJSON;
+import { postProductData } from "@/network/POST/product"
+import { postproduct } from "@/network/POST/product"
 
 
 export interface Information {
-  property_type: 'Nhà Phố' | 'Biệt Thự' | 'Đất Nền' | 'Căn Hộ'
-  price: string
-  area: string
+  property_type: 'townhouse' | 'villa' | 'land' | 'apartment'
+  price: number
+  area: number
+}
+
+export interface AdditionalInformation {
+  bedroom?: string
+  bathroom?: string
+  policy?: string
+  numberOfFloors?: string
+  interior?: string
+  entranceWay?: string
 }
 
 export interface Discribe {
@@ -30,9 +41,12 @@ const Dang_san_pham_container = () => {
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isForRent, setIsForRent] = useState<boolean>(false)
   const [location, setLocation] = useState<string>()
+  const [detailLocation, setDetailLocation] = useState<string>()
   const [coordinate, setCoordinate] = useState<[number, number]>()
   const [Information, setInformation] = useState<Information>()
   const [discribeData, setDiscribeData] = useState<Discribe>()
+  const [additionalInforData, setAdditionalInfoData] = useState<AdditionalInformation>()
+  const [productData, setProductData] = useState<postProductData>()
 
   const moveBack = (targetStep: number, currentStep: number) => {
     if (targetStep < currentStep) {
@@ -58,6 +72,15 @@ const Dang_san_pham_container = () => {
     }
   }
 
+
+  useEffect(() => {
+    if (productData) {
+      postproduct.postTownhouse({
+        title: 'sfsdfdf',
+      })
+    }
+  }, [productData]) 
+
   useEffect(() => {
     let stepCount = 0
     if (isForRent || isForSale) {
@@ -70,6 +93,25 @@ const Dang_san_pham_container = () => {
               stepCount ++
                 if (discribeData) {
                   stepCount ++
+                  if (additionalInforData) {
+                    setProductData({
+                      type: Information.property_type,
+                      title: discribeData.title,
+                      isForSale: isForSale,
+                      location: location,
+                      detail_location: detailLocation,
+                      coordinate: coordinate,
+                      price: Information.price,
+                      area: Information.area,
+                      bedroom: additionalInforData?.bedroom,
+                      bathroom: additionalInforData?.bathroom,
+                      discription: discribeData.discribe,
+                      policy: additionalInforData?.policy,
+                      numberOfFloors: additionalInforData?.numberOfFloors,
+                      interior: additionalInforData?.interior,
+                      entranceWay: additionalInforData?.entranceWay
+                    })
+                  }
                 }
             }
           }
@@ -77,13 +119,13 @@ const Dang_san_pham_container = () => {
       }
     }
     setStep(stepCount)
-  }, [isForRent, isForSale, coordinate, location, Information, discribeData])
+  }, [isForRent, isForSale, coordinate, location, Information, discribeData, additionalInforData])
 
 
   return (
     <div className="">
       <div className="w-full">
-        <ul className="steps w-full steps-vertical lg:steps-horizontal my-8 text-black">
+        <ul className="steps w-full steps-vertical lg:steps-horizontal mt-8 text-black">
           <li onClick={() => moveBack(0, step)} className={`step ${step >= 0 ? 'step-primary cursor-pointer' : ''}`}>{isForRent ? 'Cho thuê' : (isForSale) ? 'Bán': 'Nhu cầu'}</li>
           <li onClick={() => moveBack(1, step)} className={`step ${step >= 1 ? 'step-primary cursor-pointer' : ''}`}>{ location ? location : 'Vị trí' }</li>
           <li onClick={() => moveBack(2, step)} className={`step ${step >= 2 ? 'step-primary cursor-pointer' : ''}`}>{Information ? Information.property_type : 'Thông tin chính'}</li>
@@ -91,12 +133,12 @@ const Dang_san_pham_container = () => {
           <li onClick={() => moveBack(4, step)} className={`step ${step >= 4 ? 'step-primary cursor-pointer' : ''}`}>Thông tin thêm</li>
         </ul>
       </div>
-      <div className="w-2/3 mx-auto px-4 py-6 mt-10 rounded-3xl bg-white text-black flex flex-col gap-6">
+      <div className="w-2/3 mx-auto px-4 py-6 rounded-3xl bg-white text-black flex flex-col gap-6">
         {step === 0 && (
           <Sale_or_rent isForRent={isForRent} isForSale={isForSale} setIsForRent={setIsForRent} setIsForSale={setIsForSale}/>
         )}
         {step === 1 && (
-          <Select_location setCoordinateProps={setCoordinate} setLocation={setLocation}/>
+          <Select_location setDetaiLocation={setDetailLocation} setCoordinateProps={setCoordinate} setLocation={setLocation}/>
         )}
         {step === 2 && (
           <Information_component isForSale={isForSale} setInformationProp={setInformation}/>
@@ -105,7 +147,7 @@ const Dang_san_pham_container = () => {
           <Discribe_component setData={setDiscribeData}/>
         )}
         {step === 4 && Information && (
-          <Additional_information property_type={Information.property_type}/>
+          <Additional_information setAdditionalInfo={setAdditionalInfoData} property_type={Information.property_type}/>
         )}
       </div>
     </div>
