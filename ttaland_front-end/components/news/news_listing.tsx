@@ -5,7 +5,7 @@ import New_card from "./new_card"
 const News_listing = () => {
 
   return (
-    <div className="content_container bg-white">
+    <div className=" bg-white">
       <div className="w-full aspect-video bg-[url(/img/background.jpg)] bg-cover bg-center bg-no-repeat cursor-pointer ">
         <div className="h-full w-full bg-gradient-to-t from-black via-black/20  to-transparent py-4 px-6 flex flex-col justify-end">
           <p className="text-sm text-gray-400">25/09/2025</p> 
