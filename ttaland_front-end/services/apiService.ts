@@ -24,7 +24,7 @@ class ApiService {
 
 
   async getUsers(): Promise<ApiResponse<Project>> {
-    return this.fetchFromApi(`/users`)
+    return this.fetchFromApi(`/products/townhouses`)
   }
 
   async getProjects(filters: { page?: number } = {}): Promise<ApiResponse<Project>> {

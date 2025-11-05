@@ -6,12 +6,13 @@ interface Select_component_props {
   options: string[],
   setData: (val: string) => void
   default_value?: string
+  open?: boolean
 }
 
 
-const Select_component = ({options, default_value, setData}: Select_component_props) => {
+const Select_component = ({options, default_value, setData, open=false}: Select_component_props) => {
   const [val, setVal] = useState<string>(default_value ? default_value : options[0])
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(open)
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
@@ -45,7 +46,7 @@ const Select_component = ({options, default_value, setData}: Select_component_pr
         <div className="flex items-center justify-between w-full px-4">
           <p className="text-xl">{val}</p>
           <svg className={`${isOpen ? '-rotate-90' : 'rotate-90'} transition-all duration-300`} width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 4L16 12L8 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 4L16 12L8 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
       {isOpen && options.length > 0 && (
