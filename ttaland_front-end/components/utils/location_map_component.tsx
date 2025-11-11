@@ -9,7 +9,6 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 export interface place_infor {
   location: string,
   coordinate: [number, number]
-  image: string | undefined
   title: string
 }
 
@@ -50,13 +49,7 @@ const MapComponent = ({ places, allow_interact }: mapComponentProps) => {
       for (const place of places) {
         const [lng, lat] = place.coordinate
         if (lat && lng && map.current) {
-          const popupContent = `
-            <div class="p-2 max-w-xs text-sm text-gray-800">
-              <h3 class="text-base font-semibold line-clamp-2 mb-1">${place.location}</h3>
-              <img src="${place.image}" alt="${place.location}" class="rounded-md mb-2" />
-              <p class="text-xs line-clamp-2">${place.title}.</p>
-            </div>
-          `;
+
 
           new mapboxgl.Marker()
             .setLngLat([lng, lat])
@@ -65,7 +58,7 @@ const MapComponent = ({ places, allow_interact }: mapComponentProps) => {
                 offset: 25,
                 closeButton: false
               }
-            ).setHTML(popupContent))
+            ))
             .addTo(map.current);
 
             

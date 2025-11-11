@@ -9,7 +9,6 @@ import Additional_information from "./steps/additional_information"
 import { point, booleanPointInPolygon } from '@turf/turf';
 import rawData from '@/public/data/hcm.json';
 const HCMGeoJSON = rawData as CustomGeoJSON;
-import { postProductData } from "@/network/POST/product"
 import { postproduct } from "@/network/POST/product"
 
 
@@ -46,7 +45,6 @@ const Dang_san_pham_container = () => {
   const [Information, setInformation] = useState<Information>()
   const [discribeData, setDiscribeData] = useState<Discribe>()
   const [additionalInforData, setAdditionalInfoData] = useState<AdditionalInformation>()
-  const [productData, setProductData] = useState<postProductData>()
 
   const moveBack = (targetStep: number, currentStep: number) => {
     if (targetStep < currentStep) {
@@ -74,14 +72,6 @@ const Dang_san_pham_container = () => {
 
 
   useEffect(() => {
-    if (productData) {
-      postproduct.postTownhouse({
-        title: 'sfsdfdf',
-      })
-    }
-  }, [productData]) 
-
-  useEffect(() => {
     let stepCount = 0
     if (isForRent || isForSale) {
       stepCount ++
@@ -94,23 +84,31 @@ const Dang_san_pham_container = () => {
                 if (discribeData) {
                   stepCount ++
                   if (additionalInforData) {
-                    setProductData({
+                    postproduct.postProduct({
                       type: Information.property_type,
                       title: discribeData.title,
                       isForSale: isForSale,
                       location: location,
                       detail_location: detailLocation,
-                      coordinate: coordinate,
-                      price: Information.price,
-                      area: Information.area,
+                      coordinate: {
+                        longitude: String(coordinate[0]),
+                        latitude: String(coordinate[1])
+                      },
+                      price: String(Information.price),
+                      area: String(Information.area),
                       bedroom: additionalInforData?.bedroom,
                       bathroom: additionalInforData?.bathroom,
                       discription: discribeData.discribe,
                       policy: additionalInforData?.policy,
                       numberOfFloors: additionalInforData?.numberOfFloors,
                       interior: additionalInforData?.interior,
-                      entranceWay: additionalInforData?.entranceWay
-                    })
+                      entranceWay: additionalInforData?.entranceWay,
+                      images: discribeData.images.map(item => ({
+                        'name': item.name,
+                        'type': item.type
+                      })),
+                      videoUrl: discribeData.video
+                    }, discribeData.images)
                   }
                 }
             }

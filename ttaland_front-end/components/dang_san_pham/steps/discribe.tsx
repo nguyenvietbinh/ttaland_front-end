@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ImageUploader from "./imgUploader"
 import { Discribe } from "../dang_san_pham_container"
 
@@ -18,9 +18,6 @@ const Discribe_component = ({setData}: Discribe_component_props) => {
   const [images, setImages] = useState<File[]>([])
   const [video, setVideo] = useState<string>()
 
-  useEffect(() => {
-    console.log(images)
-  }, [images])
 
   return (
     <div className="flex flex-col gap-8">

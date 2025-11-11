@@ -1,21 +1,44 @@
 'use client'
 
-import { Suspense } from "react"
+import { useEffect, useState } from "react"
 import Listing from "@/components/listing/listing"
 import NavBar from "@/components/nav_bar/navbar"
 import Footer from "@/components/layout/footer"
-import { useVillas } from "@/hooks/useVillas"
+import { getProduct } from "@/network/GET/product"
+import { ProductType } from "@/types/product"
 
 const San_pham_ban_biet_thu = () => {
-  const properties = useVillas({ for_sale: true})
+  const [listingData, setListingData] = useState<{
+    isForSale: boolean
+    type: 'townhouse' | 'villa' | 'apartment' | 'land'
+    products: ProductType[]
+  }>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProduct.getSaleVillas()
+        setListingData(data)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       <NavBar/>
-      <Listing listing_return={properties}/>
+      {listingData ? (
+        <Listing listing_return={listingData}/>
+      ) : (
+        <div className="main_container">Loading ....</div>
+      )}
       <Footer/>
-    </Suspense>
+    </>
   )
 }
-
 
 export default San_pham_ban_biet_thu
