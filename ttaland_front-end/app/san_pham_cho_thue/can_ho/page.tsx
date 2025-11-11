@@ -3,22 +3,43 @@
 import Footer from "@/components/layout/footer"
 import Listing from "@/components/listing/listing"
 import NavBar from "@/components/nav_bar/navbar"
-import { Suspense } from "react"
-import { useApartments } from "@/hooks/useApartments"
+import { useState, useEffect } from "react"
+import { getProduct } from "@/network/GET/product"
+import { ProductType } from "@/types/product"
 
 
 const San_pham_cho_thue_san_ho = () => {
-  const properties = useApartments({ for_sale: false})
+  const [listingData, setListingData] = useState<{
+    isForSale: boolean
+    type: 'townhouse' | 'villa' | 'apartment' | 'land'
+    products: ProductType[]
+  }>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProduct.getRentApartments()
+        setListingData(data)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       <NavBar/>
-      <div className="container mx-auto">
-        <Listing listing_return={properties}/>
-      </div>
+      {listingData ? (
+        <Listing listing_return={listingData}/>
+      ) : (
+        <div className="main_container">Loading ....</div>
+      )}
       <Footer/>
-    </Suspense>
+    </>
   )
 }
-
 
 export default San_pham_cho_thue_san_ho

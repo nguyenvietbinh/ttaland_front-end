@@ -1,8 +1,8 @@
-import { ShowProperty } from "@/types/api/showProperties";
+import { ProductType } from "@/types/product";
 
-export const filter_with_price = (condition: string[], properties: ShowProperty[]) => {
+export const filter_with_price = (condition: string[], properties: ProductType[]) => {
   if (condition.length > 0) {
-    const ans: ShowProperty[] = []
+    const ans: ProductType[] = []
     for (let i = 0; i < condition.length; i++) {
       const conditionElement = condition[i];
       if (conditionElement.includes('<')) {
@@ -37,9 +37,9 @@ export const filter_with_price = (condition: string[], properties: ShowProperty[
   return properties
 }
 
-export const filter_with_area = (condition: string[], properties: ShowProperty[]) => {
+export const filter_with_area = (condition: string[], properties: ProductType[]) => {
   if (condition.length > 0) {
-    const ans: ShowProperty[] = []
+    const ans: ProductType[] = []
     for (let i = 0; i < condition.length; i++) {
       const conditionElement = condition[i];
       if (conditionElement.includes('<')) {
@@ -74,9 +74,9 @@ export const filter_with_area = (condition: string[], properties: ShowProperty[]
   return properties
 }
 
-export const filter_with_location = (condition: string[], properties: ShowProperty[]) => {
+export const filter_with_location = (condition: string[], properties: ProductType[]) => {
   if (condition.length > 0) {
-    const ans: ShowProperty[] = []
+    const ans: ProductType[] = []
     for (let i = 0; i < condition.length; i++) {
       const conditionElement = condition[i];
       for (let j = 0; j < properties.length; j++) {
