@@ -98,7 +98,7 @@ const San_pham_cho_thue_detail = ({ id, table }: San_pham_cho_thue_details_props
             <div className="flex justify-start gap-8 lg:gap-16 border-y-1 border-gray-500 py-2">
               <div>
                 <p className="text-2xl text-gray-500">Khoảng giá</p>
-                <p className="text-3xl ">{formatVietnameseNumber(Number(propertyData.price))}</p>
+                <p className="text-3xl ">{formatVietnameseNumber(Number(propertyData.price))}/Tháng</p>
               </div>
               <div>
                 <p className="text-2xl text-gray-500">Diện tích</p>

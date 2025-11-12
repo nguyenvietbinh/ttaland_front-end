@@ -20,7 +20,7 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
 
 
   return (
-    <Link href={urlToDetail()} className="bg-gray-200 h-auto border-[1px] m-1  border-white hover:shadow-md rounded-sm">
+    <Link href={urlToDetail()}>
       <div className="w-full h-70 gap-0.5 flex overflow-hidden relative">
         <div className="flex absolute bottom-2 z-10 right-2 items-center gap-2">
           <img src="/img/icons/picture.png" alt="" className="h-6"/>
@@ -48,7 +48,7 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
       <div className="shadow-sm p-2">
         {/* info */}
         <div className="">
-          <div className="font-bold hover:underline text-3xl  wrap-break-word line-clamp-1">
+          <div className="font-bold hover:underline text-3xl wrap-break-word line-clamp-1">
             {property.title}
           </div>
           <div className="flex justify-start gap-2 mb-2 items-baseline">
@@ -66,7 +66,7 @@ const San_pham_cho_thue_show_property = ({ property }: San_pham_cho_thue_propert
             {!(property.type === 'land') && (
               <div className="text-gray-400 hidden lg:flex">·</div>
             )}
-            <p className=''>{property.location}, Hồ Chí Minh</p>
+            <p className=''>{property.location}, HỒ CHÍ MINH</p>
           </div>
           <div className="line-clamp-2 text-sm text-gray-900">{property.discription}</div>
         </div>

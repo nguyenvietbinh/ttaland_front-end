@@ -31,7 +31,7 @@ const Detail_infor = ({ information_data }: Detail_infor_props) => {
               <p className="w-full">Diện tích:</p>
             </div>
             <div className="w-full">
-              <p>{information_data.area}</p>
+              <p>{information_data.area} m²</p>
             </div>
           </div>
           {(information_data.type !== 'land') && (

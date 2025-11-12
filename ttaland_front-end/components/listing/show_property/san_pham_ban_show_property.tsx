@@ -104,13 +104,13 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
       <div className="shadow-sm p-2">
         {/* info */}
         <div className="">
-          <div className="font-bold hover:underline text-3xl  wrap-break-word line-clamp-1">
+          <div className="font-bold hover:underline text-3xl wrap-break-word line-clamp-1">
             {property.title}
           </div>
           <div className="flex justify-start gap-2 items-baseline">
             <p className="text-red-600 font-extrabold text-2xl">{property.area} m²</p> <div className="text-gray-400">·</div>
             <p className="text-red-600 font-extrabold text-2xl">{formatVietnameseNumber(Number(property.price))}</p> <div className="text-gray-400">·</div>
-            <p className="">{get_price_per_square_meter(Number(property.price), Number(property.area))}/m²</p> <div className="text-gray-400">·</div>
+            <p className="hidden lg:flex">{get_price_per_square_meter(Number(property.price), Number(property.area))}/m²</p> <div className="text-gray-400 hidden lg:flex">·</div>
             {!(property.type === 'land') && (
               <p className="hidden lg:flex items-baseline gap-0.5"><img src="/img/icons/bed.png" className="h-3.5" alt="" />{property.bedroom}</p>
             )}
@@ -123,7 +123,7 @@ const San_pham_ban_property = ({ property }: San_pham_ban_propertyProps) => {
             {!(property.type === 'land') && (
               <div className="text-gray-400 hidden lg:flex">·</div>
             )}
-            <p className=''>{property.location}, Hồ Chí Minh</p>
+            <p className=''>{property.location}, HỒ CHÍ MINH</p>
           </div>
           <div className="line-clamp-2 text-sm text-gray-900">{property.discription}</div>
         </div>
