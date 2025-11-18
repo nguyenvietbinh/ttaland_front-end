@@ -11,12 +11,12 @@ export default function NavBar() {
     <div className="text-white bg-blue-950 sticky top-0 z-50 w-full h-auto">
       <div className='w-[100%] flex mx-auto lg:w-[936px] 2xl:w-[1140px] text-2xl gap-4'>
         <Link href="/"><img src="/img/logo.png" alt="" className='h-24'/></Link>
-        <Link href='/tin_tuc' className={path_name === '/tin_tuc' ? 'hidden lg:block my-auto text-white' : 'hidden lg:block my-auto group hover:text-white'}>
+        <Link href='/tin_tuc' className={path_name?.includes('/tin_tuc') ? 'hidden lg:block my-auto' : 'text-gray-200 hidden lg:block my-auto group hover:text-white'}>
           Tin Tức
-          <div className={path_name === '/tin_tuc' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
+          <div className={path_name?.includes('/tin_tuc') ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
         <div className="dropdown hidden lg:flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
+          <div tabIndex={0} className={path_name?.includes('/san_pham_ban') ? "flex my-auto cursor-pointer text-white" : "flex text-gray-200 my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Bán
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -37,7 +37,7 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="dropdown hidden lg:flex dropdown-hover group/main"> 
-          <div tabIndex={0} className={path_name?.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
+          <div tabIndex={0} className={path_name?.includes('/san_pham_cho_thue') ? "flex my-auto cursor-pointer text-white" : "flex text-gray-200 my-auto cursor-pointer group-hover/main:text-white"}>Sản Phẩm Cho Thuê
             <img src="/img/icons/arrow.png" className='h-2 my-auto px-2 group-hover/main:rotate-180 transition-all duration-200' alt="" />
           </div>
           <ul
@@ -57,14 +57,14 @@ export default function NavBar() {
             </Link></li>
           </ul>
         </div>
-        <Link href='/dang_san_pham' className={path_name === '/dang_san_pham' ? 'hidden lg:block my-auto text-white' : 'hidden lg:block my-auto group hover:text-white'}>
+        <Link href='/dang_san_pham' className={path_name === '/dang_san_pham' ? 'hidden lg:block my-auto text-white' : 'hidden text-gray-200 lg:block my-auto group hover:text-white'}>
           Đăng Sản Phẩm
           <div className={path_name === '/dang_san_pham' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
         </Link>
-        <Link href='/login' className={path_name === '/login' ? 'hidden lg:block my-auto text-white ml-auto' : 'hidden lg:block my-auto group hover:text-white ml-auto'}>
+        {/* <Link href='/login' className={path_name === '/login' ? 'hidden lg:block my-auto text-white ml-auto' : 'hidden lg:block my-auto group hover:text-white ml-auto'}>
           <p>Đăng nhập</p>
           <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>
-        </Link>
+        </Link> */}
 
         <div className='flex lg:hidden ml-auto'>
           <div className="dropdown ml-auto flex dropdown-hover whitespace-nowrap"> 
@@ -123,9 +123,9 @@ export default function NavBar() {
               <li className='py-2.5'><Link href='/dang_san_pham' className={path_name === '/dang_san_pham' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Sản Phẩm
                 <div className={path_name === '/dang_san_pham' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
               </Link></li>
-              <li className='py-2.5'><Link href='/login' className={path_name === '/login' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Nhập
+              {/* <li className='py-2.5'><Link href='/login' className={path_name === '/login' ? 'cursor-pointer text-white inline-block whitespace-nowrap group' : 'cursor-pointer hover:text-white inline-block whitespace-nowrap group'}>Đăng Nhập
                 <div className={path_name === '/login' ? 'h-0.5 w-full bg-white' : 'h-0.5 w-0 bg-white group-hover:w-full transition-all duration-500'}></div>  
-              </Link></li>
+              </Link></li> */}
             </ul>
           </div>
         </div>
