@@ -7,7 +7,7 @@ import { formatDate } from "./news_detail"
 import Link from "next/link"
 
 const News_listing = () => {
-  const [Loading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [data, setData] = useState<newsData[]>()
 
   useEffect(() => {
@@ -25,6 +25,15 @@ const News_listing = () => {
     };
     fetchNewsData();
   }, []);
+
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-2 flex justify-center items-center min-h-[400px]">
+        <div className="text-xl">Đang tải tin tức...</div>
+      </div>
+    );
+  }
 
   return (
     <div className=" bg-white">
@@ -51,7 +60,7 @@ const News_listing = () => {
         </div>
       ) : (
         <div>
-
+          Không tìm thấy tin tức!!!
         </div>
       )}
     </div>
