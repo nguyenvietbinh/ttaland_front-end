@@ -1,22 +1,68 @@
 'use client'
 import New_card from "./new_card"
-
+import { getNews } from "@/network/news/GET_news"
+import { useEffect, useState } from "react"
+import { newsData } from "@/network/news/GET_news"
+import { formatDate } from "./news_detail"
+import Link from "next/link"
 
 const News_listing = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [data, setData] = useState<newsData[]>()
+
+  useEffect(() => {
+    const fetchNewsData = async () => {
+      try {
+        setIsLoading(true);
+        const result = await getNews.getAllNews();
+        console.log(result)
+        setData(result);
+      } catch (err) {
+        console.error(err instanceof Error ? err.message : 'Failed to load property data');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchNewsData();
+  }, []);
+
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-2 flex justify-center items-center min-h-[400px]">
+        <div className="text-xl">Đang tải tin tức...</div>
+      </div>
+    );
+  }
 
   return (
     <div className=" bg-white">
-      <div className="w-full aspect-video bg-[url(/img/background.jpg)] bg-cover bg-center bg-no-repeat cursor-pointer ">
-        <div className="h-full w-full bg-gradient-to-t from-black via-black/20  to-transparent py-4 px-6 flex flex-col justify-end">
-          <p className="text-sm text-gray-400">25/09/2025</p> 
-          <p className="text-3xl line-clamp-2 text-white">Lộ Diện Đại Lý Phân Phối F1 Chiến Lược Dự Án Vinhomes Green Paradise Cần Giờ</p>
-          <p className="text-base text-gray-400 line-clamp-3">SSM Group chính thức trở thành Đối tác phân phối F1 Chính thức dự án Vinhomes Green Paradise Cần Giờ – siêu đô thị biển mang tầm vóc quốc tế, mở ra cơ hội đầu tư mới đầy tiềm năng tại TP.HCM.</p>
+      {data ? (
+        <div>
+          {data.map((item, index) => (
+            <div key={index}>
+              {index == 0 ? (
+                <div 
+                  className="w-full aspect-video bg-cover bg-center bg-no-repeat cursor-pointer"
+                  style={{ backgroundImage: `url(${item.thumb})` }}
+                >
+                  <Link href={`/tin_tuc/${item.id}`} className="h-full w-full bg-gradient-to-t from-black via-black/20  to-transparent py-4 px-6 flex flex-col justify-end">
+                    <p className="text-sm text-gray-400">{formatDate(item.created_at)}</p> 
+                    <p className="text-3xl line-clamp-2 text-white">{item.title}</p>
+                    <p className="text-base text-gray-400 line-clamp-3">{item.discription}</p>
+                  </Link>
+                </div>
+              ) : (
+                <New_card data={item} key={index}/>
+              )}
+            </div>
+          ))}
         </div>
-      </div>
-      <New_card/>
-      <New_card/>
-      <New_card/>
-      <New_card/>
+      ) : (
+        <div>
+          Không tìm thấy tin tức!!!
+        </div>
+      )}
     </div>
   )
 }

@@ -1,17 +1,22 @@
 'use client'
+import { newsData } from "@/network/news/GET_news"
+import { formatDate } from "./news_detail"
+import Link from "next/link"
+interface New_card_props {
+  data: newsData
+}
 
-
-const New_card = () => {
+const New_card = ({ data }: New_card_props) => {
 
   return (
-    <div className="flex w-full mt-4 cursor-pointer">
-      <img className="w-1/3 rounded-lg" src="/img/background.jpg" alt="" />
+    <Link href={`/tin_tuc/${data.id}`} className="flex w-full mt-4 cursor-pointer">
+      <img className="w-1/3 rounded-lg max-h-35 object-cover" src={data.thumb} alt="" />
       <div className="w-2/3 pl-2">
-      <p className="text-sm text-gray-900">25/09/2025</p>
-        <p className="text-2xl line-clamp-2 hover:underline">Lộ Diện Đại Lý Phân Phối F1 Chiến Lược Dự Án Vinhomes Green Paradise Cần Giờ</p>
-        <p className="text-base text-gray-800 line-clamp-3 hover:underline">SSM Group chính thức trở thành Đối tác phân phối F1 Chính thức dự án Vinhomes Green Paradise Cần Giờ – siêu đô thị biển mang tầm vóc quốc tế, mở ra cơ hội đầu tư mới đầy tiềm năng tại TP.HCM.</p>
+      <p className="text-sm text-gray-900">{formatDate(data.created_at)}</p>
+        <p className="text-2xl line-clamp-2 hover:underline">{data.title}</p>
+        <p className="text-base text-gray-800 line-clamp-3 hover:underline">{data.discription}</p>
       </div>
-    </div>
+    </Link>
   )
 }
 

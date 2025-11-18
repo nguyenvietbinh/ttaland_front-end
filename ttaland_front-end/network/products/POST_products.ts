@@ -20,7 +20,7 @@ export interface postProductData {
   interior?: string
   entranceWay?: string
   images: {
-    name: string,
+    name: string
     type: string
   }[]
   videoUrl?: string
@@ -48,7 +48,7 @@ class PostProduct {
     }
   }
 
-  private async uploadFileToS3(uploadUrls: string[], files: File[]) {
+  async uploadFileToS3(uploadUrls: string[], files: File[]) {
     for (let i = 0; i < files.length; i ++) {
       const res = await fetch(uploadUrls[i], {
         method: "PUT",

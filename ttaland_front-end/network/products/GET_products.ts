@@ -1,5 +1,3 @@
-
-
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 import { TownhouseType, VillaType, LandType, ApartmentType, ProductType } from "@/types/product"
@@ -7,7 +5,6 @@ import { TownhouseType, VillaType, LandType, ApartmentType, ProductType } from "
 class GetProduct {
   async getProductWithID(product_id: string, table: 'townhouses' | 'villas' | 'land' | 'apartments'): Promise<ProductType> {
     const endpoint = `${BASE_URL}/products/${table}/${product_id}`
-    console.log(endpoint)
     try {
       const response = await fetch(endpoint)
       if (!response.ok) {

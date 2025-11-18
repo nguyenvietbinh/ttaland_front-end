@@ -4,7 +4,7 @@ import Media_displayer from "./media_displayer/media_displayer";
 import Detail_info from "./detail_infor/detail_infor";
 import { MediaItem } from "./media_displayer/media_displayer";
 import { convertYouTubeToEmbed, convertTikTokToEmbed } from "../../utils/media-utils";
-import { getProduct } from "@/network/GET/product";
+import { getProduct } from "@/network/products/GET_products";
 import { ProductType } from "@/types/product";
 import Map_window from "./map_window";
 import { get_price_per_square_meter, formatVietnameseNumber } from "../listing/show_property/san_pham_ban_show_property";
@@ -28,7 +28,6 @@ const San_pham_ban_detail = ({ id, table }: San_pham_ban_details_props) => {
 
       try {
         setIsLoading(true);
-        console.log(`/products/${table}/${id}`)
         const result = await getProduct.getProductWithID(id, table);
         setPropertyData(result);
       } catch (err) {
