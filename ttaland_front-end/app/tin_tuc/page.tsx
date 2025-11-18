@@ -3,23 +3,16 @@
 import _navbar from "@/components/nav_bar/navbar"
 import News_listing from "@/components/news/news_listing"
 import Footer from "@/components/layout/footer"
-const about = () => {
+import News from "@/components/news/news"
 
+const News_page = () => {
   return (
     <div className="">
       <_navbar/>
-      <div className="container mx-auto">
-        
-        <div className="w-2/3 flex mx-auto">
-        
-          <News_listing/>
-          <div className="w-1/3">
-          </div>
-        </div>
-      </div>
+      <News/>
       <Footer/>
     </div>
   )
 }
 
-export default about
+export default News_page

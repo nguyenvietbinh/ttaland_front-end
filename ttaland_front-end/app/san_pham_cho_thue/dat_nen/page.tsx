@@ -4,7 +4,7 @@ import Footer from "@/components/layout/footer"
 import Listing from "@/components/listing/listing"
 import NavBar from "@/components/nav_bar/navbar"
 import { useState, useEffect } from "react"
-import { getProduct } from "@/network/GET/product"
+import { getProduct } from "@/network/products/GET_products"
 import { ProductType } from "@/types/product"
 
 

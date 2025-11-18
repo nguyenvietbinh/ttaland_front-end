@@ -9,7 +9,7 @@ import Additional_information from "./steps/additional_information"
 import { point, booleanPointInPolygon } from '@turf/turf';
 import rawData from '@/public/data/hcm.json';
 const HCMGeoJSON = rawData as CustomGeoJSON;
-import { postproduct } from "@/network/POST/product"
+import { postproduct } from "@/network/products/POST_products"
 
 
 export interface Information {
